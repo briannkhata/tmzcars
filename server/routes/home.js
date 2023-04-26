@@ -1,10 +1,10 @@
 const express = require("express");
 const homeController = require("../controllers/HomeController.js");
-const router = express.Router();
-router.get("/", homeController.home);
-router.get("/about", homeController.about);
-router.get("/contact", homeController.contact);
-router.get("/join", homeController.join);
-router.get("/login", homeController.login);
+const homeRouter = express.homeRouter();
+homeRouter.get("/", homeController.home);
+homeRouter.get("/about", homeController.about);
+homeRouter.get("/contact", homeController.contact);
+homeRouter.get("/join", homeController.join);
+homeRouter.get("/login", homeController.login);
 
-module.exports = router;
+module.exports = homeRouter;

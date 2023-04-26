@@ -9,8 +9,16 @@ const getOne = app.get("/getOne/", (req, res) => {
   res.send("get One");
 });
 
+const getByCategory = app.get("/getByCategory/", (req, res) => {
+  res.send("getBy Category");
+});
+
 const remove = app.put("/remove", (req, res) => {
   res.send("remove");
+});
+
+const searchCar = app.post("/search/", (req, res) => {
+  res.send("search car");
 });
 
 const update = app.put("/update", (req, res) => {
@@ -22,4 +30,6 @@ module.exports = {
   getOne,
   remove,
   update,
+  searchCar,
+  getByCategory,
 };
