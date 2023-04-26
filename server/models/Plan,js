@@ -1,0 +1,29 @@
+const { Sequelize, DataTypes } = require("sequelize");
+
+const sequelize = new Sequelize("database", "username", "password", {
+  host: "localhost",
+  dialect: "mysql",
+});
+
+const Plan = sequelize.define("Plans", {
+  PlanId: {
+    type: DataTypes.UUID,
+    defaultValue: uuidv4(),
+    primaryKey: true,
+  },
+  Plan: {
+    type: DataTypes.STRING,
+  },
+  Duration: {
+    type: DataTypes.STRING,
+  },
+  Price: {
+    type: DataTypes.double,
+  },
+  Deleted: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+});
+
+module.exports = Plan;
