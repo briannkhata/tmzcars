@@ -18,6 +18,14 @@ const login = app.get("/login", (req, res) => {
   res.send("Login");
 });
 
+const addMessage = app.post("/addMessage", (req, res) => {
+  res.send("Post Message");
+});
+
+const signin = app.post("/signin", (req, res) => {
+  res.send("signin");
+});
+
 module.exports = {
   home,
   about,
