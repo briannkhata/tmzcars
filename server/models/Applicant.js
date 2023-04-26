@@ -1,7 +1,7 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const { v4: uuidv4 } = require("uuid");
+const { Sequelize, DataTypes, DATE } = require("sequelize");
+const sequelize = require("../database/database.js");
 
-const sequelize = new Sequelize("postgres://user:pass@example.com:5432/dbname");
+const { v4: uuidv4 } = require("uuid");
 
 const Applicant = sequelize.define("Applicants", {
   ApplicantId: {

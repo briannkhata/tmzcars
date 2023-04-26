@@ -1,30 +1,26 @@
-const express = require("express");
+const home = (req, res) => {
+  res.render("home");
+};
+const about = (req, res) => {
+  res.render("about");
+};
+const contact = (req, res) => {
+  res.render("contact");
+};
+const join = (req, res) => {
+  res.render("join");
+};
+const login = (req, res) => {
+  res.render("login");
+};
 
-const app = express();
+const addMessage = (req, res) => {
+  res.render("Post Message");
+};
 
-const home = app.get("/", (req, res) => {
-  res.send("Home");
-});
-const about = app.get("/about", (req, res) => {
-  res.send("About");
-});
-const contact = app.get("/contact", (req, res) => {
-  res.send("Contact");
-});
-const join = app.get("/join", (req, res) => {
-  res.send("Join");
-});
-const login = app.get("/login", (req, res) => {
-  res.send("Login");
-});
-
-const addMessage = app.post("/addMessage", (req, res) => {
-  res.send("Post Message");
-});
-
-const signin = app.post("/signin", (req, res) => {
-  res.send("signin");
-});
+const signin = (req, res) => {
+  res.render("signin");
+};
 
 module.exports = {
   home,
