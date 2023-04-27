@@ -1,9 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize("database", "username", "password", {
-  host: "localhost",
-  dialect: "mysql",
-});
+const sequelize = require("../database/database.js");
 
 const FuelType = sequelize.define("FuelTypes", {
   FuelTypeId: {

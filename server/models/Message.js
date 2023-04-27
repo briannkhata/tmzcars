@@ -1,7 +1,6 @@
-const sequelize = new Sequelize("database_name", "username", "password", {
-  host: "localhost",
-  dialect: "mysql",
-});
+const { Sequelize, DataTypes } = require("sequelize");
+
+const sequelize = require("../database/database.js");
 
 const Message = sequelize.define("Messages", {
   MessageId: {

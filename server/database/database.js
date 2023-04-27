@@ -1,15 +1,20 @@
 const Sequelize = require("sequelize");
 require("dotenv").config();
 
-const sequelize = new Sequelize(
-  " postgres://tmzcars:Epd2o4vBCauEqgv8VaWAdssIDVteYvk4@dpg-ch0fsob3cv2c5b44ralg-a/tmzcars"
-  // database: "craftads",
-  // username: "craftads",
-  // password: "Epd2o4vBCauEqgv8VaWAdssIDVteYvk4",
-  // host: "",
-  // port: "5432",
-  // dialect: "postgres",
-);
+// const sequelize = new Sequelize(
+//   " postgres://tmzcars:Epd2o4vBCauEqgv8VaWAdssIDVteYvk4@dpg-ch0fsob3cv2c5b44ralg-a/tmzcars"
+//   // database: "craftads",
+//   // username: "craftads",
+//   // password: "Epd2o4vBCauEqgv8VaWAdssIDVteYvk4",
+//   // host: "",
+//   // port: "5432",
+//   // dialect: "postgres",
+// );
+
+const sequelize = new Sequelize("tmzcars", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
+});
 
 (async () => {
   let retries = 5;

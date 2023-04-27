@@ -1,14 +1,12 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize("database", "username", "password", {
-  host: "localhost",
-  dialect: "mysql",
-});
+const sequelize = require("../database/database.js");
 
 const Condition = sequelize.define("Conditions", {
   ConditionId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
     primaryKey: true,
   },
   Condition: {
