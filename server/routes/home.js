@@ -6,5 +6,7 @@ homeRouter.get("/about", homeController.about);
 homeRouter.get("/contact", homeController.contact);
 homeRouter.get("/join", homeController.join);
 homeRouter.get("/login", homeController.login);
+homeRouter.post("/login", homeController.signin);
+homeRouter.post("/join", homeController.register);
 
 module.exports = homeRouter;

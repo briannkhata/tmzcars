@@ -14,12 +14,14 @@ const login = (req, res) => {
   res.render("login", { pageTitle: "Login" });
 };
 
-const addMessage = (req, res) => {
-  res.render("Post Message");
+const register = (req, res) => {
+  const { Name, Phone, Passord } = req.body;
+  res.send("Register with " + Name);
 };
 
 const signin = (req, res) => {
-  res.render("signin");
+  const { Phone, Passord } = req.body;
+  res.send("Login with " + Phone);
 };
 
 module.exports = {
@@ -28,4 +30,6 @@ module.exports = {
   contact,
   join,
   login,
+  register,
+  signin,
 };
