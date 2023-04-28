@@ -5,7 +5,7 @@ const sequelize = require("../database/database.js");
 const Faq = sequelize.define("Faqs", {
   FaqId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Faq: {

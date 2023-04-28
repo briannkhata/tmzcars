@@ -4,7 +4,7 @@ const sequelize = require("../database/database.js");
 const Feature = sequelize.define("Features", {
   FeatureId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   DateAdded: {

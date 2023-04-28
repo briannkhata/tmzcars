@@ -5,7 +5,7 @@ const sequelize = require("../database/database.js");
 const CarType = sequelize.define("CarTypes", {
   CarTypeId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   CarType: {

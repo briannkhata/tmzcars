@@ -4,7 +4,6 @@ const User = sequelize.define("Users", {
   UserId: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
-    allowNull: false,
     primaryKey: true,
   },
   Name: {
@@ -51,10 +50,6 @@ const User = sequelize.define("Users", {
     defaultValue: null,
   },
   AddedBy: {
-    type: DataTypes.INTEGER,
-    defaultValue: null,
-  },
-  IdTypeId: {
     type: DataTypes.INTEGER,
     defaultValue: null,
   },

@@ -1,11 +1,10 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database/database.js");
 
-
 const Car = sequelize.define("Cars", {
   CarId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Name: {
@@ -82,10 +81,7 @@ const Car = sequelize.define("Cars", {
     type: DataTypes.DATE,
     allowNull: true,
   },
-  FuelTypeId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
+
   BuildDate: {
     type: DataTypes.STRING(200),
     allowNull: true,

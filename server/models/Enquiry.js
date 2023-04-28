@@ -3,10 +3,9 @@ const sequelize = require("../database/database.js");
 
 const Enquiry = sequelize.define("Enquiries", {
   EnquiryId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
   },
   Message: {
     type: DataTypes.TEXT,

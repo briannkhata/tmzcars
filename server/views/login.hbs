@@ -26,6 +26,13 @@
                             </div>
                         </div>
                         <div class="col-md-12">
+                            <div class="form-group">
+                                {{#if message}}
+                                <h4 class="alert alert-danger mt-4">{{message}}</h4>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
                             <button name="submit" type="submit"
                                 class="site-button"> <span>Login</span>
                             </button>

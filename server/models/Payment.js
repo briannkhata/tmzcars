@@ -5,14 +5,14 @@ const sequelize = require("../database/database.js");
 const Payment = sequelize.define("Payments", {
   PaymentId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   TransId: {
     type: DataTypes.STRING,
   },
   DatePaid: {
-    type: DataTypes.Date,
+    type: DataTypes.DATE,
   },
   Deleted: {
     type: DataTypes.INTEGER,

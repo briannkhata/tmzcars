@@ -6,7 +6,7 @@ const sequelize = require("../database/database.js");
 const Steering = sequelize.define("Steerings", {
   SteeringId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Steering: {

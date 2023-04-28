@@ -5,7 +5,7 @@ const sequelize = require("../database/database.js");
 const Exterior = sequelize.define("Exteriors", {
   ExteriorId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Exterior: {

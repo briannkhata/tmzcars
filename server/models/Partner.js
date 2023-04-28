@@ -6,7 +6,7 @@ const sequelize = require("../database/database.js");
 const Partner = sequelize.define("Partners", {
   PartnerId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Partner: {

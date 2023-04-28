@@ -5,7 +5,7 @@ const sequelize = require("../database/database.js");
 const FuelType = sequelize.define("FuelTypes", {
   FuelTypeId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   FuelType: {

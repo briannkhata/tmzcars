@@ -5,7 +5,7 @@ const sequelize = require("../database/database.js");
 const Plan = sequelize.define("Plans", {
   PlanId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Plan: {
@@ -15,7 +15,7 @@ const Plan = sequelize.define("Plans", {
     type: DataTypes.STRING,
   },
   Price: {
-    type: DataTypes.double,
+    type: DataTypes.DOUBLE,
   },
   Deleted: {
     type: DataTypes.INTEGER,

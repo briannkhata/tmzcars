@@ -6,7 +6,7 @@ const sequelize = require("../database/database.js");
 const Photo = sequelize.define("Photos", {
   PhotoId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Photo: {

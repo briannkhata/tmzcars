@@ -5,7 +5,7 @@ const sequelize = require("../database/database.js");
 const Interior = sequelize.define("Interiors", {
   InteriorId: {
     type: DataTypes.UUID,
-    defaultValue: uuidv4(),
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   Interior: {
