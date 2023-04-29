@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 const sequelize = require("../database/database.js");
 
-const Body = sequelize.define("Bodys", {
+const Body = sequelize.define("Bodies", {
   BodyId: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -17,4 +17,4 @@ const Body = sequelize.define("Bodys", {
   },
 });
 
-module.exports = Body;
+module.exports = { Body, sequelize };

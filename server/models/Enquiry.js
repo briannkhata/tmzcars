@@ -18,10 +18,11 @@ const Enquiry = sequelize.define("Enquiries", {
   },
   DateSent: {
     type: DataTypes.DATE,
+    defaultValue: Date.now,
   },
   Name: {
     type: DataTypes.STRING(100),
   },
 });
 
-module.exports = Enquiry;
+module.exports = { Enquiry, sequelize };
