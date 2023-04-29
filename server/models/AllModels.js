@@ -30,11 +30,6 @@ const Applicant = require("./Applicant.js");
 Model.hasOne(Car, {
   foreignKey: "ModelId",
 });
-
-Body.hasOne(Car, {
-  foreignKey: "BodylId",
-});
-
 Make.hasOne(Car, {
   foreignKey: "MakeId",
 });
@@ -103,8 +98,24 @@ Car.hasMany(Payment, {
   foreignKey: "CarId",
 });
 
+Car.hasMany(Photo, {
+  foreignKey: "CarId",
+});
+
+Car.hasMany(Attribute, {
+  foreignKey: "CarId",
+});
+
+Car.hasMany(Payment, {
+  foreignKey: "CarId",
+});
+
 Car.hasMany(Enquiry, {
   foreignKey: "CarId",
+});
+
+Body.hasOne(Car, {
+  foreignKey: "BodyId",
 });
 
 sequelize
