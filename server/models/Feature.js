@@ -10,6 +10,7 @@ const Feature = sequelize.define("Features", {
   DateAdded: {
     type: DataTypes.DATE,
     allowNull: true,
+    defaultValue: Date.now,
   },
   TransId: {
     type: DataTypes.STRING(200),

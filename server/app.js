@@ -8,6 +8,7 @@ const carRouter = require("./routes/car.js");
 const bodyRouter = require("./routes/body.js");
 const cartypeRouter = require("./routes/cartype.js");
 const enquiryRouter = require("./routes/enquiry.js");
+const conditionRouter = require("./routes/condition.js");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/v1/car/", carRouter);
 app.use("/api/v1/body/", bodyRouter);
 app.use("/api/v1/cartype/", cartypeRouter);
 app.use("/api/v1/enquiry/", enquiryRouter);
+app.use("/api/v1/condition/", conditionRouter);
 
 app.listen(PORT, (err) => {
   if (err) {
