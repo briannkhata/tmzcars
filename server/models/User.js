@@ -13,21 +13,27 @@ const User = sequelize.define(
     },
     Password: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     Role: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     Address: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     Email: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     Phone: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     AltPhone: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
 
     Deleted: {
@@ -40,12 +46,15 @@ const User = sequelize.define(
     },
     Country: {
       type: DataTypes.STRING(100),
+      allowNull: true,
     },
     City: {
       type: DataTypes.STRING(100),
+      allowNull: true,
     },
     Region: {
       type: DataTypes.STRING(100),
+      allowNull: true,
     },
     Photo: {
       type: DataTypes.STRING(100),
@@ -54,10 +63,12 @@ const User = sequelize.define(
     AddedBy: {
       type: DataTypes.INTEGER,
       defaultValue: null,
+      allowNull: true,
     },
     IdNumber: {
       type: DataTypes.STRING(100),
       defaultValue: null,
+      allowNull: true,
     },
     DateVerified: {
       type: DataTypes.DATE,
@@ -68,19 +79,10 @@ const User = sequelize.define(
       allowNull: false,
       defaultValue: 1,
     },
-    Profession: {
-      type: DataTypes.STRING(100),
-      defaultValue: null,
-    },
-
-    About: {
-      type: DataTypes.TEXT,
-      defaultValue: null,
-    },
   },
   {
     timestamps: false,
   }
 );
 
-module.exports = User;
+module.exports = { User, sequelize };

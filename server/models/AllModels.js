@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../database/database.js");
-const User = require("./User.js");
+const { User } = require("./User.js");
 const Car = require("./Car.js");
 const Attribute = require("./Attribute.js");
 const { Body } = require("./Body.js");
