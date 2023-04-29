@@ -3,10 +3,10 @@ const sequelize = require("../database/database.js");
 const User = require("./User.js");
 const Car = require("./Car.js");
 const Attribute = require("./Attribute.js");
-const Body = require("./Body.js");
-const CarType = require("./CarType.js");
+const { Body } = require("./Body.js");
+const { CarType } = require("./CarType.js");
 const Condition = require("./Condition.js");
-const Enquiry = require("./Enquiry.js");
+const { Enquiry } = require("./Enquiry.js");
 const Exterior = require("./Exterior.js");
 const Feature = require("./Feature.js");
 const FuelType = require("./FuelType.js");
@@ -23,8 +23,8 @@ const Faq = require("./Faq.js");
 const Message = require("./Message.js");
 const Partner = require("./Partner.js");
 const Plan = require("./Plan.js");
-const Testimony = require("./Testimonial.js");
 const Applicant = require("./Applicant.js");
+const Testimonial = require("./Testimonial.js");
 
 //relationships
 Model.hasOne(Car, {
@@ -36,6 +36,10 @@ Make.hasOne(Car, {
 
 Transmission.hasOne(Car, {
   foreignKey: "TransmissionId",
+});
+
+User.hasOne(Testimonial, {
+  foreignKey: "UserId",
 });
 
 Steering.hasOne(Car, {
