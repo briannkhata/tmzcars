@@ -3,7 +3,7 @@ const User = require("../models/User.js");
 
 const updateProfile = async (req, res) => {
   try {
-    const UserId = req.params.UserId;
+    const Id = req.params.UserId;
     const { Name, Phone, Password } = req.body;
 
     await User.findById({
@@ -14,13 +14,12 @@ const updateProfile = async (req, res) => {
     });
     res.status(200).json({
       success: 1,
-      message:
-        "ACCOUNT CREATED successfully..! Please LOGIN and UPDATE YOUR profile",
+      message: "PROFILE UPDATED successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: `Error CREATING ACCOUNT : ${err}` });
+      .json({ success: 0, message: `Error updating profile : ${err}` });
   }
 };
 
