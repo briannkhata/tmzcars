@@ -12,7 +12,6 @@ const Applicant = sequelize.define("Applicants", {
   Name: {
     type: DataTypes.STRING,
     allowNull: true,
-    charset: "latin1",
   },
   Phone: {
     type: DataTypes.STRING,
@@ -33,6 +32,7 @@ const Applicant = sequelize.define("Applicants", {
   DateApplied: {
     type: DataTypes.DATE,
     allowNull: true,
+    defaultValue: Date.now,
   },
   Post: {
     type: DataTypes.STRING,

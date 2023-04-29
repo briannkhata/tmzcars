@@ -11,8 +11,12 @@ const Payment = sequelize.define("Payments", {
   TransId: {
     type: DataTypes.STRING,
   },
+  Amount: {
+    type: DataTypes.DOUBLE,
+  },
   DatePaid: {
     type: DataTypes.DATE,
+    defaultValue: Date.now,
   },
   Deleted: {
     type: DataTypes.INTEGER,

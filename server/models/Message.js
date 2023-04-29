@@ -27,6 +27,7 @@ const Message = sequelize.define("Messages", {
   DateAdded: {
     type: DataTypes.DATE,
     allowNull: true,
+    defaultValue: Date.now,
   },
   Deleted: {
     type: DataTypes.INTEGER,
