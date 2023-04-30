@@ -1,4 +1,5 @@
 require("../database/database.js");
+const passport = require("passport");
 const { User } = require("../models/User.js");
 const bcrypt = require("bcryptjs");
 
@@ -37,7 +38,9 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const login = passport.authenticate('local',{
+  
+}) ,async (req, res) => {
   const { Phone, Password } = req.body;
 
   try {
