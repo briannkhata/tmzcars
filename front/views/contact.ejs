@@ -55,27 +55,27 @@
                     </div>
                 </div>
             </div>
-            <form action="">
+            <form action="/sendmessage" method="post">
                 <div class="row">
                     <div class="col-md-12 my-3">
                         <label class="site-label">Name<span class="red-text">*</span></label>
-                        <input type="text" placeholder="Enter Name" name="Name" class="site-input" required>
+                        <input type="text" placeholder="Name" name="Name" class="site-input" required>
                     </div>
 
                     <div class="col-md-6 my-3">
-                        <label class="site-label">Email Address</label>
-                        <input type="text" placeholder="Enter Email Address" name="Email" class="site-input">
+                        <label class="site-label">Email</label>
+                        <input type="email" placeholder="Email" name="Email" class="site-input">
                     </div>
                     <div class="col-md-6 my-3">
                         <label class="site-label">Phone Number</label>
-                        <input type="text" placeholder="Enter Phone Number" name="Phone" class="site-input">
+                        <input type="tel" placeholder="Phone" name="Phone" class="site-input">
                     </div>
                     <div class="col-12 my-3">
                         <label class="site-label">Message<span class="red-text">*</span></label>
-                        <textarea cols="30" rows="7" placeholder="Enter Message" name="Message" class="site-input"
+                        <textarea cols="30" rows="7" placeholder="Message" name="Message" class="site-input"
                             required></textarea>
                     </div>
-                    <div class="col-12 my-3 text-center">
+                    <div class="col-12 my-3">
                         <button class="site-btn" type="submit">Send</button>
                     </div>
                 </div>
