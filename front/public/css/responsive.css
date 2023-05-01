@@ -1,0 +1,163 @@
+@media screen and (max-width: 1399px) {
+  .car-deal-inner p{
+      font-size: 15px;
+  }
+  .p-md{
+      font-size: 14px;
+  }
+  h2 {
+      font-size: 35px;
+  }
+  .item.item-sliderNav img {
+      width: 123px;
+      height: 98px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .p-md{
+      font-size: 13px;
+  }
+  h1 {
+      font-size: 45px;
+  }
+  h2{
+      font-size: 35px;
+  }
+  h3{
+      font-size: 28px;
+  }
+  h5 {
+      font-size: 19px;
+  }
+  h6 {
+      font-size: 18px;
+  }
+  body{
+      font-size: 14px;
+  }
+  .p-sm{
+      font-size: 13px;
+  }
+  .testimonials{
+      background-position: bottom;
+  }
+  .contact-card h3 {
+      font-size: 24px;
+  }
+  .item.item-sliderNav img {
+      width: 139px;
+      height: 105px;
+  }
+  .animation-preloader img{width:200px;}
+}
+
+@media screen and (max-width: 991px) {
+  .banner{
+      background: url('../images/banner-responsive.png') no-repeat;
+      background-size: cover;
+  }
+  .inner-banner{
+      background: url('../images/inner-banner-responsive.png') no-repeat;
+      background-size: cover;
+  }
+  .new-model-releases{
+      background: #041A20;
+  }
+  .services, .new-car-deals, .new-model-releases, .about-us, .testimonials, .latest-from-trader, .car-for-sale, .contact-us, .car-details, .search-results{
+      padding: 45px 0;
+  }
+  .best-cars, .car-reviews{
+      padding-bottom: 45px;
+  }
+  h1 {
+      font-size: 40px;
+  }
+  h2{
+      font-size: 32px;
+  }
+  h3{
+      font-size: 26px;
+  }
+  .navbar-collapse {
+      background: #041A20;
+      margin-top: 10px;
+  }
+  .navbar-collapse a {
+      color: white !important;
+  }
+  .navbar-collapse li.nav-item .green-line {
+      background-color: white !important;
+  }
+  .item.item-sliderNav img {
+      width: 159px;
+      height: 125px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .services, .new-car-deals, .new-model-releases, .about-us, .testimonials, .latest-from-trader, .car-for-sale, .contact-us, .car-details, .search-results{
+      padding: 40px 0;
+  }
+  .best-cars, .car-reviews{
+      padding-bottom: 40px;
+  }
+  h1 {
+      font-size: 32px;
+  }
+  h2{
+      font-size: 28px;
+  }
+  h3 {
+      font-size: 24px;
+  }
+  h5 {
+      font-size: 17px;
+  }
+  h6 {
+      font-size: 16px;
+  }
+  .slider-card img {
+      height: 335px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .inner-banner{
+      padding: 120px 0 35px 0;
+  }
+  .trader-card{
+      min-height: 250px;
+  }
+  .services, .new-car-deals, .new-model-releases, .about-us, .testimonials, .latest-from-trader, .car-for-sale, .contact-us, .car-details, .search-results{
+      padding: 35px 0;
+  }
+  .best-cars, .car-reviews{
+      padding-bottom: 35px;
+  }
+  h1 {
+      font-size: 28px;
+  }
+  h2{
+      font-size: 24px;
+  }
+  h3, .contact-card h3{
+      font-size: 22px;
+  }
+  h5 {
+      font-size: 16px;
+  }
+  h6 {
+      font-size: 15px;
+  }
+  .item.item-sliderNav img {
+      width: 95px;
+      height: 74px;
+  }
+  .slider-card img {
+      height: 245px;
+  }
+  .ctn-preloader .animation-preloader .txt-loading {
+      font: bold 2.5em "Circular Std Book";
+  }
+}

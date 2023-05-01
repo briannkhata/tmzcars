@@ -1,0 +1,217 @@
+/* ---------------------------------------------------
+  FONTS IMPORT
+----------------------------------------------------- */
+@import url('../fonts/fonts.css');
+/* ---------------------------------------------------
+  BODY STYLE
+----------------------------------------------------- */
+body{font-family:Rubik,sans-serif;color:#333}
+/* ---------------------------------------------------
+  FONT SIZES
+----------------------------------------------------- */
+h1{font-size:65px;color:#041a20;font-weight:500}
+h2{font-size:40px}
+h3{font-size:30px}
+h5{font-size:22px}
+h6{font-size:20px}
+.p-xs{font-size:12px}
+.p-md{font-size:15px}
+.p-sm{font-size:14px}
+/* ---------------------------------------------------
+  GLOBAL STYLES
+----------------------------------------------------- */
+a{color:inherit;display:inline-block}
+a:hover{color:#3fb58b}
+ul{list-style:none;padding-left:0}
+:focus{outline:0}
+.site-label{display:block;position:relative;margin-bottom:4px;margin-left:25px}
+.site-label::after{content:'';background:#3fb58b;height:5px;width:77px;position:absolute;left:0;bottom:-5px}
+/* ---------------------------------------------------
+  FONT WEIGHTS
+----------------------------------------------------- */
+.regular{font-weight:400!important}
+.medium{font-weight:500!important}
+.semi-bold{font-weight:600!important}
+.bold{font-weight:700!important}
+/* ---------------------------------------------------
+  COLORS
+----------------------------------------------------- */
+.d-green-text{color:#041a20}
+.green-text{color:#3fb58b}
+.grey-text{color:#666}
+.red-text{color:red}
+/* ---------------------------------------------------
+  BUTTON STYLING
+----------------------------------------------------- */
+.site-btn{background:#3fb58b;border:1px solid #3fb58b;color:#fff;border-radius:50px;padding:12px 25px;min-width:160px;transition:ease-in-out .2s}
+.site-btn:hover{background:#fff;color:#3fb58b}
+.white-border-btn{background:0 0;color:#fff;border:1px solid #fff;box-shadow:0 3px 6px rgb(63,181,139,.08)}
+.white-border-btn:hover{color:#3fb58b}
+/* ---------------------------------------------------
+  INPUT STYLING
+----------------------------------------------------- */
+.site-input{border:1px solid #d5d5d5;padding:12px 15px;border-radius:50px;width:100%;appearance:none;color:#666}
+select.site-input{background:url(../images/select-arrow.png) no-repeat 95% 50%}
+.site-input::placeholder{color:#666}
+.site-input:focus{outline:0;border:1px solid #041a20}
+textarea.site-input{border-radius:12px;resize:none}
+/* ---------------------------------------------------
+  PRELOADER
+----------------------------------------------------- */
+.ctn-preloader{align-items:center;cursor:none;display:flex;height:100%;justify-content:center;position:fixed;left:0;top:0;width:100%;z-index:900}
+.ctn-preloader .animation-preloader{position:absolute;z-index:100}
+/* Spinner cargando */
+.ctn-preloader .animation-preloader .spinner{animation:spinner 1s infinite linear;border-radius:50%;border:3px solid rgb(0 0 0 / 20%);border-top-color:#041A20;height:18em;margin:0 auto 3.5em auto;width:18em}
+/* Texto cargando */
+.ctn-preloader .animation-preloader .txt-loading{font:bold 4em "Circular Std Book";text-align:center;user-select:none}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading:before{animation:letters-loading 4s infinite;color:#041A20;content:attr(data-text-preloader);left:0;opacity:0;position:absolute;top:0;transform:rotateY(-90deg)}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading{color:rgba(0,0,0,.2);position:relative}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading:nth-child(2):before{animation-delay:.2s}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading:nth-child(3):before{animation-delay:.4s}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading:nth-child(4):before{animation-delay:.6s}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading:nth-child(5):before{animation-delay:.8s}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading:nth-child(6):before{animation-delay:1s}
+.ctn-preloader .animation-preloader .txt-loading .letters-loading:nth-child(7):before{animation-delay:1.2s}
+.ctn-preloader .loader-section{background-color:#fff;height:100%;position:fixed;top:0;width:calc(50% + 1px)}
+.ctn-preloader .loader-section.section-left{left:0}
+.ctn-preloader .loader-section.section-right{right:0}
+/* Efecto de fade en la animaciÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¨ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â´ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸n de cargando */
+.loaded .animation-preloader{opacity:0;transition:.3s ease-out}
+/* Efecto de cortina */
+.loaded .loader-section.section-left{transform:translateX(-101%);transition:.7s .3s all cubic-bezier(.1,.1,.1,1)}
+.loaded .loader-section.section-right{transform:translateX(101%);transition:.7s .3s all cubic-bezier(.1,.1,.1,1)}
+.animation-preloader img{width:250px;height:170px; object-fit: contain; position:absolute;top:34%;left:0;right:0;margin:auto;transform:translateY(-45%)}
+@keyframes spinner{to{transform:rotateZ(360deg)}}@keyframes letters-loading{0%,100%,75%{opacity:0;transform:rotateY(-90deg)}25%,50%{opacity:1;transform:rotateY(0)}}
+/* ---------------------------------------------------
+  HEADER
+----------------------------------------------------- */
+header{position:absolute;width:100%}
+.navbar{padding:20px 0;background:0 0!important;border:none;border-radius:0}
+.navbar a{color:#666!important;font-size:16px!important;text-transform:capitalize;font-weight:500}
+.site-logo{width:200px}
+.navbar-toggler{padding:0;border:0;color:#041a20!important}
+.navbar-toggler:focus{box-shadow:none!important}
+.nav-line{display:flex;align-items:center;opacity:0;transition:ease-in-out .2s}
+header li.nav-item a{padding-left:0!important;padding-right:0!important;padding-bottom:0!important}
+.navbar-collapse li.active .nav-line,.navbar-collapse li:hover .nav-line{opacity:1}
+.navbar-collapse li a:hover,.navbar-collapse li.active a{color:#3fb58b!important}
+/* ---------------------------------------------------
+  BANNER
+----------------------------------------------------- */
+.banner{background:url(../images/banner-bg.png) no-repeat;background-size:cover;background-position:top right;padding:170px 0 50px 0}
+.filter-card{border:1px dashed rgb(90,90,90,.34);border-radius:0 11px 11px 11px;padding:25px}
+/* ---------------------------------------------------
+  SERVICES
+----------------------------------------------------- */
+.services{background:#f5f5f5;padding:70px 0}
+.service-card{background:#f5f5f5;border:1px solid rgb(214,214,214,.36);border-radius:20px;padding:25px 20px;text-align:center;box-shadow:0 3px 6px rgb(63,181,139,.14);transition:ease-in-out .2s}
+.service-card-img{transition:ease-in-out .2s}
+.service-card:hover{background:#3fb58b;color:#fff}
+.service-card:hover .green-text,.service-card:hover p{color:#fff}
+.service-card:hover .service-card-img{filter:brightness(4) grayscale(1) contrast(4)}
+.green-line{background:#041a20;width:33px;height:8.5px;border-radius:50px;display:inline-block}
+.service-card:hover .green-line{background-color:#fff}
+.service-card p{font-size:14px}
+/* ---------------------------------------------------
+  NEW CAR DEALS
+----------------------------------------------------- */
+.new-car-deals{text-align:center;padding:70px 0}
+.car-deal-card{border:1px solid rgb(63,181,139,.13);box-shadow:0 7px 10px rgb(63,181,139,.11);padding:20px 0 30px 0;background:#fff;border-radius:15px;height:100%;position:relative;transition:ease-in-out .2s}
+.car-deal-img{position:relative;z-index:3;height:121px;padding:0 25px;display:flex;align-items:center;justify-content:center}
+.deal-overlay{position:absolute;width:100%;height:100%;border-radius:15px;color:#fff;top:0;left:0;background:rgb(63,181,139,.93);display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:20px;opacity:0;z-index:-3;transition:all .2s;align-items:center}
+.car-deal-card:hover .deal-overlay{opacity:1;z-index:0}
+.car-deal-tags{background:#041a20;height:25px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;position:relative}
+.car-deal-tags::after{content:'';border-top:14.5px solid #3fb58b;border-left:14.5px solid transparent;position:absolute;top:0;right:0}
+.car-deal-inner{padding:15px 20px 0 20px}
+/* ---------------------------------------------------
+  NEW MODEL RELEASES
+----------------------------------------------------- */
+.new-model-releases{background:url(../images/new-releases-bg.png) no-repeat,#f5f5f5;background-size:cover;padding:70px 0;text-align:center;color:#fff;background-position:right}
+.white-line{background-color:#fff}
+/* ---------------------------------------------------
+  ABOUT US
+----------------------------------------------------- */
+.about-us{padding:70px 0}
+/* ---------------------------------------------------
+  BEST CARS
+----------------------------------------------------- */
+.best-cars{padding-bottom:70px}
+.best-cars .car-deal-card{text-align:center}
+.best-cars .car-deal-card .deal-overlay{padding:10px 20px;align-items:flex-start;text-align:left}
+.best-cars .car-deal-card:hover .deal-overlay{opacity:1;z-index:4}
+/* ---------------------------------------------------
+  TESTIMONIALS
+----------------------------------------------------- */
+.testimonials{background:url(../images/testimonial-bg.png) no-repeat;background-size:cover;color:#fff;padding:70px 0;text-align:center}
+.testimonial-carousel.owl-theme .owl-dots button span{background:#3fb58b;transition:ease-in-out .2s}
+.testimonial-carousel.owl-theme .owl-dots button:hover span{background:#fff}
+.testimonial-carousel.owl-theme .owl-dots button.active span{background:#fff;width:45px}
+/* ---------------------------------------------------
+  LATEST FROM TRADER
+----------------------------------------------------- */
+.latest-from-trader{padding:70px 0}
+.trader-card{min-height:340px;display:flex;flex-direction:column;padding:20px;justify-content:flex-end;position:relative;border-radius:25px;color:#fff}
+.trader-card-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:25px;z-index:-1}
+.trader-card::after{content:'';background:linear-gradient(to bottom,rgb(0 0 0 / 0) 55%,rgb(0,0,0,1));position:absolute;width:100%;height:100%;border-radius:25px;left:0;top:0}
+.trader-card-inner{position:relative;z-index:2}
+/* ---------------------------------------------------
+  FOOTER
+----------------------------------------------------- */
+footer{background:#041a20;color:#fff}
+footer a{text-decoration:none}
+.footer-logo{width:250px}
+/* ---------------------------------------------------
+  INNER BANNER
+----------------------------------------------------- */
+.inner-banner{background:url(../images/inner-banner.png) no-repeat;padding:120px 0 50px 0;background-size:cover;background-position:bottom right;max-height:467px}
+/* ---------------------------------------------------
+  CAR FOR SALE
+----------------------------------------------------- */
+.car-for-sale{padding:70px 0}
+/* ---------------------------------------------------
+  CONTACT US
+----------------------------------------------------- */
+.contact-us{padding:70px 0}
+.contact-card{border-radius:0 11px 11px 11px;border:1.5px dashed rgb(90,90,90,.34);padding:20px;text-align:center}
+.contact-img{width:100px;height:100px;margin:0 auto}
+.no-underline{text-decoration:none}
+.contact-us .site-input{padding:12px 25px}
+/* ---------------------------------------------------
+  PRODUCT DETAILS
+----------------------------------------------------- */
+.slider-card img{width:100%;height:495px;object-fit:cover;object-position:center;border-radius:20px}
+.item.item-sliderNav img{width:143px;height:128px;object-fit:cover;object-position:center;cursor:pointer;border-radius:10px}
+.green-tag{background:#3fb58b;width:200px;height:60px;border-radius:35px 0 0 35px;display:flex;align-items:center;justify-content:center;margin-left:auto;color:#fff}
+.detail-card{border-radius:10px;border:1px dashed rgb(90,90,90,.34);padding:20px}
+.phone-icon{width:40px;object-fit:contain}
+/* ---------------------------------------------------
+  CAR DETAILS
+----------------------------------------------------- */
+.car-details{padding:70px 0}
+/* ---------------------------------------------------
+  CAR REVIEWS
+----------------------------------------------------- */
+.car-reviews{padding-bottom:70px}
+.review-card{padding:20px;border-radius:0 11px 11px 11px;border:1.5px dashed rgb(90,90,90,.34);text-align:center}
+.big-icon{font-size:40px}
+.review-carousel.owl-theme .owl-dots button span{background:#3fb58b;transition:ease-in-out .2s;margin-top:20px}
+.review-carousel.owl-theme .owl-dots button:hover span{background:#041a20}
+.review-carousel.owl-theme .owl-dots button.active span{background:#041a20;width:45px}
+.review-carousel .owl-stage-outer, .review-carousel .owl-stage{display: flex;}
+.review-carousel .item{display: flex; height: 100%; padding-bottom: 20px;}
+.review-carousel .item .review-card{display: flex; height: 100%; align-items: center; justify-content: center; flex-direction: column;}
+/* ---------------------------------------------------
+  SEARCH RESULTS
+----------------------------------------------------- */
+.search-results{padding:70px 0}
+.pagination .page-item:first-child .page-link,.pagination .page-item:last-child .page-link{color:#3fb58b}
+.pagination{border:1px solid #041a20;display:inline-flex;border-radius:6px}
+.pagination .page-item:first-child,.pagination .page-item:first-child .page-link{border-radius:6px 0 0 6px}
+.pagination .page-item .page-link{padding:0 15px;line-height:1;border:0;border-right:1px solid #97a2c9!important;margin-left:0;border-radius:0!important;background:0 0!important;color:#2b2541}
+.pagination .page-item{padding:15px 0}
+.pagination .page-item:first-child .page-link,.pagination .page-item:last-child .page-link{border-right:0!important}
+.pagination .page-item.active,.pagination .page-item:hover{background:#3fb58b}
+.pagination .page-item.active .page-link,.pagination .page-item:hover .page-link{color:#fff;border-right:1px solid transparent!important}
+.pagination .page-item.active:first-child .page-link,.pagination .page-item.active:last-child .page-link,.pagination .page-item:hover:first-child .page-link,.pagination .page-item:hover:last-child .page-link{color:#3fb58b!important}
+.pagination .page-item.active:first-child,.pagination .page-item.active:last-child,.pagination .page-item:hover:first-child,.pagination .page-item:hover:last-child{background:0 0!important}
+.pagination .page-item .page-link:focus{box-shadow:none}

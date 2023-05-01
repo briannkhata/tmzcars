@@ -1,7 +1,9 @@
 require("../database/database.js");
-const passport = require("passport");
 const { User } = require("../models/User.js");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const auth = require("../middleware/auth.js");
 
 const register = async (req, res) => {
   console.log("register route");
@@ -38,26 +40,69 @@ const register = async (req, res) => {
   }
 };
 
-const login = passport.authenticate('local',{
-  
-}) ,async (req, res) => {
+const login = async (req, res) => {
   const { Phone, Password } = req.body;
 
   try {
-    const checkUser = await User.findOne({
+    const checkPhone = await User.findOne({
       where: { Phone: Phone },
     });
 
-    // if (!checkUser) {
-    //   return res.render("login", {
-    //     message: "Phone not found",
-    //   });
-    // }
+    if (!checkPhone) {
+      res.status(500).json({
+        success: 0,
+        message: "wrong phone number",
+      });
+    }
+
+    if (checkPhone) {
+      if (await bcrypt.compare(Password, checkPhone.Password)) {
+        //TOKENS
+
+        const accessToken = jwt.sign(
+          { id: checkPhone.UserId },
+          process.env.ACCESS_TOKEN_SECRET,
+          {
+            expiresIn: "30s",
+          }
+        );
+
+        res.send({
+          success: 1,
+          token: accessToken,
+        });
+
+        const refreshToken = jwt.sign(
+          { Phone: checkPhone.Phone },
+          process.env.REFRESH_TOKEN_SECRET,
+          {
+            expiresIn: "1day",
+          }
+        );
+
+        // res.send({
+        //   success: 1,
+        //   token: accessToken,
+        // });
+
+        res.status(200).json({
+          success: 1,
+          message: `${checkPhone.Name} is authenticated`,
+          token: accessToken,
+        });
+      } else {
+        res.status(500).json({
+          success: 0,
+          message: "wrong password",
+        });
+      }
+    }
   } catch (error) {
     console.error(error);
-    // return res.render("login", {
-    //   message: "An error occurred while logging in",
-    // });
+    res.status(500).json({
+      success: 0,
+      message: "wrong phone number",
+    });
   }
 };
 

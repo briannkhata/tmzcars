@@ -1,5 +1,6 @@
 require("../database/database.js");
 const { User } = require("../models/User.js");
+const auth = require("../middleware/auth.js");
 
 const getAll = async (req, res) => {
   try {
@@ -33,6 +34,30 @@ const getSingle = async (req, res) => {
     res
       .status(500)
       .json({ success: 0, message: `Error getting user : ${err}` });
+  }
+};
+
+const remove = async (req, res) => {
+  try {
+    const Deleted = 1;
+    const { Id } = req.params;
+    const updateUser = await User.update(
+      { Deleted },
+      { where: { UserId: Id } }
+    );
+    if (!updateUser) {
+      res
+        .status(500)
+        .json({ success: 0, message: ` Error deleting user : ${err}` });
+    }
+    res.status(200).json({
+      success: 1,
+      message: "User deleted successfully",
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: ` Error deleting User : ${err}` });
   }
 };
 
@@ -156,4 +181,5 @@ module.exports = {
   changeProfile,
   updateProfile,
   verifyAccount,
+  remove,
 };
