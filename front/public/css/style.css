@@ -51,7 +51,7 @@ ul{list-style:none;padding-left:0}
   INPUT STYLING
 ----------------------------------------------------- */
 .site-input{border:1px solid #d5d5d5;padding:12px 15px;border-radius:50px;width:100%;appearance:none;color:#666}
-select.site-input{background:url(../images/select-arrow.png) no-repeat 95% 50%}
+select.site-input{background:url(../img/select-arrow.png) no-repeat 95% 50%}
 .site-input::placeholder{color:#666}
 .site-input:focus{outline:0;border:1px solid #041a20}
 textarea.site-input{border-radius:12px;resize:none}
@@ -98,7 +98,7 @@ header li.nav-item a{padding-left:0!important;padding-right:0!important;padding-
 /* ---------------------------------------------------
   BANNER
 ----------------------------------------------------- */
-.banner{background:url(../images/banner-bg.png) no-repeat;background-size:cover;background-position:top right;padding:170px 0 50px 0}
+.banner{background:url(../img/banner-bg.png) no-repeat;background-size:cover;background-position:top right;padding:170px 0 50px 0}
 .filter-card{border:1px dashed rgb(90,90,90,.34);border-radius:0 11px 11px 11px;padding:25px}
 /* ---------------------------------------------------
   SERVICES
@@ -126,7 +126,7 @@ header li.nav-item a{padding-left:0!important;padding-right:0!important;padding-
 /* ---------------------------------------------------
   NEW MODEL RELEASES
 ----------------------------------------------------- */
-.new-model-releases{background:url(../images/new-releases-bg.png) no-repeat,#f5f5f5;background-size:cover;padding:70px 0;text-align:center;color:#fff;background-position:right}
+.new-model-releases{background:url(../img/new-releases-bg.png) no-repeat,#f5f5f5;background-size:cover;padding:70px 0;text-align:center;color:#fff;background-position:right}
 .white-line{background-color:#fff}
 /* ---------------------------------------------------
   ABOUT US
@@ -142,7 +142,7 @@ header li.nav-item a{padding-left:0!important;padding-right:0!important;padding-
 /* ---------------------------------------------------
   TESTIMONIALS
 ----------------------------------------------------- */
-.testimonials{background:url(../images/testimonial-bg.png) no-repeat;background-size:cover;color:#fff;padding:70px 0;text-align:center}
+.testimonials{background:url(../img/testimonial-bg.png) no-repeat;background-size:cover;color:#fff;padding:70px 0;text-align:center}
 .testimonial-carousel.owl-theme .owl-dots button span{background:#3fb58b;transition:ease-in-out .2s}
 .testimonial-carousel.owl-theme .owl-dots button:hover span{background:#fff}
 .testimonial-carousel.owl-theme .owl-dots button.active span{background:#fff;width:45px}
@@ -163,7 +163,7 @@ footer a{text-decoration:none}
 /* ---------------------------------------------------
   INNER BANNER
 ----------------------------------------------------- */
-.inner-banner{background:url(../images/inner-banner.png) no-repeat;padding:120px 0 50px 0;background-size:cover;background-position:bottom right;max-height:467px}
+.inner-banner{background:url(../img/inner-banner.png) no-repeat;padding:120px 0 50px 0;background-size:cover;background-position:bottom right;max-height:467px}
 /* ---------------------------------------------------
   CAR FOR SALE
 ----------------------------------------------------- */
