@@ -34,7 +34,10 @@
         this.querySelector('i').classList.toggle('fa-eye');
         this.querySelector('i').classList.toggle('fa-eye-slash');
     });
-</script>
+
+    $(".alert").delay(5000).fadeOut(200, function () {
+        $(this).alert('close');
+    });</script>
 </body>
 
 </html>
