@@ -122,4 +122,4 @@ const Car = sequelize.define(
   }
 );
 
-module.exports = Car;
+module.exports = { Car, sequelize };
