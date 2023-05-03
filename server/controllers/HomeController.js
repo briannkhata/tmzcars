@@ -5,47 +5,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const auth = require("../middleware/auth.js");
 
-// const register = async (req, res) => {
-//   try {
-//     const { Name, Phone, Password } = req.body;
-//     const Role = "User";
-
-//     if (!Name || !Phone || !Password) {
-//       return res.status(500).json({
-//         success: 0,
-//         message: "all fields are required",
-//       });
-//     }
-
-//     const hashedPassword = await bcrypt.hash(Password, 10);
-//     const alreadyExists = await User.findOne({ where: { Phone } }).catch(
-//       (err) => {
-//         console.log("Error :", err);
-//       }
-//     );
-//     if (alreadyExists) {
-//       return res.status(500).json({
-//         success: 0,
-//         message: "phone already exists",
-//       });
-//     }
-//     await User.create({
-//       Name: Name,
-//       Phone: Phone,
-//       Password: hashedPassword,
-//       Role: Role,
-//     });
-//     res.status(200).json({
-//       success: 1,
-//       message: "Account created successfully.! You can login",
-//     });
-//   } catch (err) {
-//     res
-//       .status(500)
-//       .json({ success: 0, message: `Error creating Account : ${err}` });
-//   }
-// };
-
 const register = async (req, res) => {
   try {
     const { Name, Phone, Password } = req.body;

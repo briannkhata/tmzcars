@@ -42,11 +42,20 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Name, Message, Phone, Email } = req.body;
-    await Message.create({ Name, Message, Phone, Email });
+    const name = req.body.Name;
+    const message = req.body.Message;
+    const phone = req.body.Phone;
+    const email = req.body.Email;
+
+    await Message.create({
+      Name: name,
+      Message: message,
+      Phone: phone,
+      Email: email,
+    });
     res.status(200).json({
       success: 1,
-      message: "Data Created",
+      message: "Message sent.",
     });
   } catch (err) {
     res
@@ -55,60 +64,8 @@ const add = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {
-  try {
-    const { Name, Message, Phone, Email } = req.body;
-    const { Id } = req.params;
-    const updateMessage = await Message.update(
-      { Name, Message, Phone, Email },
-      { where: { MessageId: Id } }
-    );
-    if (!updateMessage) {
-      res.status(500).json({
-        success: 0,
-        message: ` Error updating Message : ${err}`,
-      });
-    }
-    res.status(200).json({
-      success: 1,
-      message: "Message updated successfully",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error updating Message : ${err}` });
-  }
-};
-
-const remove = async (req, res) => {
-  try {
-    const Deleted = 1;
-    const { Id } = req.params;
-    const updateMessage = await Message.update(
-      { Deleted },
-      { where: { MessageId: Id } }
-    );
-    if (!updateMessage) {
-      res.status(500).json({
-        success: 0,
-        message: ` Error deleting Message : ${err}`,
-      });
-    }
-    res.status(200).json({
-      success: 1,
-      message: "Message deleted successfully",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error deleting Message : ${err}` });
-  }
-};
-
 module.exports = {
   add,
-  remove,
   getAll,
   getSingle,
-  update,
 };

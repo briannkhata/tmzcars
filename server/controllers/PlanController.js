@@ -42,11 +42,14 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Plan, Duration, Price } = req.body;
-    await Plan.create({ Plan, Duration, Price });
+    const plan = req.body.Plan;
+    const duration = req.body.Duration;
+    const price = req.body.Price;
+
+    await Plan.create({ Plan: plan, Duration: duration, Price: price });
     res.status(200).json({
       success: 1,
-      message: "Data Created",
+      message: "Plan Created",
     });
   } catch (err) {
     res
@@ -57,10 +60,12 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Plan, Duration, Price } = req.body;
+    const plan = req.body.Plan;
+    const duration = req.body.Duration;
+    const price = req.body.Price;
     const { Id } = req.params;
     const updatePlan = await Plan.update(
-      { Plan, Duration, Price },
+      { Plan: plan, Duration: duration, Price: price },
       { where: { PlanId: Id } }
     );
     if (!updatePlan) {
@@ -82,26 +87,28 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
-    const updatePlan = await Plan.update(
-      { Deleted },
+    const updateResult = await Plan.update(
+      { Deleted: 1 },
       { where: { PlanId: Id } }
     );
-    if (!updatePlan) {
-      res.status(500).json({
-        success: 0,
-        message: ` Error deleting Plan : ${err}`,
+
+    if (updateResult[0] === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Plan not found",
       });
     }
+
     res.status(200).json({
-      success: 1,
+      success: true,
       message: "Plan deleted successfully",
     });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error deleting Plan : ${err}` });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while deleting the plan",
+    });
   }
 };
 

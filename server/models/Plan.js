@@ -29,4 +29,4 @@ const Plan = sequelize.define(
   }
 );
 
-module.exports = Plan;
+module.exports = { Plan, sequelize };

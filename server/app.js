@@ -13,6 +13,8 @@ const cartypeRouter = require("./routes/cartype.js");
 const enquiryRouter = require("./routes/enquiry.js");
 const conditionRouter = require("./routes/condition.js");
 const userRouter = require("./routes/user.js");
+const messageRouter = require("./routes/message.js");
+const planRouter = require("./routes/plan.js");
 
 const app = express();
 
@@ -40,6 +42,8 @@ app.use("/api/v1/cartype/", cartypeRouter);
 app.use("/api/v1/enquiry/", enquiryRouter);
 app.use("/api/v1/condition/", conditionRouter);
 app.use("/api/v1/user/", userRouter);
+app.use("/api/v1/message/", messageRouter);
+app.use("/api/v1/plan/", planRouter);
 
 app.listen(PORT, (err) => {
   if (err) {
