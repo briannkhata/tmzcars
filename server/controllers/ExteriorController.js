@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Exterior } = req.body;
-    await Exterior.create({ Exterior });
+    const exterior = req.body.Exterior;
+    await Exterior.create({ Exterior: exterior });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +57,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Exterior } = req.body;
+    const exterior = req.body.Exterior;
     const { Id } = req.params;
     const updateexterior = await Exterior.update(
-      { Exterior },
+      { Exterior: exterior },
       { where: { exteriorId: Id } }
     );
     if (!updateexterior) {
@@ -82,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updateexterior = await Exterior.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { ExteriorId: Id } }
     );
     if (!updateexterior) {

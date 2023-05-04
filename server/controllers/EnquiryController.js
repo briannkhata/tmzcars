@@ -2,11 +2,11 @@ const { Enquiry } = require("../models/Enquiry.js");
 
 const getAll = async (req, res) => {
   try {
-    const Enquirys = await Enquiry.findAll();
+    const enquiries = await Enquiry.findAll();
     res.status(200).json({
       success: 1,
       message: "Data Retrieved successfully",
-      data: Enquirys,
+      data: enquiries,
     });
   } catch (err) {
     res
@@ -18,14 +18,14 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
   try {
     const { Id } = req.params;
-    const Enquiry = await Enquiry.findByPk(Id);
-    if (!Enquiry) {
+    const enquiry = await Enquiry.findByPk(Id);
+    if (!enquiry) {
       res.status(500).json({ success: 0, message: ` Enquiry found : ${err}` });
     }
     res.status(200).json({
       success: 1,
       message: "Getting Enquiry succesfull",
-      data: Enquiry,
+      data: enquiry,
     });
   } catch (err) {
     res.status(500).json({
@@ -37,8 +37,18 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Message, Phone, Email, Name } = req.body;
-    await Enquiry.create({ Message, Phone, Email, Name });
+    const message = req.body.Message;
+    const phone = req.body.Phone;
+    const email = req.body.Email;
+    const name = req.body.Name;
+    const carId = req.body.CarId;
+    await Enquiry.create({
+      Message: message,
+      Phone: phone,
+      Email: email,
+      Name: name,
+      CarId: carId,
+    });
     res.status(200).json({
       success: 1,
       message: "Enquiry Created",
@@ -52,10 +62,21 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Message, Phone, Email, Name } = req.body;
+    const message = req.body.Message;
+    const phone = req.body.Phone;
+    const email = req.body.Email;
+    const name = req.body.Name;
+    const carId = req.body.CarId;
+
     const id = req.body.EnquiryId;
     const updateEnquiry = await Enquiry.update(
-      { Message, Phone, Email, Name },
+      {
+        Message: message,
+        Phone: phone,
+        Email: email,
+        Name: name,
+        CarId: carId,
+      },
       { where: { EnquiryId: id } }
     );
     if (!updateEnquiry) {

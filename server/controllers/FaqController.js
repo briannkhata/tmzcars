@@ -3,7 +3,7 @@ const { Faq } = require("../models/Faq.js");
 
 const getAll = async (req, res) => {
   try {
-    const Faqs = await Faq.findAll({
+    const faqs = await Faq.findAll({
       where: {
         Deleted: 0,
       },
@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
     res.status(200).json({
       success: 1,
       message: "Data Retrieved successfully",
-      data: Faqs,
+      data: faqs,
     });
   } catch (err) {
     res
@@ -42,8 +42,10 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Faq, Answer } = req.body;
-    await Faq.create({ Faq, Answer });
+    const faq = req.body.Faq;
+    const answer = req.body.Answer;
+
+    await Faq.create({ Faq: faq, Answer: answer });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +59,11 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Faq, Answer } = req.body;
+    const faq = req.body.Faq;
+    const answer = req.body.Answer;
     const { Id } = req.params;
     const updateFaq = await Faq.update(
-      { Faq, Answer },
+      { Faq: faq, Answer: answer },
       { where: { FaqId: Id } }
     );
     if (!updateFaq) {
@@ -82,9 +85,11 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
-    const updateFaq = await Faq.update({ Deleted }, { where: { FaqId: Id } });
+    const updateFaq = await Faq.update(
+      { Deleted: 1 },
+      { where: { FaqId: Id } }
+    );
     if (!updateFaq) {
       res.status(500).json({
         success: 0,

@@ -2,7 +2,7 @@ const express = require("express");
 const userController = require("../controllers/UserController");
 const userRouter = express.Router();
 userRouter.get("/", userController.getAll);
-userRouter.get("/getOne/:Id", userController.getOne);
+userRouter.get("/getSingle/:Id", userController.getSingle);
 userRouter.get("/logout/", userController.logout);
 userRouter.put("/delete/:Id", userController.remove);
 userRouter.put("/updateProfle/:Id", userController.updateProfile);

@@ -42,8 +42,11 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { TransId, AddBy, CarId } = req.body;
-    await Feature.create({ TransId, AddBy, CarId });
+    const addBy = req.body.AddBy;
+    const transId = req.body.TransId;
+    const carId = req.body.CarId;
+
+    await Feature.create({ TransId: transId, AddBy: addBy, CarId: carId });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +60,12 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { TransId, CarId } = req.body;
+    const addBy = req.body.AddBy;
+    const transId = req.body.TransId;
+    const carId = req.body.CarId;
     const { Id } = req.params;
     const updatefeature = await Feature.update(
-      { TransId, CarId },
+      { TransId: transId, AddBy: addBy, CarId: carId },
       { where: { FeatureId: Id } }
     );
     if (!updatefeature) {

@@ -44,8 +44,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Condition } = req.body;
-    await Condition.create({ Condition });
+    const condition = req.body.Condition;
+    await Condition.create({ Condition: condition });
     res.status(200).json({
       success: 1,
       message: "Car Condition Created",
@@ -59,10 +59,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Condition } = req.body;
+    const condition = req.body.Condition;
     const { Id } = req.params;
     const updateCondition = await Condition.update(
-      { Condition },
+      { Condition: condition },
       { where: { ConditionId: Id } }
     );
     if (!updateCondition) {

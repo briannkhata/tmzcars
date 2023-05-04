@@ -21,7 +21,7 @@ const getAll = async (req, res) => {
   }
 };
 
-const getOne = async (req, res) => {
+const getSingle = async (req, res) => {
   try {
     const { Id } = req.params;
     const user = await User.findByPk(Id);

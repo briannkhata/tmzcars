@@ -1,5 +1,6 @@
 require("../database/database.js");
 const { Photo } = require("../models/Photo.js");
+const fileUpload = require("express-fileupload");
 
 const getAll = async (req, res) => {
   try {
@@ -42,13 +43,30 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const CarId = req.body.CarId;
-    const photo = req.body.Photo;
+    const carId = req.body.CarId;
+    const photo = req.files;
+    const fileName = photo[Object.keys(photo)[0]].name;
+    if (!photo) {
+      res.status(500).json({
+        success: 0,
+        message: ` please select photo to upload`,
+      });
+    }
+
+    if (/^image/.test(photo.mimetype)) {
+      res.status(500).json({
+        success: 0,
+        message: `please select proper file format to upload`,
+      });
+    }
 
     await Photo.create({
-      Photo: photo,
-      CarId,
+      Photo: fileName,
+      CarId: carId,
     });
+
+    photo.mv(__dirname + "/public/uploads/" + photo.name);
+
     res.status(200).json({
       success: 1,
       message: "Data Created",

@@ -83,10 +83,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updateCarType = await CarType.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { CartypeId: Id } }
     );
     if (!updateCarType) {

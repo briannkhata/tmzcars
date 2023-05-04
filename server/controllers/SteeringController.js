@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Steering } = req.body;
-    await steering.create({ Steering });
+    const steering = req.body.Steering;
+    await Steering.create({ Steering: steering });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +57,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Steering } = req.body;
+    const steering = req.body.Steering;
     const { Id } = req.params;
     const updatesteering = await Steering.update(
-      { Steering },
+      { Steering: steering },
       { where: { SteeringId: Id } }
     );
     if (!updatesteering) {
@@ -82,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updatesteering = await Steering.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { SteeringId: Id } }
     );
     if (!updatesteering) {

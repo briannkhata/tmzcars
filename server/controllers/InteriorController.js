@@ -60,7 +60,7 @@ const update = async (req, res) => {
     const interior = req.body.Interior;
     const { Id } = req.params;
     const updateinterior = await Interior.update(
-      { Interior },
+      { Interior: interior },
       { where: { InteriorId: Id } }
     );
     if (!updateinterior) {
@@ -82,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updateinterior = await Interior.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { InteriorId: Id } }
     );
     if (!updateinterior) {
