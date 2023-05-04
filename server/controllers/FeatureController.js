@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Feature, TransId, AddedBy } = req.body;
-    await Feature.create({ Feature, TransId, AddedBy });
+    const { TransId, AddBy, CarId } = req.body;
+    await Feature.create({ TransId, AddBy, CarId });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,51 +57,46 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Feature, TransId, AddedBy } = req.body;
+    const { TransId, CarId } = req.body;
     const { Id } = req.params;
     const updatefeature = await Feature.update(
-      { Feature, TransId, AddedBy },
+      { TransId, CarId },
       { where: { FeatureId: Id } }
     );
     if (!updatefeature) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating feature : ${err}`,
+        message: ` Error updating : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "feature updated successfully",
+      message: "updated successfully",
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error updating feature : ${err}` });
+    res.status(500).json({ success: 0, message: ` Error updating : ${err}` });
   }
 };
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updatefeature = await Feature.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { FeatureId: Id } }
     );
     if (!updatefeature) {
       res.status(500).json({
         success: 0,
-        message: ` Error deleting feature : ${err}`,
+        message: ` Error deleting : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "feature deleted successfully",
+      message: "deleted successfully",
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error deleting feature : ${err}` });
+    res.status(500).json({ success: 0, message: ` Error deleting : ${err}` });
   }
 };
 

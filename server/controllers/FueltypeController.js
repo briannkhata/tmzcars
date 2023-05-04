@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Fueltype } = req.body;
-    await Fueltype.create({ Fueltype });
+    const fueltype = req.body.Fueltype;
+    await Fueltype.create({ Fueltype: fueltype });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +57,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Fueltype } = req.body;
+    const fueltype = req.body.Fueltype;
     const { Id } = req.params;
     const updatefueltype = await Fueltype.update(
-      { Fueltype },
+      { Fueltype: fueltype },
       { where: { FueltypeId: Id } }
     );
     if (!updatefueltype) {
@@ -82,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updatefueltype = await Fueltype.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { FueltypeId: Id } }
     );
     if (!updatefueltype) {

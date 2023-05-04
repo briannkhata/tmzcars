@@ -15,6 +15,7 @@ const conditionRouter = require("./routes/condition.js");
 const userRouter = require("./routes/user.js");
 const messageRouter = require("./routes/message.js");
 const planRouter = require("./routes/plan.js");
+const featureRouter = require("./routes/feature.js");
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use("/api/v1/condition/", conditionRouter);
 app.use("/api/v1/user/", userRouter);
 app.use("/api/v1/message/", messageRouter);
 app.use("/api/v1/plan/", planRouter);
+app.use("/api/v1/feature/", featureRouter);
 
 app.listen(PORT, (err) => {
   if (err) {

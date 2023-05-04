@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { IdType } = req.body;
-    await IdType.create({ IdType });
+    const idType = req.body.IdType;
+    await IdType.create({ IdType: idType });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +57,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { IdType } = req.body;
+    const idType = req.body.IdType;
     const { Id } = req.params;
     const updateidtype = await IdType.update(
-      { IdType },
+      { IdType: idType },
       { where: { IdTypeId: Id } }
     );
     if (!updateidtype) {
@@ -82,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updateidtype = await IdType.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { IdTypeId: Id } }
     );
     if (!updateidtype) {

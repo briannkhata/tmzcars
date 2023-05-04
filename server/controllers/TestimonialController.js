@@ -1,4 +1,5 @@
 require("../database/database.js");
+const { use } = require("passport");
 const { Testimonial } = require("../models/Testimonial.js");
 
 const getAll = async (req, res) => {
@@ -42,8 +43,15 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Testimonial, User, Role } = req.body;
-    await Testimonial.create({ Testimonial, User, Role });
+    const testimonial = req.body.Testimonial;
+    const user = req.body.Testimonial;
+    const role = req.body.Role;
+
+    await Testimonial.create({
+      Testimonial: testimonial,
+      User: user,
+      Role: role,
+    });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +65,17 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Testimonial, User, Role } = req.body;
+    const testimonial = req.body.Testimonial;
+    const user = req.body.Testimonial;
+    const role = req.body.Role;
+
     const { Id } = req.params;
     const updateTestimonial = await Testimonial.update(
-      { Testimonial, User, Role },
+      {
+        Testimonial: testimonial,
+        User: user,
+        Role: role,
+      },
       { where: { TestimonialId: Id } }
     );
     if (!updateTestimonial) {

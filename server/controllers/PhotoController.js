@@ -42,10 +42,12 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Photo } = req.body;
+    const CarId = req.body.CarId;
+    const photo = req.body.Photo;
+
     await Photo.create({
-      Photo,
-      PhotoValue,
+      Photo: photo,
+      CarId,
     });
     res.status(200).json({
       success: 1,

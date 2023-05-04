@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Make } = req.body;
-    await Make.create({ Make });
+    const make = req.body.Make;
+    await Make.create({ Make: make });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,9 +57,12 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Make } = req.body;
+    const make = req.body.Make;
     const { Id } = req.params;
-    const updatemake = await Make.update({ Make }, { where: { MakeId: Id } });
+    const updatemake = await Make.update(
+      { Make: make },
+      { where: { MakeId: Id } }
+    );
     if (!updatemake) {
       res.status(500).json({
         success: 0,
@@ -79,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updatemake = await Make.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { MakeId: Id } }
     );
     if (!updatemake) {

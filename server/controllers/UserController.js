@@ -21,13 +21,13 @@ const getAll = async (req, res) => {
   }
 };
 
-const getSingle = async (req, res) => {
+const getOne = async (req, res) => {
   try {
     const { Id } = req.params;
     const user = await User.findByPk(Id);
     res.status(200).json({
       success: 1,
-      message: "user retrieved successfully",
+      message: "User retrieved successfully",
       data: user,
     });
   } catch (err) {

@@ -42,10 +42,11 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { TransId, Amount } = req.body;
+    const { TransId, Amount, CarId } = req.body;
     await Payment.create({
       TransId,
       Amount,
+      CarId,
     });
     res.status(200).json({
       success: 1,
@@ -60,10 +61,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { TransId, Amount } = req.body;
+    const { TransId, Amount, CarId } = req.body;
     const { Id } = req.params;
     const updatePayment = await Payment.update(
-      { TransId, Amount },
+      { TransId, Amount, CarId },
       { where: { PaymentId: Id } }
     );
     if (!updatePayment) {

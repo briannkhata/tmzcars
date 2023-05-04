@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Interior } = req.body;
-    await Interior.create({ Interior });
+    const interior = req.body.Interior;
+    await Interior.create({ Interior: interior });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,7 +57,7 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Interior } = req.body;
+    const interior = req.body.Interior;
     const { Id } = req.params;
     const updateinterior = await Interior.update(
       { Interior },

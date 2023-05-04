@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Model } = req.body;
-    await model.create({ Model });
+    const model = req.body.Model;
+    await Model.create({ Model: model });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +57,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Model } = req.body;
+    const model = req.body.Model;
     const { Id } = req.params;
     const updatemodel = await Model.update(
-      { model },
+      { Model: model },
       { where: { modelId: Id } }
     );
     if (!updatemodel) {
@@ -82,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updatemodel = await Model.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { ModelId: Id } }
     );
     if (!updatemodel) {

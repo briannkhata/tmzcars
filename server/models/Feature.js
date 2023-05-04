@@ -33,4 +33,4 @@ const Feature = sequelize.define(
   }
 );
 
-module.exports = Feature;
+module.exports = { Feature, sequelize };
