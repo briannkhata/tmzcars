@@ -50,4 +50,4 @@ const Applicant = sequelize.define(
   }
 );
 
-module.exports = Applicant;
+module.exports = { Applicant, sequelize };

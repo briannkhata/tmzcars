@@ -23,4 +23,4 @@ const Attribute = sequelize.define(
   }
 );
 
-module.exports = Attribute;
+module.exports = { Attribute, sequelize };

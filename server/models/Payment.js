@@ -30,4 +30,4 @@ const Payment = sequelize.define(
   }
 );
 
-module.exports = Payment;
+module.exports = { Payment, sequelize };

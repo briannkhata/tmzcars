@@ -97,10 +97,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updateTestimonial = await Testimonial.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { TestimonialId: Id } }
     );
     if (!updateTestimonial) {

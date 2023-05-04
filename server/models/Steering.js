@@ -23,4 +23,4 @@ const Steering = sequelize.define(
   }
 );
 
-module.exports = Steering;
+module.exports = { Steering, sequelize };

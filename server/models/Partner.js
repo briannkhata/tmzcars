@@ -26,4 +26,4 @@ const Partner = sequelize.define(
   }
 );
 
-module.exports = Partner;
+module.exports = { Partner, sequelize };

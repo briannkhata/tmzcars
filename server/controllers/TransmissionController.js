@@ -42,8 +42,8 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Transmission } = req.body;
-    await Transmission.create({ Transmission });
+    const transmission = req.body.Transmission;
+    await Transmission.create({ Transmission: transmission });
     res.status(200).json({
       success: 1,
       message: "Data Created",
@@ -57,10 +57,10 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const { Transmission, User, Role } = req.body;
+    const transmission = req.body.Transmission;
     const { Id } = req.params;
     const updateTransmission = await Transmission.update(
-      { Transmission },
+      { Transmission: transmission },
       { where: { TransmissionId: Id } }
     );
     if (!updateTransmission) {
@@ -82,10 +82,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
     const updateTransmission = await Transmission.update(
-      { Deleted },
+      { Deleted: 1 },
       { where: { TransmissionId: Id } }
     );
     if (!updateTransmission) {

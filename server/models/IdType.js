@@ -23,4 +23,4 @@ const IdType = sequelize.define(
   }
 );
 
-module.exports = IdType;
+module.exports = { IdType, sequelize };

@@ -31,4 +31,4 @@ const Testimonial = sequelize.define(
   }
 );
 
-module.exports = Testimonial;
+module.exports = { Testimonial, sequelize };

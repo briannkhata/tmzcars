@@ -26,4 +26,4 @@ const Faq = sequelize.define(
   }
 );
 
-module.exports = Faq;
+module.exports = { Faq, sequelize };

@@ -23,4 +23,4 @@ const Interior = sequelize.define(
   }
 );
 
-module.exports = Interior;
+module.exports = { Interior, sequelize };

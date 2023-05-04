@@ -23,4 +23,4 @@ const Make = sequelize.define(
   }
 );
 
-module.exports = Make;
+module.exports = { Make, sequelize };

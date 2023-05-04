@@ -30,4 +30,4 @@ const Setting = sequelize.define(
   }
 );
 
-module.exports = Setting;
+module.exports = { Setting, sequelize };

@@ -23,4 +23,4 @@ const Photo = sequelize.define(
   }
 );
 
-module.exports = Photo;
+module.exports = { Photo, sequelize };

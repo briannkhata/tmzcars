@@ -23,4 +23,4 @@ const Exterior = sequelize.define(
   }
 );
 
-module.exports = Exterior;
+module.exports = { Exterior, sequelize };

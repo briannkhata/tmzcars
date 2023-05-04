@@ -23,4 +23,4 @@ const Condition = sequelize.define(
   }
 );
 
-module.exports = Condition;
+module.exports = { Condition, sequelize };

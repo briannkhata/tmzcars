@@ -23,4 +23,4 @@ const FuelType = sequelize.define(
   }
 );
 
-module.exports = FuelType;
+module.exports = { FuelType, sequelize };

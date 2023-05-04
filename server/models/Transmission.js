@@ -23,4 +23,4 @@ const Transmission = sequelize.define(
   }
 );
 
-module.exports = Transmission;
+module.exports = { Transmission, sequelize };

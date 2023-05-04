@@ -23,4 +23,4 @@ const Model = sequelize.define(
   }
 );
 
-module.exports = Model;
+module.exports = { Model, sequelize };
