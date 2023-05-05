@@ -1,6 +1,7 @@
 const express = require("express");
 const homeRouter = express.Router();
 const axios = require("axios");
+const { Photo } = require("../../server/models/Photo");
 
 //const headers = { Authorization: `Bearer ${API_TOKEN}` };
 const API_URL = "http://127.0.0.1:7002/api/v1/";
@@ -35,6 +36,8 @@ homeRouter.get("/contact", (req, res) => {
 homeRouter.get("/login", (req, res) => {
   const data = {
     title: "Login",
+    message: "",
+    message2: "",
   };
   res.render("login", data);
 });
@@ -91,6 +94,54 @@ homeRouter.post("/register", async (req, res) => {
     } else {
       res.render("join", {
         title: "Create Account",
+        message2: "Error making request:",
+        message: "",
+      });
+    }
+  }
+});
+
+homeRouter.post("/login", async (req, res) => {
+  const data = {
+    Phone: req.body.Phone,
+    Password: req.body.Password,
+  };
+
+  const REG_URL = API_URL + "home/login/";
+  try {
+    const response = await axios.post(REG_URL, data);
+    const responseDataMessage = response.data.message;
+    const responseDataSuccess = response.data.success;
+
+    if (responseDataSuccess == 1) {
+      res.render("dashboard", {
+        title: "Dashbaord",
+        phone: data.Phone,
+      });
+    }
+    if (responseDataSuccess == 0) {
+      res.render("login", {
+        title: "Login",
+        message: responseDataMessage,
+        message2: "",
+      });
+    }
+  } catch (error) {
+    if (error.response) {
+      res.render("login", {
+        title: "Create Account",
+        message2: error.response.data.message,
+        message: "",
+      });
+    } else if (error.request) {
+      res.render("login", {
+        title: "Login",
+        message2: "No response received from server",
+        message: "",
+      });
+    } else {
+      res.render("login", {
+        title: "Login",
         message2: "Error making request:",
         message: "",
       });

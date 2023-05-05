@@ -23,30 +23,40 @@
     <!-- contact us section starts here -->
     <section class="contact-us">
         <div class="container">
-            <div class="alert alert-warning" role="alert">
-                This is a primary alert—check it out!
-            </div>
-            <form action="/signin" method="post">
-                <div class="row">
-                    <div class="col-md-12 my-3">
-                        <label class="site-label">Phone <span class="red-text">*</span> </label>
-                        <input type="tel" placeholder="Enter Phone Number" name="Phone" class="site-input" required>
-                    </div>
-
-                    <div class="col-md-12 my-3">
-                        <label class="site-label">Password <span class="red-text">*</span> </label>
-                        <div class="password-container">
-                            <input type="password" name="Password" class="site-input password-input" required>
-                            <a class="toggle-password" href="#"><i class="far fa-eye"></i></a>
-                        </div>
-                    </div>
-
-
-                    <div class="col-12 my-3">
-                        <button class="site-btn" type="submit">Sign In</button>
-                    </div>
+            <% if(message){%>
+                <div class="alert alert-success" role="alert">
+                    <%= message %>
                 </div>
-            </form>
+                <%}%>
+
+                    <% if(message2){%>
+                        <div class="alert alert-danger" role="alert">
+                            <%= message2 %>
+                        </div>
+                        <%}%>
+                            <form action="/login" method="post">
+                                <div class="row">
+                                    <div class="col-md-12 my-3">
+                                        <label class="site-label">Phone <span class="red-text">*</span> </label>
+                                        <input type="tel" placeholder="Enter Phone Number" name="Phone"
+                                            class="site-input" required>
+                                    </div>
+
+                                    <div class="col-md-12 my-3">
+                                        <label class="site-label">Password <span class="red-text">*</span> </label>
+                                        <div class="password-container">
+                                            <input type="password" name="Password" class="site-input password-input"
+                                                required>
+                                            <a class="toggle-password" href="#"><i class="far fa-eye"></i></a>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 my-3">
+                                        <button class="site-btn" type="submit">Sign In</button>
+                                    </div>
+                                </div>
+                            </form>
         </div>
     </section>
     <!-- contact us section ends here -->

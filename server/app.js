@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
+const multer = require("multer");
 
 const session = require("express-session");
 const passport = require("passport");
@@ -16,6 +18,7 @@ const userRouter = require("./routes/user.js");
 const messageRouter = require("./routes/message.js");
 const planRouter = require("./routes/plan.js");
 const featureRouter = require("./routes/feature.js");
+const photoRouter = require("./routes/photo.js");
 
 const app = express();
 
@@ -25,12 +28,20 @@ const PORT = process.env.PORT || 5002;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(
   session({
     secret: "secret",
     resave: false,
     saveUninitialized: false,
+  })
+);
+
+app.use(
+  fileUpload({
+    limits: {
+      fileSize: 10000000, // Around 10MB
+    },
+    abortOnLimit: true,
   })
 );
 app.use(passport.initialize());
@@ -46,6 +57,7 @@ app.use("/api/v1/user/", userRouter);
 app.use("/api/v1/message/", messageRouter);
 app.use("/api/v1/plan/", planRouter);
 app.use("/api/v1/feature/", featureRouter);
+app.use("/api/v1/photo/", photoRouter);
 
 app.listen(PORT, (err) => {
   if (err) {

@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const auth = require("../middleware/auth.js");
-
 const register = async (req, res) => {
   try {
     const { Name, Phone, Password } = req.body;
@@ -64,26 +63,30 @@ const login = async (req, res) => {
       if (await bcrypt.compare(Password, checkPhone.Password)) {
         //TOKENS
 
-        const accessToken = jwt.sign(
-          { id: checkPhone.UserId },
-          process.env.ACCESS_TOKEN_SECRET,
-          {
-            expiresIn: "30s",
-          }
-        );
+        // const accessToken = jwt.sign(
+        //   //{ id: checkPhone.UserId },
+        //   { checkPhone },
+        //   process.env.ACCESS_TOKEN_SECRET,
+        //   {
+        //     expiresIn: "1day",
+        //   }
+        // );
 
-        res.send({
-          success: 1,
-          token: accessToken,
-        });
+        // res.send({
+        //   success: 1,
+        //   user: checkPhone,
+        //   token: accessToken,
+        // });
 
-        const refreshToken = jwt.sign(
-          { Phone: checkPhone.Phone },
-          process.env.REFRESH_TOKEN_SECRET,
-          {
-            expiresIn: "1day",
-          }
-        );
+        //res.json({ checkPhone, token: accessToken });
+
+        // const refreshToken = jwt.sign(
+        //   { Phone: checkPhone.Phone },
+        //   process.env.REFRESH_TOKEN_SECRET,
+        //   {
+        //     expiresIn: "1day",
+        //   }
+        // );
 
         // res.send({
         //   success: 1,
@@ -93,7 +96,8 @@ const login = async (req, res) => {
         res.status(200).json({
           success: 1,
           message: `${checkPhone.Name} is authenticated`,
-          token: accessToken,
+          //token: accessToken,
+          phone: Phone,
         });
       } else {
         res.status(500).json({

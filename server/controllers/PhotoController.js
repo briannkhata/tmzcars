@@ -1,6 +1,5 @@
 require("../database/database.js");
 const { Photo } = require("../models/Photo.js");
-const fileUpload = require("express-fileupload");
 
 const getAll = async (req, res) => {
   try {
