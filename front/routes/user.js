@@ -30,4 +30,46 @@ userRouter.get("/changephone", (req, res) => {
   res.render("backend/admin/changephone", data);
 });
 
+userRouter.get("/messages", (req, res) => {
+  const data = {
+    title: "Messages",
+  };
+  res.render("backend/admin/messages", data);
+});
+
+userRouter.get("/testimonials", (req, res) => {
+  const data = {
+    title: "Testimonials",
+  };
+  res.render("backend/admin/testimonials", data);
+});
+
+userRouter.get("/payments", (req, res) => {
+  const data = {
+    title: "Payments",
+  };
+  res.render("backend/admin/payments", data);
+});
+
+userRouter.get("/settings", (req, res) => {
+  const data = {
+    title: "Settings",
+  };
+  res.render("backend/admin/settings", data);
+});
+
+userRouter.get("/admins", (req, res) => {
+  const data = {
+    title: "Admin Users",
+  };
+  res.render("backend/admin/admins", data);
+});
+
+userRouter.get("/users", (req, res) => {
+  const data = {
+    title: "Users",
+  };
+  res.render("backend/admin/users", data);
+});
+
 module.exports = userRouter;
