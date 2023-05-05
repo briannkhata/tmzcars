@@ -101,6 +101,13 @@ homeRouter.post("/register", async (req, res) => {
   }
 });
 
+homeRouter.get("/dashboard", (req, res) => {
+  const data = {
+    title: "Dashboard",
+  };
+  res.render("backend/dashboard", data);
+});
+
 homeRouter.post("/login", async (req, res) => {
   const data = {
     Phone: req.body.Phone,
@@ -114,10 +121,7 @@ homeRouter.post("/login", async (req, res) => {
     const responseDataSuccess = response.data.success;
 
     if (responseDataSuccess == 1) {
-      res.render("dashboard", {
-        title: "Dashbaord",
-        phone: data.Phone,
-      });
+      res.redirect("dashboard");
     }
     if (responseDataSuccess == 0) {
       res.render("login", {
