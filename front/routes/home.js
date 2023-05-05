@@ -105,7 +105,7 @@ homeRouter.get("/dashboard", (req, res) => {
   const data = {
     title: "Dashboard",
   };
-  res.render("backend/dashboard", data);
+  res.render("backend/admin/dashboard", data);
 });
 
 homeRouter.post("/login", async (req, res) => {

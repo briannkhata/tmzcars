@@ -19,6 +19,7 @@ app.use(express.static(__dirname + "/public"));
 app.set("views", "./views");
 app.set("view engine", "ejs");
 app.use("/", require("./routes/home"));
+app.use("/user/", require("./routes/user"));
 
 app.listen(PORT, (err) => {
   if (err) {
