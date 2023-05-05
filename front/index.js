@@ -20,6 +20,7 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 app.use("/", require("./routes/home"));
 app.use("/user/", require("./routes/user"));
+app.use("/car/", require("./routes/car"));
 
 app.listen(PORT, (err) => {
   if (err) {
