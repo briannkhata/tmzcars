@@ -9,6 +9,8 @@ const Setting = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoincrement: true,
+      allowNull: true,
+      defaultValue: 1,
     },
     Phone: {
       type: DataTypes.STRING,

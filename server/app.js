@@ -19,6 +19,7 @@ const messageRouter = require("./routes/message.js");
 const planRouter = require("./routes/plan.js");
 const featureRouter = require("./routes/feature.js");
 const photoRouter = require("./routes/photo.js");
+const settingRouter = require("./routes/setting.js");
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use("/api/v1/message/", messageRouter);
 app.use("/api/v1/plan/", planRouter);
 app.use("/api/v1/feature/", featureRouter);
 app.use("/api/v1/photo/", photoRouter);
+app.use("/api/v1/setting/", settingRouter);
 
 app.listen(PORT, (err) => {
   if (err) {

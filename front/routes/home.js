@@ -124,7 +124,7 @@ homeRouter.post("/login", async (req, res) => {
       res.redirect("dashboard");
     }
     if (responseDataSuccess == 0) {
-      res.render("login", {
+      res.redirect("login", {
         title: "Login",
         message: responseDataMessage,
         message2: "",
@@ -132,19 +132,19 @@ homeRouter.post("/login", async (req, res) => {
     }
   } catch (error) {
     if (error.response) {
-      res.render("login", {
+      res.redirect("login", {
         title: "Create Account",
         message2: error.response.data.message,
         message: "",
       });
     } else if (error.request) {
-      res.render("login", {
+      res.redirect("login", {
         title: "Login",
         message2: "No response received from server",
         message: "",
       });
     } else {
-      res.render("login", {
+      res.redirect("login", {
         title: "Login",
         message2: "Error making request:",
         message: "",

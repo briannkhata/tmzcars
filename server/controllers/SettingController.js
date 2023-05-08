@@ -4,9 +4,14 @@ const { Setting } = require("../models/Setting.js");
 const getAll = async (req, res) => {
   try {
     const settings = await Setting.findAll();
+
+    if (!settings || settings.length === 0) {
+      return res.status(404).json({ success: 0, message: "No settings found" });
+    }
+
     res.status(200).json({
       success: 1,
-      message: "Data Retrieved successfully",
+      message: "data Retrieved successfully",
       data: settings,
     });
   } catch (err) {
@@ -16,100 +21,36 @@ const getAll = async (req, res) => {
   }
 };
 
-const getSingle = async (req, res) => {
-  try {
-    const { Id } = req.params;
-    const setting = await Setting.findByPk(Id);
-    if (!setting) {
-      res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
-    }
-    res.status(200).json({
-      success: 1,
-      message: "Getting data succesfull",
-      data: setting,
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: 0,
-      message: `Error getting data : ${err}`,
-    });
-  }
-};
-
 const add = async (req, res) => {
   try {
-    const { Phone, Email, Address, App } = req.body;
-    await Setting.create({
-      Phone,
-      Email,
-      Address,
-      App,
-    });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
-};
+    const { Id, Phone, Email, Address, App } = req.body;
 
-const update = async (req, res) => {
-  try {
-    const { Phone, Email, Address, App } = req.body;
-    const { Id } = req.params;
-    const updateSetting = await Setting.update(
-      { Phone, Email, Address, App },
-      { where: { SettingId: Id } }
-    );
-    if (!updateSetting) {
-      res.status(500).json({
-        success: 0,
-        message: ` Error updating Setting : ${err}`,
+    if (!Id) {
+      await Setting.create({
+        App: App,
+        Phone: Phone,
+        Email: Email,
+        Address: Address,
       });
+    } else {
+      await Setting.update(
+        { App: App, Phone: Phone, Email: Email, Address: Address },
+        { where: { Id: Id } }
+      );
     }
-    res.status(200).json({
-      success: 1,
-      message: "Setting updated successfully",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error updating Setting : ${err}` });
-  }
-};
 
-const remove = async (req, res) => {
-  try {
-    const Deleted = 1;
-    const { Id } = req.params;
-    const updateSetting = await Setting.update(
-      { Deleted },
-      { where: { SettingId: Id } }
-    );
-    if (!updateSetting) {
-      res.status(500).json({
-        success: 0,
-        message: ` Error deleting Setting : ${err}`,
-      });
-    }
     res.status(200).json({
       success: 1,
-      message: "Setting deleted successfully",
+      message: "data saved successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting Setting : ${err}` });
+      .json({ success: 0, message: ` Error saving data : ${err}` });
   }
 };
 
 module.exports = {
   add,
-  remove,
   getAll,
-  getSingle,
-  update,
 };

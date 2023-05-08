@@ -6,11 +6,14 @@ const session = require("express-session");
 const flash = require("express-flash");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use(
   session({
-    secret: "codeforgeek",
+    cookie: { maxAge: 60000 },
+    store: new session.MemoryStore(),
     saveUninitialized: true,
-    resave: true,
+    resave: "true",
+    secret: "secret",
   })
 );
 
