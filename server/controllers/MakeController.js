@@ -43,7 +43,7 @@ const getSingle = async (req, res) => {
 const add = async (req, res) => {
   try {
     const make = req.body.Make;
-    await Make.create({ Make: make });
+    await Make.create({ make });
     res.status(200).json({
       success: 1,
       message: "Data Created",

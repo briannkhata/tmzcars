@@ -60,6 +60,8 @@ app.use("/api/v1/plan/", planRouter);
 app.use("/api/v1/feature/", featureRouter);
 app.use("/api/v1/photo/", photoRouter);
 app.use("/api/v1/setting/", settingRouter);
+app.use("/api/v1/model/", require("./routes/model.js"));
+app.use("/api/v1/make/", require("./routes/make.js"));
 
 app.listen(PORT, (err) => {
   if (err) {
