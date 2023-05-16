@@ -26,11 +26,38 @@ carRouter.get("/makes", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/models", (req, res) => {
-  const data = {
-    title: "Models",
-  };
-  res.render("backend/admin/models", data);
+carRouter.get("/editmake/(:id)", async (req, res) => {
+  id = req.params.id;
+  await axios
+    .get(API_URL + "make/getOne/" + id)
+    .then((response) => {
+      const data = response.data.data;
+      res.render("backend/admin/addmake", {
+        id: id,
+        make: data.Make,
+        title: "Update Make",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {});
+});
+
+carRouter.get("/models", async (req, res) => {
+  await axios
+    .get(API_URL + "model/")
+    .then((response) => {
+      const data = response.data.data;
+      res.render("backend/admin/models", {
+        data: data,
+        title: "Models",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {});
 });
 
 carRouter.get("/addmodel", (req, res) => {
@@ -43,18 +70,27 @@ carRouter.get("/addmodel", (req, res) => {
 carRouter.get("/addmake", (req, res) => {
   const data = {
     title: "Add Make",
+    id: "",
+    make: "",
   };
   res.render("backend/admin/addmake", data);
 });
 
-carRouter.post("/addmake", async (req, res) => {
+carRouter.post("/savemake", async (req, res) => {
+  const id = req.body.id;
   await axios
-    .post(API_URL + "make/add/", {
+    .post(API_URL + "make/save/", {
       Make: req.body.Make,
+      MakeId: id,
     })
     .then((response) => {
-      req.flash("success", "Saving Make successfull");
-      res.redirect("/car/addmake");
+      const data = response.data;
+      req.flash("success", data.message);
+      if (id) {
+        res.redirect("/car/makes");
+      } else {
+        res.redirect("/car/addmake");
+      }
     })
     .catch((error) => {
       req.flash("error", "Error saving Make" + error);
@@ -62,10 +98,25 @@ carRouter.post("/addmake", async (req, res) => {
     });
 });
 
+carRouter.get("/deletemake/(:id)", async (req, res) => {
+  const id = req.params.id;
+  await axios
+    .put(API_URL + "make/delete/" + id)
+    .then((response) => {
+      const data = response.data;
+      req.flash("success", data.message);
+      res.redirect("/car/makes");
+    })
+    .catch((error) => {
+      req.flash("error", "Error deleting Make " + error);
+      res.redirect("/car/makes");
+    });
+});
+
 carRouter.post("/addmodel", async (req, res) => {
   await axios
     .post(API_URL + "model/add/", {
-      Make: req.body.Make,
+      Model: req.body.Model,
     })
     .then((response) => {
       req.flash("success", "Saving Model successfull");

@@ -44,73 +44,120 @@ const register = async (req, res) => {
   }
 };
 
+// const login = async (req, res) => {
+//   const { Phone, Password } = req.body;
+
+//   try {
+//     const checkPhone = await User.findOne({
+//       where: { Phone: Phone },
+//     });
+
+//     if (!checkPhone) {
+//       res.status(500).json({
+//         success: 0,
+//         message: "wrong phone number",
+//       });
+//       return;
+//     }
+
+//     if (checkPhone) {
+//       if (await bcrypt.compare(Password, checkPhone.Password)) {
+//         //TOKENS
+
+//         // const accessToken = jwt.sign(
+//         //   //{ id: checkPhone.UserId },
+//         //   { checkPhone },
+//         //   process.env.ACCESS_TOKEN_SECRET,
+//         //   {
+//         //     expiresIn: "1day",
+//         //   }
+//         // );
+
+//         // res.send({
+//         //   success: 1,
+//         //   user: checkPhone,
+//         //   token: accessToken,
+//         // });
+
+//         //res.json({ checkPhone, token: accessToken });
+
+//         // const refreshToken = jwt.sign(
+//         //   { Phone: checkPhone.Phone },
+//         //   process.env.REFRESH_TOKEN_SECRET,
+//         //   {
+//         //     expiresIn: "1day",
+//         //   }
+//         // );
+
+//         // res.send({
+//         //   success: 1,
+//         //   token: accessToken,
+//         // });
+
+//         res.status(200).json({
+//           success: 1,
+//           message: `${checkPhone.Name} is authenticated`,
+//           //token: accessToken,
+//           phone: Phone,
+//         });
+//       } else {
+//         res.status(500).json({
+//           success: 0,
+//           message: "wrong password",
+//         });
+//       }
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({
+//       success: 0,
+//       message: "wrong phone number",
+//     });
+//   }
+// };
+
 const login = async (req, res) => {
-  const { Phone, Password } = req.body;
-
   try {
-    const checkPhone = await User.findOne({
-      where: { Phone: Phone },
-    });
+    const phone = req.body.Phone;
+    const password = req.body.Password;
+    const user = await User.findOne({ where: { Phone: phone } });
 
-    if (!checkPhone) {
-      res.status(500).json({
+    if (!user) {
+      return res.status(404).json({
         success: 0,
-        message: "wrong phone number",
+        message: "User not found",
       });
     }
 
-    if (checkPhone) {
-      if (await bcrypt.compare(Password, checkPhone.Password)) {
-        //TOKENS
+    const isMatch = await bcrypt.compare(password, user.Password);
 
-        // const accessToken = jwt.sign(
-        //   //{ id: checkPhone.UserId },
-        //   { checkPhone },
-        //   process.env.ACCESS_TOKEN_SECRET,
-        //   {
-        //     expiresIn: "1day",
-        //   }
-        // );
-
-        // res.send({
-        //   success: 1,
-        //   user: checkPhone,
-        //   token: accessToken,
-        // });
-
-        //res.json({ checkPhone, token: accessToken });
-
-        // const refreshToken = jwt.sign(
-        //   { Phone: checkPhone.Phone },
-        //   process.env.REFRESH_TOKEN_SECRET,
-        //   {
-        //     expiresIn: "1day",
-        //   }
-        // );
-
-        // res.send({
-        //   success: 1,
-        //   token: accessToken,
-        // });
-
-        res.status(200).json({
-          success: 1,
-          message: `${checkPhone.Name} is authenticated`,
-          //token: accessToken,
-          phone: Phone,
-        });
-      } else {
-        res.status(500).json({
-          success: 0,
-          message: "wrong password",
-        });
-      }
+    if (!isMatch) {
+      return res.status(401).json({
+        success: 0,
+        message: "Invalid credentials",
+      });
     }
+
+    // const payload = { id: user.id };
+    //  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    //   expiresIn: process.env.JWT_EXPIRE,
+    // });
+
+    return res.status(200).json({
+      success: 1,
+      message: "User authenticated successfully",
+      //token,
+      user: {
+        id: user.UserId,
+        name: user.Name,
+        email: user.Email,
+      },
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: 0,
-      message: "wrong phone number",
+      message: "Server error",
     });
   }
 };

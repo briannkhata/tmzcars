@@ -21,93 +21,84 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-  try {
-    const { Id } = req.params;
-    const make = await Make.findByPk(Id);
-    if (!make) {
-      res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
-    }
-    res.status(200).json({
-      success: 1,
-      message: "Getting data succesfull",
-      data: make,
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: 0,
-      message: `Error getting data : ${err}`,
-    });
-  }
-};
-
-const add = async (req, res) => {
-  try {
-    const make = req.body.Make;
-    await Make.create({ make });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
-};
-
-const update = async (req, res) => {
-  try {
-    const make = req.body.Make;
-    const { Id } = req.params;
-    const updatemake = await Make.update(
-      { Make: make },
-      { where: { MakeId: Id } }
-    );
-    if (!updatemake) {
-      res.status(500).json({
-        success: 0,
-        message: ` Error updating make : ${err}`,
+  const { Id } = req.params;
+  await Make.findByPk(Id)
+    .then((response) => {
+      res.status(200).json({
+        success: 1,
+        message: "Getting data succesfull",
+        data: response,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
+    })
+    .finally(() => {});
+};
+
+const save = async (req, res) => {
+  try {
+    const make = req.body.Make;
+    const id = req.body.MakeId;
+    console.log(make);
+    console.log(id);
+    if (!id) {
+      await Make.create({ Make: make })
+        .then((response) => {
+          res.status(200).json({
+            success: 1,
+            message: "Make created succesfull",
+            data: response,
+          });
+        })
+        .catch((err) => {
+          res
+            .status(500)
+            .json({ success: 0, message: ` error adding make : ${err}` });
+        })
+        .finally(() => {});
+    } else {
+      await Make.update({ Make: make }, { where: { MakeId: id } })
+        .then((response) => {
+          res.status(200).json({
+            success: 1,
+            message: "Make Updated succesfully",
+            data: response,
+          });
+        })
+        .catch((err) => {
+          res
+            .status(500)
+            .json({ success: 0, message: ` error updating make : ${err}` });
+        })
+        .finally(() => {});
     }
-    res.status(200).json({
-      success: 1,
-      message: "make updated successfully",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error updating make : ${err}` });
-  }
+  } catch {}
 };
 
 const remove = async (req, res) => {
   try {
-    const { Id } = req.params;
-    const updatemake = await Make.update(
-      { Deleted: 1 },
-      { where: { MakeId: Id } }
-    );
-    if (!updatemake) {
-      res.status(500).json({
-        success: 0,
-        message: ` Error deleting make : ${err}`,
-      });
-    }
-    res.status(200).json({
-      success: 1,
-      message: "make deleted successfully",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error deleting make : ${err}` });
-  }
+    const id = req.params.id;
+    console.log(id);
+    await Make.update({ Deleted: 1 }, { where: { MakeId: id } })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "make deleted successfully",
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` Error deleting make : ${err}` });
+      })
+      .finally(() => {});
+  } catch (err) {}
 };
 
 module.exports = {
-  add,
+  save,
   remove,
   getAll,
   getSingle,
-  update,
 };

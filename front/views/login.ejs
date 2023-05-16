@@ -23,15 +23,15 @@
     <!-- contact us section starts here -->
     <section class="contact-us">
         <div class="container">
-            <% if(message){%>
+            <% if(messages.success){%>
                 <div class="alert alert-success" role="alert">
-                    <%= message %>
+                    <%= messages.success %>
                 </div>
                 <%}%>
-
-                    <% if(message2){%>
-                        <div class="alert alert-danger" role="alert">
-                            <%= message2 %>
+                    <% if(messages.error){%>
+                        <div class="alert
+                                    alert-danger" role="alert">
+                            <%= messages.error %>
                         </div>
                         <%}%>
                             <form action="/login" method="post">

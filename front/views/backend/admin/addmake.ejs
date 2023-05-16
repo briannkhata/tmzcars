@@ -22,17 +22,22 @@
                                         </div>
                                         <%}%>
                                             <% if(messages.error){%>
-                                                <div class="alert alert-danger" role="alert">
+                                                <div class="alert
+                                                            alert-danger" role="alert">
                                                     <%= messages.error %>
                                                 </div>
                                                 <%}%>
                                 </p>
-                                <form class="forms-sample" action="/car/addmake" method="post">
+                                <form class="forms-sample" action="/car/savemake" method="post">
                                     <div class="form-group">
                                         <label for="exampleInputName1">Make</label>
-                                        <input type="text" name="Make" class="form-control" placeholder="Name" required>
+                                        <input type="text" name="Make" class="form-control" value="<%=
+                                                                        make %>" placeholder="Name" required>
                                     </div>
-                                    <button type="submit" class="btn btn-primary mr-2">Save</button>
+                                    <input type="hidden" name="id" value="<%=id%>">
+                                    <button type="submit" class="btn
+                                                                    btn-primary
+                                                                    mr-2">Save</button>
                                 </form>
                             </div>
                         </div>

@@ -13,52 +13,63 @@
                                 <hr>
                                 <p class="card-description">
                                     <a href="/car/addmake" class="btn btn-primary btn-sm btn-icon-text mr-3">
-                                        Add
+                                        Add Make
                                         <i class="typcn typcn-plus btn-icon-append"></i>
                                     </a>
                                 </p>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table class="table table-striped project-orders-table">
-                                            <thead>
-                                                <tr>
-                                                    <!-- <th>ID</th> -->
-                                                    <th>Make</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <% for(var i=0; i< data.length; i++) { %>
-
-                                                    <tr>
-                                                        <!-- <td>
-                                                            <%= (i+1) %>
-                                                        </td> -->
-                                                        <td>
-                                                            <%= data[i].Make%>
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <a type="button"
-                                                                    href="../car/modeledit/<%=data[i].MakeId%>"
-                                                                    class=" btn btn-success btn-sm btn-icon-text mr-3">
-                                                                    Edit
-                                                                    <i class="typcn typcn-edit btn-icon-append"></i>
-                                                                </a>
-                                                                <button type="button"
-                                                                    class="btn btn-danger btn-sm btn-icon-text">
-                                                                    Delete
-                                                                    <i
-                                                                        class="typcn typcn-delete-outline btn-icon-append"></i>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <% }%>
-                                            </tbody>
-                                        </table>
+                                <hr>
+                                <% if(messages.success){%>
+                                    <div class="alert alert-success" role="alert">
+                                        <%= messages.success %>
                                     </div>
-                                </div>
+                                    <%}%>
+                                        <% if(messages.error){%>
+                                            <div class="alert
+                                                        alert-danger" role="alert">
+                                                <%= messages.error %>
+                                            </div>
+                                            <%}%>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <table class="table table-striped project-orders-table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Make</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% for(var i=0; i< data.length; i++) { %>
+
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= data[i].Make%>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <a type="button"
+                                                                                    href="../car/editmake/<%=data[i].MakeId%>"
+                                                                                    class=" btn btn-success btn-sm btn-icon-text mr-3">
+                                                                                    Edit
+                                                                                    <i
+                                                                                        class="typcn typcn-edit btn-icon-append"></i>
+                                                                                </a>
+                                                                                <a type="button"
+                                                                                    class="btn btn-danger btn-sm btn-icon-text"
+                                                                                    onclick="return alert('Are you sure you want to delete THIS MAKE?')"
+                                                                                    href="/car/deletemake/<%=data[i].MakeId%>">
+                                                                                    Delete
+                                                                                    <i
+                                                                                        class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                                </a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }%>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                             </div>
                         </div>
                     </div>

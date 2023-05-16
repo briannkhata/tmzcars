@@ -36,8 +36,8 @@ homeRouter.get("/contact", (req, res) => {
 homeRouter.get("/login", (req, res) => {
   const data = {
     title: "Login",
-    message: "",
-    message2: "",
+    // message: "",
+    // message2: "",
   };
   res.render("login", data);
 });
@@ -104,53 +104,42 @@ homeRouter.post("/register", async (req, res) => {
 homeRouter.get("/dashboard", (req, res) => {
   const data = {
     title: "Dashboard",
+    name: req.session.user.name,
   };
   res.render("backend/admin/dashboard", data);
 });
 
 homeRouter.post("/login", async (req, res) => {
-  const data = {
-    Phone: req.body.Phone,
-    Password: req.body.Password,
-  };
-
-  const REG_URL = API_URL + "home/login/";
   try {
-    const response = await axios.post(REG_URL, data);
-    const responseDataMessage = response.data.message;
-    const responseDataSuccess = response.data.success;
+    const response = await axios.post(`${API_URL}home/login/`, {
+      Phone: req.body.Phone,
+      Password: req.body.Password,
+    });
 
-    if (responseDataSuccess == 1) {
-      res.redirect("dashboard");
+    const { success, message, user } = response.data;
+
+    if (response.status === 200 && success == 1) {
+      req.session.logged = 1;
+      req.session.user = user;
+      return res.redirect("/dashboard");
     }
-    if (responseDataSuccess == 0) {
-      res.redirect("login", {
-        title: "Login",
-        message: responseDataMessage,
-        message2: "",
-      });
+
+    if (response.status === 401) {
+      req.flash("error", message);
+      return res.redirect("/login");
     }
+
+    req.flash("error", message);
+    res.redirect("/login");
   } catch (error) {
-    if (error.response) {
-      res.redirect("login", {
-        title: "Create Account",
-        message2: error.response.data.message,
-        message: "",
-      });
-    } else if (error.request) {
-      res.redirect("login", {
-        title: "Login",
-        message2: "No response received from server",
-        message: "",
-      });
-    } else {
-      res.redirect("login", {
-        title: "Login",
-        message2: "Error making request:",
-        message: "",
-      });
-    }
+    req.flash("error", error.toString());
+    res.redirect("/login");
   }
+});
+
+homeRouter.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/login");
 });
 
 homeRouter.post("/sendmessage", async (req, res) => {

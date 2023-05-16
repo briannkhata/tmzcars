@@ -12,42 +12,48 @@
                                 </h4>
                                 <hr>
                                 <p class="card-description">
-                                    <a href="/car/addmodel" class="btn btn-primary btn-sm btn-icon-text mr-3">
+                                    <a href="/car/addmake" class="btn btn-primary btn-sm btn-icon-text mr-3">
                                         Add
                                         <i class="typcn typcn-plus btn-icon-append"></i>
                                     </a>
                                 </p>
+                                <hr>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <table class="table table-striped project-orders-table">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Model</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>#D1</td>
-                                                    <td>Consectetur adipisicing elit </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <button type="button"
-                                                                class="btn btn-success btn-sm btn-icon-text mr-3">
-                                                                Edit
-                                                                <i class="typcn typcn-edit btn-icon-append"></i>
-                                                            </button>
-                                                            <button type="button"
-                                                                class="btn btn-danger btn-sm btn-icon-text">
-                                                                Delete
-                                                                <i
-                                                                    class="typcn typcn-delete-outline btn-icon-append"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <% for(var i=0; i< data.length; i++) { %>
 
+                                                    <tr>
+                                                        <td>
+                                                            <%= data[i].Model%>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a type="button"
+                                                                    href="/car/editmodel/<%=data[i].ModelId%>"
+                                                                    class=" btn btn-success btn-sm btn-icon-text mr-3">
+                                                                    Edit
+                                                                    <i class="typcn typcn-edit btn-icon-append"></i>
+                                                                </a>
+                                                                <button type="button"
+                                                                    class="btn btn-danger btn-sm btn-icon-text"
+                                                                    onclick="return alert('Are you sure you want to delete THIS MODEL?')"
+                                                                    href="/car/deletemodel/<%=data[i].ModelId%>">
+                                                                    Delete
+                                                                    <i
+                                                                        class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }%>
                                             </tbody>
                                         </table>
                                     </div>
