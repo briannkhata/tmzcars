@@ -51,53 +51,27 @@ homeRouter.get("/join", (req, res) => {
 });
 
 homeRouter.post("/register", async (req, res) => {
-  const data = {
-    Name: req.body.Name,
-    Phone: req.body.Phone,
-    Password: req.body.Password,
-  };
-
-  const REG_URL = API_URL + "home/register/";
   try {
-    const response = await axios.post(REG_URL, data);
-    const responseDataMessage = response.data.message;
-    const responseDataSuccess = response.data.success;
+    const response = await axios.post(API_URL + "home/register/", {
+      Name: req.body.Name,
+      Phone: req.body.Phone,
+      Password: req.body.Password,
+    });
+    const { success, message } = response.data;
 
-    if (responseDataSuccess == 1) {
-      res.render("join", {
-        title: "Create Account",
-        message: responseDataMessage,
-        message2: "",
-      });
-    }
-
-    if (responseDataSuccess == 0) {
-      res.render("join", {
-        title: "Create Account",
-        message2: responseDataMessage,
-        message: "",
-      });
+    if (success === 1) {
+      req.flash("success", message);
+      return res.redirect("/join");
+    } else if (success === 0) {
+      req.flash("error", message);
+      return res.redirect("/join");
+    } else {
+      req.flash("error", message);
+      return res.redirect("/join");
     }
   } catch (error) {
-    if (error.response) {
-      res.render("join", {
-        title: "Create Account",
-        message2: error.response.data.message,
-        message: "",
-      });
-    } else if (error.request) {
-      res.render("join", {
-        title: "Create Account",
-        message2: "No response received from server",
-        message: "",
-      });
-    } else {
-      res.render("join", {
-        title: "Create Account",
-        message2: "Error making request:",
-        message: "",
-      });
-    }
+    req.flash("error", error.toString());
+    return res.redirect("/join");
   }
 });
 
@@ -117,14 +91,15 @@ homeRouter.post("/login", async (req, res) => {
     });
 
     const { success, message, user } = response.data;
-
-    if (response.status === 200 && success == 1) {
+    if (success === 1) {
       req.session.logged = 1;
       req.session.user = user;
-      return res.redirect("/dashboard");
-    }
-
-    if (response.status === 401) {
+      req.flash("success", message);
+      return res.redirect("/login");
+    } else if (success === 0) {
+      req.flash("error", message);
+      return res.redirect("/login");
+    } else {
       req.flash("error", message);
       return res.redirect("/login");
     }
@@ -143,69 +118,26 @@ homeRouter.get("/logout", (req, res) => {
 });
 
 homeRouter.post("/sendmessage", async (req, res) => {
-  const data = {
-    Name: req.body.Name,
-    Phone: req.body.Phone,
-    Email: req.body.Email,
-    Message: req.body.Message,
-  };
-
-  const SENDMESSAGE_URL = API_URL + "message/add/";
   try {
-    const response = await axios.post(SENDMESSAGE_URL, data);
-    const responseDataMessage = response.data.message;
-    const responseDataSuccess = response.data.success;
+    const response = await axios.post(API_URL + "message/add/", {
+      Name: req.body.Name,
+      Phone: req.body.Phone,
+      Email: req.body.Email,
+      Message: req.body.Message,
+    });
 
-    if (responseDataSuccess == 1) {
-      res.render("contact", {
-        title: "Contact Us",
-        message: responseDataMessage,
-        message2: "",
-        email: "info@tmzcars.com",
-        phone: "0888 015 904",
-        address: "Next to MASM House, Blantyre",
-      });
+    const { success, message } = response.data;
+    if (success === 1) {
+      req.flash("success", message);
+      return res.redirect("/contact");
     }
-
-    if (responseDataSuccess == 0) {
-      res.render("contact", {
-        title: "Contact Us",
-        message2: responseDataMessage,
-        message: "",
-        email: "info@tmzcars.com",
-        phone: "0888 015 904",
-        address: "Next to MASM House, Blantyre",
-      });
+    if (success === 0) {
+      req.flash("error", message);
+      return res.redirect("/contact");
     }
   } catch (error) {
-    if (error.response) {
-      res.render("contact", {
-        title: "Contact Us",
-        message2: error.response.data.message,
-        message: "",
-        email: "info@tmzcars.com",
-        phone: "0888 015 904",
-        address: "Next to MASM House, Blantyre",
-      });
-    } else if (error.request) {
-      res.render("contact", {
-        title: "Contact Us",
-        message2: "No response received from server",
-        message: "",
-        email: "info@tmzcars.com",
-        phone: "0888 015 904",
-        address: "Next to MASM House, Blantyre",
-      });
-    } else {
-      res.render("contact", {
-        title: "Contact Us",
-        message2: "Error making request:",
-        message: "",
-        email: "info@tmzcars.com",
-        phone: "0888 015 904",
-        address: "Next to MASM House, Blantyre",
-      });
-    }
+    req.flash("error", error.toString());
+    return res.redirect("/contact");
   }
 });
 

@@ -10,7 +10,7 @@ const register = async (req, res) => {
 
     if (!Name || !Phone || !Password) {
       return res.status(400).json({
-        success: false,
+        success: 0,
         message: "All fields are required.",
       });
     }
@@ -19,8 +19,8 @@ const register = async (req, res) => {
     const user = await User.findOne({ where: { Phone } });
 
     if (user) {
-      return res.status(409).json({
-        success: false,
+      return res.status(500).json({
+        success: 0,
         message: "Phone number already exists.",
       });
     }
