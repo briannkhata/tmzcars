@@ -43,7 +43,7 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const carType = req.body.CarType;
+    const carType = req.body.Cartype;
     await CarType.create({ CarType: carType });
     res.status(200).json({
       success: 1,

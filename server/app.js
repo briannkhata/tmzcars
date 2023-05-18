@@ -60,6 +60,7 @@ app.use("/api/v1/photo/", require("./routes/photo.js"));
 app.use("/api/v1/setting/", require("./routes/setting.js"));
 app.use("/api/v1/model/", require("./routes/model.js"));
 app.use("/api/v1/make/", require("./routes/make.js"));
+app.use("/api/v1/steering/", require("./routes/steering.js"));
 
 app.listen(PORT, (err) => {
   if (err) {

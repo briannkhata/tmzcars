@@ -5,12 +5,12 @@ const API_URL = "http://127.0.0.1:7002/api/v1/";
 
 carRouter.get("/", async (req, res) => {
   await axios
-    .get(API_URL + "body/")
+    .get(API_URL + "steering/")
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/bodies", {
+      res.render("backend/admin/steerings", {
         data: data,
-        title: "Car Bodies",
+        title: "Steerings",
       });
     })
     .catch((error) => {
@@ -22,13 +22,13 @@ carRouter.get("/", async (req, res) => {
 carRouter.get("/edit/(:id)", async (req, res) => {
   id = req.params.id;
   await axios
-    .get(API_URL + "body/getOne/" + id)
+    .get(API_URL + "steering/getOne/" + id)
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/addbody", {
+      res.render("backend/admin/addsteering", {
         id: id,
-        Body: data.Body,
-        title: "Update Body",
+        steering: data.Steering,
+        title: "Update steering",
       });
     })
     .catch((error) => {
@@ -37,49 +37,49 @@ carRouter.get("/edit/(:id)", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/addbody", (req, res) => {
+carRouter.get("/addsteering", (req, res) => {
   const data = {
-    title: "Add Body",
+    title: "Add steering",
     id: "",
-    body: "",
+    steering: "",
   };
-  res.render("backend/admin/addbody", data);
+  res.render("backend/admin/addsteering", data);
 });
 
 carRouter.post("/save", async (req, res) => {
   const id = req.body.id;
   await axios
-    .post(API_URL + "body/save/", {
-      Body: req.body.body,
-      BodyId: id,
+    .post(API_URL + "steering/add/", {
+      Steering: req.body.steering,
+      SteeringId: id,
     })
     .then((response) => {
       const data = response.data;
       req.flash("success", data.message);
       if (id) {
-        res.redirect("/body/");
+        res.redirect("/steering/");
       } else {
-        res.redirect("/body/addbody");
+        res.redirect("/steering/addsteering");
       }
     })
     .catch((error) => {
-      req.flash("error", "Error saving body" + error);
-      res.redirect("/body/addbody");
+      req.flash("error", "Error saving steering" + error);
+      res.redirect("/steering/addsteering");
     });
 });
 
 carRouter.get("/delete/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
-    .put(API_URL + "body/delete/" + id)
+    .put(API_URL + "steering/delete/" + id)
     .then((response) => {
       const data = response.data;
       req.flash("success", data.message);
-      res.redirect("/body");
+      res.redirect("/steering");
     })
     .catch((error) => {
-      req.flash("error", "Error deleting body " + error);
-      res.redirect("/body");
+      req.flash("error", "Error deleting steering " + error);
+      res.redirect("/steering");
     });
 });
 

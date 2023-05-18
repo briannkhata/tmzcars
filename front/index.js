@@ -28,6 +28,9 @@ app.use("/faq/", require("./routes/faq"));
 app.use("/model/", require("./routes/model"));
 app.use("/make/", require("./routes/make"));
 app.use("/body/", require("./routes/body"));
+app.use("/condition/", require("./routes/condition"));
+app.use("/cartype/", require("./routes/cartype"));
+app.use("/steering/", require("./routes/steering"));
 
 app.listen(PORT, (err) => {
   if (err) {
