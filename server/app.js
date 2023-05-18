@@ -61,6 +61,8 @@ app.use("/api/v1/setting/", require("./routes/setting.js"));
 app.use("/api/v1/model/", require("./routes/model.js"));
 app.use("/api/v1/make/", require("./routes/make.js"));
 app.use("/api/v1/steering/", require("./routes/steering.js"));
+app.use("/api/v1/interior/", require("./routes/interior.js"));
+app.use("/api/v1/exterior/", require("./routes/exterior.js"));
 
 app.listen(PORT, (err) => {
   if (err) {

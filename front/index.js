@@ -31,6 +31,8 @@ app.use("/body/", require("./routes/body"));
 app.use("/condition/", require("./routes/condition"));
 app.use("/cartype/", require("./routes/cartype"));
 app.use("/steering/", require("./routes/steering"));
+app.use("/interior/", require("./routes/interior"));
+app.use("/exterior/", require("./routes/exterior"));
 
 app.listen(PORT, (err) => {
   if (err) {
