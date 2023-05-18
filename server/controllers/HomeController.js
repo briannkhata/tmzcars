@@ -33,12 +33,12 @@ const register = async (req, res) => {
     });
 
     res.status(201).json({
-      success: true,
+      success: 1,
       message: "Account created successfully! You can now log in.",
     });
   } catch (err) {
     res.status(500).json({
-      success: false,
+      success: 0,
       message: "Error creating account. Please try again later." + err,
     });
   }
@@ -127,32 +127,31 @@ const login = async (req, res) => {
         success: 0,
         message: "User not found",
       });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.Password);
-
-    if (!isMatch) {
-      return res.status(401).json({
-        success: 0,
-        message: "Invalid credentials",
-      });
+    } else {
+      const isMatch = await bcrypt.compare(password, user.Password);
+      if (!isMatch) {
+        return res.status(401).json({
+          success: 0,
+          message: "Invalid credentials",
+        });
+      } else {
+        return res.status(200).json({
+          success: 1,
+          message: "User authenticated successfully",
+          //token,
+          user: {
+            id: user.UserId,
+            name: user.Name,
+            email: user.Email,
+          },
+        });
+      }
     }
 
     // const payload = { id: user.id };
     //  const token = jwt.sign(payload, process.env.JWT_SECRET, {
     //   expiresIn: process.env.JWT_EXPIRE,
     // });
-
-    return res.status(200).json({
-      success: 1,
-      message: "User authenticated successfully",
-      //token,
-      user: {
-        id: user.UserId,
-        name: user.Name,
-        email: user.Email,
-      },
-    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({

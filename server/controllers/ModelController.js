@@ -43,16 +43,41 @@ const getSingle = async (req, res) => {
 const add = async (req, res) => {
   try {
     const model = req.body.Model;
-    await Model.create({ Model: model });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
+    const id = req.body.ModelId;
+
+    if (id == "") {
+      await Model.create({ Model: model })
+        .then((response) => {
+          res.status(200).json({
+            success: 1,
+            message: "model created succesfull",
+            data: response,
+          });
+        })
+        .catch((err) => {
+          res
+            .status(500)
+            .json({ success: 0, message: ` error adding model : ${err}` });
+        })
+        .finally(() => {});
+    } else {
+      await model
+        .update({ Model: model }, { where: { ModelId: id } })
+        .then((response) => {
+          res.status(200).json({
+            success: 1,
+            message: "model Updated succesfully",
+            data: response,
+          });
+        })
+        .catch((err) => {
+          res
+            .status(500)
+            .json({ success: 0, message: ` error updating model : ${err}` });
+        })
+        .finally(() => {});
+    }
+  } catch {}
 };
 
 const update = async (req, res) => {

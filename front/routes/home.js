@@ -62,10 +62,8 @@ homeRouter.post("/register", async (req, res) => {
     if (success === 1) {
       req.flash("success", message);
       return res.redirect("/join");
-    } else if (success === 0) {
-      req.flash("error", message);
-      return res.redirect("/join");
-    } else {
+    }
+    if (success === 0) {
       req.flash("error", message);
       return res.redirect("/join");
     }
@@ -94,18 +92,13 @@ homeRouter.post("/login", async (req, res) => {
     if (success === 1) {
       req.session.logged = 1;
       req.session.user = user;
-      req.flash("success", message);
-      return res.redirect("/login");
-    } else if (success === 0) {
-      req.flash("error", message);
-      return res.redirect("/login");
-    } else {
+      return res.redirect("/dashboard");
+    }
+
+    if (success === 0) {
       req.flash("error", message);
       return res.redirect("/login");
     }
-
-    req.flash("error", message);
-    res.redirect("/login");
   } catch (error) {
     req.flash("error", error.toString());
     res.redirect("/login");

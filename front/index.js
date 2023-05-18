@@ -25,6 +25,9 @@ app.use("/", require("./routes/home"));
 app.use("/user/", require("./routes/user"));
 app.use("/car/", require("./routes/car"));
 app.use("/faq/", require("./routes/faq"));
+app.use("/model/", require("./routes/model"));
+app.use("/make/", require("./routes/make"));
+app.use("/body/", require("./routes/body"));
 
 app.listen(PORT, (err) => {
   if (err) {

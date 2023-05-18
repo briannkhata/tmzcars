@@ -28,13 +28,13 @@
                                                 </div>
                                                 <%}%>
                                 </p>
-                                <form class="forms-sample" action="/model/save" method="post">
+                                <form class="forms-sample" action="/body/save" method="post">
                                     <div class="form-group">
-                                        <label for="exampleInputName1">Model</label>
-                                        <input type="text" name="Model" class="form-control" value="<%= model %>"
-                                            placeholder="Name" required>
+                                        <label for="exampleInputName1">Body</label>
+                                        <input type="text" name="body" class="form-control" value="<%= body %>"
+                                            placeholder="Body" required>
                                     </div>
-                                    <input type="text" name="id" value="<%=id%>">
+                                    <input type="hidden" name="id" value="<%=id%>">
                                     <button type="submit" class="btn
                                                                     btn-primary
                                                                     mr-2">Save</button>

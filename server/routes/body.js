@@ -5,6 +5,6 @@ bodyRouter.get("/", bodyController.getAll);
 bodyRouter.get("/getSingle/:Id", bodyController.getSingle);
 bodyRouter.put("/delete/:Id", bodyController.remove);
 bodyRouter.put("/update/:Id", bodyController.update);
-bodyRouter.post("/add/", bodyController.add);
+bodyRouter.post("/save/", bodyController.add);
 
 module.exports = bodyRouter;

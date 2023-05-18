@@ -101,7 +101,7 @@ userRouter.post("/savesettings", async (req, res) => {
       res.redirect("/user/settings");
     })
     .catch((error) => {
-      req.flash("error", "Error saving settings" + error);
+      req.flash("error", "Error saving settings" + error.toString());
       res.redirect("/user/settings");
     });
 });
