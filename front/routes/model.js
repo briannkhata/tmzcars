@@ -10,7 +10,7 @@ modelRouter.get("/", async (req, res) => {
       const data = response.data.data;
       res.render("backend/admin/models", {
         data: data,
-        title: "models",
+        title: "Models",
       });
     })
     .catch((error) => {
@@ -19,31 +19,28 @@ modelRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
-modelRouter.get("/edit/(:id)", async (req, res) => {
-  id = req.params.id;
-  await axios
-    .get(API_URL + "model/getSingle/" + id)
-    .then((response) => {
-      const data = response.data.data;
-      res.render("backend/admin/addmodel", {
-        id: id,
-        model: data.Model,
-        title: "Update model",
+modelRouter.get("/add/(:id)", async (req, res) => {
+  const id = req.params.id;
+  if (id !== "") {
+    await axios
+      .get(API_URL + "model/getSingle/" + id)
+      .then((response) => {
+        res.render("backend/admin/addmodel", {
+          id: id,
+          model: response.data.data.Model,
+          title: "Update Model",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {});
-});
-
-modelRouter.get("/add", (req, res) => {
-  const data = {
-    title: "Add model",
-    id: "",
-    model: "",
-  };
-  res.render("backend/admin/addmodel", data);
+  } else {
+    res.render("backend/admin/addmodel", {
+      id: "",
+      model: "",
+      title: "Add Model",
+    });
+  }
 });
 
 modelRouter.post("/save", async (req, res) => {

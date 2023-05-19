@@ -23,7 +23,7 @@
                                             <%}%>
                                                 <hr>
                                                 <p class="card-description">
-                                                    <a href="/model/add"
+                                                    <a href="/model/add/"
                                                         class="btn btn-primary btn-sm btn-icon-text mr-3">
                                                         Add
                                                         <i class="typcn typcn-plus btn-icon-append"></i>
@@ -35,38 +35,43 @@
                                                         <table class="table table-striped project-orders-table">
                                                             <thead>
                                                                 <tr>
+                                                                    <th style="width: 2%;">#</th>
                                                                     <th>Model</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <% for(var i=0; i< data.length; i++) { %>
+                                                                <% var counter=0 %>
+                                                                    <% for(var i=0; i< data.length; i++) { %>
 
-                                                                    <tr>
-                                                                        <td>
-                                                                            <%= data[i].Model%>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="d-flex align-items-center">
-                                                                                <a type="button"
-                                                                                    href="/model/edit/<%=data[i].ModelId%>"
-                                                                                    class=" btn btn-success btn-sm btn-icon-text mr-3">
-                                                                                    Edit
-                                                                                    <i
-                                                                                        class="typcn typcn-edit btn-icon-append"></i>
-                                                                                </a>
-                                                                                <a type="button"
-                                                                                    class="btn btn-danger btn-sm btn-icon-text"
-                                                                                    onclick="return alert('Are you sure you want to delete THIS MODEL?')"
-                                                                                    href="/model/delete/<%=data[i].ModelId%>">
-                                                                                    Delete
-                                                                                    <i
-                                                                                        class="typcn typcn-delete-outline btn-icon-append"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <% }%>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%= ++counter %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= data[i].Model%>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="d-flex align-items-center">
+                                                                                    <a type="button"
+                                                                                        href="/model/add/<%=data[i].ModelId%>"
+                                                                                        class=" btn btn-success btn-sm btn-icon-text mr-3">
+                                                                                        Edit
+                                                                                        <i
+                                                                                            class="typcn typcn-edit btn-icon-append"></i>
+                                                                                    </a>
+                                                                                    <a type="button"
+                                                                                        class="btn btn-danger btn-sm btn-icon-text"
+                                                                                        onclick="return alert('Are you sure you want to delete THIS MODEL?')"
+                                                                                        href="/model/delete/<%=data[i].ModelId%>">
+                                                                                        Delete
+                                                                                        <i
+                                                                                            class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% }%>
                                                             </tbody>
                                                         </table>
                                                     </div>
