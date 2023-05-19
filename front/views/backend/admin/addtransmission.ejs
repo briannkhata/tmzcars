@@ -28,11 +28,12 @@
                                                 </div>
                                                 <%}%>
                                 </p>
-                                <form class="forms-sample" action="/steering/save" method="post">
+                                <form class="forms-sample" action="/transmission/save/" method="post">
                                     <div class="form-group">
-                                        <label for="exampleInputName1">Steering</label>
-                                        <input type="text" name="steering" class="form-control" value="<%= steering %>"
-                                            placeholder="steering" required>
+                                        <label for="exampleInputName1">Transmission</label>
+                                        <input type="text" name="transmission" class="form-control" value="<%=
+                                                                        transmission %>" placeholder="Transmission"
+                                            required>
                                     </div>
                                     <input type="hidden" name="id" value="<%=id%>">
                                     <button type="submit" class="btn

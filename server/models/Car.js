@@ -112,6 +112,19 @@ const Car = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
+
+    InterioColor: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    ExteriorColor: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    Steering: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     RegNo: {
       type: DataTypes.STRING(100),
       allowNull: true,

@@ -68,7 +68,7 @@ carRouter.post("/save", async (req, res) => {
     });
 });
 
-carRouter.get("/deletemake/(:id)", async (req, res) => {
+carRouter.get("/delete/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "make/delete/" + id)
