@@ -5,12 +5,12 @@ const API_URL = "http://127.0.0.1:7002/api/v1/";
 
 carRouter.get("/", async (req, res) => {
   await axios
-    .get(API_URL + "make/")
+    .get(API_URL + "idtype/")
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/makes", {
+      res.render("backend/admin/idtypes", {
         data: data,
-        title: "Makes",
+        title: "idtypes",
       });
     })
     .catch((error) => {
@@ -22,13 +22,13 @@ carRouter.get("/", async (req, res) => {
 carRouter.get("/edit/(:id)", async (req, res) => {
   id = req.params.id;
   await axios
-    .get(API_URL + "make/getOne/" + id)
+    .get(API_URL + "idtype/getOne/" + id)
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/addmake", {
+      res.render("backend/admin/addidtype", {
         id: id,
-        make: data.Make,
-        title: "Update Make",
+        idtype: data.idtype,
+        title: "Update idtype",
       });
     })
     .catch((error) => {
@@ -39,47 +39,47 @@ carRouter.get("/edit/(:id)", async (req, res) => {
 
 carRouter.get("/add", (req, res) => {
   const data = {
-    title: "Add Make",
+    title: "Add idtype",
     id: "",
-    make: "",
+    idtype: "",
   };
-  res.render("backend/admin/addmake", data);
+  res.render("backend/admin/addidtype", data);
 });
 
 carRouter.post("/save", async (req, res) => {
   const id = req.body.id;
   await axios
-    .post(API_URL + "make/save/", {
-      Make: req.body.Make,
-      MakeId: id,
+    .post(API_URL + "idtype/save/", {
+      idtype: req.body.idtype,
+      idtypeId: id,
     })
     .then((response) => {
       const data = response.data;
       req.flash("success", data.message);
       if (id) {
-        res.redirect("/make/");
+        res.redirect("/idtype/");
       } else {
-        res.redirect("/make/add");
+        res.redirect("/idtype/add");
       }
     })
     .catch((error) => {
-      req.flash("error", "Error saving Make" + error);
-      res.redirect("/make/add");
+      req.flash("error", "Error saving idtype" + error);
+      res.redirect("/idtype/add");
     });
 });
 
 carRouter.get("/delete/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
-    .put(API_URL + "make/delete/" + id)
+    .put(API_URL + "idtype/delete/" + id)
     .then((response) => {
       const data = response.data;
       req.flash("success", data.message);
-      res.redirect("/make");
+      res.redirect("/idtype");
     })
     .catch((error) => {
-      req.flash("error", "Error deleting Make " + error);
-      res.redirect("/make");
+      req.flash("error", "Error deleting idtype " + error);
+      res.redirect("/idtype");
     });
 });
 

@@ -20,14 +20,14 @@ fueltypeRouter.get("/", async (req, res) => {
 });
 
 fueltypeRouter.get("/edit/(:id)", async (req, res) => {
-  id = req.params.id;
+  const id = req.params.id;
   await axios
     .get(API_URL + "fueltype/getOne/" + id)
     .then((response) => {
       const data = response.data.data;
       res.render("backend/admin/addfueltype", {
         id: id,
-        fueltype: data.fueltype,
+        fueltype: data.FuelType,
         title: "Update fueltype",
       });
     })
@@ -49,9 +49,9 @@ fueltypeRouter.get("/add", (req, res) => {
 fueltypeRouter.post("/save", async (req, res) => {
   const id = req.body.id;
   await axios
-    .post(API_URL + "fueltype/save/", {
-      fueltype: req.body.fueltype,
-      fueltypeId: id,
+    .post(API_URL + "fueltype/add/", {
+      FuelType: req.body.fueltype,
+      FuelTypeId: id,
     })
     .then((response) => {
       const data = response.data;
@@ -59,7 +59,7 @@ fueltypeRouter.post("/save", async (req, res) => {
       if (id) {
         res.redirect("/fueltype/");
       } else {
-        res.redirect("/fueltype/addfueltype");
+        res.redirect("/fueltype/add");
       }
     })
     .catch((error) => {

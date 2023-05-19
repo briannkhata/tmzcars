@@ -3,7 +3,7 @@ const { IdType } = require("../models/IdType.js");
 
 const getAll = async (req, res) => {
   try {
-    const idtypes = await Idtype.findAll({
+    const idtypes = await IdType.findAll({
       where: {
         Deleted: 0,
       },

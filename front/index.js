@@ -32,6 +32,7 @@ app.use("/condition/", require("./routes/condition"));
 app.use("/cartype/", require("./routes/cartype"));
 app.use("/transmission/", require("./routes/transmission"));
 app.use("/fueltype/", require("./routes/fueltype"));
+app.use("/idtype/", require("./routes/idtype"));
 
 app.listen(PORT, (err) => {
   if (err) {

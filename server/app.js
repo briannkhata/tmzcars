@@ -51,6 +51,7 @@ app.use("/api/v1/model/", require("./routes/model.js"));
 app.use("/api/v1/make/", require("./routes/make.js"));
 app.use("/api/v1/transmission/", require("./routes/transmission.js"));
 app.use("/api/v1/fueltype/", require("./routes/fueltype.js"));
+app.use("/api/v1/idtype/", require("./routes/idtype.js"));
 
 app.listen(PORT, (err) => {
   if (err) {
