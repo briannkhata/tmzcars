@@ -37,7 +37,7 @@ carRouter.get("/edit/(:id)", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/addcondition", (req, res) => {
+carRouter.get("/add", (req, res) => {
   const data = {
     title: "Add condition",
     id: "",
@@ -59,12 +59,12 @@ carRouter.post("/save", async (req, res) => {
       if (id) {
         res.redirect("/condition/");
       } else {
-        res.redirect("/condition/addcondition");
+        res.redirect("/condition/add");
       }
     })
     .catch((error) => {
       req.flash("error", "Error saving condition" + error);
-      res.redirect("/condition/addcondition");
+      res.redirect("/condition/add");
     });
 });
 

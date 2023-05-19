@@ -20,26 +20,6 @@ const getAll = async (req, res) => {
   }
 };
 
-const getSingle = async (req, res) => {
-  try {
-    const { Id } = req.params;
-    const message = await Message.findByPk(Id);
-    if (!message) {
-      res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
-    }
-    res.status(200).json({
-      success: 1,
-      message: "Getting data succesfull",
-      data: message,
-    });
-  } catch (err) {
-    res.status(500).json({
-      success: 0,
-      message: `Error getting data : ${err}`,
-    });
-  }
-};
-
 const add = async (req, res) => {
   try {
     const name = req.body.Name;
@@ -67,5 +47,4 @@ const add = async (req, res) => {
 module.exports = {
   add,
   getAll,
-  getSingle,
 };

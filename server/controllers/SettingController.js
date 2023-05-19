@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
 
     res.status(200).json({
       success: 1,
-      message: "data Retrieved successfully",
+      message: "Data Retrieved successfully",
       data: settings,
     });
   } catch (err) {

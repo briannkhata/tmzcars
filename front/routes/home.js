@@ -75,7 +75,7 @@ homeRouter.post("/register", async (req, res) => {
 homeRouter.get("/dashboard", (req, res) => {
   const data = {
     title: "Dashboard",
-    name: req.session.user.name,
+    //name: req.session.user.name,
   };
   res.render("backend/admin/dashboard", data);
 });

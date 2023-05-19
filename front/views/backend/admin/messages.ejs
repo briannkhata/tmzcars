@@ -18,11 +18,9 @@
                                         <table class="table table-striped project-orders-table">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
                                                     <th>Name</th>
                                                     <th>Message</th>
-                                                    <th>Phone</th>
-                                                    <th>Email</th>
+                                                    <th>Contacts</th>
                                                     <th>Date</th>
                                                 </tr>
                                             </thead>
@@ -30,12 +28,21 @@
 
                                                 <tbody>
                                                     <tr>
-                                                        <td>#D1</td>
-                                                        <td>Consectetur adipisicing elit </td>
-                                                        <td>Beulah Cummings</td>
-                                                        <td>Beulah Cummings</td>
-                                                        <td>Beulah Cummings</td>
-                                                        <td>Beulah Cummings</td>
+                                                        <td>
+                                                            <%= data[i].Name%>
+                                                        </td>
+                                                        <td>
+                                                            <%= data[i].Message%>
+                                                        </td>
+                                                        <td>
+                                                            <%= data[i].Phone%>
+                                                                <br>    
+                                                                <%= data[i].Email%>
+                                                        </td>
+                                                        <td>
+                                                            <%=new Date(data[i].DateAdded).toLocaleDateString('en-US', {
+                                                                day: 'numeric' , month: 'long' , year: 'numeric' }) %>
+                                                        </td>
                                                     </tr>
 
                                                 </tbody>
