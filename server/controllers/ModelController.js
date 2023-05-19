@@ -42,61 +42,38 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const model = req.body.Model;
-    const id = req.body.ModelId;
-
-    if (id == "") {
-      await Model.create({ Model: model })
-        .then((response) => {
-          res.status(200).json({
-            success: 1,
-            message: "model created succesfull",
-            data: response,
-          });
-        })
-        .catch((err) => {
-          res
-            .status(500)
-            .json({ success: 0, message: ` error adding model : ${err}` });
-        })
-        .finally(() => {});
-    } else {
-      await model
-        .update({ Model: model }, { where: { ModelId: id } })
-        .then((response) => {
-          res.status(200).json({
-            success: 1,
-            message: "model Updated succesfully",
-            data: response,
-          });
-        })
-        .catch((err) => {
-          res
-            .status(500)
-            .json({ success: 0, message: ` error updating model : ${err}` });
-        })
-        .finally(() => {});
-    }
+    await Model.create({ Model: req.body.Model })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "Model created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding Model : ${err}` });
+      })
+      .finally(() => {});
   } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const model = req.body.Model;
-    const { Id } = req.params;
     const updatemodel = await Model.update(
-      { Model: model },
-      { where: { modelId: Id } }
+      { Model: req.body.Model },
+      { where: { ModelId: req.body.ModelId } }
     );
     if (!updatemodel) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating model : ${err}`,
+        message: ` Error Updating Model : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "model updated successfully",
+      message: "Model Updated successfully",
     });
   } catch (err) {
     res
@@ -120,7 +97,7 @@ const remove = async (req, res) => {
     }
     res.status(200).json({
       success: 1,
-      message: "model deleted successfully",
+      message: "Model deleted successfully",
     });
   } catch (err) {
     res

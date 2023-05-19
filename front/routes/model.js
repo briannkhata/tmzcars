@@ -48,14 +48,14 @@ modelRouter.get("/add", (req, res) => {
 
 modelRouter.post("/save", async (req, res) => {
   const id = req.body.id;
+  const SAVE_URL = id ? `${API_URL}model/update/` : `${API_URL}model/add/`;
   await axios
-    .post(API_URL + "model/add/", {
+    .post(SAVE_URL, {
       Model: req.body.Model,
       ModelId: id,
     })
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
+      req.flash("success", response.data.message);
       if (id) {
         res.redirect("/model");
       } else {
@@ -75,11 +75,11 @@ modelRouter.get("/delete/(:id)", async (req, res) => {
     .then((response) => {
       const data = response.data;
       req.flash("success", data.message);
-      res.redirect("/models");
+      res.redirect("/model/");
     })
     .catch((error) => {
       req.flash("error", "Error deleting model " + error);
-      res.redirect("/model/models");
+      res.redirect("/model/");
     });
 });
 
