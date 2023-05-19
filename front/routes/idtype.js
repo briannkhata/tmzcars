@@ -1,9 +1,9 @@
 const express = require("express");
-const carRouter = express.Router();
+const idtypeRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 
-carRouter.get("/", async (req, res) => {
+idtypeRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "idtype/")
     .then((response) => {
@@ -19,7 +19,7 @@ carRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/edit/(:id)", async (req, res) => {
+idtypeRouter.get("/edit/(:id)", async (req, res) => {
   id = req.params.id;
   await axios
     .get(API_URL + "idtype/getOne/" + id)
@@ -27,8 +27,8 @@ carRouter.get("/edit/(:id)", async (req, res) => {
       const data = response.data.data;
       res.render("backend/admin/addidtype", {
         id: id,
-        idtype: data.idtype,
-        title: "Update idtype",
+        idtype: data.IdType,
+        title: "Update Id Type",
       });
     })
     .catch((error) => {
@@ -37,21 +37,21 @@ carRouter.get("/edit/(:id)", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/add", (req, res) => {
+idtypeRouter.get("/add", (req, res) => {
   const data = {
-    title: "Add idtype",
+    title: "Add Id Type",
     id: "",
     idtype: "",
   };
   res.render("backend/admin/addidtype", data);
 });
 
-carRouter.post("/save", async (req, res) => {
+idtypeRouter.post("/save", async (req, res) => {
   const id = req.body.id;
   await axios
-    .post(API_URL + "idtype/save/", {
-      idtype: req.body.idtype,
-      idtypeId: id,
+    .post(API_URL + "idtype/add/", {
+      IdType: req.body.idtype,
+      IdTypeId: id,
     })
     .then((response) => {
       const data = response.data;
@@ -68,7 +68,7 @@ carRouter.post("/save", async (req, res) => {
     });
 });
 
-carRouter.get("/delete/(:id)", async (req, res) => {
+idtypeRouter.get("/delete/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "idtype/delete/" + id)
@@ -83,4 +83,4 @@ carRouter.get("/delete/(:id)", async (req, res) => {
     });
 });
 
-module.exports = carRouter;
+module.exports = idtypeRouter;

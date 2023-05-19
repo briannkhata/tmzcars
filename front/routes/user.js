@@ -32,13 +32,6 @@ userRouter.get("/changephone", (req, res) => {
   res.render("backend/admin/changephone", data);
 });
 
-userRouter.get("/messages", (req, res) => {
-  const data = {
-    title: "Messages",
-  };
-  res.render("backend/admin/messages", data);
-});
-
 userRouter.get("/testimonials", (req, res) => {
   const data = {
     title: "Testimonials",

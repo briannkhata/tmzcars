@@ -5,7 +5,6 @@ const { Photo } = require("../../server/models/Photo");
 
 //const headers = { Authorization: `Bearer ${API_TOKEN}` };
 const API_URL = "http://127.0.0.1:7002/api/v1/";
-//localhost:7002/api/v1/home/register
 //const API_TOKEN = "YOUR_API_TOKEN";
 
 homeRouter.get("/", (req, res) => {
