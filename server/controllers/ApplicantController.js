@@ -83,7 +83,7 @@ const update = async (req, res) => {
     if (!updateapplicant) {
       res.status(500).json({
         success: 0,
-        message: ` Error Updating applicanttion : ${err}`,
+        message: ` Error Updating application : ${err}`,
       });
     }
     res.status(200).json({
@@ -93,7 +93,7 @@ const update = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error updating applicantion : ${err}` });
+      .json({ success: 0, message: ` Error updating application : ${err}` });
   }
 };
 
@@ -102,7 +102,7 @@ const remove = async (req, res) => {
     const { Id } = req.params;
     const updateapplicant = await applicant.update(
       { Deleted: 1 },
-      { where: { applicantId: Id } }
+      { where: { ApplicantId: Id } }
     );
     if (!updateapplicant) {
       res.status(500).json({

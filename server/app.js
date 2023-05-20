@@ -54,6 +54,7 @@ app.use("/api/v1/fueltype/", require("./routes/fueltype.js"));
 app.use("/api/v1/idtype/", require("./routes/idtype.js"));
 app.use("/api/v1/testimonial/", require("./routes/testimonial.js"));
 app.use("/api/v1/faq/", require("./routes/faq.js"));
+app.use("/api/v1/applicant/", require("./routes/applicant.js"));
 
 app.listen(PORT, (err) => {
   if (err) {
