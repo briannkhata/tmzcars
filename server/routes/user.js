@@ -14,5 +14,7 @@ userRouter.put("/verifyAccount/:Id", userController.verifyAccount);
 userRouter.get("/getAdmins/", userController.getAdmins);
 userRouter.get("/getSellers/", userController.getSellers);
 userRouter.get("/getConfirmed/", userController.getConfirmed);
+userRouter.post("/add/", userController.addadmin);
+userRouter.post("/update/", userController.updateadmin);
 
 module.exports = userRouter;

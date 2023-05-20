@@ -25,18 +25,69 @@ userRouter.get("/changephone", (req, res) => {
   res.render("backend/admin/changephone", data);
 });
 
-userRouter.get("/testimonials", (req, res) => {
-  const data = {
-    title: "Testimonials",
-  };
-  res.render("backend/admin/testimonials", data);
-});
-
 userRouter.get("/payments", (req, res) => {
   const data = {
     title: "Payments",
   };
   res.render("backend/admin/payments", data);
+});
+
+userRouter.get("/addadmin", async (req, res) => {
+  res.render("backend/admin/addadmin", {
+    id: "",
+    name: "",
+    phone: "",
+    email: "",
+    title: "Add Admin",
+  });
+});
+
+userRouter.get("/editadmin/(:id)", async (req, res) => {
+  const id = req.params.id;
+  await axios
+    .get(API_URL + "user/getOne/" + id)
+    .then((response) => {
+      res.render("backend/admin/addadmin", {
+        id: id,
+        name: response.data.data.Name,
+        phone: response.data.data.Phone,
+        email: response.data.data.Email,
+        password: response.data.data.Password,
+        title: "Update Admin",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+userRouter.post("/saveadmin", async (req, res) => {
+  const id = req.body.id;
+  const SAVE_URL = id ? `${API_URL}user/update/` : `${API_URL}user/add/`;
+  await axios
+    .post(SAVE_URL, {
+      Name: req.body.Name,
+      Email: req.body.Email,
+      Phone: req.body.Phone,
+      Password: req.body.Password,
+      UserId: id,
+    })
+    .then((response) => {
+      req.flash("success", response.data.message);
+      if (id) {
+        res.redirect("/user/admins");
+      } else {
+        res.redirect("/user/addadmin");
+      }
+    })
+    .catch((error) => {
+      req.flash("error", error.toString());
+      if (id) {
+        res.redirect("/user/admins");
+      } else {
+        res.redirect("/user/addadmin");
+      }
+    });
 });
 
 userRouter.get("/admins", async (req, res) => {

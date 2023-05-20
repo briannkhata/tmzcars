@@ -1,6 +1,7 @@
 require("../database/database.js");
 const { User } = require("../models/User.js");
 const auth = require("../middleware/auth.js");
+const bcrypt = require("bcryptjs");
 
 const getAll = async (req, res) => {
   try {
@@ -18,6 +19,73 @@ const getAll = async (req, res) => {
     res
       .status(500)
       .json({ success: 0, message: `Error getting users : ${err}` });
+  }
+};
+
+const addadmin = async (req, res) => {
+  try {
+    const { Name, Phone, Email, Password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(Password, 10);
+    const user = await User.findOne({ where: { Phone } });
+
+    if (user) {
+      return res.status(500).json({
+        success: 0,
+        message: "Phone number already exists.",
+      });
+    }
+    await User.create({
+      Name,
+      Phone,
+      Email,
+      Password: hashedPassword,
+      Role: "Admin",
+    });
+
+    res.status(201).json({
+      success: 1,
+      message: "Account created successfully!.",
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: 0,
+      message: "Error creating account." + err,
+    });
+  }
+};
+
+const updateadmin = async (req, res) => {
+  try {
+    const { Name, Phone, Email } = req.body;
+    const Password = req.body.Password;
+    if (Password != "") {
+      const hashedPassword = await bcrypt.hash(Password, 10);
+      var updatee = await User.update(
+        { Name, Phone, Email, Password: hashedPassword },
+        { where: { UserId: req.body.UserId } }
+      );
+    } else {
+      var updatee = await User.update(
+        { Name, Phone, Email },
+        { where: { UserId: req.body.UserId } }
+      );
+    }
+
+    if (!updatee) {
+      res.status(500).json({
+        success: 0,
+        message: ` Error updating admin : ${err}`,
+      });
+    }
+    res.status(200).json({
+      success: 1,
+      message: "admin Updated successfully",
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: ` Error updating admin : ${err}` });
   }
 };
 
@@ -244,4 +312,6 @@ module.exports = {
   getConfirmed,
   getAdmins,
   getSellers,
+  addadmin,
+  updateadmin,
 };
