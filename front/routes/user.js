@@ -132,4 +132,17 @@ userRouter.get("/confirmed", async (req, res) => {
     });
 });
 
+userRouter.get("/delete/(:id)", async (req, res) => {
+  await axios
+    .put(API_URL + "user/delete/" + req.params.id)
+    .then((response) => {
+      req.flash("success", response.data.message);
+      res.redirect("/user/admins");
+    })
+    .catch((error) => {
+      req.flash("error", "Error deleting user " + error);
+      res.redirect("/user/admins");
+    });
+});
+
 module.exports = userRouter;

@@ -2,6 +2,7 @@ require("../database/database.js");
 const { User } = require("../models/User.js");
 const auth = require("../middleware/auth.js");
 const bcrypt = require("bcryptjs");
+const { Op } = require("sequelize");
 
 const getAll = async (req, res) => {
   try {
@@ -134,6 +135,9 @@ const getConfirmed = async (req, res) => {
     const users = await User.findAll({
       where: {
         Deleted: 0,
+        IdNumber: {
+          [Op.not]: null,
+        },
       },
     });
     res.status(200).json({
