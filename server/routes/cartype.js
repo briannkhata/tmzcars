@@ -4,7 +4,7 @@ const cartypeRouter = express.Router();
 cartypeRouter.get("/", cartypeController.getAll);
 cartypeRouter.get("/getOne/:Id", cartypeController.getSingle);
 cartypeRouter.put("/delete/:Id", cartypeController.remove);
-cartypeRouter.put("/update/", cartypeController.update);
-cartypeRouter.post("/add", cartypeController.add);
+cartypeRouter.post("/update/", cartypeController.update);
+cartypeRouter.post("/add/", cartypeController.add);
 
 module.exports = cartypeRouter;

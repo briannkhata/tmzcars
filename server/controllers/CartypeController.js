@@ -1,4 +1,5 @@
-const { CarType } = require("../models/CarType.js");
+require("../database/database.js");
+const { CarType } = require("../models/cartype.js");
 
 const getAll = async (req, res) => {
   try {
@@ -15,92 +16,93 @@ const getAll = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: `Error getting car types : ${err}` });
+      .json({ success: 0, message: `Error getting data : ${err}` });
   }
 };
 
 const getSingle = async (req, res) => {
   try {
     const { Id } = req.params;
-    const carType = await CarType.findByPk(Id);
-    if (!carType) {
-      res
-        .status(500)
-        .json({ success: 0, message: ` Car Type Not found : ${err}` });
+    const cartype = await CarType.findByPk(Id);
+    if (!cartype) {
+      res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
     }
     res.status(200).json({
       success: 1,
-      message: "Getting Car Type succesfull",
-      data: carType,
+      message: "Getting data succesfull",
+      data: cartype,
     });
   } catch (err) {
     res.status(500).json({
       success: 0,
-      message: `Error getting Car Type : ${err}`,
+      message: `Error getting data : ${err}`,
     });
   }
 };
 
 const add = async (req, res) => {
   try {
-    const carType = req.body.Cartype;
-    await CarType.create({ CarType: carType });
-    res.status(200).json({
-      success: 1,
-      message: "Car Type Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating Car Type : ${err}` });
-  }
+    await CarType.create({ CarType: req.body.CarType })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "Car Type created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding cartype : ${err}` });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const cartype = req.body.CarType;
-    const id = req.body.CartypeId;
-    const updateCarType = await CarType.update(
-      { CarType: cartype },
-      { where: { CartypeId: id } }
+    const updatecartype = await CarType.update(
+      { CarType: req.body.CarType },
+      { where: { CarTypeId: req.body.CarTypeId } }
     );
-    if (!updateCarType) {
+    if (!updatecartype) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating Car Type : ${err}`,
+        message: ` Error Updating cartype : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Car Type updated successfully",
+      message: "cartype Updated successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error updating Car Type : ${err}` });
+      .json({ success: 0, message: ` Error updating cartype : ${err}` });
   }
 };
 
 const remove = async (req, res) => {
   try {
     const { Id } = req.params;
-    const updateCarType = await CarType.update(
+    const updatecartype = await CarType.update(
       { Deleted: 1 },
-      { where: { CartypeId: Id } }
+      { where: { CarTypeId: Id } }
     );
-    if (!updateCarType) {
-      res
-        .status(500)
-        .json({ success: 0, message: ` Error deleting Car Type : ${err}` });
+    if (!updatecartype) {
+      res.status(500).json({
+        success: 0,
+        message: ` Error deleting cartype : ${err}`,
+      });
     }
     res.status(200).json({
       success: 1,
-      message: "Car Type deleted successfully",
+      message: "car type deleted successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting Car Type : ${err}` });
+      .json({ success: 0, message: ` Error deleting cartype : ${err}` });
   }
 };
 

@@ -7,64 +7,59 @@ cartypeRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "cartype/")
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/cartypes", {
-        data: data,
-        title: "Cartypes",
+        data: response.data.data,
+        title: "Car Types",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
+    });
+});
+
+cartypeRouter.get("/add", async (req, res) => {
+  res.render("backend/admin/addcartype", {
+    id: "",
+    cartype: "",
+    title: "Add car type",
+  });
 });
 
 cartypeRouter.get("/edit/(:id)", async (req, res) => {
-  id = req.params.id;
+  const id = req.params.id;
   await axios
     .get(API_URL + "cartype/getOne/" + id)
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/addcartype", {
         id: id,
-        cartype: data.CarType,
+        cartype: response.data.data.cartype,
         title: "Update cartype",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
-});
-
-cartypeRouter.get("/addcartype", (req, res) => {
-  const data = {
-    title: "Add cartype",
-    id: "",
-    cartype: "",
-  };
-  res.render("backend/admin/addcartype", data);
+    });
 });
 
 cartypeRouter.post("/save", async (req, res) => {
   const id = req.body.id;
+  const SAVE_URL = id ? `${API_URL}cartype/update/` : `${API_URL}cartype/add/`;
   await axios
-    .post(API_URL + "cartype/add/", {
-      Cartype: req.body.cartype,
-      CartypeId: id,
+    .post(SAVE_URL, {
+      CarType: req.body.CarType,
+      CarTypeId: id,
     })
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
+      req.flash("success", response.data.message);
       if (id) {
-        res.redirect("/cartype/");
+        res.redirect("/cartype");
       } else {
-        res.redirect("/cartype/addcartype");
+        res.redirect("/cartype/add");
       }
     })
     .catch((error) => {
-      req.flash("error", "Error saving cartype" + error);
-      res.redirect("/cartype/addcartype");
+      req.flash("error", error.toString());
+      res.redirect("/cartype/add");
     });
 });
 
@@ -73,13 +68,12 @@ cartypeRouter.get("/delete/(:id)", async (req, res) => {
   await axios
     .put(API_URL + "cartype/delete/" + id)
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
-      res.redirect("/cartype");
+      req.flash("success", response.data.message);
+      res.redirect("/cartype/");
     })
     .catch((error) => {
       req.flash("error", "Error deleting cartype " + error);
-      res.redirect("/cartype");
+      res.redirect("/cartype/");
     });
 });
 
