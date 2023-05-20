@@ -1,86 +1,81 @@
 const express = require("express");
-const carRouter = express.Router();
+const conditionRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 
-carRouter.get("/", async (req, res) => {
+conditionRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "condition/")
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/conditions", {
-        data: data,
+        data: response.data.data,
         title: "Conditions",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
+    });
 });
 
-carRouter.get("/edit/(:id)", async (req, res) => {
-  id = req.params.id;
+conditionRouter.get("/add", async (req, res) => {
+  res.render("backend/admin/addcondition", {
+    id: "",
+    condition: "",
+    title: "Add condition",
+  });
+});
+
+conditionRouter.get("/edit/(:id)", async (req, res) => {
+  const id = req.params.id;
   await axios
     .get(API_URL + "condition/getOne/" + id)
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/addcondition", {
         id: id,
-        condition: data.Condition,
+        condition: response.data.data.Condition,
         title: "Update condition",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
+    });
 });
 
-carRouter.get("/add", (req, res) => {
-  const data = {
-    title: "Add condition",
-    id: "",
-    condition: "",
-  };
-  res.render("backend/admin/addcondition", data);
-});
-
-carRouter.post("/save", async (req, res) => {
+conditionRouter.post("/save", async (req, res) => {
   const id = req.body.id;
+  const SAVE_URL = id
+    ? `${API_URL}condition/update/`
+    : `${API_URL}condition/add/`;
   await axios
-    .post(API_URL + "condition/add/", {
-      Condition: req.body.condition,
+    .post(SAVE_URL, {
+      Condition: req.body.Condition,
       ConditionId: id,
     })
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
+      req.flash("success", response.data.message);
       if (id) {
-        res.redirect("/condition/");
+        res.redirect("/condition");
       } else {
         res.redirect("/condition/add");
       }
     })
     .catch((error) => {
-      req.flash("error", "Error saving condition" + error);
+      req.flash("error", error.toString());
       res.redirect("/condition/add");
     });
 });
 
-carRouter.get("/delete/(:id)", async (req, res) => {
-  const id = req.params.id;
+conditionRouter.get("/delete/(:id)", async (req, res) => {
   await axios
-    .put(API_URL + "condition/delete/" + id)
+    .put(API_URL + "condition/delete/" + req.params.id)
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
-      res.redirect("/condition");
+      req.flash("success", response.data.message);
+      res.redirect("/condition/");
     })
     .catch((error) => {
       req.flash("error", "Error deleting condition " + error);
-      res.redirect("/condition");
+      res.redirect("/condition/");
     });
 });
 
-module.exports = carRouter;
+module.exports = conditionRouter;
