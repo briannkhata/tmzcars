@@ -16,6 +16,9 @@ const Payment = sequelize.define(
     Amount: {
       type: DataTypes.DOUBLE,
     },
+    PaymentMethod: {
+      type: DataTypes.STRING,
+    },
     DatePaid: {
       type: DataTypes.DATE,
       defaultValue: Date.now,

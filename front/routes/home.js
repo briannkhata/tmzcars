@@ -35,14 +35,21 @@ homeRouter.get("/contact", (req, res) => {
 homeRouter.get("/login", (req, res) => {
   const data = {
     title: "Login",
-    // message: "",
-    // message2: "",
   };
   res.render("login", data);
 });
 homeRouter.get("/join", (req, res) => {
   const data = {
     title: "Create Account",
+    message: "",
+    message2: "",
+  };
+  res.render("join", data);
+});
+
+homeRouter.get("/career", (req, res) => {
+  const data = {
+    title: "Careers",
     message: "",
     message2: "",
   };

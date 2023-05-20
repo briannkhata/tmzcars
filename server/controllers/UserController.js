@@ -21,6 +21,65 @@ const getAll = async (req, res) => {
   }
 };
 
+const getAdmins = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        Deleted: 0,
+        Role: "Admin",
+      },
+    });
+    res.status(200).json({
+      success: 1,
+      message: "users retrieved successfully",
+      data: users,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting users : ${err}` });
+  }
+};
+
+const getSellers = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        Deleted: 0,
+        Role: "User",
+      },
+    });
+    res.status(200).json({
+      success: 1,
+      message: "users retrieved successfully",
+      data: users,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting users : ${err}` });
+  }
+};
+
+const getConfirmed = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        Deleted: 0,
+      },
+    });
+    res.status(200).json({
+      success: 1,
+      message: "users retrieved successfully",
+      data: users,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting users : ${err}` });
+  }
+};
+
 const getSingle = async (req, res) => {
   try {
     const { Id } = req.params;
@@ -182,4 +241,7 @@ module.exports = {
   updateProfile,
   verifyAccount,
   remove,
+  getConfirmed,
+  getAdmins,
+  getSellers,
 };

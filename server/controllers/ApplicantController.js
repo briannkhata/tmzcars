@@ -1,5 +1,5 @@
 require("../database/database.js");
-const { Applicant } = require("../models/Applicant.js");
+const { Applicant } = require("../models/applicant.js");
 
 const getAll = async (req, res) => {
   try {
@@ -42,76 +42,82 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const { Name, Applicant, Phone, Email, Location, Post, Qualification } =
-      req.body;
     await Applicant.create({
-      Name,
-      Applicant,
-      Phone,
-      Email,
-      Location,
-      Post,
-      Qualification,
-    });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
+      Name: req.applicant.Name,
+      Phone: req.applicant.Phone,
+      Email: req.applicant.Email,
+      Location: req.applicant.Location,
+      Post: req.applicant.Post,
+      Qualification: req.applicant.Qualification,
+    })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "Application submitted Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: 0,
+          message: ` error submitting application : ${err}`,
+        });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const { Name, Applicant, Phone, Email, Location, Post, Qualification } =
-      req.body;
-    const { Id } = req.params;
-    const updateApplicant = await Applicant.update(
-      { Name, Applicant, Phone, Email, Location, Post, Qualification },
-      { where: { ApplicantId: Id } }
+    const updateapplicant = await Applicant.update(
+      {
+        Name: req.applicant.Name,
+        Phone: req.applicant.Phone,
+        Email: req.applicant.Email,
+        Location: req.applicant.Location,
+        Post: req.applicant.Post,
+        Qualification: req.applicant.Qualification,
+      },
+      { where: { ApplicantId: req.applicant.ApplicantId } }
     );
-    if (!updateApplicant) {
+    if (!updateapplicant) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating Applicant : ${err}`,
+        message: ` Error Updating applicanttion : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Applicant updated successfully",
+      message: "applicantion Updated successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error updating Applicant : ${err}` });
+      .json({ success: 0, message: ` Error updating applicantion : ${err}` });
   }
 };
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
-    const updateApplicant = await Applicant.update(
-      { Deleted },
-      { where: { ApplicantId: Id } }
+    const updateapplicant = await applicant.update(
+      { Deleted: 1 },
+      { where: { applicantId: Id } }
     );
-    if (!updateApplicant) {
+    if (!updateapplicant) {
       res.status(500).json({
         success: 0,
-        message: ` Error deleting Applicant : ${err}`,
+        message: ` Error deleting application : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Applicant deleted successfully",
+      message: "application deleted successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting Applicant : ${err}` });
+      .json({ success: 0, message: ` Error deleting application : ${err}` });
   }
 };
 

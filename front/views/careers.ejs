@@ -1,0 +1,110 @@
+<%- include ("header.ejs") %>
+
+    <!-- header ends here  -->
+
+    <!-- inner banner section starts here -->
+    <section class="inner-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 my-3">
+                    <h1>Contact Us</h1>
+                    <p class="grey-text">TMZ Cars is a premium car brokerage
+                        company that can assist you in finding a
+                        new existing car..</p>
+                </div>
+                <div class="col-lg-6 my-3 d-lg-block d-none">
+                    <img src="img/banner-sm.png" alt="banner car" class="img-fluid w-100">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- inner banner section ends here -->
+
+
+    <section class="contact-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 my-3">
+                    <div class="contact-card">
+                        <div class="contact-img">
+                            <img src="img/call-icon.png" alt="" class="img-fluid">
+                        </div>
+                        <p class="mb-0">Call Us</p>
+                        <a href="tel:07472034968" class="green-text
+                            no-underline">
+                            <h3 class="regular">
+                                <%= phone %>
+                            </h3>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 my-3">
+                    <div class="contact-card">
+                        <div class="contact-img">
+                            <img src="/img/email-icon.png" alt="" class="img-fluid">
+                        </div>
+                        <p class="mb-0">Send Us Email</p>
+                        <a href="mailto:gyagomba@gmail.com" class="green-text no-underline">
+                            <h3 class="regular">
+                                <%= email %>
+                            </h3>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 my-3">
+                    <div class="contact-card">
+                        <div class="contact-img">
+                            <img src="img/address-icon.png" alt="" class="img-fluid">
+                        </div>
+                        <p class="mb-0">Visit Us</p>
+                        <h3 class="green-text regular">
+                            <%= address %>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <% if(messages.success){%>
+                <div class="alert alert-success" role="alert">
+                    <%= messages.success %>
+                </div>
+                <%}%>
+                    <% if(messages.error){%>
+                        <div class="alert
+                                    alert-danger" role="alert">
+                            <%= messages.error %>
+                        </div>
+                        <%}%>
+                            <form action="/sendmessage" method="post">
+                                <div class="row">
+                                    <div class="col-md-12
+                                                            my-3">
+                                        <label class="site-label">Name<span class="red-text">*</span></label>
+                                        <input type="text" placeholder="Name" name="Name" class="site-input" required>
+                                    </div>
+
+                                    <div class="col-md-6
+                                                            my-3">
+                                        <label class="site-label">Email</label>
+                                        <input type="email" placeholder="Email" name="Email" class="site-input">
+                                    </div>
+                                    <div class="col-md-6
+                                                            my-3">
+                                        <label class="site-label">Phone
+                                            Number</label>
+                                        <input type="tel" placeholder="Phone" name="Phone" class="site-input">
+                                    </div>
+                                    <div class="col-12
+                                                            my-3">
+                                        <label class="site-label">Message<span class="red-text">*</span></label>
+                                        <textarea cols="30" rows="7" placeholder="Message" name="Message"
+                                            class="site-input" required></textarea>
+                                    </div>
+                                    <div class="col-12
+                                                            my-3">
+                                        <button class="site-btn" type="submit">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+        </div>
+    </section>
+    <%- include ("footer.ejs") %>
