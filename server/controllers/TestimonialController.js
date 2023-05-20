@@ -1,6 +1,5 @@
 require("../database/database.js");
-const { use } = require("passport");
-const { Testimonial } = require("../models/Testimonial.js");
+const { Testimonial } = require("../models/testimonial.js");
 
 const getAll = async (req, res) => {
   try {
@@ -43,69 +42,65 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const testimonial = req.body.Testimonial;
-    const user = req.body.Testimonial;
-    const role = req.body.Role;
-
     await Testimonial.create({
-      Testimonial: testimonial,
-      User: user,
-      Role: role,
-    });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
+      Testimonial: req.body.Testimonial,
+      Role: req.body.Role,
+      UserId: req.body.UserId,
+    })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "Testimonial created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding testimonial : ${err}` });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const testimonial = req.body.Testimonial;
-    const user = req.body.Testimonial;
-    const role = req.body.Role;
-
-    const { Id } = req.params;
-    const updateTestimonial = await Testimonial.update(
+    const updatetestimonial = await Testimonial.update(
       {
-        Testimonial: testimonial,
-        User: user,
-        Role: role,
+        Testimonial: req.body.Testimonial,
+        Role: req.body.Role,
+        UserId: req.body.UserId,
       },
-      { where: { TestimonialId: Id } }
+      { where: { TestimonialId: req.body.TestimonialId } }
     );
-    if (!updateTestimonial) {
+    if (!updatetestimonial) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating Testimonial : ${err}`,
+        message: ` Error Updating testimonial : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Testimonial updated successfully",
+      message: "testimonial Updated successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error updating Testimonial : ${err}` });
+      .json({ success: 0, message: ` Error updating testimonial : ${err}` });
   }
 };
 
 const remove = async (req, res) => {
   try {
     const { Id } = req.params;
-    const updateTestimonial = await Testimonial.update(
+    const updatetestimonial = await Testimonial.update(
       { Deleted: 1 },
       { where: { TestimonialId: Id } }
     );
-    if (!updateTestimonial) {
+    if (!updatetestimonial) {
       res.status(500).json({
         success: 0,
-        message: ` Error deleting Testimonial : ${err}`,
+        message: ` Error deleting testimonial : ${err}`,
       });
     }
     res.status(200).json({
@@ -115,7 +110,7 @@ const remove = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting Testimonial : ${err}` });
+      .json({ success: 0, message: ` Error deleting testimonial : ${err}` });
   }
 };
 

@@ -1,5 +1,5 @@
 require("../database/database.js");
-const { Faq } = require("../models/Faq.js");
+const { Faq } = require("../models/faq.js");
 
 const getAll = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
   try {
     const { Id } = req.params;
-    const faq = await Faq.findByPk(Id);
+    const faq = await faq.findByPk(Id);
     if (!faq) {
       res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
     }
@@ -42,55 +42,60 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const faq = req.body.Faq;
-    const answer = req.body.Answer;
-
-    await Faq.create({ Faq: faq, Answer: answer });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
+    await Faq.create({
+      Faq: req.body.Faq,
+      Answer: req.body.Answer,
+    })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "faq created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding faq : ${err}` });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const faq = req.body.Faq;
-    const answer = req.body.Answer;
-    const { Id } = req.params;
-    const updateFaq = await Faq.update(
-      { Faq: faq, Answer: answer },
-      { where: { FaqId: Id } }
+    const updatefaq = await Faq.update(
+      {
+        Faq: req.body.Faq,
+        Answer: req.body.Answer,
+      },
+      { where: { FaqId: req.body.FaqId } }
     );
-    if (!updateFaq) {
+    if (!updatefaq) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating Faq : ${err}`,
+        message: ` Error Updating faq : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Faq updated successfully",
+      message: "faq Updated successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error updating Faq : ${err}` });
+      .json({ success: 0, message: ` Error updating faq : ${err}` });
   }
 };
 
 const remove = async (req, res) => {
   try {
     const { Id } = req.params;
-    const updateFaq = await Faq.update(
+    const updatefaq = await Faq.update(
       { Deleted: 1 },
       { where: { FaqId: Id } }
     );
-    if (!updateFaq) {
+    if (!updatefaq) {
       res.status(500).json({
         success: 0,
         message: ` Error deleting Faq : ${err}`,
@@ -98,12 +103,12 @@ const remove = async (req, res) => {
     }
     res.status(200).json({
       success: 1,
-      message: "Faq deleted successfully",
+      message: "faq deleted successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting Faq : ${err}` });
+      .json({ success: 0, message: ` Error deleting faq : ${err}` });
   }
 };
 

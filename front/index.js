@@ -35,6 +35,7 @@ app.use("/fueltype/", require("./routes/fueltype"));
 app.use("/idtype/", require("./routes/idtype"));
 app.use("/message/", require("./routes/message"));
 app.use("/setting/", require("./routes/setting"));
+app.use("/testimonial/", require("./routes/testimonial"));
 
 app.listen(PORT, (err) => {
   if (err) {
