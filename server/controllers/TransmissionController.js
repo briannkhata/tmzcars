@@ -1,9 +1,9 @@
 require("../database/database.js");
-const { Transmission } = require("../models/Transmission.js");
+const { Transmission } = require("../models/transmission.js");
 
 const getAll = async (req, res) => {
   try {
-    const Transmissions = await Transmission.findAll({
+    const transmissions = await Transmission.findAll({
       where: {
         Deleted: 0,
       },
@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
     res.status(200).json({
       success: 1,
       message: "Data Retrieved successfully",
-      data: Transmissions,
+      data: transmissions,
     });
   } catch (err) {
     res
@@ -42,65 +42,67 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const transmission = req.body.Transmission;
-    await Transmission.create({ Transmission: transmission });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
+    await Transmission.create({ Transmission: req.body.Transmission })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "Transmission created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding transmission : ${err}` });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const transmission = req.body.Transmission;
-    const { Id } = req.params;
-    const updateTransmission = await Transmission.update(
-      { Transmission: transmission },
-      { where: { TransmissionId: Id } }
+    const updatetransmission = await Transmission.update(
+      { Transmission: req.body.Transmission },
+      { where: { transmissionId: req.body.TransmissionId } }
     );
-    if (!updateTransmission) {
+    if (!updatetransmission) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating Transmission : ${err}`,
+        message: ` Error Updating transmission : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Transmission updated successfully",
+      message: "transmission Updated successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error updating Transmission : ${err}` });
+      .json({ success: 0, message: ` Error updating transmission : ${err}` });
   }
 };
 
 const remove = async (req, res) => {
   try {
     const { Id } = req.params;
-    const updateTransmission = await Transmission.update(
+    const updatetransmission = await Transmission.update(
       { Deleted: 1 },
       { where: { TransmissionId: Id } }
     );
-    if (!updateTransmission) {
+    if (!updatetransmission) {
       res.status(500).json({
         success: 0,
-        message: ` Error deleting Transmission : ${err}`,
+        message: ` Error deleting transmission : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Transmission deleted successfully",
+      message: "id type deleted successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting Transmission : ${err}` });
+      .json({ success: 0, message: ` Error deleting transmission : ${err}` });
   }
 };
 

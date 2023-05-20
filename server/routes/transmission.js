@@ -4,7 +4,7 @@ const transmissionRouter = express.Router();
 transmissionRouter.get("/", transmissionController.getAll);
 transmissionRouter.get("/getOne/:Id", transmissionController.getSingle);
 transmissionRouter.put("/delete/:Id", transmissionController.remove);
-transmissionRouter.put("/update/:Id", transmissionController.update);
+transmissionRouter.post("/update/", transmissionController.update);
 transmissionRouter.post("/add/", transmissionController.add);
 
 module.exports = transmissionRouter;

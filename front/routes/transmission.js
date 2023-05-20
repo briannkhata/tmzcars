@@ -7,79 +7,74 @@ transmissionRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "transmission/")
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/transmissions", {
-        data: data,
-        title: "Transmissions",
+        data: response.data.data,
+        title: "transmissions",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
+    });
+});
+
+transmissionRouter.get("/add", async (req, res) => {
+  res.render("backend/admin/addtransmission", {
+    id: "",
+    transmission: "",
+    title: "Add transmission",
+  });
 });
 
 transmissionRouter.get("/edit/(:id)", async (req, res) => {
-  id = req.params.id;
+  const id = req.params.id;
   await axios
     .get(API_URL + "transmission/getOne/" + id)
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/addtransmission", {
         id: id,
-        transmission: data.Transmission,
+        transmission: response.data.data.Transmission,
         title: "Update Transmission",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
-});
-
-transmissionRouter.get("/add", (req, res) => {
-  const data = {
-    title: "Add transmission",
-    id: "",
-    transmission: "",
-  };
-  res.render("backend/admin/addtransmission", data);
+    });
 });
 
 transmissionRouter.post("/save", async (req, res) => {
   const id = req.body.id;
+  const SAVE_URL = id
+    ? `${API_URL}transmission/update/`
+    : `${API_URL}transmission/add/`;
   await axios
-    .post(API_URL + "transmission/add/", {
-      Transmission: req.body.transmission,
+    .post(SAVE_URL, {
+      Transmission: req.body.Transmission,
       TransmissionId: id,
     })
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
+      req.flash("success", response.data.message);
       if (id) {
-        res.redirect("/transmission/");
+        res.redirect("/transmission");
       } else {
         res.redirect("/transmission/add");
       }
     })
     .catch((error) => {
-      req.flash("error", "Error saving transmission" + error);
+      req.flash("error", error.toString());
       res.redirect("/transmission/add");
     });
 });
 
 transmissionRouter.get("/delete/(:id)", async (req, res) => {
-  const id = req.params.id;
   await axios
-    .put(API_URL + "transmission/delete/" + id)
+    .put(API_URL + "transmission/delete/" + req.params.id)
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
-      res.redirect("/transmission");
+      req.flash("success", response.data.message);
+      res.redirect("/transmission/");
     })
     .catch((error) => {
       req.flash("error", "Error deleting transmission " + error);
-      res.redirect("/transmission");
+      res.redirect("/transmission/");
     });
 });
 
