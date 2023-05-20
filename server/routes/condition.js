@@ -4,7 +4,7 @@ const conditionRouter = express.Router();
 conditionRouter.get("/", conditionController.getAll);
 conditionRouter.get("/getOne/:Id", conditionController.getSingle);
 conditionRouter.put("/delete/:Id", conditionController.remove);
-conditionRouter.put("/update/:Id", conditionController.update);
+conditionRouter.post("/update/", conditionController.update);
 conditionRouter.post("/add/", conditionController.add);
 
 module.exports = conditionRouter;

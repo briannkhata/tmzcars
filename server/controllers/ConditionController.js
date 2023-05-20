@@ -1,9 +1,9 @@
 require("../database/database.js");
-const { Condition } = require("../models/Condition.js");
+const { Condition } = require("../models/condition.js");
 
 const getAll = async (req, res) => {
   try {
-    const condition = await Condition.findAll({
+    const conditions = await Condition.findAll({
       where: {
         Deleted: 0,
       },
@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
     res.status(200).json({
       success: 1,
       message: "Data Retrieved successfully",
-      data: condition,
+      data: conditions,
     });
   } catch (err) {
     res
@@ -25,85 +25,84 @@ const getSingle = async (req, res) => {
     const { Id } = req.params;
     const condition = await Condition.findByPk(Id);
     if (!condition) {
-      res
-        .status(500)
-        .json({ success: 0, message: ` Condition Not found : ${err}` });
+      res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
     }
     res.status(200).json({
       success: 1,
-      message: "Getting car Condition succesfull",
+      message: "Getting data succesfull",
       data: condition,
     });
   } catch (err) {
     res.status(500).json({
       success: 0,
-      message: `Error getting Condition Not found : ${err}`,
+      message: `Error getting data : ${err}`,
     });
   }
 };
 
 const add = async (req, res) => {
   try {
-    const condition = req.body.Condition;
-    await Condition.create({ Condition: condition });
-    res.status(200).json({
-      success: 1,
-      message: "Car Condition Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating car Condition : ${err}` });
-  }
+    await Condition.create({ Condition: req.body.Condition })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "Car Type created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding condition : ${err}` });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const condition = req.body.Condition;
-    const { Id } = req.params;
-    const updateCondition = await Condition.update(
-      { Condition: condition },
-      { where: { ConditionId: Id } }
+    const updatecondition = await Condition.update(
+      { Condition: req.body.Condition },
+      { where: { ConditionId: req.body.ConditionId } }
     );
-    if (!updateCondition) {
+    if (!updatecondition) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating car Condition : ${err}`,
+        message: ` Error Updating condition : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Car Condition updated successfully",
+      message: "condition Updated successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error updating car Condition : ${err}` });
+      .json({ success: 0, message: ` Error updating condition : ${err}` });
   }
 };
 
 const remove = async (req, res) => {
   try {
-    const Deleted = 1;
     const { Id } = req.params;
-    const updateCondition = await Condition.update(
-      { Deleted },
-      { where: { ConditionId: Id } }
+    const updatecondition = await Condition.update(
+      { Deleted: 1 },
+      { where: { conditionId: Id } }
     );
-    if (!updateCondition) {
+    if (!updatecondition) {
       res.status(500).json({
         success: 0,
-        message: ` Error deleting car Condition : ${err}`,
+        message: ` Error deleting condition : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Car Condition deleted successfully",
+      message: "condition deleted successfully",
     });
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting car Condition : ${err}` });
+      .json({ success: 0, message: ` Error deleting condition : ${err}` });
   }
 };
 

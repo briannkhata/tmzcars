@@ -1,5 +1,5 @@
 require("../database/database.js");
-const { IdType } = require("../models/IdType.js");
+const { IdType } = require("../models/idtype.js");
 
 const getAll = async (req, res) => {
   try {
@@ -42,36 +42,38 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const idType = req.body.IdType;
-    await IdType.create({ IdType: idType });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
+    await IdType.create({ IdType: req.body.IdType })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "id Type created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding idtype : ${err}` });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const idType = req.body.IdType;
-    const { Id } = req.params;
     const updateidtype = await IdType.update(
-      { IdType: idType },
-      { where: { IdTypeId: Id } }
+      { IdType: req.body.IdType },
+      { where: { IdTypeId: req.body.IdTypeId } }
     );
     if (!updateidtype) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating idtype : ${err}`,
+        message: ` Error Updating idtype : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "idtype updated successfully",
+      message: "idtype Updated successfully",
     });
   } catch (err) {
     res
@@ -95,7 +97,7 @@ const remove = async (req, res) => {
     }
     res.status(200).json({
       success: 1,
-      message: "idtype deleted successfully",
+      message: "id type deleted successfully",
     });
   } catch (err) {
     res

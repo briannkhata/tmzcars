@@ -34,37 +34,43 @@
                                                         <table class="table table-striped project-orders-table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Fueltype</th>
+                                                                    <th style="width: 2%;">#</th>
+                                                                    <th>Fuel Type</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <% for(var i=0; i< data.length; i++) { %>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <%= data[i].FuelType%>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="d-flex align-items-center">
-                                                                                <a type="button"
-                                                                                    href="/fueltype/edit/<%=data[i].FuelTypeId%>"
-                                                                                    class=" btn btn-success btn-sm btn-icon-text mr-3">
-                                                                                    Edit
-                                                                                    <i
-                                                                                        class="typcn typcn-edit btn-icon-append"></i>
-                                                                                </a>
-                                                                                <a type="button"
-                                                                                    class="btn btn-danger btn-sm btn-icon-text"
-                                                                                    onclick="return alert('Are you sure you want to delete THIS fueltype?')"
-                                                                                    href="/fueltype/delete/<%=data[i].FuelTypeId%>">
-                                                                                    Delete
-                                                                                    <i
-                                                                                        class="typcn typcn-delete-outline btn-icon-append"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <% }%>
+                                                                <% var counter=0 %>
+                                                                    <% for(var i=0; i< data.length; i++) { %>
+
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%= ++counter %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= data[i].FuelType%>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="d-flex align-items-center">
+                                                                                    <a type="button"
+                                                                                        href="/fueltype/edit/<%=data[i].FuelTypeId%>"
+                                                                                        class=" btn btn-success btn-sm btn-icon-text mr-3">
+                                                                                        Edit
+                                                                                        <i
+                                                                                            class="typcn typcn-edit btn-icon-append"></i>
+                                                                                    </a>
+                                                                                    <a type="button"
+                                                                                        class="btn btn-danger btn-sm btn-icon-text"
+                                                                                        onclick="return alert('Are you sure you want to delete THIS CAR fueltype?')"
+                                                                                        href="/fueltype/delete/<%=data[i].FuelTypeId%>">
+                                                                                        Delete
+                                                                                        <i
+                                                                                            class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% }%>
                                                             </tbody>
                                                         </table>
                                                     </div>

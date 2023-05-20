@@ -4,7 +4,7 @@ const idtypeRouter = express.Router();
 idtypeRouter.get("/", idtypeController.getAll);
 idtypeRouter.get("/getOne/:Id", idtypeController.getSingle);
 idtypeRouter.put("/delete/:Id", idtypeController.remove);
-idtypeRouter.put("/update/:Id", idtypeController.update);
+idtypeRouter.post("/update/", idtypeController.update);
 idtypeRouter.post("/add/", idtypeController.add);
 
 module.exports = idtypeRouter;

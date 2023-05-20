@@ -1,5 +1,5 @@
 require("../database/database.js");
-const { FuelType } = require("../models/FuelType.js");
+const { FuelType } = require("../models/fueltype.js");
 
 const getAll = async (req, res) => {
   try {
@@ -42,36 +42,38 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const fueltype = req.body.FuelType;
-    await FuelType.create({ FuelType: fueltype });
-    res.status(200).json({
-      success: 1,
-      message: "Data Created",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error creating data : ${err}` });
-  }
+    await FuelType.create({ FuelType: req.body.FuelType })
+      .then((response) => {
+        res.status(200).json({
+          success: 1,
+          message: "fuel Type created Succesfull",
+          data: response,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ success: 0, message: ` error Adding fueltype : ${err}` });
+      })
+      .finally(() => {});
+  } catch {}
 };
 
 const update = async (req, res) => {
   try {
-    const fueltype = req.body.Fueltype;
-    const { Id } = req.params;
     const updatefueltype = await FuelType.update(
-      { Fueltype: fueltype },
-      { where: { FueltypeId: Id } }
+      { FuelType: req.body.FuelType },
+      { where: { FuelTypeId: req.body.FuelTypeId } }
     );
     if (!updatefueltype) {
       res.status(500).json({
         success: 0,
-        message: ` Error updating fueltype : ${err}`,
+        message: ` Error Updating fueltype : ${err}`,
       });
     }
     res.status(200).json({
       success: 1,
-      message: "Fueltype updated successfully",
+      message: "fueltype Updated successfully",
     });
   } catch (err) {
     res
@@ -85,7 +87,7 @@ const remove = async (req, res) => {
     const { Id } = req.params;
     const updatefueltype = await FuelType.update(
       { Deleted: 1 },
-      { where: { FueltypeId: Id } }
+      { where: { FuelTypeId: Id } }
     );
     if (!updatefueltype) {
       res.status(500).json({
@@ -95,7 +97,7 @@ const remove = async (req, res) => {
     }
     res.status(200).json({
       success: 1,
-      message: "Fueltype deleted successfully",
+      message: "fuel type deleted successfully",
     });
   } catch (err) {
     res

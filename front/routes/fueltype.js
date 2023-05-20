@@ -7,16 +7,22 @@ fueltypeRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "fueltype/")
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/fueltypes", {
-        data: data,
-        title: "Fueltypes",
+        data: response.data.data,
+        title: "fueltypes",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
+    });
+});
+
+fueltypeRouter.get("/add", async (req, res) => {
+  res.render("backend/admin/addfueltype", {
+    id: "",
+    fueltype: "",
+    title: "Add fueltype",
+  });
 });
 
 fueltypeRouter.get("/edit/(:id)", async (req, res) => {
@@ -24,62 +30,51 @@ fueltypeRouter.get("/edit/(:id)", async (req, res) => {
   await axios
     .get(API_URL + "fueltype/getOne/" + id)
     .then((response) => {
-      const data = response.data.data;
       res.render("backend/admin/addfueltype", {
         id: id,
-        fueltype: data.FuelType,
+        fueltype: response.data.data.FuelType,
         title: "Update fueltype",
       });
     })
     .catch((error) => {
       console.log(error);
-    })
-    .finally(() => {});
-});
-
-fueltypeRouter.get("/add", (req, res) => {
-  const data = {
-    title: "Add fueltype",
-    id: "",
-    fueltype: "",
-  };
-  res.render("backend/admin/addfueltype", data);
+    });
 });
 
 fueltypeRouter.post("/save", async (req, res) => {
   const id = req.body.id;
+  const SAVE_URL = id
+    ? `${API_URL}fueltype/update/`
+    : `${API_URL}fueltype/add/`;
   await axios
-    .post(API_URL + "fueltype/add/", {
-      FuelType: req.body.fueltype,
+    .post(SAVE_URL, {
+      FuelType: req.body.FuelType,
       FuelTypeId: id,
     })
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
+      req.flash("success", response.data.message);
       if (id) {
-        res.redirect("/fueltype/");
+        res.redirect("/fueltype");
       } else {
         res.redirect("/fueltype/add");
       }
     })
     .catch((error) => {
-      req.flash("error", "Error saving fueltype" + error);
+      req.flash("error", error.toString());
       res.redirect("/fueltype/add");
     });
 });
 
 fueltypeRouter.get("/delete/(:id)", async (req, res) => {
-  const id = req.params.id;
   await axios
-    .put(API_URL + "fueltype/delete/" + id)
+    .put(API_URL + "fueltype/delete/" + req.params.id)
     .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
-      res.redirect("/fueltype");
+      req.flash("success", response.data.message);
+      res.redirect("/fueltype/");
     })
     .catch((error) => {
       req.flash("error", "Error deleting fueltype " + error);
-      res.redirect("/fueltype");
+      res.redirect("/fueltype/");
     });
 });
 
