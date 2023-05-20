@@ -39,18 +39,46 @@ userRouter.get("/payments", (req, res) => {
   res.render("backend/admin/payments", data);
 });
 
-userRouter.get("/admins", (req, res) => {
-  const data = {
-    title: "Admin Users",
-  };
-  res.render("backend/admin/admins", data);
+userRouter.get("/admins", async (req, res) => {
+  await axios
+    .get(API_URL + "user/getAdmins/")
+    .then((response) => {
+      res.render("backend/admin/admins", {
+        data: response.data.data,
+        title: "Admins",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
-userRouter.get("/users", (req, res) => {
-  const data = {
-    title: "Users",
-  };
-  res.render("backend/admin/users", data);
+userRouter.get("/users", async (req, res) => {
+  await axios
+    .get(API_URL + "user/getSellers/")
+    .then((response) => {
+      res.render("backend/admin/users", {
+        data: response.data.data,
+        title: "Users",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+userRouter.get("/confirmed", async (req, res) => {
+  await axios
+    .get(API_URL + "user/getConfirmed/")
+    .then((response) => {
+      res.render("backend/admin/confirmedusers", {
+        data: response.data.data,
+        title: "Confirmed Users",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 module.exports = userRouter;

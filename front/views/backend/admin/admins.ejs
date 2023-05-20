@@ -38,30 +38,32 @@
                                                                     <th>Name</th>
                                                                     <th>Phone</th>
                                                                     <th>Email</th>
-                                                                    <th>Address</th>
-                                                                    <th>Id Type</th>
-                                                                    <th>Id Type</th>
-                                                                    <th>Id Type</th>
-                                                                    <th>Id Type</th>
-                                                                    <th>Id Type</th>
                                                                     <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <% var counter=0 %>
                                                                     <% for(var i=0; i< data.length; i++) { %>
-
                                                                         <tr>
                                                                             <td>
                                                                                 <%= ++counter %>
                                                                             </td>
                                                                             <td>
-                                                                                <%= data[i].IdType%>
+                                                                                <%= data[i].Name%>
                                                                             </td>
+                                                                            <td>
+                                                                                <%= data[i].Phone%>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <%= data[i].Email%>
+                                                                            </td>
+
+
                                                                             <td>
                                                                                 <div class="d-flex align-items-center">
                                                                                     <a type="button"
-                                                                                        href="/idtype/edit/<%=data[i].IdTypeId%>"
+                                                                                        href="/user/edit/<%=data[i].UserId%>"
                                                                                         class=" btn btn-success btn-sm btn-icon-text mr-3">
                                                                                         Edit
                                                                                         <i
@@ -70,7 +72,7 @@
                                                                                     <a type="button"
                                                                                         class="btn btn-danger btn-sm btn-icon-text"
                                                                                         onclick="return alert('Are you sure you want to delete THIS CAR ID TYPE?')"
-                                                                                        href="/idtype/delete/<%=data[i].IdTypeId%>">
+                                                                                        href="/user/delete/<%=data[i].UserId%>">
                                                                                         Delete
                                                                                         <i
                                                                                             class="typcn typcn-delete-outline btn-icon-append"></i>
