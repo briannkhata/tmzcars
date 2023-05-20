@@ -49,6 +49,7 @@ faqRouter.post("/save", async (req, res) => {
   await axios
     .post(SAVE_URL, {
       Faq: req.body.Faq,
+      Answer: req.body.Answer,
       FaqId: id,
     })
     .then((response) => {

@@ -23,7 +23,7 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
   try {
     const { Id } = req.params;
-    const faq = await faq.findByPk(Id);
+    const faq = await Faq.findByPk(Id);
     if (!faq) {
       res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
     }
