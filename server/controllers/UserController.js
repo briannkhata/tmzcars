@@ -192,9 +192,9 @@ const remove = async (req, res) => {
   }
 };
 
-const updateProfile = async (req, res) => {
+const updateprofile = async (req, res) => {
   try {
-    const { Id } = req.params;
+    const id = req.body.UserId;
     const { Name, Address, Email, AltPhone, Country, City, Region } = req.body;
     await User.update(
       {
@@ -206,7 +206,7 @@ const updateProfile = async (req, res) => {
         City,
         Region,
       },
-      { where: { UserId: Id } }
+      { where: { UserId: id } }
     );
     res.status(200).json({
       success: 1,
@@ -219,15 +219,22 @@ const updateProfile = async (req, res) => {
   }
 };
 
-const changePhone = async (req, res) => {
+const updatephone = async (req, res) => {
   try {
-    const { Id } = req.params;
-    const { Phone } = req.body;
-    await User.update({ Phone }, { where: { UserId: Id } });
-    res.status(200).json({
-      success: 1,
-      message: "phone changed successfully",
-    });
+    const id = req.body.UserId;
+    const user = await User.findOne({ where: { Phone: req.body.Phone } });
+    if (user) {
+      return res.status(500).json({
+        success: 0,
+        message: "Phone number already exists.",
+      });
+    } else {
+      await User.update({ Phone: req.body.Phone }, { where: { UserId: id } });
+      res.status(200).json({
+        success: 1,
+        message: "phone changed successfully",
+      });
+    }
   } catch (err) {
     res
       .status(500)
@@ -235,29 +242,13 @@ const changePhone = async (req, res) => {
   }
 };
 
-const changeProfile = async (req, res) => {
+const updatepassword = async (req, res) => {
   try {
-    const { Id } = req.params;
-    const { Photo } = req.body;
-    await User.update({ Photo }, { where: { UserId: Id } });
-    res.status(200).json({
-      success: 1,
-      message: "photo changed successfully",
-    });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: `Error changing photo : ${err}` });
-  }
-};
-
-const changePassword = async (req, res) => {
-  try {
-    const { Id } = req.params;
+    const id = req.body.UserId;
     const { Password } = req.body;
     const hashedPassword = await bcrypt.hash(Password, 10);
 
-    await User.update({ Password: hashedPassword }, { where: { UserId: Id } });
+    await User.update({ Password: hashedPassword }, { where: { UserId: id } });
     res.status(200).json({
       success: 1,
       message: "password changed successfully",
@@ -307,10 +298,9 @@ module.exports = {
   getAll,
   getSingle,
   logout,
-  changePassword,
-  changePhone,
-  changeProfile,
-  updateProfile,
+  updatepassword,
+  updatephone,
+  updateprofile,
   verifyAccount,
   remove,
   getConfirmed,

@@ -32,7 +32,7 @@ idtypeRouter.get("/edit/(:id)", async (req, res) => {
     .then((response) => {
       res.render("backend/admin/addidtype", {
         id: id,
-        idtype: response.data.data.idType,
+        idtype: response.data.data.IdType,
         title: "Update idtype",
       });
     })
