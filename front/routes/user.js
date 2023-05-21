@@ -68,6 +68,38 @@ userRouter.get("/profile/(:id)", async (req, res) => {
     });
 });
 
+function getIdTypes() {
+  return axios
+    .get(API_URL + "idtype/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+userRouter.get("/verifyaccount/(:id)", async (req, res) => {
+  const id = req.params.id;
+  const idTypes = await getIdTypes();
+  await axios
+    .get(API_URL + "user/getOne/" + id)
+    .then((response) => {
+      res.render("backend/admin/verifyaccount", {
+        id: id,
+        name: response.data.data.Name,
+        phone: response.data.data.Phone,
+        idnumber: response.data.data.IdNumber,
+        idtypee: response.data.data.IdType,
+        title: "Verify Account",
+        idtypes: idTypes,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 userRouter.get("/changephone/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
