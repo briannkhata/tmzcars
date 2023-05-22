@@ -19,6 +19,83 @@ carRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
+function getModels() {
+  return axios
+    .get(API_URL + "model/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getCarTypes() {
+  return axios
+    .get(API_URL + "cartype/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getFuelTypes() {
+  return axios
+    .get(API_URL + "fueltype/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getConditions() {
+  return axios
+    .get(API_URL + "condition/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getTransmissions() {
+  return axios
+    .get(API_URL + "transmission/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getMakes() {
+  return axios
+    .get(API_URL + "make/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getBodies() {
+  return axios
+    .get(API_URL + "body/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 carRouter.get("/edit/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
@@ -37,21 +114,61 @@ carRouter.get("/edit/(:id)", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/add", (req, res) => {
+carRouter.get("/add", async (req, res) => {
+  const models = await getModels();
+  const makes = await getMakes();
+  const cartypes = await getCarTypes();
+  const transmissions = await getTransmissions();
+  const conditions = await getConditions();
+  const fueltypes = await getFuelTypes();
+  const bodies = await getBodies();
+
   const data = {
     title: "Add car",
     id: "",
     car: "",
+    models: models,
+    makes: makes,
+    fueltypes: fueltypes,
+    conditions: conditions,
+    transmissions: transmissions,
+    cartypes: cartypes,
+    bodies: bodies,
   };
+
   res.render("backend/admin/addcar", data);
 });
 
 carRouter.post("/save", async (req, res) => {
   const id = req.body.id;
+  const {
+    Year,
+    SellingPrice,
+    Mileage,
+    Engine,
+    FuelConsumption,
+    Warrant,
+    CountryOfManufacture,
+    ServiceHistory,
+    RegNo,
+    ModelId,
+    MakeId,
+    TransmissionId,
+    Steering,
+    ConditionId,
+    InteriorId,
+    ExteriorId,
+    FuelTypeId,
+    CarTypeId,
+    UserId,
+    BodyId,
+    YearBought,
+    YearsUsed,
+    OtherDetails,
+  } = req.body;
   await axios
     .post(API_URL + "car/add/", {
-      car: req.body.car,
-      carId: id,
+      dataTosend,
     })
     .then((response) => {
       const data = response.data;

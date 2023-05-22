@@ -14,52 +14,273 @@
                                     <%=title%>
                                 </h4>
                                 <hr>
-                                <form class="forms-sample">
-                                    <div class="form-group">
-                                        <label for="exampleInputName1">Name</label>
-                                        <input type="text" class="form-control" id="exampleInputName1"
-                                            placeholder="Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail3">Email address</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail3"
-                                            placeholder="Email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword4">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword4"
-                                            placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleSelectGender">Gender</label>
-                                        <select class="form-control" id="exampleSelectGender">
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>File upload</label>
-                                        <input type="file" name="img[]" class="file-upload-default">
-                                        <div class="input-group col-xs-12">
-                                            <input type="text" class="form-control file-upload-info" disabled
-                                                placeholder="Upload Image">
-                                            <span class="input-group-append">
-                                                <button class="file-upload-browse btn btn-primary"
-                                                    type="button">Upload</button>
-                                            </span>
+                                <p>
+
+                                    <% if(messages.success){%>
+                                        <div class="alert alert-success" role="alert">
+                                            <%= messages.success %>
+                                        </div>
+                                        <%}%>
+                                            <% if(messages.error){%>
+                                                <div class="alert
+                                                            alert-danger" role="alert">
+                                                    <%= messages.error %>
+                                                </div>
+                                                <%}%>
+                                </p>
+                                <form class="forms-sample" action="/car/save/" method="post">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Car Type</label>
+                                                <select class="form-control" name="CarTypeId" required>
+                                                    <option>Option</option>
+                                                    <% cartypes.forEach((cartype)=> { %>
+                                                        <option value="<%= cartype.CarTypeId %>">
+                                                            <%= cartype.CarType %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Model</label>
+                                                <select class="form-control" name="ModelId">
+                                                    <option>Option</option>
+                                                    <% models.forEach((model)=> { %>
+                                                        <option value="<%= model.ModelId %>">
+                                                            <%= model.Model %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Make</label>
+                                                <select class="form-control" name="MakeId">
+                                                    <option>Option</option>
+                                                    <% makes.forEach((make)=> { %>
+                                                        <option value="<%= make.MakeId %>">
+                                                            <%= make.Make %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputCity1">City</label>
-                                        <input type="text" class="form-control" id="exampleInputCity1"
-                                            placeholder="Location">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Body</label>
+                                                <select class="form-control" name="BodyId">
+                                                    <option>Option</option>
+                                                    <% bodies.forEach((body)=> { %>
+                                                        <option value="<%= body.BodyId %>">
+                                                            <%= body.Body %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Condition</label>
+                                                <select class="form-control" name="ConditionId">
+                                                    <option>Option</option>
+                                                    <% conditions.forEach((condition)=> { %>
+                                                        <option value="<%= condition.ConditionId %>">
+                                                            <%= condition.Condition %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Fuel Type</label>
+                                                <select class="form-control" name="FuelTypeId">
+                                                    <option>Option</option>
+                                                    <% fueltypes.forEach((fueltype)=> { %>
+                                                        <option value="<%= fueltype.FuelTypeId %>">
+                                                            <%= fueltype.FuelType %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleTextarea1">Textarea</label>
-                                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Transmission</label>
+                                                <select class="form-control" name="TransmissionId">
+                                                    <option>Option</option>
+                                                    <% transmissions.forEach((transmission)=> { %>
+                                                        <option value="<%= transmission.TransmissionId %>">
+                                                            <%= transmission.Transmission %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Steering</label>
+                                                <select class="form-control" name="Steering">
+                                                    <option>Option</option>
+                                                    <option value="LEFT">LEFT</option>
+                                                    <option value="RIGHT">RIGHT</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                    <button class="btn btn-light">Cancel</button>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">External Color</label>
+                                                <input type="text" class="form-control" name="ExteriorColor"
+                                                    placeholder="Exterior Color">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Internal Color</label>
+                                                <input type="text" class="form-control" name="InteriorColor"
+                                                    placeholder="Interior Color">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Year Bought</label>
+                                                <select name="YearBought" class="form-control">
+                                                    <option selected disabled>Year</option>
+                                                    <% for (let i=1970; i <=2025; i++) { %>
+                                                        <option value="<%= i %>">
+                                                            <%= i %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Years Used</label>
+                                                <input type="text" class="form-control" name="YearsUsed"
+                                                    placeholder="Years Used">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Mileage</label>
+                                                <input type="text" class="form-control" name="Mileage"
+                                                    placeholder="Mileage">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Engine</label>
+                                                <input type="text" class="form-control" name="Engine"
+                                                    placeholder="Engine">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Fuel Consumption</label>
+                                                <input type="text" class="form-control" name="FuelConsumption"
+                                                    placeholder="Fuel Consumption">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Warrant</label>
+                                                <input type="text" class="form-control" name="Warrant"
+                                                    placeholder="Warrant">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Country Of Manufacture</label>
+                                                <input type="text" class="form-control" name="CountryOfManufacture"
+                                                    placeholder="Country Of Manufacture">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Service History</label>
+                                                <input type="text" class="form-control" name="ServiceHistory"
+                                                    placeholder="Service History">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Registration Number</label>
+                                                <input type="text" class="form-control" name="RegNo"
+                                                    placeholder="RegNo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Year of Make</label>
+                                                <select name="Year" class="form-control">
+                                                    <option selected disabled>Year</option>
+                                                    <% for (let i=1970; i <=2025; i++) { %>
+                                                        <option value="<%= i %>">
+                                                            <%= i %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Selling Price</label>
+                                                <input type="text" class="form-control" name="SellingPrice">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Other Details</label>
+                                                <textarea class="form-control" name="OtherDetails" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <input type="hidden" name="id">
+
+                                    <button type="submit" class="btn btn-primary mr-2">Save</button>
                                 </form>
                             </div>
                         </div>
