@@ -41,11 +41,11 @@
 
                                     <div class="form-group">
                                         <label for="exampleInputName1">Id Type</label>
-                                        <select class="form-control" name="IdType">
+                                        <select class="form-control" name="IdTypeId">
                                             <option>Option</option>
                                             <% idtypes.forEach((idtype)=> { %>
-                                                <option value="<%= idtype.IdType %>" <% if (idtype.IdType===idtypee) {
-                                                    %>selected<% } %>>
+                                                <option value="<%= idtype.IdTypeId %>" <% if (idtype.IdTypeId===idtypee)
+                                                    { %>selected<% } %>>
                                                         <%= idtype.IdType %>
                                                 </option>
                                                 <% }); %>

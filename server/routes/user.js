@@ -7,7 +7,7 @@ userRouter.get("/logout/", userController.logout);
 userRouter.put("/delete/:Id", userController.remove);
 userRouter.post("/updatephone/", userController.updatephone);
 userRouter.post("/updatepassword", userController.updatepassword);
-userRouter.put("/verifyAccount/:Id", userController.verifyAccount);
+userRouter.post("/verifyaccount/", userController.verifyaccount);
 userRouter.get("/getAdmins/", userController.getAdmins);
 userRouter.get("/getSellers/", userController.getSellers);
 userRouter.get("/getConfirmed/", userController.getConfirmed);

@@ -1,5 +1,7 @@
 require("../database/database.js");
 const { User } = require("../models/User.js");
+const { IdType } = require("../models/IdType.js");
+
 const auth = require("../middleware/auth.js");
 const bcrypt = require("bcryptjs");
 const { Op } = require("sequelize");
@@ -260,12 +262,17 @@ const updatepassword = async (req, res) => {
   }
 };
 
-const verifyAccount = async (req, res) => {
+const verifyaccount = async (req, res) => {
   try {
-    const { Id } = req.params;
+    const id = req.body.UserId;
     const { IdNumber, IdTypeId } = req.body;
+    const idType = await IdType.findOne({ where: { IdTypeId } });
+    if (!idType) {
+      return res.status(400).json({ success: 0, message: "Invalid IdTypeId" });
+    }
+    User.setIdType(idType);
+    await User.update({ IdNumber, IdTypeId }, { where: { UserId: id } });
 
-    await User.update({ IdNumber, IdTypeId }, { where: { UserId: Id } });
     res.status(200).json({
       success: 1,
       message: "account verified successfully",
@@ -301,7 +308,7 @@ module.exports = {
   updatepassword,
   updatephone,
   updateprofile,
-  verifyAccount,
+  verifyaccount,
   remove,
   getConfirmed,
   getAdmins,

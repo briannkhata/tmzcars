@@ -90,13 +90,32 @@ userRouter.get("/verifyaccount/(:id)", async (req, res) => {
         name: response.data.data.Name,
         phone: response.data.data.Phone,
         idnumber: response.data.data.IdNumber,
-        idtypee: response.data.data.IdType,
+        idtypee: response.data.data.IdTypeId,
         title: "Verify Account",
         idtypes: idTypes,
       });
     })
     .catch((error) => {
       console.log(error);
+    });
+});
+
+userRouter.post("/saveid", async (req, res) => {
+  const id = req.body.id;
+  const SAVE_URL = `${API_URL}user/verifyaccount/`;
+  await axios
+    .post(SAVE_URL, {
+      IdNumber: req.body.IdNumber,
+      IdTypeId: req.body.IdTypeId,
+      UserId: id,
+    })
+    .then((response) => {
+      req.flash("success", response.data.message);
+      res.redirect("/user/verifyaccount/" + id);
+    })
+    .catch((error) => {
+      req.flash("error", error.toString());
+      res.redirect("/user/verifyaccount/" + id);
     });
 });
 

@@ -13,9 +13,6 @@ const Testimonial = sequelize.define(
     Testimonial: {
       type: DataTypes.STRING,
     },
-    User: {
-      type: DataTypes.STRING,
-    },
 
     Role: {
       type: DataTypes.STRING,
