@@ -44,9 +44,9 @@
                                         <select class="form-control" name="IdTypeId">
                                             <option>Option</option>
                                             <% idtypes.forEach((idtype)=> { %>
-                                                <option value="<%= idtype.IdTypeId %>" <% if (idtype.IdTypeId===idtypee)
-                                                    { %>selected<% } %>>
-                                                        <%= idtype.IdType %>
+                                                <option value="<%= idtype.IdTypeId %>" <%=idtype.IdTypeId===idtypee
+                                                    ? 'selected' :'' %>>
+                                                    <%= idtype.IdType %>
                                                 </option>
                                                 <% }); %>
 

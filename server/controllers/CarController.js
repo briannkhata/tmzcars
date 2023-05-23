@@ -300,9 +300,6 @@ const add = async (req, res) => {
       YearsUsed,
       OtherDetails,
     } = req.body;
-
-    console.log(req.body.CarTypeId);
-
     await Car.create({
       Year,
       SellingPrice,
@@ -321,7 +318,7 @@ const add = async (req, res) => {
       InteriorColor,
       ExteriorColor,
       FuelTypeId,
-      CarTypeId: "2fa0fa96-8c02-45fc-882a-9de5372f49ec",
+      CarTypeId: req.body.CarTypeId,
       UserId,
       BodyId,
       YearBought,

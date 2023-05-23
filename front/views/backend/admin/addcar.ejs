@@ -36,8 +36,8 @@
                                                 <select class="form-control" name="CarTypeId" required>
                                                     <option selected disabled>Option</option>
                                                     <% cartypes.forEach((cartype)=> { %>
-                                                        <option value="<%= cartype.CarTypeId %>" <%
-                                                            cartype.CarTypeId===CarTypeId ? 'selected' : '' %>>
+                                                        <option value="<%= cartype.CarTypeId %>"
+                                                            <%=cartype.CarTypeId===CarTypeId ? 'selected' : '' %>>
                                                             <%= cartype.CarType %>
                                                         </option>
                                                         <% }); %>
@@ -52,7 +52,7 @@
                                                 <select class="form-control" name="ModelId">
                                                     <option selected disabled>Option</option>
                                                     <% models.forEach((model)=> { %>
-                                                        <option value="<%= model.ModelId %>" <% model.ModelId===ModelId
+                                                        <option value="<%= model.ModelId %>" <%=model.ModelId===ModelId
                                                             ? 'selected' : '' %>>
                                                             <%= model.Model %>
                                                         </option>
@@ -68,7 +68,7 @@
                                                 <select class="form-control" name="MakeId">
                                                     <option selected disabled>Option</option>
                                                     <% makes.forEach((make)=> { %>
-                                                        <option value="<%= make.MakeId %>" <% make.MakeId===MakeId
+                                                        <option value="<%= make.MakeId %>" <%=make.MakeId===MakeId
                                                             ? 'selected' : '' %>>
                                                             <%= make.Make %>
                                                         </option>
@@ -85,7 +85,7 @@
                                                 <select class="form-control" name="BodyId">
                                                     <option selected disabled>Option</option>
                                                     <% bodies.forEach((body)=> { %>
-                                                        <option value="<%= body.BodyId %>" <% body.BodyId===BodyId
+                                                        <option value="<%= body.BodyId %>" <%=body.BodyId===BodyId
                                                             ? 'selected' : '' %>>
                                                             <%= body.Body %>
                                                         </option>
@@ -100,8 +100,8 @@
                                                 <select class="form-control" name="ConditionId">
                                                     <option selected disabled>Option</option>
                                                     <% conditions.forEach((condition)=> { %>
-                                                        <option value="<%= condition.ConditionId %>" <%
-                                                            condition.ConditionId===ConditionId ? 'selected' : '' %>>
+                                                        <option value="<%= condition.ConditionId %>"
+                                                            <%=condition.ConditionId===ConditionId ? 'selected' : '' %>>
                                                             <%= condition.Condition %>
                                                         </option>
                                                         <% }); %>
@@ -115,8 +115,8 @@
                                                 <select class="form-control" name="FuelTypeId">
                                                     <option selected disabled>Option</option>
                                                     <% fueltypes.forEach((fueltype)=> { %>
-                                                        <option value="<%= fueltype.FuelTypeId %>" <%
-                                                            fueltype.FuelTypeId===FuelTypeId ? 'selected' : '' %>>
+                                                        <option value="<%= fueltype.FuelTypeId %>"
+                                                            <%=fueltype.FuelTypeId===FuelTypeId ? 'selected' : '' %>>
                                                             <%= fueltype.FuelType %>
                                                         </option>
                                                         <% }); %>
@@ -132,8 +132,8 @@
                                                 <select class="form-control" name="TransmissionId">
                                                     <option selected disabled>Option</option>
                                                     <% transmissions.forEach((transmission)=> { %>
-                                                        <option value="<%= transmission.TransmissionId %>" <%
-                                                            transmission.TransmissionId===TransmissionId ? 'selected'
+                                                        <option value="<%= transmission.TransmissionId %>"
+                                                            <%=transmission.TransmissionId===TransmissionId ? 'selected'
                                                             : '' %>>
                                                             <%= transmission.Transmission %>
                                                         </option>
@@ -147,9 +147,9 @@
                                                 <label for="exampleInputName1">Steering</label>
                                                 <select class="form-control" name="Steering">
                                                     <option selected disabled>Option</option>
-                                                    <option <% Steering=='LEFT' ? 'selected' : '' %> value="LEFT">LEFT
+                                                    <option <%=Steering==='LEFT' ? 'selected' : '' %> value="LEFT">LEFT
                                                     </option>
-                                                    <option <% Steering=='RIGHT' ? 'selected' : '' %>
+                                                    <option <%=Steering==='RIGHT' ? 'selected' : '' %>
                                                         value="RIGHT">RIGHT</option>
                                                 </select>
                                             </div>
@@ -180,7 +180,7 @@
                                                 <select name="YearBought" class="form-control">
                                                     <option selected disabled>Year</option>
                                                     <% for (let i=1970; i <=2025; i++) { %>
-                                                        <option value="<%= i %>" <% i==YearBought ? "selected" : "" %>>
+                                                        <option value="<%= i %>" <%=i==YearBought ? "selected" : "" %>>
                                                             <%= i %>
                                                         </option>
                                                         <% } %>
@@ -261,7 +261,7 @@
                                                 <select name="Year" class="form-control">
                                                     <option selected disabled>Year</option>
                                                     <% for (let i=1970; i <=2025; i++) { %>
-                                                        <option value="<%= i %>" <% i==Year ? "selected" : "" %>>
+                                                        <option value="<%= i %>" <%=i==Year ? "selected" : "" %>>
                                                             <%= i %>
                                                         </option>
                                                         <% } %>
