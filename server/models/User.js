@@ -79,6 +79,9 @@ const User = sequelize.define(
       allowNull: false,
       defaultValue: 1,
     },
+    IdTypeId: {
+      type: DataTypes.BIGINT,
+    },
   },
   {
     timestamps: false,

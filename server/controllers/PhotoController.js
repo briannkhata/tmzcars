@@ -40,6 +40,26 @@ const getSingle = async (req, res) => {
   }
 };
 
+const getCarImages = async (req, res) => {
+  try {
+    const { Id } = req.params;
+    const photos = await Photo.findAll({ where: { CarId: Id } });
+    if (!photos) {
+      res.status(500).json({ success: 0, message: ` Data Not found : ${err}` });
+    }
+    res.status(200).json({
+      success: 1,
+      message: "Getting data succesfull",
+      data: photos,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: 0,
+      message: `Error getting data : ${err}`,
+    });
+  }
+};
+
 const add = async (req, res) => {
   try {
     const carId = req.body.CarId;
@@ -133,4 +153,5 @@ module.exports = {
   getAll,
   getSingle,
   update,
+  getCarImages,
 };

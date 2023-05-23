@@ -265,13 +265,27 @@ const updatepassword = async (req, res) => {
 const verifyaccount = async (req, res) => {
   try {
     const id = req.body.UserId;
-    const { IdNumber, IdTypeId } = req.body;
-    const idType = await IdType.findOne({ where: { IdTypeId } });
-    if (!idType) {
-      return res.status(400).json({ success: 0, message: "Invalid IdTypeId" });
-    }
-    User.setIdType(idType);
-    await User.update({ IdNumber, IdTypeId }, { where: { UserId: id } });
+    const { IdNumber } = req.body;
+    const idtype = req.body.IdTypeId;
+
+    // const idType = await IdType.findOne({ where: { IdTypeId } });
+    // if (!idType) {
+    //   return res.status(400).json({ success: 0, message: "Invalid IdTypeId" });
+    // }
+    //User.setIdType(idType);
+    await User.update(
+      {
+        IdNumber,
+        IdTypeId: idtype,
+        foreignKeys: {
+          IdTypeId: {
+            table: "IdTypes",
+            column: "IdTypeId",
+          },
+        },
+      },
+      { where: { UserId: id } }
+    );
 
     res.status(200).json({
       success: 1,

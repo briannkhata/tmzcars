@@ -8,12 +8,12 @@ const register = async (req, res) => {
   try {
     const { Name, Phone, Password } = req.body;
 
-    if (!Name || !Phone || !Password) {
-      return res.status(400).json({
-        success: 0,
-        message: "All fields are required.",
-      });
-    }
+    // if (!Name || !Phone || !Password) {
+    //   return res.status(400).json({
+    //     success: 0,
+    //     message: "All fields are required.",
+    //   });
+    // }
 
     const hashedPassword = await bcrypt.hash(Password, 10);
     const user = await User.findOne({ where: { Phone } });

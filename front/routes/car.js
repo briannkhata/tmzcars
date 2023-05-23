@@ -19,6 +19,22 @@ carRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
+carRouter.get("/images/(:id)", async (req, res) => {
+  await axios
+    .get(API_URL + "photo/getCarImages/" + req.params.id)
+    .then((response) => {
+      const data = response.data.data;
+      res.render("backend/admin/addcarimage", {
+        data: data,
+        title: "Car Details",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {});
+});
+
 function getModels() {
   return axios
     .get(API_URL + "model/")
@@ -197,6 +213,13 @@ carRouter.get("/add", async (req, res) => {
 
 carRouter.post("/save", async (req, res) => {
   const id = req.body.id;
+  const modelId = req.body.ModelId;
+  const makeId = req.body.MakeId;
+  const transmissionId = req.body.TransmissionId;
+  const conditionId = req.body.ConditionId;
+  const fuelTypeId = req.body.FuelTypeId;
+  const carTypeId = req.body.CarTypeId;
+  const bodyId = req.body.BodyId;
   const {
     Year,
     SellingPrice,
@@ -207,16 +230,9 @@ carRouter.post("/save", async (req, res) => {
     CountryOfManufacture,
     ServiceHistory,
     RegNo,
-    ModelId,
-    MakeId,
-    TransmissionId,
     Steering,
-    ConditionId,
     InteriorColor,
     ExteriorColor,
-    FuelTypeId,
-    CarTypeId,
-    BodyId,
     YearBought,
     YearsUsed,
     OtherDetails,
@@ -236,16 +252,16 @@ carRouter.post("/save", async (req, res) => {
       CountryOfManufacture,
       ServiceHistory,
       RegNo,
-      ModelId,
-      MakeId,
-      TransmissionId,
+      ModelId: modelId,
+      MakeId: makeId,
+      TransmissionId: transmissionId,
       Steering,
-      ConditionId,
+      ConditionId: conditionId,
       InteriorColor,
       ExteriorColor,
-      FuelTypeId,
-      CarTypeId,
-      BodyId,
+      FuelTypeId: fuelTypeId,
+      CarTypeId: carTypeId,
+      BodyId: bodyId,
       YearBought,
       YearsUsed,
       OtherDetails,

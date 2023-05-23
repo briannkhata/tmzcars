@@ -4,13 +4,6 @@ const axios = require("axios");
 
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 
-userRouter.get("/verifyaccount", (req, res) => {
-  const data = {
-    title: "Verify Account",
-  };
-  res.render("backend/admin/verifyaccount", data);
-});
-
 userRouter.get("/changepassword", (req, res) => {
   const data = {
     title: "Change Password",

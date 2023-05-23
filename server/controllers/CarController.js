@@ -275,6 +275,13 @@ const getCarsBySteering = async (req, res) => {
 
 const add = async (req, res) => {
   try {
+    const modelId = req.body.ModelId;
+    const makeId = req.body.MakeId;
+    const transmissionId = req.body.TransmissionId;
+    const conditionId = req.body.ConditionId;
+    const fuelTypeId = req.body.FuelTypeId;
+    const carTypeId = req.body.CarTypeId;
+    const bodyId = req.body.BodyId;
     const {
       Year,
       SellingPrice,
@@ -285,17 +292,10 @@ const add = async (req, res) => {
       CountryOfManufacture,
       ServiceHistory,
       RegNo,
-      ModelId,
-      MakeId,
-      TransmissionId,
       Steering,
-      ConditionId,
       InteriorColor,
       ExteriorColor,
-      FuelTypeId,
-      CarTypeId,
       UserId,
-      BodyId,
       YearBought,
       YearsUsed,
       OtherDetails,
@@ -310,17 +310,17 @@ const add = async (req, res) => {
       CountryOfManufacture,
       ServiceHistory,
       RegNo,
-      ModelId,
-      MakeId,
-      TransmissionId,
+      ModelId: modelId,
+      MakeId: makeId,
+      TransmissionId: transmissionId,
       Steering,
-      ConditionId,
+      ConditionId: conditionId,
       InteriorColor,
       ExteriorColor,
-      FuelTypeId,
-      CarTypeId: req.body.CarTypeId,
+      FuelTypeId: fuelTypeId,
+      CarTypeId: carTypeId,
       UserId,
-      BodyId,
+      BodyId: bodyId,
       YearBought,
       YearsUsed,
       OtherDetails,
