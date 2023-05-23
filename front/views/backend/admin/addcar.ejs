@@ -34,9 +34,10 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Car Type</label>
                                                 <select class="form-control" name="CarTypeId" required>
-                                                    <option>Option</option>
+                                                    <option selected disabled>Option</option>
                                                     <% cartypes.forEach((cartype)=> { %>
-                                                        <option value="<%= cartype.CarTypeId %>">
+                                                        <option value="<%= cartype.CarTypeId %>" <%
+                                                            cartype.CarTypeId===CarTypeId ? 'selected' : '' %>>
                                                             <%= cartype.CarType %>
                                                         </option>
                                                         <% }); %>
@@ -49,9 +50,10 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Model</label>
                                                 <select class="form-control" name="ModelId">
-                                                    <option>Option</option>
+                                                    <option selected disabled>Option</option>
                                                     <% models.forEach((model)=> { %>
-                                                        <option value="<%= model.ModelId %>">
+                                                        <option value="<%= model.ModelId %>" <% model.ModelId===ModelId
+                                                            ? 'selected' : '' %>>
                                                             <%= model.Model %>
                                                         </option>
                                                         <% }); %>
@@ -64,9 +66,10 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Make</label>
                                                 <select class="form-control" name="MakeId">
-                                                    <option>Option</option>
+                                                    <option selected disabled>Option</option>
                                                     <% makes.forEach((make)=> { %>
-                                                        <option value="<%= make.MakeId %>">
+                                                        <option value="<%= make.MakeId %>" <% make.MakeId===MakeId
+                                                            ? 'selected' : '' %>>
                                                             <%= make.Make %>
                                                         </option>
                                                         <% }); %>
@@ -80,9 +83,10 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Body</label>
                                                 <select class="form-control" name="BodyId">
-                                                    <option>Option</option>
+                                                    <option selected disabled>Option</option>
                                                     <% bodies.forEach((body)=> { %>
-                                                        <option value="<%= body.BodyId %>">
+                                                        <option value="<%= body.BodyId %>" <% body.BodyId===BodyId
+                                                            ? 'selected' : '' %>>
                                                             <%= body.Body %>
                                                         </option>
                                                         <% }); %>
@@ -94,9 +98,10 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Condition</label>
                                                 <select class="form-control" name="ConditionId">
-                                                    <option>Option</option>
+                                                    <option selected disabled>Option</option>
                                                     <% conditions.forEach((condition)=> { %>
-                                                        <option value="<%= condition.ConditionId %>">
+                                                        <option value="<%= condition.ConditionId %>" <%
+                                                            condition.ConditionId===ConditionId ? 'selected' : '' %>>
                                                             <%= condition.Condition %>
                                                         </option>
                                                         <% }); %>
@@ -108,9 +113,10 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Fuel Type</label>
                                                 <select class="form-control" name="FuelTypeId">
-                                                    <option>Option</option>
+                                                    <option selected disabled>Option</option>
                                                     <% fueltypes.forEach((fueltype)=> { %>
-                                                        <option value="<%= fueltype.FuelTypeId %>">
+                                                        <option value="<%= fueltype.FuelTypeId %>" <%
+                                                            fueltype.FuelTypeId===FuelTypeId ? 'selected' : '' %>>
                                                             <%= fueltype.FuelType %>
                                                         </option>
                                                         <% }); %>
@@ -124,9 +130,11 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Transmission</label>
                                                 <select class="form-control" name="TransmissionId">
-                                                    <option>Option</option>
+                                                    <option selected disabled>Option</option>
                                                     <% transmissions.forEach((transmission)=> { %>
-                                                        <option value="<%= transmission.TransmissionId %>">
+                                                        <option value="<%= transmission.TransmissionId %>" <%
+                                                            transmission.TransmissionId===TransmissionId ? 'selected'
+                                                            : '' %>>
                                                             <%= transmission.Transmission %>
                                                         </option>
                                                         <% }); %>
@@ -138,9 +146,11 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Steering</label>
                                                 <select class="form-control" name="Steering">
-                                                    <option>Option</option>
-                                                    <option value="LEFT">LEFT</option>
-                                                    <option value="RIGHT">RIGHT</option>
+                                                    <option selected disabled>Option</option>
+                                                    <option <% Steering=='LEFT' ? 'selected' : '' %> value="LEFT">LEFT
+                                                    </option>
+                                                    <option <% Steering=='RIGHT' ? 'selected' : '' %>
+                                                        value="RIGHT">RIGHT</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -151,14 +161,14 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">External Color</label>
                                                 <input type="text" class="form-control" name="ExteriorColor"
-                                                    placeholder="Exterior Color">
+                                                    placeholder="Exterior Color" value="<%= ExteriorColor %>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Internal Color</label>
                                                 <input type="text" class="form-control" name="InteriorColor"
-                                                    placeholder="Interior Color">
+                                                    placeholder="Interior Color" value="<%= InteriorColor %>">
                                             </div>
                                         </div>
                                     </div>
@@ -170,7 +180,7 @@
                                                 <select name="YearBought" class="form-control">
                                                     <option selected disabled>Year</option>
                                                     <% for (let i=1970; i <=2025; i++) { %>
-                                                        <option value="<%= i %>">
+                                                        <option value="<%= i %>" <% i==YearBought ? "selected" : "" %>>
                                                             <%= i %>
                                                         </option>
                                                         <% } %>
@@ -181,7 +191,7 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Years Used</label>
                                                 <input type="text" class="form-control" name="YearsUsed"
-                                                    placeholder="Years Used">
+                                                    placeholder="Years Used" value="<%= YearsUsed %>">
                                             </div>
                                         </div>
 
@@ -189,7 +199,7 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Mileage</label>
                                                 <input type="text" class="form-control" name="Mileage"
-                                                    placeholder="Mileage">
+                                                    placeholder="Mileage" value="<%= Mileage %>">
                                             </div>
                                         </div>
                                     </div>
@@ -199,14 +209,14 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Engine</label>
                                                 <input type="text" class="form-control" name="Engine"
-                                                    placeholder="Engine">
+                                                    value="<%= Engine %>" placeholder="Engine">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Fuel Consumption</label>
                                                 <input type="text" class="form-control" name="FuelConsumption"
-                                                    placeholder="Fuel Consumption">
+                                                    placeholder="Fuel Consumption" value="<%= FuelConsumption %>">
                                             </div>
                                         </div>
 
@@ -214,7 +224,7 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Warrant</label>
                                                 <input type="text" class="form-control" name="Warrant"
-                                                    placeholder="Warrant">
+                                                    placeholder="Warrant" value="<%= Warrant %>">
                                             </div>
                                         </div>
                                     </div>
@@ -224,22 +234,23 @@
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Country Of Manufacture</label>
                                                 <input type="text" class="form-control" name="CountryOfManufacture"
-                                                    placeholder="Country Of Manufacture">
+                                                    placeholder="Country Of Manufacture"
+                                                    value="<%= CountryOfManufacture %>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Service History</label>
                                                 <input type="text" class="form-control" name="ServiceHistory"
-                                                    placeholder="Service History">
+                                                    placeholder="Service History" value="<%= ServiceHistory %>">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Registration Number</label>
-                                                <input type="text" class="form-control" name="RegNo"
-                                                    placeholder="RegNo">
+                                                <input type="text" class="form-control" name="RegNo" placeholder="RegNo"
+                                                    value="<%= RegNo %>">
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +261,7 @@
                                                 <select name="Year" class="form-control">
                                                     <option selected disabled>Year</option>
                                                     <% for (let i=1970; i <=2025; i++) { %>
-                                                        <option value="<%= i %>">
+                                                        <option value="<%= i %>" <% i==Year ? "selected" : "" %>>
                                                             <%= i %>
                                                         </option>
                                                         <% } %>
@@ -263,7 +274,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Selling Price</label>
-                                                <input type="text" class="form-control" name="SellingPrice">
+                                                <input type="text" class="form-control" name="SellingPrice"
+                                                    value="<%= SellingPrice %>">
                                             </div>
                                         </div>
                                     </div>
@@ -271,14 +283,15 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Other Details</label>
-                                                <textarea class="form-control" name="OtherDetails" rows="4"></textarea>
+                                                <textarea class="form-control" name="OtherDetails" rows="4">
+                                                    <%= OtherDetails %>
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
 
 
-
-                                    <input type="hidden" name="id">
+                                    <input type="hidden" name="id" value="<%=id%>">
 
                                     <button type="submit" class="btn btn-primary mr-2">Save</button>
                                 </form>

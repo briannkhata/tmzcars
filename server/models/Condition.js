@@ -5,10 +5,9 @@ const Condition = sequelize.define(
   "Conditions",
   {
     ConditionId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Condition: {
       type: DataTypes.STRING,

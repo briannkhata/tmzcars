@@ -7,9 +7,9 @@ const Applicant = sequelize.define(
   "Applicants",
   {
     ApplicantId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Name: {
       type: DataTypes.STRING,

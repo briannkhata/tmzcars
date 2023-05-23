@@ -6,10 +6,8 @@ const Setting = sequelize.define(
   "Settings",
   {
     Id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       primaryKey: true,
-      autoincrement: true,
-      allowNull: true,
       defaultValue: 1,
     },
     Phone: {

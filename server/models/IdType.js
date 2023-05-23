@@ -6,9 +6,9 @@ const IdType = sequelize.define(
   "IdTypes",
   {
     IdTypeId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     IdType: {
       type: DataTypes.STRING,

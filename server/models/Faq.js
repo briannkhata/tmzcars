@@ -6,9 +6,9 @@ const Faq = sequelize.define(
   "Faqs",
   {
     FaqId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Faq: {
       type: DataTypes.STRING,

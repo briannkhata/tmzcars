@@ -5,9 +5,9 @@ const Feature = sequelize.define(
   "Features",
   {
     FeatureId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     DateAdded: {
       type: DataTypes.DATE,

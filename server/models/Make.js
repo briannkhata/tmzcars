@@ -6,9 +6,9 @@ const Make = sequelize.define(
   "Makes",
   {
     MakeId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Make: {
       type: DataTypes.STRING,

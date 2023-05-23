@@ -1,4 +1,11 @@
 const { Car } = require("../models/Car.js");
+const { CarType } = require("../models/CarType.js");
+const { Make } = require("../models/Make.js");
+const { Model } = require("../models/Model.js");
+const { Transmission } = require("../models/Transmission.js");
+const { FuelType } = require("../models/FuelType.js");
+const { Body } = require("../models/Body.js");
+const { Condition } = require("../models/Condition.js");
 const getAll = async (req, res) => {
   try {
     const cars = await Car.findAll({
@@ -22,7 +29,7 @@ const getOne = async (req, res) => {
     const { Id } = req.params;
     const car = await Car.findByPk(Id);
     if (!car) {
-      res.status(500).json({ success: 0, message: ` Car Not found : ${err}` });
+      res.status(500).json({ success: 0, message: ` Car Not found ` });
     }
     res.status(200).json({
       success: 1,
@@ -269,19 +276,10 @@ const getCarsBySteering = async (req, res) => {
 const add = async (req, res) => {
   try {
     const {
-      Name,
-      CarNo,
       Year,
       SellingPrice,
-      SellingPriceAlt,
       Mileage,
       Engine,
-      DriveTrain,
-      AddedBy,
-      Comment,
-      BuildDate,
-      ComplianceDate,
-      Series,
       FuelConsumption,
       Warrant,
       CountryOfManufacture,
@@ -290,51 +288,49 @@ const add = async (req, res) => {
       ModelId,
       MakeId,
       TransmissionId,
-      SteeringId,
+      Steering,
       ConditionId,
-      InteriorId,
-      ExteriorId,
+      InteriorColor,
+      ExteriorColor,
       FuelTypeId,
       CarTypeId,
       UserId,
       BodyId,
+      YearBought,
+      YearsUsed,
+      OtherDetails,
     } = req.body;
-    const allData = req.body;
+
+    console.log(req.body.CarTypeId);
+
     await Car.create({
-      allData,
-      // Name,
-      // CarNo,
-      // Year,
-      // SellingPrice,
-      // SellingPriceAlt,
-      // Mileage,
-      // Engine,
-      // DriveTrain,
-      // AddedBy,
-      // Comment,
-      // BuildDate,
-      // ComplianceDate,
-      // Series,
-      // FuelConsumption,
-      // Warrant,
-      // CountryOfManufacture,
-      // ServiceHistory,
-      // RegNo,
-      // ModelId,
-      // MakeId,
-      // TransmissionId,
-      // SteeringId,
-      // ConditionId,
-      // InteriorId,
-      // ExteriorId,
-      // FuelTypeId,
-      // CarTypeId,
-      // UserId,
-      // BodyId,
+      Year,
+      SellingPrice,
+      Mileage,
+      Engine,
+      FuelConsumption,
+      Warrant,
+      CountryOfManufacture,
+      ServiceHistory,
+      RegNo,
+      ModelId,
+      MakeId,
+      TransmissionId,
+      Steering,
+      ConditionId,
+      InteriorColor,
+      ExteriorColor,
+      FuelTypeId,
+      CarTypeId: "2fa0fa96-8c02-45fc-882a-9de5372f49ec",
+      UserId,
+      BodyId,
+      YearBought,
+      YearsUsed,
+      OtherDetails,
     });
     res.status(200).json({
       success: 1,
-      message: "Car added successfully",
+      message: "Car saved successfully",
     });
   } catch (err) {
     res.status(500).json({ success: 0, message: `Error adding Car : ${err}` });
@@ -344,19 +340,10 @@ const add = async (req, res) => {
 const update = async (req, res) => {
   try {
     const {
-      Name,
-      CarNo,
       Year,
       SellingPrice,
-      SellingPriceAlt,
       Mileage,
       Engine,
-      DriveTrain,
-      AddedBy,
-      Comment,
-      BuildDate,
-      ComplianceDate,
-      Series,
       FuelConsumption,
       Warrant,
       CountryOfManufacture,
@@ -365,31 +352,25 @@ const update = async (req, res) => {
       ModelId,
       MakeId,
       TransmissionId,
-      SteeringId,
+      Steering,
       ConditionId,
-      InteriorId,
-      ExteriorId,
+      InteriorColor,
+      ExteriorColor,
       FuelTypeId,
       CarTypeId,
       UserId,
       BodyId,
+      YearBought,
+      YearsUsed,
+      OtherDetails,
     } = req.body;
-    const { Id } = req.params;
+    const { Id } = req.body.CarId;
     const updateCar = await Car.update(
       {
-        Name,
-        CarNo,
         Year,
         SellingPrice,
-        SellingPriceAlt,
         Mileage,
         Engine,
-        DriveTrain,
-        AddedBy,
-        Comment,
-        BuildDate,
-        ComplianceDate,
-        Series,
         FuelConsumption,
         Warrant,
         CountryOfManufacture,
@@ -398,14 +379,17 @@ const update = async (req, res) => {
         ModelId,
         MakeId,
         TransmissionId,
-        SteeringId,
+        Steering,
         ConditionId,
-        InteriorId,
-        ExteriorId,
+        InteriorColor,
+        ExteriorColor,
         FuelTypeId,
         CarTypeId,
         UserId,
         BodyId,
+        YearBought,
+        YearsUsed,
+        OtherDetails,
       },
       { where: { CarId: Id } }
     );

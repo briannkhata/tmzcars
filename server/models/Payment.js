@@ -6,9 +6,9 @@ const Payment = sequelize.define(
   "Payments",
   {
     PaymentId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     TransId: {
       type: DataTypes.STRING,

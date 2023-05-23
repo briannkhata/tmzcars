@@ -6,9 +6,9 @@ const Partner = sequelize.define(
   "Partners",
   {
     PartnerId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Partner: {
       type: DataTypes.STRING,

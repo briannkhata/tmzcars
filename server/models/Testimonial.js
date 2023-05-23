@@ -6,9 +6,9 @@ const Testimonial = sequelize.define(
   "Testimonials",
   {
     TestimonialId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Testimonial: {
       type: DataTypes.STRING,

@@ -6,9 +6,9 @@ const Plan = sequelize.define(
   "Plans",
   {
     PlanId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Plan: {
       type: DataTypes.STRING,

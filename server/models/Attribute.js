@@ -6,9 +6,9 @@ const Attribute = sequelize.define(
   "Attributes",
   {
     AttributeId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Attribute: {
       type: DataTypes.STRING,

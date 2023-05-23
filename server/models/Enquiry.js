@@ -5,9 +5,9 @@ const Enquiry = sequelize.define(
   "Enquiries",
   {
     EnquiryId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Message: {
       type: DataTypes.TEXT,

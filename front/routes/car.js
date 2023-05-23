@@ -10,7 +10,7 @@ carRouter.get("/", async (req, res) => {
       const data = response.data.data;
       res.render("backend/admin/cars", {
         data: data,
-        title: "cars",
+        title: "Cars List",
       });
     })
     .catch((error) => {
@@ -97,6 +97,13 @@ function getBodies() {
 }
 
 carRouter.get("/edit/(:id)", async (req, res) => {
+  const models = await getModels();
+  const makes = await getMakes();
+  const cartypes = await getCarTypes();
+  const transmissions = await getTransmissions();
+  const conditions = await getConditions();
+  const fueltypes = await getFuelTypes();
+  const bodies = await getBodies();
   const id = req.params.id;
   await axios
     .get(API_URL + "car/getOne/" + id)
@@ -104,8 +111,36 @@ carRouter.get("/edit/(:id)", async (req, res) => {
       const data = response.data.data;
       res.render("backend/admin/addcar", {
         id: id,
-        car: data.car,
-        title: "Update car",
+        Year: data.Year,
+        SellingPrice: data.SellingPrice,
+        Mileage: data.Mileage,
+        Engine: data.Engine,
+        FuelConsumption: data.FuelConsumption,
+        Warrant: data.Warrant,
+        CountryOfManufacture: data.CountryOfManufacture,
+        ServiceHistory: data.ServiceHistory,
+        RegNo: data.RegNo,
+        ModelId: data.ModelId,
+        MakeId: data.MakeId,
+        TransmissionId: "",
+        Steering: data.Steering,
+        ConditionId: data.ConditionId,
+        InteriorColor: data.InteriorColor,
+        ExteriorColor: data.ExteriorColor,
+        FuelTypeId: data.FuelTypeId,
+        CarTypeId: data.CarTypeId,
+        BodyId: data.BodyId,
+        YearBought: data.YearBought,
+        YearsUsed: data.YearsUsed,
+        OtherDetails: data.OtherDetails,
+        models: models,
+        makes: makes,
+        fueltypes: fueltypes,
+        conditions: conditions,
+        transmissions: transmissions,
+        cartypes: cartypes,
+        bodies: bodies,
+        title: "Update Car Details",
       });
     })
     .catch((error) => {
@@ -126,7 +161,28 @@ carRouter.get("/add", async (req, res) => {
   const data = {
     title: "Add car",
     id: "",
-    car: "",
+    Year: "",
+    SellingPrice: "",
+    Mileage: "",
+    Engine: "",
+    FuelConsumption: "",
+    Warrant: "",
+    CountryOfManufacture: "",
+    ServiceHistory: "",
+    RegNo: "",
+    ModelId: "",
+    MakeId: "",
+    TransmissionId: "",
+    Steering: "",
+    ConditionId: "",
+    InteriorColor: "",
+    ExteriorColor: "",
+    FuelTypeId: "",
+    CarTypeId: "",
+    BodyId: "",
+    YearBought: "",
+    YearsUsed: "",
+    OtherDetails: "",
     models: models,
     makes: makes,
     fueltypes: fueltypes,
@@ -156,19 +212,44 @@ carRouter.post("/save", async (req, res) => {
     TransmissionId,
     Steering,
     ConditionId,
-    InteriorId,
-    ExteriorId,
+    InteriorColor,
+    ExteriorColor,
     FuelTypeId,
     CarTypeId,
-    UserId,
     BodyId,
     YearBought,
     YearsUsed,
     OtherDetails,
   } = req.body;
+  const SAVE_URL = id ? `${API_URL}car/update/` : `${API_URL}car/add/`;
+
+  console.log(req.body);
+
   await axios
-    .post(API_URL + "car/add/", {
-      dataTosend,
+    .post(SAVE_URL, {
+      Year,
+      SellingPrice,
+      Mileage,
+      Engine,
+      FuelConsumption,
+      Warrant,
+      CountryOfManufacture,
+      ServiceHistory,
+      RegNo,
+      ModelId,
+      MakeId,
+      TransmissionId,
+      Steering,
+      ConditionId,
+      InteriorColor,
+      ExteriorColor,
+      FuelTypeId,
+      CarTypeId,
+      BodyId,
+      YearBought,
+      YearsUsed,
+      OtherDetails,
+      CarId: id,
     })
     .then((response) => {
       const data = response.data;

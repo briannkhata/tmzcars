@@ -24,7 +24,7 @@ const { Applicant } = require("./Applicant.js");
 const { Testimonial } = require("./Testimonial.js");
 
 //relationships
-Model.hasOne(Car, {
+Model.hasMany(Car, {
   foreignKey: "ModelId",
   onUpdate: "CASCADE",
 });
@@ -33,7 +33,7 @@ Car.belongsTo(Model, {
   onUpdate: "CASCADE",
 });
 
-Make.hasOne(Car, {
+Make.hasMany(Car, {
   foreignKey: "MakeId",
   onUpdate: "CASCADE",
 });
@@ -42,7 +42,7 @@ Car.belongsTo(Make, {
   onUpdate: "CASCADE",
 });
 
-Transmission.hasOne(Car, {
+Transmission.hasMany(Car, {
   foreignKey: "TransmissionId",
   onUpdate: "CASCADE",
 });
@@ -61,7 +61,7 @@ Testimonial.belongsTo(User, {
   onUpdate: "CASCADE",
 });
 
-Condition.hasOne(Car, {
+Condition.hasMany(Car, {
   foreignKey: "ConditionId",
   onUpdate: "CASCADE",
 });
@@ -70,7 +70,7 @@ Car.belongsTo(Condition, {
   onUpdate: "CASCADE",
 });
 
-FuelType.hasOne(Car, {
+FuelType.hasMany(Car, {
   foreignKey: "FuelTypeId",
   onUpdate: "CASCADE",
 });
@@ -79,7 +79,7 @@ Car.belongsTo(FuelType, {
   onUpdate: "CASCADE",
 });
 
-CarType.hasOne(Car, {
+CarType.hasMany(Car, {
   foreignKey: "CarTypeId",
   onUpdate: "CASCADE",
 });
@@ -152,7 +152,7 @@ Enquiry.belongsTo(Car, {
   onUpdate: "CASCADE",
 });
 
-Body.hasOne(Car, {
+Body.hasMany(Car, {
   foreignKey: "BodyId",
   onUpdate: "CASCADE",
 });
@@ -162,7 +162,7 @@ Car.belongsTo(Body, {
 });
 
 sequelize
-  .sync({ alter: true })
+  .sync({ force: true })
   .then(() => {
     console.log("Database synchronized successfully.");
   })

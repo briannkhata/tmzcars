@@ -6,9 +6,9 @@ const Transmission = sequelize.define(
   "Transmissions",
   {
     TransmissionId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Transmission: {
       type: DataTypes.STRING,

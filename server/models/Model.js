@@ -6,9 +6,9 @@ const Model = sequelize.define(
   "Models",
   {
     ModelId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     Model: {
       type: DataTypes.STRING,

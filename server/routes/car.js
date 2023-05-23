@@ -2,7 +2,7 @@ const express = require("express");
 const carController = require("../controllers/CarController.js");
 const carRouter = express.Router();
 carRouter.get("/", carController.getAll);
-carRouter.get("/getOne/:CarId", carController.getOne);
+carRouter.get("/getOne/:Id", carController.getOne);
 carRouter.post("/remove/", carController.remove);
 carRouter.post("/update/", carController.update);
 carRouter.post("/search", carController.searchCar);

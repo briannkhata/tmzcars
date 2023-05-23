@@ -6,9 +6,9 @@ const FuelType = sequelize.define(
   "FuelTypes",
   {
     FuelTypeId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     FuelType: {
       type: DataTypes.STRING,

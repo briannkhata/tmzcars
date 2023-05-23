@@ -66,7 +66,7 @@ const Car = sequelize.define(
       allowNull: true,
     },
 
-    InterioColor: {
+    InteriorColor: {
       type: DataTypes.TEXT,
       allowNull: true,
     },

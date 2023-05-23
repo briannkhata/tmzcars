@@ -6,9 +6,9 @@ const CarType = sequelize.define(
   "CarType",
   {
     CarTypeId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoIncrement: true,
     },
     CarType: {
       type: DataTypes.STRING,
