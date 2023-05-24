@@ -1,16 +1,20 @@
 const { Car } = require("../models/Car.js");
-const { CarType } = require("../models/CarType.js");
-const { Make } = require("../models/Make.js");
+// const { CarType } = require("../models/CarType.js");
+// const { Make } = require("../models/Make.js");
 const { Model } = require("../models/Model.js");
-const { Transmission } = require("../models/Transmission.js");
-const { FuelType } = require("../models/FuelType.js");
-const { Body } = require("../models/Body.js");
-const { Condition } = require("../models/Condition.js");
+// const { Transmission } = require("../models/Transmission.js");
+// const { FuelType } = require("../models/FuelType.js");
+// const { Body } = require("../models/Body.js");
+// const { Condition } = require("../models/Condition.js");
 const getAll = async (req, res) => {
   try {
     const cars = await Car.findAll({
       where: {
         Deleted: 0,
+      },
+
+      include: {
+        model: Model, // replace "Model" with the actual associated model name
       },
     });
     res.status(200).json({
@@ -324,6 +328,36 @@ const add = async (req, res) => {
       YearBought,
       YearsUsed,
       OtherDetails,
+      foreignKeys: {
+        TransmissionId: {
+          table: "Transmissions",
+          column: "TransmissionId",
+        },
+        ModelId: {
+          table: "Models",
+          column: "ModelId",
+        },
+        CarTypeId: {
+          table: "CarTypes",
+          column: "CarTypeId",
+        },
+        MakeId: {
+          table: "Makes",
+          column: "MakeId",
+        },
+        BodyId: {
+          table: "Bodies",
+          column: "BodyId",
+        },
+        FuelTypeId: {
+          table: "FuelTypes",
+          column: "FuelTypeId",
+        },
+        ConditionId: {
+          table: "Conditions",
+          column: "ConditionId",
+        },
+      },
     });
     res.status(200).json({
       success: 1,

@@ -23,4 +23,7 @@ const Transmission = sequelize.define(
   }
 );
 
+Transmission.associate = (models) => {
+  Transmission.hasMany(models.Car);
+};
 module.exports = { Transmission, sequelize };

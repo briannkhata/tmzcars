@@ -82,10 +82,53 @@ const Car = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: true,
     },
+    MakeId: {
+      type: DataTypes.BIGINT,
+    },
+    ModelId: {
+      type: DataTypes.BIGINT,
+    },
+    CarTypeId: {
+      type: DataTypes.BIGINT,
+    },
+    FuelTypeId: {
+      type: DataTypes.BIGINT,
+    },
+    TransmissionId: {
+      type: DataTypes.BIGINT,
+    },
+    BodyId: {
+      type: DataTypes.BIGINT,
+    },
+    ConditionId: {
+      type: DataTypes.BIGINT,
+    },
   },
   {
     timestamps: false,
   }
 );
+
+Car.associate = (models) => {
+  Car.belongsTo(models.Model);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Make);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.FuelType);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Condition);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Transmission);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.CarType);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Body);
+};
 
 module.exports = { Car, sequelize };

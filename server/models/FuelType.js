@@ -23,4 +23,8 @@ const FuelType = sequelize.define(
   }
 );
 
+FuelType.associate = (models) => {
+  FuelType.hasMany(models.Car);
+};
+
 module.exports = { FuelType, sequelize };

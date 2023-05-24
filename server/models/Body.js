@@ -23,4 +23,7 @@ const Body = sequelize.define(
   }
 );
 
+Body.associate = (models) => {
+  Body.hasMany(models.Car);
+};
 module.exports = { Body, sequelize };

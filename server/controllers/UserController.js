@@ -268,11 +268,6 @@ const verifyaccount = async (req, res) => {
     const { IdNumber } = req.body;
     const idtype = req.body.IdTypeId;
 
-    // const idType = await IdType.findOne({ where: { IdTypeId } });
-    // if (!idType) {
-    //   return res.status(400).json({ success: 0, message: "Invalid IdTypeId" });
-    // }
-    //User.setIdType(idType);
     await User.update(
       {
         IdNumber,

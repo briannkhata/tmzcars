@@ -22,4 +22,8 @@ const Condition = sequelize.define(
   }
 );
 
+Condition.associate = (models) => {
+  Condition.hasMany(models.Car);
+};
+
 module.exports = { Condition, sequelize };

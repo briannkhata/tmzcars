@@ -23,4 +23,8 @@ const IdType = sequelize.define(
   }
 );
 
+IdType.associate = (models) => {
+  IdType.hasMany(models.Car);
+};
+
 module.exports = { IdType, sequelize };

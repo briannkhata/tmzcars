@@ -27,17 +27,11 @@
                                                 <tr>
                                                     <th style="width:2%">#</th>
                                                     <th>Year</th>
-                                                    <th>Engine</th>
-                                                    <th>Fuel Consumption</th>
-                                                    <th>Warrant</th>
-                                                    <th>Service History</th>
-                                                    <th>Steering</th>
-                                                    <th>Model</th>
-                                                    <th>Condition</th>
-                                                    <th>Fuel Type</th>
                                                     <th>Car Type</th>
+                                                    <th>Model</th>
+                                                    <th>Make</th>
+                                                    <th>Condition</th>
                                                     <th>Body</th>
-                                                    <th>Details</th>
                                                     <th>Date Added</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -53,24 +47,8 @@
                                                             <td>
                                                                 <%= data[i].Year%>
                                                             </td>
-
                                                             <td>
-                                                                <%= data[i].Engine%>
-                                                            </td>
-
-                                                            <td>
-                                                                <%= data[i].FuelConsumption%>
-                                                            </td>
-                                                            <td>
-                                                                <%= data[i].Warrant%>
-                                                            </td>
-
-                                                            <td>
-                                                                <%= data[i].ServiceHistory%>
-                                                            </td>
-
-                                                            <td>
-                                                                <%= data[i].Steering%>
+                                                                <%= data[i].CarTypeId%>
                                                             </td>
 
                                                             <td>
@@ -79,24 +57,16 @@
                                                             <td>
                                                                 <%= data[i].MakeId%>
                                                             </td>
-                                                            <td>
-                                                                <%= data[i].TransmissionId%>
-                                                            </td>
+
                                                             <td>
                                                                 <%= data[i].ConditionId%>
                                                             </td>
-                                                            <td>
-                                                                <%= data[i].FuelTypeId%>
-                                                            </td>
-                                                            <td>
-                                                                <%= data[i].CarTypeId%>
-                                                            </td>
+
+
                                                             <td>
                                                                 <%= data[i].BodyId%>
                                                             </td>
-                                                            <td>
-                                                                <%= data[i].UserId%>
-                                                            </td>
+
 
                                                             <td>
                                                                 <%=new

@@ -33,4 +33,8 @@ const Feature = sequelize.define(
   }
 );
 
+Feature.associate = (models) => {
+  Feature.hasMany(models.Car);
+};
+
 module.exports = { Feature, sequelize };

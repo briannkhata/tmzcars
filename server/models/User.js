@@ -88,4 +88,11 @@ const User = sequelize.define(
   }
 );
 
+User.associate = (models) => {
+  User.belongsTo(models.IdType);
+};
+User.associate = (models) => {
+  User.belongsTo(models.Testimonial);
+};
+
 module.exports = { User, sequelize };

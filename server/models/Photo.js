@@ -23,4 +23,8 @@ const Photo = sequelize.define(
   }
 );
 
+Photo.associate = (models) => {
+  Photo.hasMany(models.Car);
+};
+
 module.exports = { Photo, sequelize };
