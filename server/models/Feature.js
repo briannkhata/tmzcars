@@ -14,18 +14,17 @@ const Feature = sequelize.define(
       allowNull: true,
       defaultValue: Date.now,
     },
-    TransId: {
-      type: DataTypes.STRING(200),
-      allowNull: true,
-    },
-    AddBy: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
     Deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+    },
+    CarId: {
+      type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "CarId",
+        referencedTable: "Car",
+      },
     },
   },
   {

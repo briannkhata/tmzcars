@@ -92,11 +92,60 @@ const User = sequelize.define(
   }
 );
 
-// User.associate = (models) => {
-//   User.belongsTo(models.IdType);
-// };
-// User.associate = (models) => {
-//   User.belongsTo(models.Testimonial);
-// };
+const IdType = sequelize.define(
+  "IdTypes",
+  {
+    IdTypeId: {
+      type: DataTypes.BIGINT,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    IdType: {
+      type: DataTypes.STRING,
+    },
+    Deleted: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
 
-module.exports = { User, sequelize };
+const Testimonial = sequelize.define(
+  "Testimonials",
+  {
+    TestimonialId: {
+      type: DataTypes.BIGINT,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Testimonial: {
+      type: DataTypes.STRING,
+    },
+
+    Role: {
+      type: DataTypes.STRING,
+    },
+
+    Deleted: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
+
+User.belongsTo(IdType, { foreignKey: "IdTypeId" });
+IdType.hasMany(User, { foreignKey: "IdTypeId" });
+Testimonial.belongsTo(User, {
+  foreignKey: "UserId",
+});
+User.hasMany(Testimonial, {
+  foreignKey: "UserId",
+});
+
+module.exports = { User, IdType, Testimonial, sequelize };

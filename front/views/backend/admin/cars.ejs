@@ -26,7 +26,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:2%">#</th>
-                                                    <th>Year</th>
+                                                    <th>Owner</th>
                                                     <th>Car Type</th>
                                                     <th>Model</th>
                                                     <th>Make</th>
@@ -45,26 +45,26 @@
                                                                 <%= ++counter %>
                                                             </td>
                                                             <td>
-                                                                <%= data[i].Year%>
+                                                                <%= data[i].User%>
                                                             </td>
                                                             <td>
-                                                                <%= data[i].CarTypeId%>
-                                                            </td>
-
-                                                            <td>
-                                                                <%= data[i].ModelId%>
-                                                            </td>
-                                                            <td>
-                                                                <%= data[i].MakeId%>
+                                                                <%= data[i].CarType.CarType%>
                                                             </td>
 
                                                             <td>
-                                                                <%= data[i].ConditionId%>
+                                                                <%= data[i].Model.Model%>
+                                                            </td>
+                                                            <td>
+                                                                <%= data[i].Make.Make%>
+                                                            </td>
+
+                                                            <td>
+                                                                <%= data[i].Condition.Condition%>
                                                             </td>
 
 
                                                             <td>
-                                                                <%= data[i].BodyId%>
+                                                                <%= data[i].Body.Body%>
                                                             </td>
 
 

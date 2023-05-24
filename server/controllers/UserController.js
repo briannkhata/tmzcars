@@ -114,15 +114,25 @@ const getAdmins = async (req, res) => {
 
 const getSellers = async (req, res) => {
   try {
+    // const users = await User.findAll({
+    //   where: {
+    //     Deleted: 0,
+    //     Role: "User",
+    //   },
+    //   include: {
+    //     model: IdType,
+    //   },
+    // });
+
     const users = await User.findAll({
-      where: {
-        Deleted: 0,
-        Role: "User",
-      },
-      include: {
-        model: IdType,
-      },
+      include: [
+        {
+          model: IdType,
+          //required: true,
+        },
+      ],
     });
+
     res.status(200).json({
       success: 1,
       message: "users retrieved successfully",

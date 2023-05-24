@@ -32,6 +32,24 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
+                                                <label for="exampleInputName1">Owner</label>
+                                                <select class="form-control" name="UserId" required>
+                                                    <option selected disabled>Option</option>
+                                                    <% users.forEach((user)=> { %>
+                                                        <option value="<%= cartype.CarTypeId %>" <%=user.UserId===UserId
+                                                            ? 'selected' : '' %>>
+                                                            <%= user.Name %>
+                                                        </option>
+                                                        <% }); %>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
                                                 <label for="exampleInputName1">Car Type</label>
                                                 <select class="form-control" name="CarTypeId" required>
                                                     <option selected disabled>Option</option>

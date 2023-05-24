@@ -1,4 +1,14 @@
-const { Car } = require("../models/Car.js");
+const {
+  Car,
+  User,
+  Model,
+  Make,
+  CarType,
+  Transmission,
+  FuelType,
+  Body,
+  Condition,
+} = require("../models/Car.js");
 // const { CarType } = require("../models/CarType.js");
 // const { Make } = require("../models/Make.js");
 // const { Model } = require("../models/Model.js");
@@ -12,9 +22,18 @@ const getAll = async (req, res) => {
       where: {
         Deleted: 0,
       },
-      include: {
-        model: Model, // replace "Model" with the actual associated model name
-      },
+      include: [
+        {
+          model: Model,
+        },
+        { model: Make },
+        { model: CarType },
+        { model: FuelType },
+        { model: Condition },
+        { model: Body },
+        { model: Transmission },
+        { model: User },
+      ],
     });
     res.status(200).json({
       success: 1,

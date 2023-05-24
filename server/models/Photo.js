@@ -13,9 +13,12 @@ const Photo = sequelize.define(
     Photo: {
       type: DataTypes.STRING,
     },
-    Deleted: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    CarId: {
+      type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "CarId",
+        referencedTable: "Car",
+      },
     },
   },
   {
