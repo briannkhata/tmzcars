@@ -22,8 +22,4 @@ const Transmission = sequelize.define(
     timestamps: false,
   }
 );
-
-Transmission.associate = (models) => {
-  Transmission.hasMany(models.Car);
-};
 module.exports = { Transmission, sequelize };

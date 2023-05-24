@@ -23,8 +23,4 @@ const Model = sequelize.define(
   }
 );
 
-Model.associate = (models) => {
-  Model.hasMany(models.Car);
-};
-
 module.exports = { Model, sequelize };

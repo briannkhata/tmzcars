@@ -4,9 +4,9 @@ const User = sequelize.define(
   "Users",
   {
     UserId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoincrement: true,
     },
     Name: {
       type: DataTypes.STRING,
@@ -81,6 +81,10 @@ const User = sequelize.define(
     },
     IdTypeId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "IdTypeId",
+        referencedTable: "IdType",
+      },
     },
   },
   {
@@ -88,11 +92,11 @@ const User = sequelize.define(
   }
 );
 
-User.associate = (models) => {
-  User.belongsTo(models.IdType);
-};
-User.associate = (models) => {
-  User.belongsTo(models.Testimonial);
-};
+// User.associate = (models) => {
+//   User.belongsTo(models.IdType);
+// };
+// User.associate = (models) => {
+//   User.belongsTo(models.Testimonial);
+// };
 
 module.exports = { User, sequelize };

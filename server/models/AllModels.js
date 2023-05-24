@@ -23,6 +23,10 @@ const { Plan } = require("./Plan.js");
 const { Applicant } = require("./Applicant.js");
 const { Testimonial } = require("./Testimonial.js");
 
+// sequelize
+//   .drop()
+//   .then(() => console.log("All models dropped successfully"))
+//   .catch((err) => console.log("Error dropping models:", err));
 //relationships
 Model.hasMany(Car, {
   foreignKey: "ModelId",
@@ -88,7 +92,7 @@ Car.belongsTo(CarType, {
   onUpdate: "CASCADE",
 });
 
-IdType.hasOne(User, {
+IdType.hasMany(User, {
   foreignKey: "IdTypeId",
   onUpdate: "CASCADE",
 });
@@ -160,6 +164,81 @@ Car.belongsTo(Body, {
   foreignKey: "BodyId",
   onUpdate: "CASCADE",
 });
+
+Car.associate = (models) => {
+  Car.belongsTo(models.Model);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Make);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.FuelType);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Condition);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Transmission);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.CarType);
+};
+Car.associate = (models) => {
+  Car.belongsTo(models.Body);
+};
+
+Photo.associate = (models) => {
+  Photo.hasMany(models.Car);
+};
+
+Body.associate = (models) => {
+  Body.hasMany(models.Car);
+};
+CarType.associate = (models) => {
+  CarType.hasMany(models.Car);
+};
+Condition.associate = (models) => {
+  Condition.hasMany(models.Car);
+};
+Enquiry.associate = (models) => {
+  Enquiry.hasMany(models.Car);
+};
+
+Feature.associate = (models) => {
+  Feature.hasMany(models.Car);
+};
+
+FuelType.associate = (models) => {
+  FuelType.hasMany(models.Car);
+};
+IdType.associate = (models) => {
+  IdType.hasMany(models.User);
+};
+Make.associate = (models) => {
+  Make.hasMany(models.Car);
+};
+Model.associate = (models) => {
+  Model.hasMany(models.Car);
+};
+Transmission.associate = (models) => {
+  Transmission.hasMany(models.Car);
+};
+Testimonial.associate = (models) => {
+  Testimonial.hasMany(models.User);
+};
+
+User.associate = (models) => {
+  User.belongsTo(models.IdType);
+};
+User.associate = (models) => {
+  User.belongsTo(models.Testimonial);
+};
+Photo.associate = (models) => {
+  Photo.belongsTo(models.Car);
+};
+Feature.associate = (models) => {
+  Feature.hasMany(models.Car);
+};
 
 sequelize
   .sync({ alter: true })

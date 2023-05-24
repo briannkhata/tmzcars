@@ -31,8 +31,8 @@ const Enquiry = sequelize.define(
   }
 );
 
-Enquiry.associate = (models) => {
-  Enquiry.hasMany(models.Car);
-};
+// Enquiry.associate = (models) => {
+//   Enquiry.hasMany(models.Car);
+// };
 
 module.exports = { Enquiry, sequelize };

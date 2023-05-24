@@ -5,9 +5,9 @@ const Car = sequelize.define(
   "Cars",
   {
     CarId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.BIGINT,
       primaryKey: true,
+      autoincrement: true,
     },
     Year: {
       type: DataTypes.STRING(4),
@@ -65,7 +65,6 @@ const Car = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-
     InteriorColor: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -84,51 +83,57 @@ const Car = sequelize.define(
     },
     MakeId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "MakeId",
+        referencedTable: "Make",
+      },
     },
     ModelId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "ModelId",
+        referencedTable: "Model",
+      },
     },
     CarTypeId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "CarTypeId",
+        referencedTable: "CarType",
+      },
     },
     FuelTypeId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "FuelTypeId",
+        referencedTable: "FuelType",
+      },
     },
     TransmissionId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "TransmissionId",
+        referencedTable: "Transmission",
+      },
     },
     BodyId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "BodyId",
+        referencedTable: "Body",
+      },
     },
     ConditionId: {
       type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "ConditionId",
+        referencedTable: "Condition",
+      },
     },
   },
   {
     timestamps: false,
   }
 );
-
-Car.associate = (models) => {
-  Car.belongsTo(models.Model);
-};
-Car.associate = (models) => {
-  Car.belongsTo(models.Make);
-};
-Car.associate = (models) => {
-  Car.belongsTo(models.FuelType);
-};
-Car.associate = (models) => {
-  Car.belongsTo(models.Condition);
-};
-Car.associate = (models) => {
-  Car.belongsTo(models.Transmission);
-};
-Car.associate = (models) => {
-  Car.belongsTo(models.CarType);
-};
-Car.associate = (models) => {
-  Car.belongsTo(models.Body);
-};
 
 module.exports = { Car, sequelize };

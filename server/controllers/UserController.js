@@ -119,6 +119,9 @@ const getSellers = async (req, res) => {
         Deleted: 0,
         Role: "User",
       },
+      include: {
+        model: IdType,
+      },
     });
     res.status(200).json({
       success: 1,

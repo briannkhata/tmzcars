@@ -1,7 +1,7 @@
 const { Car } = require("../models/Car.js");
 // const { CarType } = require("../models/CarType.js");
 // const { Make } = require("../models/Make.js");
-const { Model } = require("../models/Model.js");
+// const { Model } = require("../models/Model.js");
 // const { Transmission } = require("../models/Transmission.js");
 // const { FuelType } = require("../models/FuelType.js");
 // const { Body } = require("../models/Body.js");
@@ -12,7 +12,6 @@ const getAll = async (req, res) => {
       where: {
         Deleted: 0,
       },
-
       include: {
         model: Model, // replace "Model" with the actual associated model name
       },

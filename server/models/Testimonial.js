@@ -28,8 +28,4 @@ const Testimonial = sequelize.define(
   }
 );
 
-Testimonial.associate = (models) => {
-  Testimonial.hasMany(models.User);
-};
-
 module.exports = { Testimonial, sequelize };

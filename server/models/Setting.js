@@ -12,6 +12,7 @@ const Setting = sequelize.define(
     },
     Phone: {
       type: DataTypes.STRING,
+      defaultValue: "0888 015 904",
     },
     Email: {
       type: DataTypes.STRING,

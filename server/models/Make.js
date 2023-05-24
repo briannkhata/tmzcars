@@ -23,8 +23,4 @@ const Make = sequelize.define(
   }
 );
 
-Make.associate = (models) => {
-  Make.hasMany(models.Car);
-};
-
 module.exports = { Make, sequelize };
