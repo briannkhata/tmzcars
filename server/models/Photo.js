@@ -26,4 +26,7 @@ const Photo = sequelize.define(
   }
 );
 
+Photo.belongsTo(Car, { foreignKey: "CarId" });
+Car.hasMany(Photo, { foreignKey: "CarId" });
+
 module.exports = { Photo, sequelize };

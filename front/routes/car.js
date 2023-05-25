@@ -101,6 +101,17 @@ function getMakes() {
     });
 }
 
+function getUsers() {
+  return axios
+    .get(API_URL + "user/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function getBodies() {
   return axios
     .get(API_URL + "body/")
@@ -120,6 +131,8 @@ carRouter.get("/edit/(:id)", async (req, res) => {
   const conditions = await getConditions();
   const fueltypes = await getFuelTypes();
   const bodies = await getBodies();
+  const users = await getUsers();
+
   const id = req.params.id;
   await axios
     .get(API_URL + "car/getOne/" + id)
@@ -146,6 +159,7 @@ carRouter.get("/edit/(:id)", async (req, res) => {
         FuelTypeId: data.FuelTypeId,
         CarTypeId: data.CarTypeId,
         BodyId: data.BodyId,
+        UserId: data.UserId,
         YearBought: data.YearBought,
         YearsUsed: data.YearsUsed,
         OtherDetails: data.OtherDetails,
@@ -156,6 +170,7 @@ carRouter.get("/edit/(:id)", async (req, res) => {
         transmissions: transmissions,
         cartypes: cartypes,
         bodies: bodies,
+        users: users,
         title: "Update Car Details",
       });
     })
@@ -173,6 +188,7 @@ carRouter.get("/add", async (req, res) => {
   const conditions = await getConditions();
   const fueltypes = await getFuelTypes();
   const bodies = await getBodies();
+  const users = await getUsers();
 
   const data = {
     title: "Add car",
@@ -196,6 +212,7 @@ carRouter.get("/add", async (req, res) => {
     FuelTypeId: "",
     CarTypeId: "",
     BodyId: "",
+    UserId: "",
     YearBought: "",
     YearsUsed: "",
     OtherDetails: "",
@@ -206,6 +223,7 @@ carRouter.get("/add", async (req, res) => {
     transmissions: transmissions,
     cartypes: cartypes,
     bodies: bodies,
+    users: users,
   };
 
   res.render("backend/admin/addcar", data);
@@ -220,6 +238,7 @@ carRouter.post("/save", async (req, res) => {
   const fuelTypeId = req.body.FuelTypeId;
   const carTypeId = req.body.CarTypeId;
   const bodyId = req.body.BodyId;
+  const userId = req.body.UserId;
   const {
     Year,
     SellingPrice,
@@ -262,6 +281,7 @@ carRouter.post("/save", async (req, res) => {
       FuelTypeId: fuelTypeId,
       CarTypeId: carTypeId,
       BodyId: bodyId,
+      UserId: userId,
       YearBought,
       YearsUsed,
       OtherDetails,

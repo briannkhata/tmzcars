@@ -1,12 +1,14 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../database/database.js");
+const { IdType } = require("../models/IdType.js");
+
 const User = sequelize.define(
   "Users",
   {
     UserId: {
       type: DataTypes.BIGINT,
       primaryKey: true,
-      autoincrement: true,
+      autoIncrement: true,
     },
     Name: {
       type: DataTypes.STRING,
@@ -81,6 +83,7 @@ const User = sequelize.define(
     },
     IdTypeId: {
       type: DataTypes.BIGINT,
+      allowNull: true,
       foreignKey: {
         column: "IdTypeId",
         referencedTable: "IdType",
@@ -92,60 +95,7 @@ const User = sequelize.define(
   }
 );
 
-const IdType = sequelize.define(
-  "IdTypes",
-  {
-    IdTypeId: {
-      type: DataTypes.BIGINT,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    IdType: {
-      type: DataTypes.STRING,
-    },
-    Deleted: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-  },
-  {
-    timestamps: false,
-  }
-);
-
-const Testimonial = sequelize.define(
-  "Testimonials",
-  {
-    TestimonialId: {
-      type: DataTypes.BIGINT,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    Testimonial: {
-      type: DataTypes.STRING,
-    },
-
-    Role: {
-      type: DataTypes.STRING,
-    },
-
-    Deleted: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-  },
-  {
-    timestamps: false,
-  }
-);
-
 User.belongsTo(IdType, { foreignKey: "IdTypeId" });
 IdType.hasMany(User, { foreignKey: "IdTypeId" });
-Testimonial.belongsTo(User, {
-  foreignKey: "UserId",
-});
-User.hasMany(Testimonial, {
-  foreignKey: "UserId",
-});
 
-module.exports = { User, IdType, Testimonial, sequelize };
+module.exports = { User, sequelize };

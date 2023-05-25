@@ -304,6 +304,8 @@ const add = async (req, res) => {
     const fuelTypeId = req.body.FuelTypeId;
     const carTypeId = req.body.CarTypeId;
     const bodyId = req.body.BodyId;
+    const userId = req.body.UserId;
+
     const {
       Year,
       SellingPrice,
@@ -317,7 +319,6 @@ const add = async (req, res) => {
       Steering,
       InteriorColor,
       ExteriorColor,
-      UserId,
       YearBought,
       YearsUsed,
       OtherDetails,
@@ -341,7 +342,7 @@ const add = async (req, res) => {
       ExteriorColor,
       FuelTypeId: fuelTypeId,
       CarTypeId: carTypeId,
-      UserId,
+      UserId: userId,
       BodyId: bodyId,
       YearBought,
       YearsUsed,
@@ -375,6 +376,10 @@ const add = async (req, res) => {
           table: "Conditions",
           column: "ConditionId",
         },
+        UserId: {
+          table: "Users",
+          column: "UserId",
+        },
       },
     });
     res.status(200).json({
@@ -388,6 +393,15 @@ const add = async (req, res) => {
 
 const update = async (req, res) => {
   try {
+    const modelId = req.body.ModelId;
+    const makeId = req.body.MakeId;
+    const transmissionId = req.body.TransmissionId;
+    const conditionId = req.body.ConditionId;
+    const fuelTypeId = req.body.FuelTypeId;
+    const carTypeId = req.body.CarTypeId;
+    const bodyId = req.body.BodyId;
+    const userId = req.body.UserId;
+
     const {
       Year,
       SellingPrice,
@@ -398,17 +412,9 @@ const update = async (req, res) => {
       CountryOfManufacture,
       ServiceHistory,
       RegNo,
-      ModelId,
-      MakeId,
-      TransmissionId,
       Steering,
-      ConditionId,
       InteriorColor,
       ExteriorColor,
-      FuelTypeId,
-      CarTypeId,
-      UserId,
-      BodyId,
       YearBought,
       YearsUsed,
       OtherDetails,
@@ -425,27 +431,61 @@ const update = async (req, res) => {
         CountryOfManufacture,
         ServiceHistory,
         RegNo,
-        ModelId,
-        MakeId,
-        TransmissionId,
+        ModelId: modelId,
+        MakeId: makeId,
+        TransmissionId: transmissionId,
         Steering,
-        ConditionId,
+        ConditionId: conditionId,
         InteriorColor,
         ExteriorColor,
-        FuelTypeId,
-        CarTypeId,
-        UserId,
-        BodyId,
+        FuelTypeId: fuelTypeId,
+        CarTypeId: carTypeId,
+        UserId: userId,
+        BodyId: bodyId,
         YearBought,
         YearsUsed,
         OtherDetails,
+        foreignKeys: {
+          TransmissionId: {
+            table: "Transmissions",
+            column: "TransmissionId",
+          },
+          ModelId: {
+            table: "Models",
+            column: "ModelId",
+          },
+          CarTypeId: {
+            table: "CarTypes",
+            column: "CarTypeId",
+          },
+          MakeId: {
+            table: "Makes",
+            column: "MakeId",
+          },
+          BodyId: {
+            table: "Bodies",
+            column: "BodyId",
+          },
+          FuelTypeId: {
+            table: "FuelTypes",
+            column: "FuelTypeId",
+          },
+          ConditionId: {
+            table: "Conditions",
+            column: "ConditionId",
+          },
+          UserId: {
+            table: "Users",
+            column: "UserId",
+          },
+        },
       },
       { where: { CarId: Id } }
     );
     if (!updateCar) {
       res
         .status(500)
-        .json({ success: 0, message: ` Error deleting Car : ${err}` });
+        .json({ success: 0, message: ` Error updating Car : ${err}` });
     }
     res.status(200).json({
       success: 1,
@@ -454,7 +494,7 @@ const update = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ success: 0, message: ` Error deleting Car : ${err}` });
+      .json({ success: 0, message: ` Error updating Car : ${err}` });
   }
 };
 

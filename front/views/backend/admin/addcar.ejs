@@ -30,13 +30,13 @@
                                 </p>
                                 <form class="forms-sample" action="/car/save/" method="post">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Owner</label>
                                                 <select class="form-control" name="UserId" required>
                                                     <option selected disabled>Option</option>
                                                     <% users.forEach((user)=> { %>
-                                                        <option value="<%= cartype.CarTypeId %>" <%=user.UserId===UserId
+                                                        <option value="<%= user.UserId %>" <%=user.UserId===UserId
                                                             ? 'selected' : '' %>>
                                                             <%= user.Name %>
                                                         </option>

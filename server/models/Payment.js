@@ -33,4 +33,6 @@ const Payment = sequelize.define(
   }
 );
 
+Payment.belongsTo(Car, { foreignKey: "CarId" });
+Car.hasMany(Payment, { foreignKey: "CarId" });
 module.exports = { Payment, sequelize };
