@@ -18,13 +18,11 @@ const { Payment } = require("./Payment.js");
 const { Setting } = require("./Setting.js");
 const { Faq } = require("./Faq.js");
 const { Message } = require("./Message.js");
-const { Partner } = require("./Partner.js");
-const { Plan } = require("./Plan.js");
 const { Applicant } = require("./Applicant.js");
 const { Testimonial } = require("./Testimonial.js");
 
 sequelize
-  .sync({ force: true })
+  .sync({ alter: true })
   .then(() => {
     console.log("Database synchronized successfully.");
   })

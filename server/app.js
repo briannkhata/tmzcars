@@ -43,7 +43,6 @@ app.use("/api/v1/enquiry/", require("./routes/enquiry.js"));
 app.use("/api/v1/condition/", require("./routes/condition.js"));
 app.use("/api/v1/user/", require("./routes/user.js"));
 app.use("/api/v1/message/", require("./routes/message.js"));
-app.use("/api/v1/plan/", require("./routes/plan.js"));
 app.use("/api/v1/feature/", require("./routes/feature.js"));
 app.use("/api/v1/photo/", require("./routes/photo.js"));
 app.use("/api/v1/setting/", require("./routes/setting.js"));
