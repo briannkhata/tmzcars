@@ -32,7 +32,7 @@ cartypeRouter.get("/edit/(:id)", async (req, res) => {
     .then((response) => {
       res.render("backend/admin/addcartype", {
         id: id,
-        cartype: response.data.data.cartype,
+        cartype: response.data.data.CarType,
         title: "Update cartype",
       });
     })

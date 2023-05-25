@@ -52,7 +52,7 @@ userRouter.get("/profile/(:id)", async (req, res) => {
         city: response.data.data.City,
         region: response.data.data.Region,
         idnumber: response.data.data.IdNumber,
-        idtype: response.data.data.IdType,
+        idtype: response.data.data.IdType.IdType,
         title: "Update Profile",
       });
     })

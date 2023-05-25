@@ -114,21 +114,14 @@ const getAdmins = async (req, res) => {
 
 const getSellers = async (req, res) => {
   try {
-    // const users = await User.findAll({
-    //   where: {
-    //     Deleted: 0,
-    //     Role: "User",
-    //   },
-    //   include: {
-    //     model: IdType,
-    //   },
-    // });
-
     const users = await User.findAll({
+      where: {
+        Deleted: 0,
+        Role: "User",
+      },
       include: [
         {
           model: IdType,
-          //required: true,
         },
       ],
     });
@@ -154,6 +147,11 @@ const getConfirmed = async (req, res) => {
           [Op.not]: null,
         },
       },
+      include: [
+        {
+          model: IdType,
+        },
+      ],
     });
     res.status(200).json({
       success: 1,
@@ -170,16 +168,23 @@ const getConfirmed = async (req, res) => {
 const getSingle = async (req, res) => {
   try {
     const { Id } = req.params;
-    const user = await User.findByPk(Id);
+    const user = await User.findByPk(Id, {
+      include: [
+        {
+          model: IdType,
+        },
+      ],
+    });
     res.status(200).json({
       success: 1,
       message: "User retrieved successfully",
       data: user,
     });
-  } catch (err) {
+  } catch (error) {
+    console.error(error);
     res
       .status(500)
-      .json({ success: 0, message: `Error getting user : ${err}` });
+      .json({ success: 0, message: `Error getting user: ${error}` });
   }
 };
 
@@ -285,6 +290,7 @@ const verifyaccount = async (req, res) => {
       {
         IdNumber,
         IdTypeId: idtype,
+        DateVerified: Date.now(),
         foreignKeys: {
           IdTypeId: {
             table: "IdTypes",

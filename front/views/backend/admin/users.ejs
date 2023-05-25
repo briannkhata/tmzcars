@@ -79,7 +79,9 @@
                                                                                 <%= data[i].IdNumber%>
                                                                             </td>
                                                                             <td>
-                                                                                <%= data[i].IdType%>
+                                                                                <%= data[i].IdType &&
+                                                                                    data[i].IdType.IdType ?
+                                                                                    data[i].IdType.IdType : '' %>
                                                                             </td>
                                                                             <td>
                                                                                 <%= new

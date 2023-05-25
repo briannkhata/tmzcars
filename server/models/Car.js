@@ -200,7 +200,6 @@ Car.belongsTo(User, {
   foreignKey: "UserId",
 });
 
-
 Body.hasMany(Car, {
   foreignKey: "BodyId",
 });
@@ -210,12 +209,5 @@ Car.belongsTo(Body, {
 
 module.exports = {
   Car,
-  Model,
-  Make,
-  CarType,
-  Transmission,
-  FuelType,
-  Body,
-  Condition,
-  sequelize,
+  Sequelize,
 };

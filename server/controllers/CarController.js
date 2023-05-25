@@ -1,27 +1,20 @@
-const {
-  Car,
-  User,
-  Model,
-  Make,
-  CarType,
-  Transmission,
-  FuelType,
-  Body,
-  Condition,
-} = require("../models/Car.js");
-// const { CarType } = require("../models/CarType.js");
-// const { Make } = require("../models/Make.js");
-// const { Model } = require("../models/Model.js");
-// const { Transmission } = require("../models/Transmission.js");
-// const { FuelType } = require("../models/FuelType.js");
-// const { Body } = require("../models/Body.js");
-// const { Condition } = require("../models/Condition.js");
+const { Car } = require("../models/Car.js");
+const { CarType } = require("../models/CarType.js");
+const { Make } = require("../models/Make.js");
+const { Model } = require("../models/Model.js");
+const { Transmission } = require("../models/Transmission.js");
+const { FuelType } = require("../models/FuelType.js");
+const { Body } = require("../models/Body.js");
+const { Condition } = require("../models/Condition.js");
+const { User } = require("../models/User.js");
+
 const getAll = async (req, res) => {
   try {
     const cars = await Car.findAll({
       where: {
         Deleted: 0,
       },
+
       include: [
         {
           model: Model,
