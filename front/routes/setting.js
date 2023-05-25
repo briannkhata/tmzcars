@@ -7,13 +7,16 @@ settingRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "setting/")
     .then((response) => {
-      const data = response.data.data[0];
+      const data = response.data.data;
+      console.log(data);
       res.render("backend/admin/settings", {
         id: data.Id,
         phone: data.Phone,
         email: data.Email,
         address: data.Address,
         app: data.App,
+        data: response.data.data,
+
         title: "Settings",
       });
     })

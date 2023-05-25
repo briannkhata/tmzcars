@@ -82,6 +82,10 @@
                                                                                 <%= data[i].IdType &&
                                                                                     data[i].IdType.IdType ?
                                                                                     data[i].IdType.IdType : '' %>
+                                                                                    <br>
+                                                                                    <%= new
+                                                                                        Date(data[i].DateVerified).toLocaleDateString('en-GB')
+                                                                                        %>
                                                                             </td>
                                                                             <td>
                                                                                 <%= new

@@ -5,9 +5,9 @@ const getAll = async (req, res) => {
   try {
     const settings = await Setting.findAll();
 
-    if (!settings || settings.length === 0) {
-      return res.status(404).json({ success: 0, message: "No settings found" });
-    }
+    // if (!settings || settings.length === 0) {
+    //   return res.status(404).json({ success: 0, message: "No settings found" });
+    // }
 
     res.status(200).json({
       success: 1,

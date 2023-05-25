@@ -7,6 +7,11 @@ const getAll = async (req, res) => {
       where: {
         Deleted: 0,
       },
+      include: [
+        {
+          model: User,
+        },
+      ],
     });
     res.status(200).json({
       success: 1,
