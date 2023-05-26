@@ -1,12 +1,15 @@
 require("../database/database.js");
 const { Payment } = require("../models/Payment.js");
+const { Car } = require("../models/Car.js");
 
 const getAll = async (req, res) => {
   try {
     const payments = await Payment.findAll({
-      where: {
-        Deleted: 0,
-      },
+      include: [
+        {
+          model: Car,
+        },
+      ],
     });
     res.status(200).json({
       success: 1,

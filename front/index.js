@@ -38,6 +38,7 @@ app.use("/setting/", require("./routes/setting"));
 app.use("/testimonial/", require("./routes/testimonial"));
 app.use("/applicant/", require("./routes/applicant"));
 app.use("/photo/", require("./routes/photo"));
+app.use("/payment/", require("./routes/payment"));
 
 app.listen(PORT, (err) => {
   if (err) {

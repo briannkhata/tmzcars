@@ -18,13 +18,6 @@ userRouter.get("/changephone", (req, res) => {
   res.render("backend/admin/changephone", data);
 });
 
-userRouter.get("/payments", (req, res) => {
-  const data = {
-    title: "Payments",
-  };
-  res.render("backend/admin/payments", data);
-});
-
 userRouter.get("/addadmin", async (req, res) => {
   res.render("backend/admin/addadmin", {
     id: "",

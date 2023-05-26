@@ -19,34 +19,37 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Testimonial</th>
-                                                    <th>User</th>
-                                                    <th>Role</th>
-                                                    <th></th>
+                                                    <th>Trans Id</th>
+                                                    <th>Amount</th>
+                                                    <th>Payment Date</th>
+                                                    <th>Car Details</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>#D1</td>
-                                                    <td>Consectetur adipisicing elit </td>
-                                                    <td>Beulah Cummings</td>
-                                                    <td>Beulah Cummings</td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <button type="button"
-                                                                class="btn btn-success btn-sm btn-icon-text mr-3">
-                                                                Edit
-                                                                <i class="typcn typcn-edit btn-icon-append"></i>
-                                                            </button>
-                                                            <button type="button"
-                                                                class="btn btn-danger btn-sm btn-icon-text">
-                                                                Delete
-                                                                <i
-                                                                    class="typcn typcn-delete-outline btn-icon-append"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <% var counter=0 %>
+                                                    <% for(var i=0; i< data.length; i++) { %>
+
+                                                        <tr>
+                                                            <td>
+                                                                <%= ++counter %>
+                                                            </td>
+                                                            <td>
+                                                                <%= data[i].TransId%>
+                                                            </td>
+                                                            <td>
+                                                                <%= data[i].Amount%>
+                                                            </td>
+                                                            <td>
+                                                                <%= data[i].PaymentMethod%>
+                                                            </td>
+                                                            <td>
+                                                                <%= data[i].DatePaid%>
+                                                            </td>
+                                                            <td>
+                                                                <%= data[i].Car%>
+                                                            </td>
+                                                        </tr>
+                                                        <%}%>
 
                                             </tbody>
                                         </table>
