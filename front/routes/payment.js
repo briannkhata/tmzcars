@@ -17,4 +17,23 @@ paymentRouter.get("/", async (req, res) => {
     });
 });
 
+paymentRouter.post("/save", async (req, res) => {
+  const SAVE_URL = `${API_URL}payment/add/`;
+  const action = "FEATURE_";
+  const payMethod = "Mpamba";
+  await axios
+    .post(SAVE_URL, {
+      TransId: action,
+      Amount: 5000,
+      PaymentMethod: payMethod,
+      CarId: "",
+    })
+    .then((response) => {
+      console.log(response.data.message);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 module.exports = paymentRouter;
