@@ -1,6 +1,6 @@
 require("../database/database.js");
-const { Testimonial } = require("../models/testimonial.js");
-
+const { Testimonial } = require("../models/Testimonial.js");
+const { User } = require("../models/User.js");
 const getAll = async (req, res) => {
   try {
     const testimonials = await Testimonial.findAll({

@@ -34,7 +34,7 @@ const register = async (req, res) => {
 
     res.status(201).json({
       success: 1,
-      message: "Account created successfully! You can now log in.",
+      message: "account created successfully! You can now log in.",
     });
   } catch (err) {
     res.status(500).json({
@@ -44,122 +44,100 @@ const register = async (req, res) => {
   }
 };
 
-// const login = async (req, res) => {
-//   const { Phone, Password } = req.body;
-
-//   try {
-//     const checkPhone = await User.findOne({
-//       where: { Phone: Phone },
-//     });
-
-//     if (!checkPhone) {
-//       res.status(500).json({
-//         success: 0,
-//         message: "wrong phone number",
-//       });
-//       return;
-//     }
-
-//     if (checkPhone) {
-//       if (await bcrypt.compare(Password, checkPhone.Password)) {
-//         //TOKENS
-
-//         // const accessToken = jwt.sign(
-//         //   //{ id: checkPhone.UserId },
-//         //   { checkPhone },
-//         //   process.env.ACCESS_TOKEN_SECRET,
-//         //   {
-//         //     expiresIn: "1day",
-//         //   }
-//         // );
-
-//         // res.send({
-//         //   success: 1,
-//         //   user: checkPhone,
-//         //   token: accessToken,
-//         // });
-
-//         //res.json({ checkPhone, token: accessToken });
-
-//         // const refreshToken = jwt.sign(
-//         //   { Phone: checkPhone.Phone },
-//         //   process.env.REFRESH_TOKEN_SECRET,
-//         //   {
-//         //     expiresIn: "1day",
-//         //   }
-//         // );
-
-//         // res.send({
-//         //   success: 1,
-//         //   token: accessToken,
-//         // });
-
-//         res.status(200).json({
-//           success: 1,
-//           message: `${checkPhone.Name} is authenticated`,
-//           //token: accessToken,
-//           phone: Phone,
-//         });
-//       } else {
-//         res.status(500).json({
-//           success: 0,
-//           message: "wrong password",
-//         });
-//       }
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({
-//       success: 0,
-//       message: "wrong phone number",
-//     });
-//   }
-// };
-
 const login = async (req, res) => {
-  try {
-    const phone = req.body.Phone;
-    const password = req.body.Password;
-    const user = await User.findOne({ where: { Phone: phone } });
+  const { Phone, Password } = req.body;
 
-    if (!user) {
-      return res.status(404).json({
+  try {
+    const checkPhone = await User.findOne({
+      where: { Phone: Phone },
+    });
+
+    if (!checkPhone) {
+      res.status(500).json({
         success: 0,
-        message: "User not found",
+        message: "wrong phone number or password",
       });
-    } else {
-      const isMatch = await bcrypt.compare(password, user.Password);
-      if (!isMatch) {
-        return res.status(401).json({
-          success: 0,
-          message: "Invalid credentials",
+      return;
+    }
+
+    if (checkPhone) {
+      if (await bcrypt.compare(Password, checkPhone.Password)) {
+        const accessToken = jwt.sign(
+          {
+            id: checkPhone.UserId,
+            phone: Phone,
+            name: checkPhone.Name,
+          },
+          process.env.ACCESS_TOKEN_SECRET,
+          {
+            expiresIn: "1d",
+          }
+        );
+
+        res.status(200).json({
+          success: 1,
+          message: `${checkPhone.Name} is authenticated`,
+          token: accessToken,
         });
       } else {
-        return res.status(200).json({
-          success: 1,
-          message: "User authenticated successfully",
-          //token,
-          user: {
-            id: user.UserId,
-            name: user.Name,
-            email: user.Email,
-          },
+        res.status(500).json({
+          success: 0,
+          message: "wrong phone or password",
         });
       }
     }
-
-    // const payload = { id: user.id };
-    //  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    //   expiresIn: process.env.JWT_EXPIRE,
-    // });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({
+    res.status(500).json({
       success: 0,
-      message: "Server error",
+      message: "wrong phone number or password",
     });
   }
 };
+
+// const login = async (req, res) => {
+//   try {
+//     const phone = req.body.Phone;
+//     const password = req.body.Password;
+//     const user = await User.findOne({ where: { Phone: phone } });
+
+//     if (!user) {
+//       return res.status(404).json({
+//         success: 0,
+//         message: "User not found",
+//       });
+//     } else {
+//       const isMatch = await bcrypt.compare(password, user.Password);
+//       if (!isMatch) {
+//         return res.status(401).json({
+//           success: 0,
+//           message: "Invalid credentials",
+//         });
+//       } else {
+//         return res.status(200).json({
+//           success: 1,
+//           message: "user authenticated successfully",
+//           //token,
+//           user: {
+//             id: user.UserId,
+//             name: user.Name,
+//             email: user.Email,
+//           },
+//         });
+//       }
+//     }
+//     // const payload = { id: user.id };
+//     // const token = jwt.sign(payload, process.env.JWT_SECRET, {
+//     //   expiresIn: process.env.JWT_EXPIRE,
+//     // });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({
+//       success: 0,
+//       message: "server error",
+//     });
+//   }
+// };
 
 module.exports = {
   register,

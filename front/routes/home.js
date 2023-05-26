@@ -2,6 +2,7 @@ const express = require("express");
 const homeRouter = express.Router();
 const axios = require("axios");
 const { Photo } = require("../../server/models/Photo");
+const jwt = require("jsonwebtoken");
 
 //const headers = { Authorization: `Bearer ${API_TOKEN}` };
 const API_URL = "http://127.0.0.1:7002/api/v1/";
@@ -140,7 +141,6 @@ homeRouter.get("/dashboard", async (req, res) => {
   const confirmed = await getConfirmed();
   const carstoday = await getCarsToday();
   const carsFeatured = await getCarsFeatured();
-
   const data = {
     title: "Dashboard",
     users: users,
@@ -159,13 +159,11 @@ homeRouter.post("/login", async (req, res) => {
       Password: req.body.Password,
     });
 
-    const { success, message, user } = response.data;
+    const { success, message, token } = response.data;
     if (success === 1) {
-      req.session.logged = 1;
-      req.session.user = user;
+      console.log(token.name);
       return res.redirect("/dashboard");
     }
-
     if (success === 0) {
       req.flash("error", message);
       return res.redirect("/login");

@@ -9,6 +9,7 @@ const { FuelType } = require("../models/FuelType.js");
 const { Body } = require("../models/Body.js");
 const { Condition } = require("../models/Condition.js");
 const { User } = require("../models/User.js");
+const { Payment } = require("../models/Payment.js");
 
 const getAll = async (req, res) => {
   try {
@@ -321,7 +322,7 @@ const add = async (req, res) => {
     const carTypeId = req.body.CarTypeId;
     const bodyId = req.body.BodyId;
     const userId = req.body.UserId;
-
+    const payment = Payment.add(req, res);
     const {
       Year,
       SellingPrice,
@@ -398,6 +399,7 @@ const add = async (req, res) => {
         },
       },
     });
+
     res.status(200).json({
       success: 1,
       message: "Car saved successfully",

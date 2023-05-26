@@ -22,6 +22,15 @@ const Testimonial = sequelize.define(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+
+    UserId: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      foreignKey: {
+        column: "UserId",
+        referencedTable: "User",
+      },
+    },
   },
   {
     timestamps: false,
