@@ -1,0 +1,184 @@
+<%- include ("../header.ejs") %>
+    <%- include ("nav.ejs") %>
+
+
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+
+
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-description">
+                                    <a href="/car/addimage/<%=id%>" class="btn btn-primary btn-sm btn-icon-text mr-3">
+                                        Add Image
+                                        <i class="typcn typcn-plus btn-icon-append"></i>
+                                    </a>
+                                    <a type="button" class="btn btn-danger btn-sm btn-icon-text"
+                                        onclick="return alert('Are you sure you want to delete THIS CAR BODY?')"
+                                        href="/car/delete/<%=id%>">
+                                        Delete
+                                        <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                    </a>
+                                </p>
+                                <hr>
+                                <h4 class="card-title">
+                                    <%=title%>
+                                </h4>
+                                <p>
+
+                                    <% if(messages.success){%>
+                                        <div class="alert alert-success" role="alert">
+                                            <%= messages.success %>
+                                        </div>
+                                        <%}%>
+                                            <% if(messages.error){%>
+                                                <div class="alert
+                                                            alert-danger" role="alert">
+                                                    <%= messages.error %>
+                                                </div>
+                                                <%}%>
+                                </p>
+                                <table class="table">
+
+                                    <tr>
+                                        <td>Owner </td>
+                                        <td>
+                                            <%= Name%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Model </td>
+                                        <td>
+                                            <%= Model%>
+                                        </td>
+                                    <tr>
+                                        <td>Transmission </td>
+                                        <td>
+                                            <%= Transmission%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fuel Type </td>
+                                        <td>
+                                            <%= FuelType%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Car Type </td>
+                                        <td>
+                                            <%= CarType%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Body </td>
+                                        <td>
+                                            <%= Body%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Condition </td>
+                                        <td>
+                                            <%= Condition%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Service History </td>
+                                        <td>
+                                            <%= ServiceHistory%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year of Make</td>
+                                        <td>
+                                            <%= Year%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year Bought</td>
+                                        <td>
+                                            <%= Year%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mileage</td>
+                                        <td>
+                                            <%= Mileage%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Engine</td>
+                                        <td>
+                                            <%= Engine%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Selling Price</td>
+                                        <td>
+                                            <%= SellingPrice%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>External Color</td>
+                                        <td>
+                                            <%= ExteriorColor%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Internal Color </td>
+                                        <td>
+                                            <%= InteriorColor%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country of Manufacture</td>
+                                        <td>
+                                            <%= CountryOfManufacture%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other Details</td>
+                                        <td>
+                                            <%= OtherDetails%>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr>
+                                <p>
+
+                                <h3>Images</h3>
+                                </p>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <%- include ("../footer.ejs") %>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="addImage" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>

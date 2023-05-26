@@ -28,36 +28,19 @@
                                                 </div>
                                                 <%}%>
                                 </p>
-                                <form class="forms-sample" action="/car/saveimage/" method="post">
+                                <form class="forms-sample" action="/car/savephoto/" method="post">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Select File</label>
+                                                <input type="file" name="Photo" class="form-control">
 
-
-
-                                    <div class="form-group">
-                                        <label>Upload Images</label>
-                                        <input type="file" name="img[]" class="file-upload-default">
-                                        <div class="input-group col-xs-12">
-                                            <input type="text" class="form-control file-upload-info" disabled
-                                                placeholder="Upload Image">
-                                            <span class="input-group-append">
-                                                <button class="file-upload-browse btn btn-primary"
-                                                    type="button">Upload</button>
-                                            </span>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" class="btn btn-primary mr-2">Save</button>
+                                    <input type="hidden" name="id" value="<%=id%>">
+                                    <button type="submit" class="btn btn-primary mr-2">Upload Image</button>
                                 </form>
-
-                                <hr>
-                                <h1>Image Upload</h1>
-                                <form action="/upload" method="post" enctype="multipart/form-data">
-                                    <input type="text" name="name" placeholder="Name">
-                                    <input type="file" name="image">
-                                    <input type="submit" value="Upload">
-                                </form>
-                                <ul>
-
-                                </ul>
                             </div>
                         </div>
                     </div>

@@ -19,13 +19,38 @@ carRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/images/(:id)", async (req, res) => {
+carRouter.get("/view/(:id)", async (req, res) => {
   await axios
-    .get(API_URL + "photo/getCarImages/" + req.params.id)
+    .get(API_URL + "car/getOne/" + req.params.id)
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/addcarimage", {
-        data: data,
+      console.log(data);
+      res.render("backend/admin/cardetails", {
+        id: data.CarId,
+        Year: data.Year,
+        SellingPrice: data.SellingPrice,
+        Mileage: data.Mileage,
+        Engine: data.Engine,
+        FuelConsumption: data.FuelConsumption,
+        Warrant: data.Warrant,
+        CountryOfManufacture: data.CountryOfManufacture,
+        ServiceHistory: data.ServiceHistory,
+        RegNo: data.RegNo,
+        Model: data.Model.Model,
+        Make: data.Make.Make,
+        Transmission: data.Transmission.Transmission,
+        Steering: data.Steering,
+        Condition: data.Condition.Condition,
+        InteriorColor: data.InteriorColor,
+        ExteriorColor: data.ExteriorColor,
+        FuelType: data.FuelType.FuelType,
+        CarType: data.CarType.CarType,
+        Body: data.Body.Body,
+        YearBought: data.YearBought,
+        YearsUsed: data.YearsUsed,
+        OtherDetails: data.OtherDetails,
+        Name: data.User.Name,
+        images: "",
         title: "Car Details",
       });
     })
@@ -314,6 +339,35 @@ carRouter.get("/delete/(:id)", async (req, res) => {
     .catch((error) => {
       req.flash("error", "Error deleting car " + error);
       res.redirect("/car");
+    });
+});
+
+carRouter.get("/addimage/(:id)", (req, res) => {
+  const data = {
+    title: "Add Image",
+    id: req.params.id,
+  };
+  res.render("backend/admin/addimage", data);
+});
+
+carRouter.post("/savephoto", async (req, res) => {
+  const carId = req.body.id;
+  const photo = req.body.Photo;
+  const SAVE_URL = `${API_URL}photo/add/`;
+
+  await axios
+    .post(SAVE_URL, {
+      Photo: photo,
+      CarId: carId,
+    })
+    .then((response) => {
+      const data = response.data;
+      req.flash("success", data.message);
+      res.redirect("/car/view/" + carId);
+    })
+    .catch((error) => {
+      req.flash("error", "Error saving car" + error);
+      res.redirect("/car/view/" + carId);
     });
 });
 

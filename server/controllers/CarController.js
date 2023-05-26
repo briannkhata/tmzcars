@@ -66,7 +66,20 @@ const getCarsToday = async (req, res) => {
 const getOne = async (req, res) => {
   try {
     const { Id } = req.params;
-    const car = await Car.findByPk(Id);
+    const car = await Car.findByPk(Id, {
+      include: [
+        {
+          model: Model,
+        },
+        { model: Make },
+        { model: CarType },
+        { model: FuelType },
+        { model: Condition },
+        { model: Body },
+        { model: Transmission },
+        { model: User },
+      ],
+    });
     if (!car) {
       res.status(500).json({ success: 0, message: ` Car Not found ` });
     }
