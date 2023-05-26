@@ -1,5 +1,6 @@
 require("../database/database.js");
 const { Feature } = require("../models/Feature.js");
+const { Car } = require("../models/Car.js");
 
 const getAll = async (req, res) => {
   try {
@@ -7,6 +8,11 @@ const getAll = async (req, res) => {
       where: {
         Deleted: 0,
       },
+      include: [
+        {
+          model: Car,
+        },
+      ],
     });
     res.status(200).json({
       success: 1,
@@ -42,14 +48,17 @@ const getSingle = async (req, res) => {
 
 const add = async (req, res) => {
   try {
-    const addBy = req.body.AddBy;
-    const transId = req.body.TransId;
+    const startDate = req.body.StartDate;
+    const endDate = req.body.EndDate;
     const carId = req.body.CarId;
-
-    await Feature.create({ TransId: transId, AddBy: addBy, CarId: carId });
+    await Feature.create({
+      StartDate: startDate,
+      EndDate: endDate,
+      CarId: carId,
+    });
     res.status(200).json({
       success: 1,
-      message: "Data Created",
+      message: "car featured successfully",
     });
   } catch (err) {
     res

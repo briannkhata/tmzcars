@@ -24,9 +24,12 @@ const Payment = sequelize.define(
       type: DataTypes.DATE,
       defaultValue: Date.now,
     },
-    Deleted: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    CarId: {
+      type: DataTypes.BIGINT,
+      foreignKey: {
+        column: "CarId",
+        referencedTable: "Car",
+      },
     },
   },
   {

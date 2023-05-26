@@ -1,3 +1,5 @@
+const { Sequelize } = require("sequelize");
+const Op = Sequelize.Op;
 const { Car } = require("../models/Car.js");
 const { CarType } = require("../models/CarType.js");
 const { Make } = require("../models/Make.js");
@@ -14,7 +16,6 @@ const getAll = async (req, res) => {
       where: {
         Deleted: 0,
       },
-
       include: [
         {
           model: Model,
@@ -27,6 +28,28 @@ const getAll = async (req, res) => {
         { model: Transmission },
         { model: User },
       ],
+    });
+    res.status(200).json({
+      success: 1,
+      message: "Cars Retrieved successfully",
+      data: cars,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting cars : ${err}` });
+  }
+};
+
+const getCarsToday = async (req, res) => {
+  try {
+    const cars = await Car.findAll({
+      where: {
+        Deleted: 0,
+        DateAdded: {
+          [Op.eq]: new Date(),
+        },
+      },
     });
     res.status(200).json({
       success: 1,
@@ -536,4 +559,5 @@ module.exports = {
   getCarsByTransmission,
   getCarsByMake,
   add,
+  getCarsToday,
 };

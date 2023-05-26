@@ -79,10 +79,75 @@ homeRouter.post("/register", async (req, res) => {
   }
 });
 
-homeRouter.get("/dashboard", (req, res) => {
+function getUsers() {
+  return axios
+    .get(API_URL + "user/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getCars() {
+  return axios
+    .get(API_URL + "car/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getConfirmed() {
+  return axios
+    .get(API_URL + "user/getConfirmed/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getCarsToday() {
+  return axios
+    .get(API_URL + "car/getCarsToday/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getCarsFeatured() {
+  return axios
+    .get(API_URL + "feature/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+homeRouter.get("/dashboard", async (req, res) => {
+  const users = await getUsers();
+  const cars = await getCars();
+  const confirmed = await getConfirmed();
+  const carstoday = await getCarsToday();
+  const carsFeatured = await getCarsFeatured();
+
   const data = {
     title: "Dashboard",
-    //name: req.session.user.name,
+    users: users,
+    confirmed: confirmed,
+    cars: cars,
+    carstoday: carstoday,
+    carsFeatured: carsFeatured,
   };
   res.render("backend/admin/dashboard", data);
 });

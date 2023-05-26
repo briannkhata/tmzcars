@@ -18,5 +18,6 @@ carRouter.post("/getByCondition", carController.getCarsByCondition);
 carRouter.post("/getByTransmission", carController.getCarsByTransmission);
 carRouter.post("/getByBody", carController.getCarsByBody);
 carRouter.post("/getByCartype", carController.getCarsByCartype);
+carRouter.get("/getCarsToday", carController.getCarsToday);
 
 module.exports = carRouter;

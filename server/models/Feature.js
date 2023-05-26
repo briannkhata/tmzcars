@@ -10,6 +10,14 @@ const Feature = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    StartDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    EndDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
     DateAdded: {
       type: DataTypes.DATE,
       allowNull: true,
