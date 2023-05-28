@@ -149,7 +149,37 @@
 
                                 <h3>Images</h3>
                                 </p>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped project-orders-table">
 
+                                            <tbody>
+                                                <% for(var i=0; i< images.length; i++) { %>
+                                                    <tr>
+
+                                                        <td>
+                                                            <img src="/front/public/uploads/<%= images[i].Photo%>">
+                                                            <img src="1685269820581-07.jpg">
+                                                            <img src="/front/public/uploads/1685269820581-03.jpg">
+
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <a type="button"
+                                                                    class="btn btn-danger btn-sm btn-icon-text"
+                                                                    onclick="return alert('Are you sure you want to delete THIS IMAGE?')"
+                                                                    href="/car/deleteimage/<%=images[i].ImageId%>">
+                                                                    <i
+                                                                        class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <% }%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

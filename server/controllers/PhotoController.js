@@ -60,10 +60,18 @@ const add = async (req, res) => {
   try {
     const carId = req.body.CarId;
     const photo = req.body.Photo;
-    Photo.create({
-      Photo: photo,
-      CarId: carId,
-    });
+    // Photo.create({
+    //   Photo: photo,
+    //   CarId: carId,
+    // });
+
+    for (let i = 0; i < photo.length; i++) {
+      const ph = photo[i];
+      await Photo.create({
+        Photo: ph,
+        CarId: carId,
+      });
+    }
     res.status(200).json({
       success: 1,
       message: "photo uploaded successfully",

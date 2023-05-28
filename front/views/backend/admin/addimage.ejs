@@ -34,11 +34,16 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Select File</label>
-                                                <input type="file" name="Photo" class="form-control">
+                                                <input type="file" id="Photo" name="Photo" multiple accept="image/*"
+                                                    class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="text" name="id" value="<%=id%>">
+                                    <br>
+                                    <div class="image-preview-container" id="image-previews">
+                                    </div>
+                                    <br>
+                                    <input type="hidden" name="id" value="<%=id%>">
                                     <button type="submit" class="btn btn-primary mr-2">Upload Image</button>
                                 </form>
                             </div>
@@ -49,3 +54,25 @@
             </div>
 
             <%- include ("../footer.ejs") %>
+                <script>
+                    function previewImages() {
+                        var images = document.getElementById("Photo").files;
+
+                        for (var i = 0; i < images.length; i++) {
+                            var reader = new FileReader();
+                            reader.onload = function (event) {
+                                var img = document.createElement("img");
+                                img.src = event.target.result;
+                                document.getElementById("image-previews").appendChild(img);
+                            };
+                            reader.readAsDataURL(images[i]);
+                        }
+                    }
+                    // Add remove button event listener
+                    document.getElementById("image-previews").addEventListener("click", function (event) {
+                        if (event.target.classList.contains("remove-button")) {
+                            event.target.parentElement.remove();
+                        }
+                    });
+                    document.getElementById("Photo").addEventListener("change", previewImages);
+                </script>

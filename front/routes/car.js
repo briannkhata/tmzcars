@@ -1,12 +1,10 @@
 const express = require("express");
 const carRouter = express.Router();
 const axios = require("axios");
-const API_URL = "http://127.0.0.1:7002/api/v1/";
 const path = require("path");
-
 const multer = require("multer");
 
-const uploadDir = path.join(__dirname, "../uploads/");
+const uploadDir = path.join(__dirname, "../public/uploads/");
 const storage = multer.diskStorage({
   destination: uploadDir,
   filename: (req, file, cb) => {
@@ -14,6 +12,8 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
+
+const API_URL = "http://127.0.0.1:7002/api/v1/";
 carRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "car/")
@@ -30,7 +30,19 @@ carRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
+function getCarImages(id) {
+  return axios
+    .get(API_URL + "photo/getCarImages/" + id)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 carRouter.get("/view/(:id)", async (req, res) => {
+  const images = await getCarImages(req.params.id);
   await axios
     .get(API_URL + "car/getOne/" + req.params.id)
     .then((response) => {
@@ -61,7 +73,7 @@ carRouter.get("/view/(:id)", async (req, res) => {
         YearsUsed: data.YearsUsed,
         OtherDetails: data.OtherDetails,
         Name: data.User.Name,
-        images: "",
+        images: images,
         title: "Car Details",
       });
     })
@@ -359,15 +371,12 @@ carRouter.get("/addimage/(:id)", (req, res) => {
   res.render("backend/admin/addimage", data);
 });
 
-carRouter.post("/savephoto", upload.single("Photo"), async (req, res) => {
+carRouter.post("/savephoto", upload.array("Photo"), async (req, res) => {
   const carId = req.body.id;
-  const photo = req.file.filename;
-  console.log(photo);
-  console.log(carId);
   const SAVE_URL = `${API_URL}photo/add/`;
   await axios
     .post(SAVE_URL, {
-      Photo: photo,
+      Photo: req.files.map((file) => file.filename),
       CarId: carId,
     })
     .then((response) => {
