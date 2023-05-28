@@ -28,17 +28,17 @@
                                                 </div>
                                                 <%}%>
                                 </p>
-                                <form class="forms-sample" action="/car/savephoto/" method="post">
+                                <form class="forms-sample" action="/car/savephoto/" method="post"
+                                    enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Select File</label>
                                                 <input type="file" name="Photo" class="form-control">
-
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="id" value="<%=id%>">
+                                    <input type="text" name="id" value="<%=id%>">
                                     <button type="submit" class="btn btn-primary mr-2">Upload Image</button>
                                 </form>
                             </div>

@@ -2,7 +2,18 @@ const express = require("express");
 const carRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const path = require("path");
 
+const multer = require("multer");
+
+const uploadDir = path.join(__dirname, "../uploads/");
+const storage = multer.diskStorage({
+  destination: uploadDir,
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage });
 carRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "car/")
@@ -158,13 +169,12 @@ carRouter.get("/edit/(:id)", async (req, res) => {
   const bodies = await getBodies();
   const users = await getUsers();
 
-  const id = req.params.id;
   await axios
-    .get(API_URL + "car/getOne/" + id)
+    .get(API_URL + "car/getOne/" + req.params.id)
     .then((response) => {
       const data = response.data.data;
       res.render("backend/admin/addcar", {
-        id: id,
+        id: req.params.id,
         Year: data.Year,
         SellingPrice: data.SellingPrice,
         Mileage: data.Mileage,
@@ -326,7 +336,6 @@ carRouter.post("/save", async (req, res) => {
       res.redirect("/car/add");
     });
 });
-
 carRouter.get("/delete/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
@@ -350,11 +359,12 @@ carRouter.get("/addimage/(:id)", (req, res) => {
   res.render("backend/admin/addimage", data);
 });
 
-carRouter.post("/savephoto", async (req, res) => {
+carRouter.post("/savephoto", upload.single("Photo"), async (req, res) => {
   const carId = req.body.id;
-  const photo = req.body.Photo;
+  const photo = req.file.filename;
+  console.log(photo);
+  console.log(carId);
   const SAVE_URL = `${API_URL}photo/add/`;
-
   await axios
     .post(SAVE_URL, {
       Photo: photo,

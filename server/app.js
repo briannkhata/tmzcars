@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-const multer = require("multer");
 
 const session = require("express-session");
 const passport = require("passport");
