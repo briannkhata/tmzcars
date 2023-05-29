@@ -390,4 +390,18 @@ carRouter.post("/savephoto", upload.array("Photo"), async (req, res) => {
     });
 });
 
+carRouter.get("/deleteimage/(:id)/(:id2)", async (req, res) => {
+  const id = req.params.id;
+  const id2 = req.params.id2;
+  await axios
+    .delete(API_URL + "photo/remove/" + id)
+    .then((response) => {
+      req.flash("success", response.data.message);
+      res.redirect("/car/view/" + id2);
+    })
+    .catch((error) => {
+      req.flash("error", "Error deleting image " + error);
+      res.redirect("/car/view/" + id2);
+    });
+});
 module.exports = carRouter;

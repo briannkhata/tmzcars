@@ -1,15 +1,15 @@
 const express = require("express");
-const photoRouter = express.Router();
+const makeRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 
-photoRouter.get("/", async (req, res) => {
+makeRouter.get("/", async (req, res) => {
   await axios
-    .get(API_URL + "photo/")
+    .get(API_URL + "make/")
     .then((response) => {
-      res.render("backend/admin/photos", {
+      res.render("backend/admin/makes", {
         data: response.data.data,
-        title: "photos",
+        title: "Makes",
       });
     })
     .catch((error) => {
@@ -17,23 +17,23 @@ photoRouter.get("/", async (req, res) => {
     });
 });
 
-photoRouter.get("/add", async (req, res) => {
-  res.render("backend/admin/addphoto", {
+makeRouter.get("/add", async (req, res) => {
+  res.render("backend/admin/addmake", {
     id: "",
-    photo: "",
-    title: "Add photo",
+    make: "",
+    title: "Add make",
   });
 });
 
-photoRouter.get("/edit/(:id)", async (req, res) => {
+makeRouter.get("/edit/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
-    .get(API_URL + "photo/getOne/" + id)
+    .get(API_URL + "make/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addphoto", {
+      res.render("backend/admin/addmake", {
         id: id,
-        photo: response.data.data.photo,
-        title: "Update photo",
+        make: response.data.data.make,
+        title: "Update make",
       });
     })
     .catch((error) => {
@@ -41,40 +41,40 @@ photoRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-photoRouter.post("/save", async (req, res) => {
+makeRouter.post("/save", async (req, res) => {
   const id = req.body.id;
-  const SAVE_URL = id ? `${API_URL}photo/update/` : `${API_URL}photo/add/`;
+  const SAVE_URL = id ? `${API_URL}make/update/` : `${API_URL}make/add/`;
   await axios
     .post(SAVE_URL, {
-      photo: req.body.photo,
-      photoId: id,
+      Make: req.body.Make,
+      MakeId: id,
     })
     .then((response) => {
       req.flash("success", response.data.message);
       if (id) {
-        res.redirect("/photo");
+        res.redirect("/make");
       } else {
-        res.redirect("/photo/add");
+        res.redirect("/make/add");
       }
     })
     .catch((error) => {
       req.flash("error", error.toString());
-      res.redirect("/photo/add");
+      res.redirect("/make/add");
     });
 });
 
-photoRouter.get("/delete/(:id)", async (req, res) => {
+makeRouter.get("/delete/(:id)", async (req, res) => {
   const id = req.params.id;
   await axios
-    .put(API_URL + "photo/delete/" + id)
+    .put(API_URL + "make/delete/" + id)
     .then((response) => {
       req.flash("success", response.data.message);
-      res.redirect("/photo/");
+      res.redirect("/make/");
     })
     .catch((error) => {
-      req.flash("error", "Error deleting photo " + error);
-      res.redirect("/photo/");
+      req.flash("error", "Error deleting make " + error);
+      res.redirect("/make/");
     });
 });
 
-module.exports = photoRouter;
+module.exports = makeRouter;

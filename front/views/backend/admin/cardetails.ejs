@@ -158,9 +158,7 @@
                                                     <tr>
 
                                                         <td>
-                                                            <img src="/front/public/uploads/<%= images[i].Photo%>">
-                                                            <img src="1685269820581-07.jpg">
-                                                            <img src="/front/public/uploads/1685269820581-03.jpg">
+                                                            <img src="/uploads/<%= images[i].Photo%>" alt="Image">
 
                                                         </td>
                                                         <td>
@@ -168,7 +166,7 @@
                                                                 <a type="button"
                                                                     class="btn btn-danger btn-sm btn-icon-text"
                                                                     onclick="return alert('Are you sure you want to delete THIS IMAGE?')"
-                                                                    href="/car/deleteimage/<%=images[i].ImageId%>">
+                                                                    href="/car/deleteimage/<%=images[i].PhotoId%>/<%=id%>">
                                                                     <i
                                                                         class="typcn typcn-delete-outline btn-icon-append"></i>
                                                                 </a>

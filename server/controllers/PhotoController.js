@@ -1,6 +1,6 @@
 require("../database/database.js");
 const { Photo } = require("../models/Photo.js");
-
+const fs = require("fs");
 const getAll = async (req, res) => {
   try {
     const photos = await Photo.findAll({});
@@ -60,10 +60,6 @@ const add = async (req, res) => {
   try {
     const carId = req.body.CarId;
     const photo = req.body.Photo;
-    // Photo.create({
-    //   Photo: photo,
-    //   CarId: carId,
-    // });
 
     for (let i = 0; i < photo.length; i++) {
       const ph = photo[i];
@@ -82,24 +78,68 @@ const add = async (req, res) => {
   }
 };
 
-const remove = async (req, res) => {
+// const remove = async (req, res) => {
+//   try {
+//     const id = req.query.id;
+//     const deletePhoto = await Photo.destroy({ where: { PhotoId: Id } });
+//     if (!deletePhoto) {
+//       res.status(500).json({
+//         success: 0,
+//         message: ` Error deleting Photo : ${err}`,
+//       });
+//     }
+//     res.status(200).json({
+//       success: 1,
+//       message: "Photo deleted successfully",
+//     });
+//   } catch (err) {
+//     res
+//       .status(500)
+//       .json({ success: 0, message: ` Error deleting Photo : ${err}` });
+//   }
+// };
+
+function getImageName(id) {
   try {
-    const { Id } = req.params;
-    const deletePhoto = await Photo.destroy({ where: { PhotoId: Id } });
-    if (!deletePhoto) {
-      res.status(500).json({
+    const image = Photo.findOne({
+      where: { PhotoId: id },
+      attributes: ["Photo"],
+    });
+    return image;
+  } catch (error) {
+    console.error(`Error fetching image for id ${id}:`, error);
+  }
+}
+
+const remove = async (req, res) => {
+  const id = req.params.Id;
+  const image = await getImageName(id);
+  const pathToFolder = "././../front/public/uploads";
+  fs.unlink(`${pathToFolder}/${image.Photo}`, (err) => {
+    if (err) throw err;
+    console.log(`Deleted ${image.Photo}`);
+  });
+
+  try {
+    const photo = await Photo.findOne({ PhotoId: id });
+    if (!photo) {
+      res.status(404).json({
         success: 0,
-        message: ` Error deleting Photo : ${err}`,
+        message: "Photo not found",
       });
+      return;
     }
+
+    await photo.destroy();
     res.status(200).json({
       success: 1,
       message: "Photo deleted successfully",
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ success: 0, message: ` Error deleting Photo : ${err}` });
+    res.status(500).json({
+      success: 0,
+      message: `Error deleting Photo: ${err}`,
+    });
   }
 };
 
