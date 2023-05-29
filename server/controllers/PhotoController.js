@@ -78,27 +78,6 @@ const add = async (req, res) => {
   }
 };
 
-// const remove = async (req, res) => {
-//   try {
-//     const id = req.query.id;
-//     const deletePhoto = await Photo.destroy({ where: { PhotoId: Id } });
-//     if (!deletePhoto) {
-//       res.status(500).json({
-//         success: 0,
-//         message: ` Error deleting Photo : ${err}`,
-//       });
-//     }
-//     res.status(200).json({
-//       success: 1,
-//       message: "Photo deleted successfully",
-//     });
-//   } catch (err) {
-//     res
-//       .status(500)
-//       .json({ success: 0, message: ` Error deleting Photo : ${err}` });
-//   }
-// };
-
 function getImageName(id) {
   try {
     const image = Photo.findOne({

@@ -21,6 +21,14 @@
                                         Delete
                                         <i class="typcn typcn-delete-outline btn-icon-append"></i>
                                     </a>
+
+                                    <a type="button" class="btn btn-success btn-sm btn-icon-text">
+                                        WhatsApp
+                                    </a>
+
+                                    <button type="button" class="btn btn-primary btn-sm btn-icon-text">
+                                        Print
+                                    </button>
                                 </p>
                                 <hr>
                                 <h4 class="card-title">
@@ -150,33 +158,22 @@
                                 <h3>Images</h3>
                                 </p>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <table class="table table-striped project-orders-table">
+                                    <% for(var i=0; i< images.length; i++) { %>
 
-                                            <tbody>
-                                                <% for(var i=0; i< images.length; i++) { %>
-                                                    <tr>
+                                        <div class="col-md-4">
+                                            <img src="/uploads/<%= images[i].Photo%>" alt="Image" class="img-fluid"
+                                                style="border-radius:10px; height:300px; width:400px;">
+                                            <div class="d-flex align-items-center">
+                                                <a type="button" class="btn btn-danger btn-sm btn-icon-text"
+                                                    onclick="return alert('Are you sure you want to delete THIS IMAGE?')"
+                                                    href="/car/deleteimage/<%=images[i].PhotoId%>/<%=id%>">
+                                                    <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <%}%>
 
-                                                        <td>
-                                                            <img src="/uploads/<%= images[i].Photo%>" alt="Image">
 
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <a type="button"
-                                                                    class="btn btn-danger btn-sm btn-icon-text"
-                                                                    onclick="return alert('Are you sure you want to delete THIS IMAGE?')"
-                                                                    href="/car/deleteimage/<%=images[i].PhotoId%>/<%=id%>">
-                                                                    <i
-                                                                        class="typcn typcn-delete-outline btn-icon-append"></i>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <% }%>
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
 
                             </div>
