@@ -335,10 +335,11 @@ const add = async (req, res) => {
     const carTypeId = req.body.CarTypeId;
     const bodyId = req.body.BodyId;
     const userId = req.body.UserId;
-    const payment = Payment.add(req, res);
+    //const payment = Payment.add(req, res);
     const {
       Year,
       SellingPrice,
+      TmzSellingPrice,
       Mileage,
       Engine,
       FuelConsumption,
@@ -356,6 +357,7 @@ const add = async (req, res) => {
     await Car.create({
       Year,
       SellingPrice,
+      TmzSellingPrice,
       Mileage,
       Engine,
       FuelConsumption,
@@ -436,6 +438,7 @@ const update = async (req, res) => {
     const {
       Year,
       SellingPrice,
+      TmzSellingPrice,
       Mileage,
       Engine,
       FuelConsumption,
@@ -455,6 +458,7 @@ const update = async (req, res) => {
       {
         Year,
         SellingPrice,
+        TmzSellingPrice,
         Mileage,
         Engine,
         FuelConsumption,

@@ -90,6 +90,20 @@ function getImageName(id) {
   }
 }
 
+function getRandomImage(id) {
+  try {
+    const image = Photo.findOne({
+      where: { CarId: id },
+      attributes: ["Photo"],
+      order: sequelize.random(),
+      limit: 1,
+    });
+    return image.Photo;
+  } catch (error) {
+    console.error(`Error fetching random image:`, error);
+  }
+}
+
 const remove = async (req, res) => {
   const id = req.params.Id;
   const image = await getImageName(id);
@@ -128,4 +142,5 @@ module.exports = {
   getAll,
   getSingle,
   getCarImages,
+  getRandomImage,
 };

@@ -25,6 +25,10 @@ const Car = sequelize.define(
       type: DataTypes.DOUBLE,
       allowNull: true,
     },
+    TmzSellingPrice: {
+      type: DataTypes.DOUBLE,
+      allowNull: true,
+    },
     Mileage: {
       type: DataTypes.STRING(200),
       allowNull: true,

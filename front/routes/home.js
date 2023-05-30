@@ -8,9 +8,75 @@ const jwt = require("jsonwebtoken");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 //const API_TOKEN = "YOUR_API_TOKEN";
 
-homeRouter.get("/", (req, res) => {
+function getAllCars() {
+  return axios
+    .get(API_URL + "car/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getModels() {
+  return axios
+    .get(API_URL + "model/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getMakes() {
+  return axios
+    .get(API_URL + "make/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getCarTypes() {
+  return axios
+    .get(API_URL + "cartype/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getConditions() {
+  return axios
+    .get(API_URL + "condition/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+homeRouter.get("/", async (req, res) => {
+  const cars = await getAllCars();
+  const models = await getModels();
+  const makes = await getMakes();
+  const conditions = await getConditions();
+  const cartypes = await getCarTypes();
+
   const data = {
     title: "Home",
+    cars: cars,
+    models: models,
+    makes: makes,
+    conditions: conditions,
+    cartypes: cartypes,
   };
   res.render("home", data);
 });

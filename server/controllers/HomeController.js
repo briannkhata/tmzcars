@@ -48,43 +48,34 @@ const login = async (req, res) => {
   const { Phone, Password } = req.body;
 
   try {
-    const checkPhone = await User.findOne({
+    const user = await User.findOne({
       where: { Phone: Phone },
     });
 
-    if (!checkPhone) {
+    if (user && bcrypt.compare(Password, user.Password)) {
+      const token = jwt.sign(
+        {
+          id: user.UserId,
+          phone: Phone,
+          name: user.Name,
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          expiresIn: "1d",
+        }
+      );
+
+      res.status(200).json({
+        success: 1,
+        message: `${user.Name} is authenticated`,
+        token: token,
+      });
+      console.log(token);
+    } else {
       res.status(500).json({
         success: 0,
-        message: "wrong phone number or password",
+        message: "wrong phone or password",
       });
-      return;
-    }
-
-    if (checkPhone) {
-      if (await bcrypt.compare(Password, checkPhone.Password)) {
-        const accessToken = jwt.sign(
-          {
-            id: checkPhone.UserId,
-            phone: Phone,
-            name: checkPhone.Name,
-          },
-          process.env.ACCESS_TOKEN_SECRET,
-          {
-            expiresIn: "1d",
-          }
-        );
-
-        res.status(200).json({
-          success: 1,
-          message: `${checkPhone.Name} is authenticated`,
-          token: accessToken,
-        });
-      } else {
-        res.status(500).json({
-          success: 0,
-          message: "wrong phone or password",
-        });
-      }
     }
   } catch (error) {
     console.error(error);

@@ -6,5 +6,6 @@ photoRouter.get("/getOne/:Id", photoController.getSingle);
 photoRouter.get("/getCarImages/:Id", photoController.getCarImages);
 photoRouter.delete("/remove/:Id", photoController.remove);
 photoRouter.post("/add/", photoController.add);
+photoRouter.get("/getRandomImage/", photoController.getRandomImage);
 
 module.exports = photoRouter;

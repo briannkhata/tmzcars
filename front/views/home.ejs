@@ -13,27 +13,64 @@
                     <div class="filter-card">
                         <form action="/search">
                             <div class="row">
-                                <div class="col-lg-4 my-2 col-sm-6">
-                                    <select name="Car Type" class="site-input">
-                                        <option value="Car Type" disabled selected>Car Type</option>
-                                        <option value="">New Car</option>
-                                        <option value="">Used Car</option>
+                                <div class="col-lg-3 my-2 col-sm-6">
+                                    <select name="CarTypeId" class="form-control">
+                                        <option value="Car Type" disabled selected>Type</option>
+                                        <% for (const cartype of cartypes) { %>
+                                            <option value="<%=cartype.CarTypeId%>">
+                                                <%=cartype.CarType%>
+                                            </option>
+                                            <%}%>
                                     </select>
                                 </div>
-                                <div class="col-lg-4 my-2 col-sm-6">
-                                    <select name="Makes" class="site-input">
-                                        <option value="Makes" disabled selected>Makes</option>
+                                <div class="col-lg-3 my-2 col-sm-6">
+                                    <select name="MakeId" class="form-control">
+                                        <option value="Makes" disabled selected>Make</option>
+                                        <% for (const make of makes) { %>
+                                            <option value="<%=make.MakeId%>">
+                                                <%=make.Make%>
+                                            </option>
+                                            <%}%>
                                     </select>
                                 </div>
-                                <div class="col-lg-4 my-2 col-sm-6">
-                                    <select name="Model" class="site-input">
+                                <div class="col-lg-3 my-2 col-sm-6">
+                                    <select name="Model" class="form-control">
                                         <option value="Model" disabled selected>Model</option>
+                                        <% for (const model of models) { %>
+                                            <option value="<%=model.ModelId%>">
+                                                <%=model.Model%>
+                                            </option>
+                                            <%}%>
                                     </select>
                                 </div>
-                                <div class="col-lg-4 my-2 col-sm-6">
-                                    <select name="Price" class="site-input">
-                                        <option value="Price" disabled selected>Price</option>
+
+                                <div class="col-lg-3 my-2 col-sm-6">
+                                    <select name="Model" class="form-control">
+                                        <option value="Model" disabled selected>Condition</option>
+                                        <% for (const condition of conditions) { %>
+                                            <option value="<%=condition.ConditionId%>">
+                                                <%=condition.Condition%>
+                                            </option>
+                                            <%}%>
                                     </select>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-6 my-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Min Price</span>
+                                        </div>
+                                        <input id="min-price-input" name="MinPrice" class="form-control" type="number">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-6 my-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Max Price</span>
+                                        </div>
+                                        <input id="min-price-input" name="MinPrice" class="form-control" type="number">
+                                    </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 my-2">
                                     <button class="site-btn w-100">Search
@@ -54,299 +91,311 @@
     <!-- new car deals section starts here -->
     <section class="new-car-deals">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
 
-            </div>
+            </div> -->
             <div class="row">
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-1.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Audi TTS</h6>
-                            <div class="d-flex mt-2 align-items-center
-                                        justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
-                                            fa-caret-right"></i>
+                <% for (const car of cars) { %>
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                        <div class="car-deal-card">
+                            <div class="car-deal-img">
+                                <img src="/img/car-1.png" alt="Car" class="img-fluid" />
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$59,500</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$59,500</h3>
-                        </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
+                            <div class="car-deal-tags mt-2">
+                                <p class="my-0">TMZ Cars</p>
+                                <span class="green-text mx-2">|</span>
+                                <p class="my-0">TMZ Cars</p>
+                                <span class="green-text mx-2">|</span>
+                                <p class="my-0">TMZ Cars</p>
+                                <span class="green-text mx-2">|</span>
+                                <p class="my-0">TMZ Cars</p>
+                            </div>
+                            <div class="car-deal-inner">
+                                <h6 class="mb-0">
+                                    <%= car.Model.Model%> | <%= car.Make.Make%>
+                                </h6>
+                                <div class="d-flex mt-2 align-items-center
+                                        justify-content-center">
+                                    <i class="fas green-text fa-caret-left"></i>
+                                    <span class="green-line mx-1"></span>
+                                    <i class="fas green-text
+                                            fa-caret-right"></i>
+                                </div>
+                                <p class="mb-0 p-xs mt-2">Initial Price</p>
+                                <h3 class="green-text mb-0 regular">
+                                    <%= car.SellingPrice.toLocaleString('en-US', { minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2 }) %>
+                                </h3>
+                                <p class="my-2 p-xs">TMZ Price</p>
+                                <h3 class="green-text regular">
+                                    <%= car.SellingPrice.toLocaleString('en-US', { minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2 }) %>
+                                </h3>
+                            </div>
+                            <div class="deal-overlay">
+                                <button class="site-btn white-border-btn"
+                                    onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                    View Details
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-2.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Audi S4</h6>
-                            <div class="d-flex mt-2 align-items-center
+                    <% }%>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <img src="/img/car-2.png" alt="Car" class="img-fluid" />
+                                </div>
+                                <div class="car-deal-tags mt-2">
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                </div>
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">Audi S4</h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Cash Price</p>
+                                    <h3 class="green-text mb-0 regular">$76,100</h3>
+                                    <p class="my-2 p-xs">PCP Finance From</p>
+                                    <h3 class="green-text regular">$76,100</h3>
+                                </div>
+                                <div class="deal-overlay">
+                                    <button class="site-btn white-border-btn"
+                                        onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$76,100</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$76,100</h3>
                         </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-3.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Audi A3 Sedan</h6>
-                            <div class="d-flex mt-2 align-items-center
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <img src="/img/car-3.png" alt="Car" class="img-fluid" />
+                                </div>
+                                <div class="car-deal-tags mt-2">
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                </div>
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">Audi A3 Sedan</h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Cash Price</p>
+                                    <h3 class="green-text mb-0 regular">$38,500</h3>
+                                    <p class="my-2 p-xs">PCP Finance From</p>
+                                    <h3 class="green-text regular">$38,500</h3>
+                                </div>
+                                <div class="deal-overlay">
+                                    <button class="site-btn white-border-btn"
+                                        onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$38,500</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$38,500</h3>
                         </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-4.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Jaguar XF</h6>
-                            <div class="d-flex mt-2 align-items-center
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <img src="/img/car-4.png" alt="Car" class="img-fluid" />
+                                </div>
+                                <div class="car-deal-tags mt-2">
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                </div>
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">Jaguar XF</h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Cash Price</p>
+                                    <h3 class="green-text mb-0 regular">$32,998</h3>
+                                    <p class="my-2 p-xs">PCP Finance From</p>
+                                    <h3 class="green-text regular">$32,998</h3>
+                                </div>
+                                <div class="deal-overlay">
+                                    <button class="site-btn white-border-btn"
+                                        onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$32,998</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$32,998</h3>
                         </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-4.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Jaguar XF</h6>
-                            <div class="d-flex mt-2 align-items-center
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <img src="/img/car-4.png" alt="Car" class="img-fluid" />
+                                </div>
+                                <div class="car-deal-tags mt-2">
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                </div>
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">Jaguar XF</h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Cash Price</p>
+                                    <h3 class="green-text mb-0 regular">$32,998</h3>
+                                    <p class="my-2 p-xs">PCP Finance From</p>
+                                    <h3 class="green-text regular">$32,998</h3>
+                                </div>
+                                <div class="deal-overlay">
+                                    <button class="site-btn white-border-btn"
+                                        onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$32,998</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$32,998</h3>
                         </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-3.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Audi A3 Sedan</h6>
-                            <div class="d-flex mt-2 align-items-center
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <img src="/img/car-3.png" alt="Car" class="img-fluid" />
+                                </div>
+                                <div class="car-deal-tags mt-2">
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                </div>
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">Audi A3 Sedan</h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Cash Price</p>
+                                    <h3 class="green-text mb-0 regular">$38,500</h3>
+                                    <p class="my-2 p-xs">PCP Finance From</p>
+                                    <h3 class="green-text regular">$38,500</h3>
+                                </div>
+                                <div class="deal-overlay">
+                                    <button class="site-btn white-border-btn"
+                                        onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$38,500</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$38,500</h3>
                         </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-5.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Kia Optima SX Turbo</h6>
-                            <div class="d-flex mt-2 align-items-center
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <img src="/img/car-5.png" alt="Car" class="img-fluid" />
+                                </div>
+                                <div class="car-deal-tags mt-2">
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                </div>
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">Kia Optima SX Turbo</h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Cash Price</p>
+                                    <h3 class="green-text mb-0 regular">$16,800</h3>
+                                    <p class="my-2 p-xs">PCP Finance From</p>
+                                    <h3 class="green-text regular">$16,800</h3>
+                                </div>
+                                <div class="deal-overlay">
+                                    <button class="site-btn white-border-btn"
+                                        onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$16,800</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$16,800</h3>
                         </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                    <div class="car-deal-card">
-                        <div class="car-deal-img">
-                            <img src="/img/car-6.png" alt="Car" class="img-fluid" />
-                        </div>
-                        <div class="car-deal-tags mt-2">
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                            <span class="green-text mx-2">|</span>
-                            <p class="my-0">Feature</p>
-                        </div>
-                        <div class="car-deal-inner">
-                            <h6 class="mb-0">Bentley Continental GT
-                                Speed</h6>
-                            <div class="d-flex mt-2 align-items-center
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <img src="/img/car-6.png" alt="Car" class="img-fluid" />
+                                </div>
+                                <div class="car-deal-tags mt-2">
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                    <span class="green-text mx-2">|</span>
+                                    <p class="my-0">Feature</p>
+                                </div>
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">Bentley Continental GT
+                                        Speed</h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                <i class="fas green-text fa-caret-left"></i>
-                                <span class="green-line mx-1"></span>
-                                <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Cash Price</p>
+                                    <h3 class="green-text mb-0 regular">$202,500</h3>
+                                    <p class="my-2 p-xs">PCP Finance From</p>
+                                    <h3 class="green-text regular">$202,500</h3>
+                                </div>
+                                <div class="deal-overlay">
+                                    <button class="site-btn white-border-btn"
+                                        onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
-                            <p class="mb-0 p-xs mt-2">Cash Price</p>
-                            <h3 class="green-text mb-0 regular">$202,500</h3>
-                            <p class="my-2 p-xs">PCP Finance From</p>
-                            <h3 class="green-text regular">$202,500</h3>
                         </div>
-                        <div class="deal-overlay">
-                            <button class="site-btn white-border-btn"
-                                onclick="location.href='https://dev124.onlinetestingserver.com/cy-autos-theme/preview/product-details.html'">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-12 mt-3">

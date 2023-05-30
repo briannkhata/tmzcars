@@ -11,24 +11,26 @@
                         <div class="card">
                             <div class="card-body">
                                 <p class="card-description">
-                                    <a href="/car/addimage/<%=id%>" class="btn btn-primary btn-sm btn-icon-text mr-3">
+                                    <a href="/car/" class="btn btn-primary btn-sm btn-icon-text">
+                                        Back
+                                        <i class="typcn typcn-arrow-back btn-icon-append"></i>
+                                    </a>
+                                    <a href="/car/addimage/<%=id%>" class="btn btn-primary btn-sm btn-icon-text">
                                         Add Image
                                         <i class="typcn typcn-plus btn-icon-append"></i>
                                     </a>
+                                    <button type="button" class="btn btn-success btn-sm btn-icon-text"
+                                        onclick="window.print()">
+                                        Print
+                                        <i class="typcn typcn-printer btn-icon-append"></i>
+                                    </button>
+
                                     <a type="button" class="btn btn-danger btn-sm btn-icon-text"
                                         onclick="return alert('Are you sure you want to delete THIS CAR BODY?')"
                                         href="/car/delete/<%=id%>">
                                         Delete
                                         <i class="typcn typcn-delete-outline btn-icon-append"></i>
                                     </a>
-
-                                    <a type="button" class="btn btn-success btn-sm btn-icon-text">
-                                        WhatsApp
-                                    </a>
-
-                                    <button type="button" class="btn btn-primary btn-sm btn-icon-text">
-                                        Print
-                                    </button>
                                 </p>
                                 <hr>
                                 <h4 class="card-title">
@@ -123,8 +125,10 @@
                                     </tr>
                                     <tr>
                                         <td>Selling Price</td>
-                                        <td>
-                                            <%= SellingPrice%>
+                                        <td><strong>
+                                                <%= SellingPrice.toLocaleString('en-US', { minimumFractionDigits: 2,
+                                                    maximumFractionDigits: 2 })%>
+                                            </strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -153,10 +157,7 @@
                                     </tr>
                                 </table>
                                 <hr>
-                                <p>
 
-                                <h3>Images</h3>
-                                </p>
                                 <div class="row">
                                     <% for(var i=0; i< images.length; i++) { %>
 
@@ -172,8 +173,6 @@
                                             </div>
                                         </div>
                                         <%}%>
-
-
                                 </div>
 
                             </div>
@@ -184,26 +183,3 @@
             </div>
 
             <%- include ("../footer.ejs") %>
-
-
-                <!-- Modal -->
-                <div class="modal fade" id="addImage" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>

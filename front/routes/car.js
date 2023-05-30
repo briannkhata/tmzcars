@@ -289,6 +289,7 @@ carRouter.post("/save", async (req, res) => {
   const {
     Year,
     SellingPrice,
+    TmzSellingPrice,
     Mileage,
     Engine,
     FuelConsumption,
@@ -311,6 +312,7 @@ carRouter.post("/save", async (req, res) => {
     .post(SAVE_URL, {
       Year,
       SellingPrice,
+      TmzSellingPrice,
       Mileage,
       Engine,
       FuelConsumption,
@@ -344,7 +346,7 @@ carRouter.post("/save", async (req, res) => {
       }
     })
     .catch((error) => {
-      req.flash("error", "Error saving car" + error);
+      req.flash("error", "Error saving car " + error);
       res.redirect("/car/add");
     });
 });
