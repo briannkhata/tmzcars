@@ -132,6 +132,15 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>TMZ Selling Price</td>
+                                        <td><strong>
+                                                <%= TmzSellingPrice !==null && TmzSellingPrice !=='' ?
+                                                    TmzSellingPrice.toLocaleString('en-US', { minimumFractionDigits: 2,
+                                                    maximumFractionDigits: 2 }) : '' %>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>External Color</td>
                                         <td>
                                             <%= ExteriorColor%>
