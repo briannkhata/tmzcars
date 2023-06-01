@@ -1,0 +1,332 @@
+<%- include ("header.ejs") %>
+
+    <!-- header ends here  -->
+
+    <!-- product details section starts here  -->
+    <% cars.forEach((car)=> { %>
+
+        <section class="product-details">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 my-3">
+                        <div class="slider product-slider">
+                            <% images.forEach((photo)=> { %>
+                                <div class="item me-3">
+                                    <div class="slider-card">
+                                        <img src="/uploads/<%=photo.Photo%>" class="img-fluid" alt="product-img" />
+                                    </div>
+                                </div>
+                                <%})%>
+                        </div>
+                        <div class="slider product-thumbnail mt-4">
+                            <% images.forEach((photo)=> { %>
+                                <div>
+                                    <div class="item item-sliderNav">
+                                        <img src="/uploads/<%=photo.Photo%>" class="img-fluid"
+                                            alt="product thumbnail" />
+                                    </div>
+                                </div>
+                                <%})%>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 my-3">
+                        <p class="green-tag">Private Seller</p>
+                        <h3>Car Details</h3>
+                        <h5 class="regular green-text">2007 (57 Reg)</h5>
+                        <p>3.2 TFSI V6 S Tronic Quattro 3Dr</p>
+                        <div class="row">
+                            <div class="col-12 my-2">
+                                <p class="mb-0">Luckily, it’s one of those cars that is more attractive in the metal.
+                                    This
+                                    TT is our own long-term test model (as is the Golf GTI Edition 30), and has lost
+                                    none of
+                                    its ability to turn heads, even though it’s been with us for nearly a year. Up
+                                    close,
+                                    the lines are taut and lean, suggesting that the TT has been on a diet – which it
+                                    has.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-6 col-sm-8">
+
+                                <div class="row">
+                                    <div class="col-6 my-2">
+                                        <div class="detail-card">
+                                            <p class="green-text mb-2">Car Price</p>
+                                            <h3 class="regular">£4,850</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 my-2">
+                                        <div class="detail-card">
+                                            <p class="green-text mb-2">Car Price</p>
+                                            <h3 class="regular">£4,850</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 my-3">
+                                        <div class="detail-card">
+                                            <p class="mb-2">Private Seller</p>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <img src="assets/images/call-icon.png" alt="phone icon"
+                                                        class="img-fluid phone-icon">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <h3 class="green-text regular mb-0">07472034968</h3>
+                                                </div>
+                                            </div>
+                                            <p class="p-xs mt-2 mb-0">Seller's Number Has Been Protected.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product details section ends here  -->
+
+        <!-- car details section starts here  -->
+        <section class="car-details">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-10 col-lg-11 col-12">
+                        <h3>Car <span class="green-text"> Details</span></h3>
+                        <p class="grey-text mb-3">Back on the surface, the detailing is superb. The metal fuel cap, 3D
+                            tail-light clusters, perfectly integrated pop-up spoiler and 18-inch Turbine alloy wheels
+                            all
+                            add to the sense of occasion. And with a large rear hatch and maximum boot capacity of 700
+                            litres, it’s more practical than you might imagine. Provided, that is, you want to carry
+                            luggage, rather than people. So cramped are the back seats that they will barely cope with
+                            small
+                            children. And they won’t enjoy the claustrophobic rear cabin – or the ferocious acceleration
+                            the
+                            TT is capable of.</p>
+                        <p class="grey-text mb-3">The 3.2-litre V6 doesn’t match the firepower of the 135i – it delivers
+                            247bhp and 320Nm of torque, and so trails its rival by 55bhp and 80Nm respectively. But it
+                            has
+                            less weight to shift, while the quattro 4WD delivers exceptional traction and the S tronic
+                            double clutch gearbox provides instantaneous shifts. As a result, the TT sprinted from
+                            0-60mph
+                            in only 5.7 seconds. The trouble is, there is no turbo to beef up mid-range torque, so its
+                            in-gear times weren’t as good as the Golf’s.</p>
+                        <p class="grey-text mb-3">What lets it down is the transmission, which doesn’t like low speeds.
+                            It’s
+                            jerky, then surges forward suddenly as the clutch bites. The system isn’t as mechanically
+                            involving as a manual box, either. Yet once up and running, the S tronic is magnificent – as
+                            a
+                            passenger, the only way to detect shifts is to watch the driver’s fingers pull the paddles
+                            or
+                            listen to the powerplant.</p>
+                        <p class="grey-text mb-0">It’s sharp and inspires confidence. The steering is better than the
+                            BMW’s,
+                            and helped by the fact it’s lower to the ground. The Audi feels more planted and secure on
+                            the
+                            road. It turns in hard, grips well and is more informative than the 135i and Golf. We’d
+                            specify
+                            the £1,150 optional Magnetic Dampers, though. They work brilliantly, not only making the TT
+                            even
+                            more dynamic to drive, but boosting absorbency in the softer setting. Without them, the ride
+                            is
+                            not as relaxing as it could be.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- car details section ends here  -->
+
+        <!-- car reviews section starts here  -->
+        <section class="car-reviews">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Car <span class="green-text"> Reviews</span></h3>
+                        <div class="owl-carousel review-carousel owl-theme">
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">The 2008 Audi TT 3.2 Quattro is extraordinarily fun to drive,
+                                        with
+                                        unbeatable cornering from its all-wheel-drive system. The 12-speaker Bose audio
+                                        system option produces pin-drop clarity. </p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">Usually, roadsters imply compromise, but the 2008 Audi TT 3.2
+                                        Quattro skimps on neither performance nor cabin gadgets. The convertible version
+                                        of
+                                        Audi's unique little coupe gets a remake for 2008, with some minor exterior
+                                        updates
+                                        and a full range of interior tech. But along with this incredible performance
+                                        comes
+                                        a high price, suggesting the TT is a rich person's toy.</p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">The new TT roadster deemphasizes the curviness of its
+                                        predecessor's
+                                        body and breaks up the smooth sides with a more distinct beltline. It looks like
+                                        a
+                                        slab on wheels, but Audi proves that a slab can be sculpted. The headlights and
+                                        grille give the front end a distinct face, while the curved trunk lip has a
+                                        retractable spoiler. The convertible top works effortlessly, lowering and
+                                        raising at
+                                        the push of a button, and latching itself down without driver intervention.</p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">The 2008 Audi TT 3.2 Quattro is a unique sports car that can be
+                                        pushed hard with little effort. It doesn't neglect the tech side of things,
+                                        however,
+                                        offering premium audio, navigation, and hands-free phone support.</p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">Being a roadster, the Audi TT has a small cabin with little
+                                        storage
+                                        space. But we had plenty of legroom and found the seats' long range of vertical
+                                        power adjustment useful for centering our view through the windshield, no matter
+                                        how
+                                        tall the driver. None of our drivers had to sit with the top of the windshield
+                                        frame
+                                        blocking their view of the road.</p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">The 2008 Audi TT 3.2 Quattro is extraordinarily fun to drive,
+                                        with
+                                        unbeatable cornering from its all-wheel-drive system. The 12-speaker Bose audio
+                                        system option produces pin-drop clarity. </p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">Usually, roadsters imply compromise, but the 2008 Audi TT 3.2
+                                        Quattro skimps on neither performance nor cabin gadgets. The convertible version
+                                        of
+                                        Audi's unique little coupe gets a remake for 2008, with some minor exterior
+                                        updates
+                                        and a full range of interior tech. But along with this incredible performance
+                                        comes
+                                        a high price, suggesting the TT is a rich person's toy.</p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">The new TT roadster deemphasizes the curviness of its
+                                        predecessor's
+                                        body and breaks up the smooth sides with a more distinct beltline. It looks like
+                                        a
+                                        slab on wheels, but Audi proves that a slab can be sculpted. The headlights and
+                                        grille give the front end a distinct face, while the curved trunk lip has a
+                                        retractable spoiler. The convertible top works effortlessly, lowering and
+                                        raising at
+                                        the push of a button, and latching itself down without driver intervention.</p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item px-3">
+                                <div class="review-card py-4 mt-3">
+                                    <i class="fas fa-quote-left green-text big-icon"></i>
+                                    <p class="mb-3 mt-3">The 2008 Audi TT 3.2 Quattro is a unique sports car that can be
+                                        pushed hard with little effort. It doesn't neglect the tech side of things,
+                                        however,
+                                        offering premium audio, navigation, and hands-free phone support.</p>
+                                    <p class="mb-0">Ben Döring</p>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="fas fa-star green-text"></i>
+                                        <i class="far fa-star green-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- car reviews section ends here  -->
+        <%})%>
+
+            <!-- footer starts here -->
+            <%- include ("footer.ejs") %>

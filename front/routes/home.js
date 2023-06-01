@@ -63,6 +63,28 @@ function getConditions() {
     });
 }
 
+function getCarDetails(id) {
+  return axios
+    .get(API_URL + "car/getOne/" + id)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getCarImages(id) {
+  return axios
+    .get(API_URL + "photo/getCarImages/" + id)
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 homeRouter.get("/", async (req, res) => {
   const cars = await getAllCars();
   const models = await getModels();
@@ -79,6 +101,43 @@ homeRouter.get("/", async (req, res) => {
     cartypes: cartypes,
   };
   res.render("home", data);
+});
+
+homeRouter.get("/view/(:id)", async (req, res) => {
+  const car = await getCarDetails(req.params.id);
+  const images = await getCarImages(req.params.id);
+  console.log(images);
+  const data = {
+    title: "Car Details",
+    id: car.CarId,
+    Year: car.Year,
+    SellingPrice: car.SellingPrice,
+    TmzSellingPrice: car.TmzSellingPrice,
+    Mileage: car.Mileage,
+    Engine: car.Engine,
+    FuelConsumption: car.FuelConsumption,
+    Warrant: car.Warrant,
+    CountryOfManufacture: car.CountryOfManufacture,
+    ServiceHistory: car.ServiceHistory,
+    RegNo: car.RegNo,
+    Model: car.Model.Model,
+    Make: car.Make.Make,
+    Transmission: car.Transmission.Transmission,
+    Steering: car.Steering,
+    Condition: car.Condition.Condition,
+    InteriorColor: car.InteriorColor,
+    ExteriorColor: car.ExteriorColor,
+    FuelType: car.FuelType.FuelType,
+    CarType: car.CarType.CarType,
+    Body: car.Body.Body,
+    YearBought: car.YearBought,
+    YearsUsed: car.YearsUsed,
+    OtherDetails: car.OtherDetails,
+    Name: car.User.Name,
+    images: images,
+    title: "Car Details",
+  };
+  res.render("cardetails", data);
 });
 
 homeRouter.get("/about", (req, res) => {
