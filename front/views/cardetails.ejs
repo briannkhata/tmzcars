@@ -65,7 +65,8 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h3 class="green-text regular mb-0">
-                                                <a href="" style="text-decoration: none;">
+                                                <a href='' onclick="sendWhatsAppMessage(Phone, 'Hello');" style="text-decoration:
+                                                    none;">
                                                     <%=Phone%>
                                                 </a>
                                             </h3>
@@ -82,8 +83,8 @@
                                     <!-- <p class="mb-2">Private Seller</p> -->
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
-                                            <img src="/img/email-icon.png" alt="phone icon"
-                                                class="img-fluid phone-icon">
+                                            <img src="/img/email-icon.png" alt="email icon"
+                                                class="img-fluid email-icon">
                                         </div>
                                         <div class="flex-grow-1">
                                             <h3 class="green-text regular mb-0">
@@ -104,8 +105,8 @@
                                     <!-- <p class="mb-2">Private Seller</p> -->
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
-                                            <img src="/img/email-icon.png" alt="phone icon"
-                                                class="img-fluid phone-icon">
+                                            <img src="/img/email-icon.png" alt="email icon"
+                                                class="img-fluid email-icon">
                                         </div>
                                         <div class="flex-grow-1">
                                             <h3 class="green-text regular mb-0">
@@ -271,7 +272,6 @@
                         </tr>
                     </table>
                     </p>
-
                 </div>
             </div>
         </div>
@@ -469,3 +469,8 @@
 
     <!-- footer starts here -->
     <%- include ("footer.ejs") %>
+        <script>
+            function sendWhatsAppMessage(number, text) {
+                window.open('https://wa.me/' + number + '?text=' + text);
+            }
+        </script>
