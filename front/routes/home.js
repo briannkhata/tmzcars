@@ -106,7 +106,7 @@ homeRouter.get("/", async (req, res) => {
 homeRouter.get("/view/(:id)", async (req, res) => {
   const car = await getCarDetails(req.params.id);
   const images = await getCarImages(req.params.id);
-  console.log(images);
+  console.log(car);
   const data = {
     title: "Car Details",
     id: car.CarId,
@@ -134,6 +134,8 @@ homeRouter.get("/view/(:id)", async (req, res) => {
     YearsUsed: car.YearsUsed,
     OtherDetails: car.OtherDetails,
     Name: car.User.Name,
+    Phone: car.User.Phone,
+    Email: car.User.Email,
     images: images,
     title: "Car Details",
   };
