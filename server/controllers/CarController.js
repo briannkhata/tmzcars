@@ -10,6 +10,7 @@ const { Body } = require("../models/Body.js");
 const { Condition } = require("../models/Condition.js");
 const { User } = require("../models/User.js");
 const { Payment } = require("../models/Payment.js");
+const { Photo } = require("../models/Photo.js");
 
 const getAll = async (req, res) => {
   try {
@@ -28,6 +29,7 @@ const getAll = async (req, res) => {
         { model: Body },
         { model: Transmission },
         { model: User },
+        { model: Photo },
       ],
     });
     res.status(200).json({

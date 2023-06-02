@@ -92,53 +92,61 @@
     <section class="new-car-deals">
         <div class="container">
             <!-- <div class="row">
-
+                
             </div> -->
+            <style>
+                .car-deal-img img {
+                    max-width: 100%;
+                    height: auto;
+                }
+            </style>
             <div class="row">
                 <% for (const car of cars) { %>
 
                     <div class="col-xl-3 col-lg-4 col-md-6 my-3">
                         <div class="car-deal-card">
-                            <div class="car-deal-img">
-                                <img src="/img/car-1.png" alt="Car" class="img-fluid" />
-                            </div>
-                            <div class="car-deal-tags mt-2">
-                                <p class="my-0">TMZ Cars</p>
-                                <span class="green-text mx-2">|</span>
-                                <p class="my-0">TMZ Cars</p>
-                                <span class="green-text mx-2">|</span>
-                                <p class="my-0">TMZ Cars</p>
-                                <span class="green-text mx-2">|</span>
-                                <p class="my-0">TMZ Cars</p>
-                            </div>
-                            <div class="car-deal-inner">
-                                <h6 class="mb-0">
-                                    <%= car.Model.Model%> | <%= car.Make.Make%>
-                                </h6>
-                                <div class="d-flex mt-2 align-items-center
-                                        justify-content-center">
-                                    <i class="fas green-text fa-caret-left"></i>
-                                    <span class="green-line mx-1"></span>
-                                    <i class="fas green-text
-                                            fa-caret-right"></i>
+                            <% car.Photos.forEach((photo,index)=>{ if(index===0){%>
+                                <div class="car-deal-img">
+                                    <img src="/uploads/<%=photo.Photo%>" alt="Car" class="img-fluid" />
                                 </div>
-                                <p class="mb-0 p-xs mt-2">Vendor Price</p>
-                                <h4 class="green-text mb-0 regular">
-                                    <%=car.SellingPrice ? car.SellingPrice.toLocaleString('en-US', {
-                                        minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00' ; %>
-                                </h4>
-                                <p class="my-2 p-xs">TMZ Price</p>
-                                <h4 class="green-text regular">
-                                    <%=car.TmzSellingPrice ? car.TmzSellingPrice.toLocaleString('en-US', {
-                                        minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00' ; %>
-                                </h4>
-                            </div>
-                            <div class="deal-overlay">
-                                <a style="text-decoration: none;" class="site-btn white-border-btn"
-                                    href='/view/<%=car.CarId%>'>
-                                    View Details
-                                </a>
-                            </div>
+                                <%} }); %>
+                                    <div class="car-deal-tags mt-2">
+                                        <p class="my-0">TMZ Cars</p>
+                                        <span class="green-text mx-2">|</span>
+                                        <p class="my-0">TMZ Cars</p>
+                                        <span class="green-text mx-2">|</span>
+                                        <p class="my-0">TMZ Cars</p>
+                                        <span class="green-text mx-2">|</span>
+                                        <p class="my-0">TMZ Cars</p>
+                                    </div>
+                                    <div class="car-deal-inner">
+                                        <h6 class="mb-0">
+                                            <%= car.Model.Model%> | <%= car.Make.Make%>
+                                        </h6>
+                                        <div class="d-flex mt-2 align-items-center
+                                        justify-content-center">
+                                            <i class="fas green-text fa-caret-left"></i>
+                                            <span class="green-line mx-1"></span>
+                                            <i class="fas green-text
+                                            fa-caret-right"></i>
+                                        </div>
+                                        <p class="mb-0 p-xs mt-2">Vendor Price</p>
+                                        <h4 class="green-text mb-0 regular">
+                                            <%=car.SellingPrice ? car.SellingPrice.toLocaleString('en-US', {
+                                                minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00' ; %>
+                                        </h4>
+                                        <p class="my-2 p-xs">TMZ Price</p>
+                                        <h4 class="green-text regular">
+                                            <%=car.TmzSellingPrice ? car.TmzSellingPrice.toLocaleString('en-US', {
+                                                minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00' ; %>
+                                        </h4>
+                                    </div>
+                                    <div class="deal-overlay">
+                                        <a style="text-decoration: none;" class="site-btn white-border-btn"
+                                            href='/view/<%=car.CarId%>'>
+                                            View Details
+                                        </a>
+                                    </div>
                         </div>
                     </div>
                     <% }%>

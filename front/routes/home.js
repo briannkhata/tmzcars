@@ -91,7 +91,7 @@ homeRouter.get("/", async (req, res) => {
   const makes = await getMakes();
   const conditions = await getConditions();
   const cartypes = await getCarTypes();
-
+  console.log(cars);
   const data = {
     title: "Home",
     cars: cars,
