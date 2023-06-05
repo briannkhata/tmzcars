@@ -4,9 +4,11 @@ const PORT = process.env.PORT || 5003;
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const flash = require("express-flash");
+const cookieParser = require("cookie-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(cookieParser());
 app.use(
   session({
     cookie: { maxAge: 60000 },

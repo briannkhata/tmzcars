@@ -8,6 +8,12 @@ const jwt = require("jsonwebtoken");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 //const API_TOKEN = "YOUR_API_TOKEN";
 
+homeRouter.use("/dashboard", function (err, req, res, next) {
+  console.log(err);
+  //User should be authenticated! Redirect him to log in.
+  res.redirect("/login");
+});
+
 function getAllCars() {
   return axios
     .get(API_URL + "car/")
@@ -166,18 +172,10 @@ homeRouter.get("/login", (req, res) => {
   };
   res.render("login", data);
 });
+
 homeRouter.get("/join", (req, res) => {
   const data = {
     title: "Create Account",
-    message: "",
-    message2: "",
-  };
-  res.render("join", data);
-});
-
-homeRouter.get("/career", (req, res) => {
-  const data = {
-    title: "Careers",
     message: "",
     message2: "",
   };
@@ -262,23 +260,6 @@ function getCarsFeatured() {
     });
 }
 
-homeRouter.get("/dashboard", async (req, res) => {
-  const users = await getUsers();
-  const cars = await getCars();
-  const confirmed = await getConfirmed();
-  const carstoday = await getCarsToday();
-  const carsFeatured = await getCarsFeatured();
-  const data = {
-    title: "Dashboard",
-    users: users,
-    confirmed: confirmed,
-    cars: cars,
-    carstoday: carstoday,
-    carsFeatured: carsFeatured,
-  };
-  res.render("backend/admin/dashboard", data);
-});
-
 homeRouter.post("/login", async (req, res) => {
   try {
     const response = await axios.post(`${API_URL}home/login/`, {
@@ -288,7 +269,14 @@ homeRouter.post("/login", async (req, res) => {
 
     const { success, message, token } = response.data;
     if (success === 1) {
-      console.log(token.name);
+      console.log(response.data);
+      //console.log(response.data.data.Name);
+      // const data = {
+      //   name: data.data.Name,
+      //   role: data.data.Role,
+      // };
+      req.session.user = response.data.data;
+
       return res.redirect("/dashboard");
     }
     if (success === 0) {
@@ -301,6 +289,34 @@ homeRouter.post("/login", async (req, res) => {
   }
 });
 
+function checkSignIn(req, res) {
+  if (req.session.user) {
+    next();
+  } else {
+    var err = new Error("Not logged in!");
+    //console.log(req.session.user);
+    next();
+  }
+}
+
+homeRouter.get("/dashboard", checkSignIn, async (req, res) => {
+  const users = await getUsers();
+  const cars = await getCars();
+  const confirmed = await getConfirmed();
+  const carstoday = await getCarsToday();
+  const carsFeatured = await getCarsFeatured();
+  const data = {
+    title: "Dashboard",
+    users: users,
+    confirmed: confirmed,
+    cars: cars,
+    carstoday: carstoday,
+    carsFeatured: carsFeatured,
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
+  };
+  res.render("backend/admin/dashboard", data);
+});
 homeRouter.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/login");

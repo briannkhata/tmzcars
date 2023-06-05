@@ -53,35 +53,34 @@ const login = async (req, res) => {
     });
 
     if (user && bcrypt.compare(Password, user.Password)) {
-      const token = jwt.sign(
-        {
-          id: user.UserId,
-          phone: Phone,
-          name: user.Name,
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-        {
-          expiresIn: "1d",
-        }
-      );
+      // const token = jwt.sign(
+      //   {
+      //     id: user.UserId,
+      //     phone: Phone,
+      //     name: user.Name,
+      //   },
+      //   process.env.ACCESS_TOKEN_SECRET,
+      //   {
+      //     expiresIn: "1d",
+      //   }
+      // );
 
       res.status(200).json({
         success: 1,
         message: `${user.Name} is authenticated`,
-        token: token,
+        data: user,
       });
-      console.log(token);
     } else {
       res.status(500).json({
         success: 0,
-        message: "wrong phone or password",
+        message: "wrong creditions",
       });
     }
   } catch (error) {
     console.error(error);
     res.status(500).json({
       success: 0,
-      message: "wrong phone number or password",
+      message: "wrong credietions",
     });
   }
 };
