@@ -10,6 +10,8 @@ applicantRouter.get("/", async (req, res) => {
       res.render("backend/admin/applicants", {
         data: response.data.data,
         title: "applicants",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -22,6 +24,8 @@ applicantRouter.get("/add", async (req, res) => {
     id: "",
     applicant: "",
     title: "Add applicant",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -34,6 +38,8 @@ applicantRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         applicant: response.data.data.applicant,
         title: "Update applicant",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

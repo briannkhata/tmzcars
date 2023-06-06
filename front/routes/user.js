@@ -25,6 +25,8 @@ userRouter.get("/addadmin", async (req, res) => {
     phone: "",
     email: "",
     title: "Add Admin",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -47,6 +49,8 @@ userRouter.get("/profile/(:id)", async (req, res) => {
         idnumber: response.data.data.IdNumber,
         idtype: response.data.data.IdType.IdType,
         title: "Update Profile",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -79,6 +83,8 @@ userRouter.get("/verifyaccount/(:id)", async (req, res) => {
         idtypee: response.data.data.IdTypeId,
         title: "Verify Account",
         idtypes: idTypes,
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -115,6 +121,8 @@ userRouter.get("/changephone/(:id)", async (req, res) => {
         name: response.data.data.Name,
         phone: response.data.data.Phone,
         title: "Change Phone",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -150,6 +158,8 @@ userRouter.get("/changepassword/(:id)", async (req, res) => {
         name: response.data.data.Name,
         phone: response.data.data.Phone,
         title: "Change Password",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -211,6 +221,8 @@ userRouter.get("/editadmin/(:id)", async (req, res) => {
         email: response.data.data.Email,
         password: response.data.data.Password,
         title: "Update Admin",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -254,6 +266,8 @@ userRouter.get("/admins", async (req, res) => {
       res.render("backend/admin/admins", {
         data: response.data.data,
         title: "Admins",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -268,6 +282,8 @@ userRouter.get("/users", async (req, res) => {
       res.render("backend/admin/users", {
         data: response.data.data,
         title: "Users",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -282,6 +298,8 @@ userRouter.get("/confirmed", async (req, res) => {
       res.render("backend/admin/confirmedusers", {
         data: response.data.data,
         title: "Confirmed Users",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
