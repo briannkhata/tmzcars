@@ -10,6 +10,8 @@ fueltypeRouter.get("/", async (req, res) => {
       res.render("backend/admin/fueltypes", {
         data: response.data.data,
         title: "fueltypes",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -34,6 +36,8 @@ fueltypeRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         fueltype: response.data.data.FuelType,
         title: "Update fueltype",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

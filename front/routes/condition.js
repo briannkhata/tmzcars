@@ -10,6 +10,8 @@ conditionRouter.get("/", async (req, res) => {
       res.render("backend/admin/conditions", {
         data: response.data.data,
         title: "Conditions",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -22,6 +24,8 @@ conditionRouter.get("/add", async (req, res) => {
     id: "",
     condition: "",
     title: "Add condition",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 

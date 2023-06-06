@@ -3,16 +3,16 @@ const homeRouter = express.Router();
 const axios = require("axios");
 const { Photo } = require("../../server/models/Photo");
 const jwt = require("jsonwebtoken");
+const checkAuth = require("../middleware/CheckAuth.js");
 
 //const headers = { Authorization: `Bearer ${API_TOKEN}` };
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 //const API_TOKEN = "YOUR_API_TOKEN";
 
-homeRouter.use("/dashboard", function (err, req, res, next) {
-  console.log(err);
-  //User should be authenticated! Redirect him to log in.
-  res.redirect("/login");
-});
+// homeRouter.use("/dashboard", function (err, req, res, next) {
+//   console.log(err);
+//   res.redirect("/login");
+// });
 
 function getAllCars() {
   return axios
@@ -269,14 +269,7 @@ homeRouter.post("/login", async (req, res) => {
 
     const { success, message, token } = response.data;
     if (success === 1) {
-      console.log(response.data);
-      //console.log(response.data.data.Name);
-      // const data = {
-      //   name: data.data.Name,
-      //   role: data.data.Role,
-      // };
       req.session.user = response.data.data;
-
       return res.redirect("/dashboard");
     }
     if (success === 0) {
@@ -289,17 +282,16 @@ homeRouter.post("/login", async (req, res) => {
   }
 });
 
-function checkSignIn(req, res) {
+function checkSignIn(req, res, next) {
   if (req.session.user) {
     next();
   } else {
-    var err = new Error("Not logged in!");
-    //console.log(req.session.user);
-    next();
+    //next(new Error("Session Expired or You need to Login!"));
+    res.redirect("/login");
   }
 }
 
-homeRouter.get("/dashboard", checkSignIn, async (req, res) => {
+homeRouter.get("/dashboard", checkAuth, async (req, res) => {
   const users = await getUsers();
   const cars = await getCars();
   const confirmed = await getConfirmed();

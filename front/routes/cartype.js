@@ -10,6 +10,8 @@ cartypeRouter.get("/", async (req, res) => {
       res.render("backend/admin/cartypes", {
         data: response.data.data,
         title: "Car Types",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -34,6 +36,8 @@ cartypeRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         cartype: response.data.data.CarType,
         title: "Update cartype",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

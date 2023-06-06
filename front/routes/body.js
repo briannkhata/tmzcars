@@ -10,6 +10,8 @@ bodyRouter.get("/", async (req, res) => {
       res.render("backend/admin/bodies", {
         data: response.data.data,
         title: "Car Bodies",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -22,6 +24,8 @@ bodyRouter.get("/add", async (req, res) => {
     id: "",
     body: "",
     title: "Add car body",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -34,6 +38,8 @@ bodyRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         body: response.data.data.Body,
         title: "Update body",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

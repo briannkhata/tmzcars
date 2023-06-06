@@ -10,6 +10,8 @@ idtypeRouter.get("/", async (req, res) => {
       res.render("backend/admin/idtypes", {
         data: response.data.data,
         title: "idtypes",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -22,6 +24,8 @@ idtypeRouter.get("/add", async (req, res) => {
     id: "",
     idtype: "",
     title: "Add idtype",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -34,6 +38,8 @@ idtypeRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         idtype: response.data.data.IdType,
         title: "Update idtype",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

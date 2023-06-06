@@ -10,6 +10,8 @@ faqRouter.get("/", async (req, res) => {
       res.render("backend/admin/faqs", {
         data: response.data.data,
         title: "faqs",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -23,6 +25,8 @@ faqRouter.get("/add", async (req, res) => {
     faq: "",
     answer: "",
     title: "Add Faq",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -36,6 +40,8 @@ faqRouter.get("/edit/(:id)", async (req, res) => {
         faq: response.data.data.Faq,
         answer: response.data.data.Answer,
         title: "Update faq",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

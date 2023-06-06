@@ -2,7 +2,8 @@ const express = require("express");
 const modelRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
-
+const checkAuth = require("../middleware/CheckAuth.js");
+modelRouter.use(checkAuth);
 modelRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "model/")
@@ -10,6 +11,8 @@ modelRouter.get("/", async (req, res) => {
       res.render("backend/admin/models", {
         data: response.data.data,
         title: "Models",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -22,6 +25,8 @@ modelRouter.get("/add", async (req, res) => {
     id: "",
     model: "",
     title: "Add Model",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -34,6 +39,8 @@ modelRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         model: response.data.data.Model,
         title: "Update Model",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

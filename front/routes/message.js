@@ -11,6 +11,8 @@ messageRouter.get("/", async (req, res) => {
       res.render("backend/admin/messages", {
         data: data,
         title: "messages",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -29,6 +31,8 @@ messageRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         message: data.message,
         title: "Update Id Type",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -42,6 +46,8 @@ messageRouter.get("/add", (req, res) => {
     title: "Add Id Type",
     id: "",
     message: "",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   };
   res.render("backend/admin/addmessage", data);
 });

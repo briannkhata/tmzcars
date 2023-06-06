@@ -10,6 +10,8 @@ testimonialRouter.get("/", async (req, res) => {
       res.render("backend/admin/testimonials", {
         data: response.data.data,
         title: "testimonials",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -24,6 +26,8 @@ testimonialRouter.get("/add", async (req, res) => {
     role: "",
     userId: "",
     title: "Add testimonial",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -38,6 +42,8 @@ testimonialRouter.get("/edit/(:id)", async (req, res) => {
         role: response.data.data.Role,
         userId: response.data.data.UserId,
         title: "Update Testimonial",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

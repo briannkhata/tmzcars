@@ -10,6 +10,8 @@ makeRouter.get("/", async (req, res) => {
       res.render("backend/admin/makes", {
         data: response.data.data,
         title: "Makes",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -22,6 +24,8 @@ makeRouter.get("/add", async (req, res) => {
     id: "",
     make: "",
     title: "Add make",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -34,6 +38,8 @@ makeRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         make: response.data.data.make,
         title: "Update make",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

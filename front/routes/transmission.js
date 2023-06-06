@@ -10,6 +10,8 @@ transmissionRouter.get("/", async (req, res) => {
       res.render("backend/admin/transmissions", {
         data: response.data.data,
         title: "transmissions",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -22,6 +24,8 @@ transmissionRouter.get("/add", async (req, res) => {
     id: "",
     transmission: "",
     title: "Add transmission",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
@@ -34,6 +38,8 @@ transmissionRouter.get("/edit/(:id)", async (req, res) => {
         id: id,
         transmission: response.data.data.Transmission,
         title: "Update Transmission",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

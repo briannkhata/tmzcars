@@ -22,6 +22,8 @@ carRouter.get("/", async (req, res) => {
       res.render("backend/admin/cars", {
         data: data,
         title: "Cars List",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -76,6 +78,8 @@ carRouter.get("/view/(:id)", async (req, res) => {
         Name: data.User.Name,
         images: images,
         title: "Car Details",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -221,6 +225,8 @@ carRouter.get("/edit/(:id)", async (req, res) => {
         bodies: bodies,
         users: users,
         title: "Update Car Details",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -274,6 +280,8 @@ carRouter.get("/add", async (req, res) => {
     cartypes: cartypes,
     bodies: bodies,
     users: users,
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   };
 
   res.render("backend/admin/addcar", data);
@@ -308,8 +316,6 @@ carRouter.post("/save", async (req, res) => {
     OtherDetails,
   } = req.body;
   const SAVE_URL = id ? `${API_URL}car/update/` : `${API_URL}car/add/`;
-
-  console.log(req.body);
 
   await axios
     .post(SAVE_URL, {
