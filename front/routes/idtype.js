@@ -2,8 +2,9 @@ const express = require("express");
 const idtypeRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-idtypeRouter.get("/", async (req, res) => {
+idtypeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "idtype/")
     .then((response) => {
@@ -19,7 +20,7 @@ idtypeRouter.get("/", async (req, res) => {
     });
 });
 
-idtypeRouter.get("/add", async (req, res) => {
+idtypeRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addidtype", {
     id: "",
     idtype: "",
@@ -29,7 +30,7 @@ idtypeRouter.get("/add", async (req, res) => {
   });
 });
 
-idtypeRouter.get("/edit/(:id)", async (req, res) => {
+idtypeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "idtype/getOne/" + id)
@@ -47,7 +48,7 @@ idtypeRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-idtypeRouter.post("/save", async (req, res) => {
+idtypeRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id ? `${API_URL}idtype/update/` : `${API_URL}idtype/add/`;
   await axios
@@ -69,7 +70,7 @@ idtypeRouter.post("/save", async (req, res) => {
     });
 });
 
-idtypeRouter.get("/delete/(:id)", async (req, res) => {
+idtypeRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   await axios
     .put(API_URL + "idtype/delete/" + req.params.id)
     .then((response) => {

@@ -2,6 +2,7 @@ const express = require("express");
 const conditionRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
 conditionRouter.get("/", checkAuth, async (req, res) => {
   await axios

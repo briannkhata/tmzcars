@@ -2,8 +2,9 @@ const express = require("express");
 const testimonialRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-testimonialRouter.get("/", async (req, res) => {
+testimonialRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "testimonial/")
     .then((response) => {
@@ -19,7 +20,7 @@ testimonialRouter.get("/", async (req, res) => {
     });
 });
 
-testimonialRouter.get("/add", async (req, res) => {
+testimonialRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addtestimonial", {
     id: "",
     testimonial: "",
@@ -31,7 +32,7 @@ testimonialRouter.get("/add", async (req, res) => {
   });
 });
 
-testimonialRouter.get("/edit/(:id)", async (req, res) => {
+testimonialRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "testimonial/getOne/" + id)
@@ -51,7 +52,7 @@ testimonialRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-testimonialRouter.post("/save", async (req, res) => {
+testimonialRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id
     ? `${API_URL}testimonial/update/`
@@ -77,7 +78,7 @@ testimonialRouter.post("/save", async (req, res) => {
     });
 });
 
-testimonialRouter.get("/delete/(:id)", async (req, res) => {
+testimonialRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   await axios
     .put(API_URL + "testimonial/delete/" + req.params.id)
     .then((response) => {

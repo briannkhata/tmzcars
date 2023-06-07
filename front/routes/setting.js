@@ -2,8 +2,9 @@ const express = require("express");
 const settingRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-settingRouter.get("/", async (req, res) => {
+settingRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "setting/")
     .then((response) => {
@@ -27,7 +28,7 @@ settingRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
-settingRouter.post("/add", async (req, res) => {
+settingRouter.post("/add", checkAuth, async (req, res) => {
   await axios
     .post(API_URL + "setting/add/", {
       App: req.body.App,

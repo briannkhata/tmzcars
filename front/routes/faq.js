@@ -2,8 +2,9 @@ const express = require("express");
 const faqRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-faqRouter.get("/", async (req, res) => {
+faqRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "faq/")
     .then((response) => {
@@ -19,7 +20,7 @@ faqRouter.get("/", async (req, res) => {
     });
 });
 
-faqRouter.get("/add", async (req, res) => {
+faqRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addfaq", {
     id: "",
     faq: "",
@@ -30,7 +31,7 @@ faqRouter.get("/add", async (req, res) => {
   });
 });
 
-faqRouter.get("/edit/(:id)", async (req, res) => {
+faqRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "faq/getOne/" + id)
@@ -49,7 +50,7 @@ faqRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-faqRouter.post("/save", async (req, res) => {
+faqRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id ? `${API_URL}faq/update/` : `${API_URL}faq/add/`;
   await axios

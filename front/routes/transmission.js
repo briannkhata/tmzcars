@@ -2,8 +2,9 @@ const express = require("express");
 const transmissionRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-transmissionRouter.get("/", async (req, res) => {
+transmissionRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "transmission/")
     .then((response) => {
@@ -19,7 +20,7 @@ transmissionRouter.get("/", async (req, res) => {
     });
 });
 
-transmissionRouter.get("/add", async (req, res) => {
+transmissionRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addtransmission", {
     id: "",
     transmission: "",
@@ -29,7 +30,7 @@ transmissionRouter.get("/add", async (req, res) => {
   });
 });
 
-transmissionRouter.get("/edit/(:id)", async (req, res) => {
+transmissionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "transmission/getOne/" + id)
@@ -47,7 +48,7 @@ transmissionRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-transmissionRouter.post("/save", async (req, res) => {
+transmissionRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id
     ? `${API_URL}transmission/update/`
@@ -71,7 +72,7 @@ transmissionRouter.post("/save", async (req, res) => {
     });
 });
 
-transmissionRouter.get("/delete/(:id)", async (req, res) => {
+transmissionRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   await axios
     .put(API_URL + "transmission/delete/" + req.params.id)
     .then((response) => {

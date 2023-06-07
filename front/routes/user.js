@@ -1,24 +1,25 @@
 const express = require("express");
 const userRouter = express.Router();
 const axios = require("axios");
+const checkAuth = require("../middleware/CheckAuth.js");
 
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 
-userRouter.get("/changepassword", (req, res) => {
+userRouter.get("/changepassword", checkAuth, async (req, res) => {
   const data = {
     title: "Change Password",
   };
   res.render("backend/admin/changepassword", data);
 });
 
-userRouter.get("/changephone", (req, res) => {
+userRouter.get("/changephone", checkAuth, async (req, res) => {
   const data = {
     title: "Change Phone",
   };
   res.render("backend/admin/changephone", data);
 });
 
-userRouter.get("/addadmin", async (req, res) => {
+userRouter.get("/addadmin", checkAuth, async (req, res) => {
   res.render("backend/admin/addadmin", {
     id: "",
     name: "",
@@ -30,7 +31,7 @@ userRouter.get("/addadmin", async (req, res) => {
   });
 });
 
-userRouter.get("/profile/(:id)", async (req, res) => {
+userRouter.get("/profile/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "user/getOne/" + id)
@@ -69,7 +70,7 @@ function getIdTypes() {
     });
 }
 
-userRouter.get("/verifyaccount/(:id)", async (req, res) => {
+userRouter.get("/verifyaccount/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   const idTypes = await getIdTypes();
   await axios
@@ -92,7 +93,7 @@ userRouter.get("/verifyaccount/(:id)", async (req, res) => {
     });
 });
 
-userRouter.post("/saveid", async (req, res) => {
+userRouter.post("/saveid", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = `${API_URL}user/verifyaccount/`;
   await axios
@@ -111,7 +112,7 @@ userRouter.post("/saveid", async (req, res) => {
     });
 });
 
-userRouter.get("/changephone/(:id)", async (req, res) => {
+userRouter.get("/changephone/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "user/getOne/" + id)
@@ -130,7 +131,7 @@ userRouter.get("/changephone/(:id)", async (req, res) => {
     });
 });
 
-userRouter.post("/updatephone", async (req, res) => {
+userRouter.post("/updatephone", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = `${API_URL}user/updatephone/`;
   await axios
@@ -148,7 +149,7 @@ userRouter.post("/updatephone", async (req, res) => {
     });
 });
 
-userRouter.get("/changepassword/(:id)", async (req, res) => {
+userRouter.get("/changepassword/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "user/getOne/" + id)
@@ -167,7 +168,7 @@ userRouter.get("/changepassword/(:id)", async (req, res) => {
     });
 });
 
-userRouter.post("/updatepassword", async (req, res) => {
+userRouter.post("/updatepassword", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = `${API_URL}user/updatepassword/`;
   await axios
@@ -185,7 +186,7 @@ userRouter.post("/updatepassword", async (req, res) => {
     });
 });
 
-userRouter.post("/updateprofile", async (req, res) => {
+userRouter.post("/updateprofile", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = `${API_URL}user/updateprofile/`;
   await axios
@@ -209,7 +210,7 @@ userRouter.post("/updateprofile", async (req, res) => {
     });
 });
 
-userRouter.get("/editadmin/(:id)", async (req, res) => {
+userRouter.get("/editadmin/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "user/getOne/" + id)
@@ -230,7 +231,7 @@ userRouter.get("/editadmin/(:id)", async (req, res) => {
     });
 });
 
-userRouter.post("/saveadmin", async (req, res) => {
+userRouter.post("/saveadmin", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id ? `${API_URL}user/update/` : `${API_URL}user/add/`;
   await axios
@@ -259,7 +260,7 @@ userRouter.post("/saveadmin", async (req, res) => {
     });
 });
 
-userRouter.get("/admins", async (req, res) => {
+userRouter.get("/admins", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getAdmins/")
     .then((response) => {
@@ -275,7 +276,7 @@ userRouter.get("/admins", async (req, res) => {
     });
 });
 
-userRouter.get("/users", async (req, res) => {
+userRouter.get("/users", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getSellers/")
     .then((response) => {
@@ -291,7 +292,7 @@ userRouter.get("/users", async (req, res) => {
     });
 });
 
-userRouter.get("/confirmed", async (req, res) => {
+userRouter.get("/confirmed", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getConfirmed/")
     .then((response) => {
@@ -307,7 +308,7 @@ userRouter.get("/confirmed", async (req, res) => {
     });
 });
 
-userRouter.get("/delete/(:id)", async (req, res) => {
+userRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   await axios
     .put(API_URL + "user/delete/" + req.params.id)
     .then((response) => {

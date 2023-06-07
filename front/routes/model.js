@@ -3,8 +3,7 @@ const modelRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 const checkAuth = require("../middleware/CheckAuth.js");
-modelRouter.use(checkAuth);
-modelRouter.get("/", async (req, res) => {
+modelRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "model/")
     .then((response) => {
@@ -20,7 +19,7 @@ modelRouter.get("/", async (req, res) => {
     });
 });
 
-modelRouter.get("/add", async (req, res) => {
+modelRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addmodel", {
     id: "",
     model: "",
@@ -30,7 +29,7 @@ modelRouter.get("/add", async (req, res) => {
   });
 });
 
-modelRouter.get("/edit/(:id)", async (req, res) => {
+modelRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "model/getOne/" + id)
@@ -48,7 +47,7 @@ modelRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-modelRouter.post("/save", async (req, res) => {
+modelRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id ? `${API_URL}model/update/` : `${API_URL}model/add/`;
   await axios
@@ -70,7 +69,7 @@ modelRouter.post("/save", async (req, res) => {
     });
 });
 
-modelRouter.get("/delete/(:id)", async (req, res) => {
+modelRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "model/delete/" + id)

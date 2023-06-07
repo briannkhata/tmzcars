@@ -2,8 +2,9 @@ const express = require("express");
 const fueltypeRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-fueltypeRouter.get("/", async (req, res) => {
+fueltypeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "fueltype/")
     .then((response) => {
@@ -19,7 +20,7 @@ fueltypeRouter.get("/", async (req, res) => {
     });
 });
 
-fueltypeRouter.get("/add", async (req, res) => {
+fueltypeRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addfueltype", {
     id: "",
     fueltype: "",
@@ -29,7 +30,7 @@ fueltypeRouter.get("/add", async (req, res) => {
   });
 });
 
-fueltypeRouter.get("/edit/(:id)", async (req, res) => {
+fueltypeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "fueltype/getOne/" + id)
@@ -47,7 +48,7 @@ fueltypeRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-fueltypeRouter.post("/save", async (req, res) => {
+fueltypeRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id
     ? `${API_URL}fueltype/update/`
@@ -71,7 +72,7 @@ fueltypeRouter.post("/save", async (req, res) => {
     });
 });
 
-fueltypeRouter.get("/delete/(:id)", async (req, res) => {
+fueltypeRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   await axios
     .put(API_URL + "fueltype/delete/" + req.params.id)
     .then((response) => {

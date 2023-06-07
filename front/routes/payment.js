@@ -2,8 +2,9 @@ const express = require("express");
 const paymentRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-paymentRouter.get("/", async (req, res) => {
+paymentRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "payment/")
     .then((response) => {
@@ -19,7 +20,7 @@ paymentRouter.get("/", async (req, res) => {
     });
 });
 
-paymentRouter.post("/save", async (req, res) => {
+paymentRouter.post("/save", checkAuth, async (req, res) => {
   const SAVE_URL = `${API_URL}payment/add/`;
   const action = "FEATURE_";
   const payMethod = "Mpamba";

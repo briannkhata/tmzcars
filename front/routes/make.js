@@ -2,8 +2,9 @@ const express = require("express");
 const makeRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-makeRouter.get("/", async (req, res) => {
+makeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "make/")
     .then((response) => {
@@ -19,7 +20,7 @@ makeRouter.get("/", async (req, res) => {
     });
 });
 
-makeRouter.get("/add", async (req, res) => {
+makeRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addmake", {
     id: "",
     make: "",
@@ -29,7 +30,7 @@ makeRouter.get("/add", async (req, res) => {
   });
 });
 
-makeRouter.get("/edit/(:id)", async (req, res) => {
+makeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "make/getOne/" + id)
@@ -47,7 +48,7 @@ makeRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-makeRouter.post("/save", async (req, res) => {
+makeRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id ? `${API_URL}make/update/` : `${API_URL}make/add/`;
   await axios
@@ -69,7 +70,7 @@ makeRouter.post("/save", async (req, res) => {
     });
 });
 
-makeRouter.get("/delete/(:id)", async (req, res) => {
+makeRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "make/delete/" + id)

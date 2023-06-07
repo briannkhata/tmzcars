@@ -2,8 +2,9 @@ const express = require("express");
 const messageRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-messageRouter.get("/", async (req, res) => {
+messageRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "message/")
     .then((response) => {
@@ -21,7 +22,7 @@ messageRouter.get("/", async (req, res) => {
     .finally(() => {});
 });
 
-messageRouter.get("/edit/(:id)", async (req, res) => {
+messageRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "message/getOne/" + id)
@@ -41,7 +42,7 @@ messageRouter.get("/edit/(:id)", async (req, res) => {
     .finally(() => {});
 });
 
-messageRouter.get("/add", (req, res) => {
+messageRouter.get("/add", checkAuth, async (req, res) => {
   const data = {
     title: "Add Id Type",
     id: "",
@@ -52,7 +53,7 @@ messageRouter.get("/add", (req, res) => {
   res.render("backend/admin/addmessage", data);
 });
 
-messageRouter.post("/save", async (req, res) => {
+messageRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   await axios
     .post(API_URL + "message/add/", {
@@ -74,7 +75,7 @@ messageRouter.post("/save", async (req, res) => {
     });
 });
 
-messageRouter.get("/delete/(:id)", async (req, res) => {
+messageRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "message/delete/" + id)
