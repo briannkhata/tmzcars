@@ -3,6 +3,7 @@ const carRouter = express.Router();
 const axios = require("axios");
 const path = require("path");
 const multer = require("multer");
+const checkAuth = require("../middleware/CheckAuth.js");
 
 const uploadDir = path.join(__dirname, "../public/uploads/");
 const storage = multer.diskStorage({
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const API_URL = "http://127.0.0.1:7002/api/v1/";
-carRouter.get("/", async (req, res) => {
+carRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "car/")
     .then((response) => {
@@ -43,7 +44,7 @@ function getCarImages(id) {
     });
 }
 
-carRouter.get("/view/(:id)", async (req, res) => {
+carRouter.get("/view/(:id)", checkAuth, async (req, res) => {
   const images = await getCarImages(req.params.id);
   await axios
     .get(API_URL + "car/getOne/" + req.params.id)
@@ -176,7 +177,7 @@ function getBodies() {
     });
 }
 
-carRouter.get("/edit/(:id)", async (req, res) => {
+carRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const models = await getModels();
   const makes = await getMakes();
   const cartypes = await getCarTypes();
@@ -235,7 +236,7 @@ carRouter.get("/edit/(:id)", async (req, res) => {
     .finally(() => {});
 });
 
-carRouter.get("/add", async (req, res) => {
+carRouter.get("/add", checkAuth, async (req, res) => {
   const models = await getModels();
   const makes = await getMakes();
   const cartypes = await getCarTypes();
@@ -287,7 +288,7 @@ carRouter.get("/add", async (req, res) => {
   res.render("backend/admin/addcar", data);
 });
 
-carRouter.post("/save", async (req, res) => {
+carRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const modelId = req.body.ModelId;
   const makeId = req.body.MakeId;
@@ -359,7 +360,7 @@ carRouter.post("/save", async (req, res) => {
       res.redirect("/car/add");
     });
 });
-carRouter.get("/delete/(:id)", async (req, res) => {
+carRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "car/delete/" + id)
@@ -378,30 +379,37 @@ carRouter.get("/addimage/(:id)", (req, res) => {
   const data = {
     title: "Add Image",
     id: req.params.id,
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   };
   res.render("backend/admin/addimage", data);
 });
 
-carRouter.post("/savephoto", upload.array("Photo"), async (req, res) => {
-  const carId = req.body.id;
-  const SAVE_URL = `${API_URL}photo/add/`;
-  await axios
-    .post(SAVE_URL, {
-      Photo: req.files.map((file) => file.filename),
-      CarId: carId,
-    })
-    .then((response) => {
-      const data = response.data;
-      req.flash("success", data.message);
-      res.redirect("/car/view/" + carId);
-    })
-    .catch((error) => {
-      req.flash("error", "Error saving car" + error);
-      res.redirect("/car/view/" + carId);
-    });
-});
+carRouter.post(
+  "/savephoto",
+  upload.array("Photo"),
+  checkAuth,
+  async (req, res) => {
+    const carId = req.body.id;
+    const SAVE_URL = `${API_URL}photo/add/`;
+    await axios
+      .post(SAVE_URL, {
+        Photo: req.files.map((file) => file.filename),
+        CarId: carId,
+      })
+      .then((response) => {
+        const data = response.data;
+        req.flash("success", data.message);
+        res.redirect("/car/view/" + carId);
+      })
+      .catch((error) => {
+        req.flash("error", "Error saving car" + error);
+        res.redirect("/car/view/" + carId);
+      });
+  }
+);
 
-carRouter.get("/deleteimage/(:id)/(:id2)", async (req, res) => {
+carRouter.get("/deleteimage/(:id)/(:id2)", checkAuth, async (req, res) => {
   const id = req.params.id;
   const id2 = req.params.id2;
   await axios

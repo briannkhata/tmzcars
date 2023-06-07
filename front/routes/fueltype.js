@@ -24,6 +24,8 @@ fueltypeRouter.get("/add", async (req, res) => {
     id: "",
     fueltype: "",
     title: "Add fueltype",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 

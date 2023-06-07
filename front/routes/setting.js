@@ -16,8 +16,9 @@ settingRouter.get("/", async (req, res) => {
         address: data.Address,
         app: data.App,
         data: response.data.data,
-
         title: "Settings",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {

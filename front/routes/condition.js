@@ -3,7 +3,7 @@ const conditionRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
 
-conditionRouter.get("/", async (req, res) => {
+conditionRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "condition/")
     .then((response) => {
@@ -19,7 +19,7 @@ conditionRouter.get("/", async (req, res) => {
     });
 });
 
-conditionRouter.get("/add", async (req, res) => {
+conditionRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addcondition", {
     id: "",
     condition: "",
@@ -29,7 +29,7 @@ conditionRouter.get("/add", async (req, res) => {
   });
 });
 
-conditionRouter.get("/edit/(:id)", async (req, res) => {
+conditionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "condition/getOne/" + id)
@@ -45,7 +45,7 @@ conditionRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-conditionRouter.post("/save", async (req, res) => {
+conditionRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id
     ? `${API_URL}condition/update/`
@@ -69,7 +69,7 @@ conditionRouter.post("/save", async (req, res) => {
     });
 });
 
-conditionRouter.get("/delete/(:id)", async (req, res) => {
+conditionRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   await axios
     .put(API_URL + "condition/delete/" + req.params.id)
     .then((response) => {

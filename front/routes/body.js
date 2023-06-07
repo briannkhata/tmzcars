@@ -2,8 +2,9 @@ const express = require("express");
 const bodyRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-bodyRouter.get("/", async (req, res) => {
+bodyRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "body/")
     .then((response) => {
@@ -19,7 +20,7 @@ bodyRouter.get("/", async (req, res) => {
     });
 });
 
-bodyRouter.get("/add", async (req, res) => {
+bodyRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addbody", {
     id: "",
     body: "",
@@ -29,7 +30,7 @@ bodyRouter.get("/add", async (req, res) => {
   });
 });
 
-bodyRouter.get("/edit/(:id)", async (req, res) => {
+bodyRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "body/getOne/" + id)
@@ -47,7 +48,7 @@ bodyRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-bodyRouter.post("/save", async (req, res) => {
+bodyRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id ? `${API_URL}body/update/` : `${API_URL}body/add/`;
   await axios
@@ -69,7 +70,7 @@ bodyRouter.post("/save", async (req, res) => {
     });
 });
 
-bodyRouter.get("/delete/(:id)", async (req, res) => {
+bodyRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "body/delete/" + id)

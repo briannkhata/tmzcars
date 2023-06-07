@@ -2,8 +2,9 @@ const express = require("express");
 const cartypeRouter = express.Router();
 const axios = require("axios");
 const API_URL = "http://127.0.0.1:7002/api/v1/";
+const checkAuth = require("../middleware/CheckAuth.js");
 
-cartypeRouter.get("/", async (req, res) => {
+cartypeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "cartype/")
     .then((response) => {
@@ -19,15 +20,17 @@ cartypeRouter.get("/", async (req, res) => {
     });
 });
 
-cartypeRouter.get("/add", async (req, res) => {
+cartypeRouter.get("/add", checkAuth, async (req, res) => {
   res.render("backend/admin/addcartype", {
     id: "",
     cartype: "",
     title: "Add car type",
+    name: req.session.user.Name,
+    id: req.session.user.UserId,
   });
 });
 
-cartypeRouter.get("/edit/(:id)", async (req, res) => {
+cartypeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .get(API_URL + "cartype/getOne/" + id)
@@ -45,7 +48,7 @@ cartypeRouter.get("/edit/(:id)", async (req, res) => {
     });
 });
 
-cartypeRouter.post("/save", async (req, res) => {
+cartypeRouter.post("/save", checkAuth, async (req, res) => {
   const id = req.body.id;
   const SAVE_URL = id ? `${API_URL}cartype/update/` : `${API_URL}cartype/add/`;
   await axios
@@ -67,7 +70,7 @@ cartypeRouter.post("/save", async (req, res) => {
     });
 });
 
-cartypeRouter.get("/delete/(:id)", async (req, res) => {
+cartypeRouter.get("/delete/(:id)", checkAuth, async (req, res) => {
   const id = req.params.id;
   await axios
     .put(API_URL + "cartype/delete/" + id)

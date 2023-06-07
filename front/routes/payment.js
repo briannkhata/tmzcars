@@ -10,6 +10,8 @@ paymentRouter.get("/", async (req, res) => {
       res.render("backend/admin/payments", {
         data: response.data.data,
         title: "Payments",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
       });
     })
     .catch((error) => {
