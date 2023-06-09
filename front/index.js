@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   session({
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 86400000 }, // 1 day (in milliseconds)
     store: new session.MemoryStore(),
     saveUninitialized: true,
     resave: "true",

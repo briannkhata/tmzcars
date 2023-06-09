@@ -8,7 +8,7 @@ conditionRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "condition/")
     .then((response) => {
-      res.render("backend/admin/conditions", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/conditions", {
         data: response.data.data,
         title: "Conditions",
         name: req.session.user.Name,
@@ -21,7 +21,7 @@ conditionRouter.get("/", checkAuth, async (req, res) => {
 });
 
 conditionRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addcondition", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcondition", {
     id: "",
     condition: "",
     title: "Add condition",
@@ -35,7 +35,7 @@ conditionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "condition/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addcondition", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcondition", {
         id: id,
         condition: response.data.data.Condition,
         title: "Update condition",

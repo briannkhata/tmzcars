@@ -8,12 +8,15 @@ transmissionRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "transmission/")
     .then((response) => {
-      res.render("backend/admin/transmissions", {
-        data: response.data.data,
-        title: "transmissions",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/transmissions",
+        {
+          data: response.data.data,
+          title: "transmissions",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -21,13 +24,16 @@ transmissionRouter.get("/", checkAuth, async (req, res) => {
 });
 
 transmissionRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addtransmission", {
-    id: "",
-    transmission: "",
-    title: "Add transmission",
-    name: req.session.user.Name,
-    id: req.session.user.UserId,
-  });
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/addtransmission",
+    {
+      id: "",
+      transmission: "",
+      title: "Add transmission",
+      name: req.session.user.Name,
+      id: req.session.user.UserId,
+    }
+  );
 });
 
 transmissionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
@@ -35,13 +41,16 @@ transmissionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "transmission/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addtransmission", {
-        id: id,
-        transmission: response.data.data.Transmission,
-        title: "Update Transmission",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addtransmission",
+        {
+          id: id,
+          transmission: response.data.data.Transmission,
+          title: "Update Transmission",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

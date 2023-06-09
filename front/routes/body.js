@@ -8,7 +8,7 @@ bodyRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "body/")
     .then((response) => {
-      res.render("backend/admin/bodies", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/bodies", {
         data: response.data.data,
         title: "Car Bodies",
         name: req.session.user.Name,
@@ -21,7 +21,7 @@ bodyRouter.get("/", checkAuth, async (req, res) => {
 });
 
 bodyRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addbody", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addbody", {
     id: "",
     body: "",
     title: "Add car body",
@@ -35,7 +35,7 @@ bodyRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "body/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addbody", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addbody", {
         id: id,
         body: response.data.data.Body,
         title: "Update body",

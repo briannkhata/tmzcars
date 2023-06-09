@@ -8,7 +8,7 @@ fueltypeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "fueltype/")
     .then((response) => {
-      res.render("backend/admin/fueltypes", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/fueltypes", {
         data: response.data.data,
         title: "fueltypes",
         name: req.session.user.Name,
@@ -21,7 +21,7 @@ fueltypeRouter.get("/", checkAuth, async (req, res) => {
 });
 
 fueltypeRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addfueltype", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addfueltype", {
     id: "",
     fueltype: "",
     title: "Add fueltype",
@@ -35,7 +35,7 @@ fueltypeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "fueltype/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addfueltype", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addfueltype", {
         id: id,
         fueltype: response.data.data.FuelType,
         title: "Update fueltype",

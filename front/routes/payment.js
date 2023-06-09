@@ -8,7 +8,7 @@ paymentRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "payment/")
     .then((response) => {
-      res.render("backend/admin/payments", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/payments", {
         data: response.data.data,
         title: "Payments",
         name: req.session.user.Name,

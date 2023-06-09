@@ -10,7 +10,7 @@ settingRouter.get("/", checkAuth, async (req, res) => {
     .then((response) => {
       const data = response.data.data;
       console.log(data);
-      res.render("backend/admin/settings", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/settings", {
         id: data.Id,
         phone: data.Phone,
         email: data.Email,

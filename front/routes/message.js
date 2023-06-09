@@ -9,7 +9,7 @@ messageRouter.get("/", checkAuth, async (req, res) => {
     .get(API_URL + "message/")
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/messages", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/messages", {
         data: data,
         title: "messages",
         name: req.session.user.Name,
@@ -28,7 +28,7 @@ messageRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
     .get(API_URL + "message/getOne/" + id)
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/addmessage", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addmessage", {
         id: id,
         message: data.message,
         title: "Update Id Type",
@@ -50,7 +50,7 @@ messageRouter.get("/add", checkAuth, async (req, res) => {
     name: req.session.user.Name,
     id: req.session.user.UserId,
   };
-  res.render("backend/admin/addmessage", data);
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addmessage", data);
 });
 
 messageRouter.post("/save", checkAuth, async (req, res) => {

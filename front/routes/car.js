@@ -20,7 +20,7 @@ carRouter.get("/", checkAuth, async (req, res) => {
     .get(API_URL + "car/")
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/cars", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/cars", {
         data: data,
         title: "Cars List",
         name: req.session.user.Name,
@@ -51,7 +51,7 @@ carRouter.get("/view/(:id)", checkAuth, async (req, res) => {
     .then((response) => {
       const data = response.data.data;
       console.log(data);
-      res.render("backend/admin/cardetails", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/cardetails", {
         id: data.CarId,
         Year: data.Year,
         SellingPrice: data.SellingPrice,
@@ -191,7 +191,7 @@ carRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
     .get(API_URL + "car/getOne/" + req.params.id)
     .then((response) => {
       const data = response.data.data;
-      res.render("backend/admin/addcar", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcar", {
         id: req.params.id,
         Year: data.Year,
         SellingPrice: data.SellingPrice,
@@ -285,7 +285,7 @@ carRouter.get("/add", checkAuth, async (req, res) => {
     id: req.session.user.UserId,
   };
 
-  res.render("backend/admin/addcar", data);
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcar", data);
 });
 
 carRouter.post("/save", checkAuth, async (req, res) => {
@@ -382,7 +382,7 @@ carRouter.get("/addimage/(:id)", (req, res) => {
     name: req.session.user.Name,
     id: req.session.user.UserId,
   };
-  res.render("backend/admin/addimage", data);
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addimage", data);
 });
 
 carRouter.post(

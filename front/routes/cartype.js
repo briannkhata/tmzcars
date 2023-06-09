@@ -8,7 +8,7 @@ cartypeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "cartype/")
     .then((response) => {
-      res.render("backend/admin/cartypes", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/cartypes", {
         data: response.data.data,
         title: "Car Types",
         name: req.session.user.Name,
@@ -21,7 +21,7 @@ cartypeRouter.get("/", checkAuth, async (req, res) => {
 });
 
 cartypeRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addcartype", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcartype", {
     id: "",
     cartype: "",
     title: "Add car type",
@@ -35,7 +35,7 @@ cartypeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "cartype/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addcartype", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcartype", {
         id: id,
         cartype: response.data.data.CarType,
         title: "Update cartype",

@@ -7,12 +7,15 @@ applicantRouter.get("/", async (req, res) => {
   await axios
     .get(API_URL + "applicant/")
     .then((response) => {
-      res.render("backend/admin/applicants", {
-        data: response.data.data,
-        title: "applicants",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/applicants",
+        {
+          data: response.data.data,
+          title: "applicants",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -20,13 +23,16 @@ applicantRouter.get("/", async (req, res) => {
 });
 
 applicantRouter.get("/add", async (req, res) => {
-  res.render("backend/admin/addapplicant", {
-    id: "",
-    applicant: "",
-    title: "Add applicant",
-    name: req.session.user.Name,
-    id: req.session.user.UserId,
-  });
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/addapplicant",
+    {
+      id: "",
+      applicant: "",
+      title: "Add applicant",
+      name: req.session.user.Name,
+      id: req.session.user.UserId,
+    }
+  );
 });
 
 applicantRouter.get("/edit/(:id)", async (req, res) => {
@@ -34,13 +40,16 @@ applicantRouter.get("/edit/(:id)", async (req, res) => {
   await axios
     .get(API_URL + "applicant/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addapplicant", {
-        id: id,
-        applicant: response.data.data.applicant,
-        title: "Update applicant",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addapplicant",
+        {
+          id: id,
+          applicant: response.data.data.applicant,
+          title: "Update applicant",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

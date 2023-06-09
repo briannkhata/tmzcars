@@ -7,7 +7,7 @@ modelRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "model/")
     .then((response) => {
-      res.render("backend/admin/models", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/models", {
         data: response.data.data,
         title: "Models",
         name: req.session.user.Name,
@@ -20,7 +20,7 @@ modelRouter.get("/", checkAuth, async (req, res) => {
 });
 
 modelRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addmodel", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addmodel", {
     id: "",
     model: "",
     title: "Add Model",
@@ -34,13 +34,16 @@ modelRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "model/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addmodel", {
-        id: id,
-        model: response.data.data.Model,
-        title: "Update Model",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addmodel",
+        {
+          id: id,
+          model: response.data.data.Model,
+          title: "Update Model",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

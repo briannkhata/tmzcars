@@ -8,7 +8,7 @@ testimonialRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "testimonial/")
     .then((response) => {
-      res.render("backend/admin/testimonials", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/testimonials", {
         data: response.data.data,
         title: "testimonials",
         name: req.session.user.Name,
@@ -21,7 +21,7 @@ testimonialRouter.get("/", checkAuth, async (req, res) => {
 });
 
 testimonialRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addtestimonial", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addtestimonial", {
     id: "",
     testimonial: "",
     role: "",
@@ -37,7 +37,7 @@ testimonialRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "testimonial/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addtestimonial", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addtestimonial", {
         id: id,
         testimonial: response.data.data.Testimonial,
         role: response.data.data.Role,

@@ -8,7 +8,7 @@ faqRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "faq/")
     .then((response) => {
-      res.render("backend/admin/faqs", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/faqs", {
         data: response.data.data,
         title: "faqs",
         name: req.session.user.Name,
@@ -21,7 +21,7 @@ faqRouter.get("/", checkAuth, async (req, res) => {
 });
 
 faqRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addfaq", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addfaq", {
     id: "",
     faq: "",
     answer: "",
@@ -36,7 +36,7 @@ faqRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "faq/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addfaq", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addfaq", {
         id: id,
         faq: response.data.data.Faq,
         answer: response.data.data.Answer,

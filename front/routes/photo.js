@@ -8,7 +8,7 @@ makeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "make/")
     .then((response) => {
-      res.render("backend/admin/makes", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/makes", {
         data: response.data.data,
         title: "Makes",
         name: req.session.user.Name,
@@ -21,7 +21,7 @@ makeRouter.get("/", checkAuth, async (req, res) => {
 });
 
 makeRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/admin/addmake", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addmake", {
     id: "",
     make: "",
     title: "Add make",
@@ -35,7 +35,7 @@ makeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "make/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addmake", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addmake", {
         id: id,
         make: response.data.data.make,
         title: "Update make",
