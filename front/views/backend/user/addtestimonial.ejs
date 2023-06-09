@@ -1,0 +1,58 @@
+<%- include ("../header.ejs") %>
+    <%- include ("nav.ejs") %>
+
+
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+
+
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <%=title%>
+                                </h4>
+                                <hr>
+                                <p>
+
+                                    <% if(messages.success){%>
+                                        <div class="alert alert-success" role="alert">
+                                            <%= messages.success %>
+                                        </div>
+                                        <%}%>
+                                            <% if(messages.error){%>
+                                                <div class="alert
+                                                            alert-danger" role="alert">
+                                                    <%= messages.error %>
+                                                </div>
+                                                <%}%>
+                                </p>
+                                <form class="forms-sample" action="/testimonial/save" method="post">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Testimonial</label>
+                                        <textarea name="Testimonial" class="form-control" required>
+                                            <%= testimonial %>
+                                        </textarea>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Role e.g CEO</label>
+                                        <input type="text" name="Role" class="form-control" value="<%= role %>"
+                                            placeholder="Role" required>
+                                    </div>
+                                    <input type="hidden" name="id" value="<%=id%>">
+                                    <input type="hidden" name="UserId" value="<%=userId%>">
+
+                                    <button type="submit" class="btn
+                                                                    btn-primary
+                                                                    mr-2">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <%- include ("../footer.ejs") %>

@@ -1,0 +1,50 @@
+<%- include ("../header.ejs") %>
+    <%- include ("nav.ejs") %>
+
+
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+
+
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <%=title%>
+                                </h4>
+                                <hr>
+                                <p>
+
+                                    <% if(messages.success){%>
+                                        <div class="alert alert-success" role="alert">
+                                            <%= messages.success %>
+                                        </div>
+                                        <%}%>
+                                            <% if(messages.error){%>
+                                                <div class="alert
+                                                            alert-danger" role="alert">
+                                                    <%= messages.error %>
+                                                </div>
+                                                <%}%>
+                                </p>
+                                <form class="forms-sample" action="/transmission/save/" method="post">
+                                    <div class="form-group">
+                                        <label for="exampleInputName1">Transmission</label>
+                                        <input type="text" name="Transmission" class="form-control" value="<%=
+                                                                        transmission %>" placeholder="Transmission"
+                                            required>
+                                    </div>
+                                    <input type="hidden" name="id" value="<%=id%>">
+                                    <button type="submit" class="btn
+                                                                    btn-primary
+                                                                    mr-2">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <%- include ("../footer.ejs") %>

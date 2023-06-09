@@ -9,18 +9,24 @@ userRouter.get("/changepassword", checkAuth, async (req, res) => {
   const data = {
     title: "Change Password",
   };
-  res.render("backend/admin/changepassword", data);
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/changepassword",
+    data
+  );
 });
 
 userRouter.get("/changephone", checkAuth, async (req, res) => {
   const data = {
     title: "Change Phone",
   };
-  res.render("backend/admin/changephone", data);
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/changephone",
+    data
+  );
 });
 
 userRouter.get("/addadmin", checkAuth, async (req, res) => {
-  res.render("backend/admin/addadmin", {
+  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addadmin", {
     id: "",
     name: "",
     phone: "",
@@ -36,23 +42,26 @@ userRouter.get("/profile/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/profile", {
-        id: id,
-        name: response.data.data.Name,
-        phone: response.data.data.Phone,
-        email: response.data.data.Email,
-        password: response.data.data.Password,
-        address: response.data.data.Address,
-        altphone: response.data.data.AltPhone,
-        country: response.data.data.Country,
-        city: response.data.data.City,
-        region: response.data.data.Region,
-        idnumber: response.data.data.IdNumber,
-        idtype: response.data.data.IdType.IdType,
-        title: "Update Profile",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/profile",
+        {
+          id: id,
+          name: response.data.data.Name,
+          phone: response.data.data.Phone,
+          email: response.data.data.Email,
+          password: response.data.data.Password,
+          address: response.data.data.Address,
+          altphone: response.data.data.AltPhone,
+          country: response.data.data.Country,
+          city: response.data.data.City,
+          region: response.data.data.Region,
+          idnumber: response.data.data.IdNumber,
+          idtype: response.data.data.IdType.IdType,
+          title: "Update Profile",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -76,17 +85,20 @@ userRouter.get("/verifyaccount/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/verifyaccount", {
-        id: id,
-        name: response.data.data.Name,
-        phone: response.data.data.Phone,
-        idnumber: response.data.data.IdNumber,
-        idtypee: response.data.data.IdTypeId,
-        title: "Verify Account",
-        idtypes: idTypes,
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/verifyaccount",
+        {
+          id: id,
+          name: response.data.data.Name,
+          phone: response.data.data.Phone,
+          idnumber: response.data.data.IdNumber,
+          idtypee: response.data.data.IdTypeId,
+          title: "Verify Account",
+          idtypes: idTypes,
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -117,14 +129,17 @@ userRouter.get("/changephone/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/changephone", {
-        id: id,
-        name: response.data.data.Name,
-        phone: response.data.data.Phone,
-        title: "Change Phone",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/changephone",
+        {
+          id: id,
+          name: response.data.data.Name,
+          phone: response.data.data.Phone,
+          title: "Change Phone",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -154,14 +169,17 @@ userRouter.get("/changepassword/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/changepassword", {
-        id: id,
-        name: response.data.data.Name,
-        phone: response.data.data.Phone,
-        title: "Change Password",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/changepassword",
+        {
+          id: id,
+          name: response.data.data.Name,
+          phone: response.data.data.Phone,
+          title: "Change Password",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -215,16 +233,19 @@ userRouter.get("/editadmin/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getOne/" + id)
     .then((response) => {
-      res.render("backend/admin/addadmin", {
-        id: id,
-        name: response.data.data.Name,
-        phone: response.data.data.Phone,
-        email: response.data.data.Email,
-        password: response.data.data.Password,
-        title: "Update Admin",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addadmin",
+        {
+          id: id,
+          name: response.data.data.Name,
+          phone: response.data.data.Phone,
+          email: response.data.data.Email,
+          password: response.data.data.Password,
+          title: "Update Admin",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -264,7 +285,7 @@ userRouter.get("/admins", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getAdmins/")
     .then((response) => {
-      res.render("backend/admin/admins", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/admins", {
         data: response.data.data,
         title: "Admins",
         name: req.session.user.Name,
@@ -280,7 +301,7 @@ userRouter.get("/users", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getSellers/")
     .then((response) => {
-      res.render("backend/admin/users", {
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/users", {
         data: response.data.data,
         title: "Users",
         name: req.session.user.Name,
@@ -296,12 +317,15 @@ userRouter.get("/confirmed", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getConfirmed/")
     .then((response) => {
-      res.render("backend/admin/confirmedusers", {
-        data: response.data.data,
-        title: "Confirmed Users",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/confirmedusers",
+        {
+          data: response.data.data,
+          title: "Confirmed Users",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

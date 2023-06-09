@@ -283,7 +283,7 @@ homeRouter.post("/login", async (req, res) => {
 });
 
 function checkSignIn(req, res, next) {
-  if (req.session.user) {
+  if (req.session.user.Role) {
     next();
   } else {
     //next(new Error("Session Expired or You need to Login!"));
@@ -306,8 +306,12 @@ homeRouter.get("/dashboard", checkAuth, async (req, res) => {
     carsFeatured: carsFeatured,
     name: req.session.user.Name,
     id: req.session.user.UserId,
+    role: req.session.user.Role,
   };
-  res.render("backend/admin/dashboard", data);
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/dashboard",
+    data
+  );
 });
 homeRouter.get("/logout", (req, res) => {
   req.session.destroy();

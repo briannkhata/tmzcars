@@ -1,0 +1,194 @@
+<%- include ("../header.ejs") %>
+    <%- include ("nav.ejs") %>
+
+
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+
+
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-description">
+                                    <a href="/car/" class="btn btn-primary btn-sm btn-icon-text">
+                                        Back
+                                        <i class="typcn typcn-arrow-back btn-icon-append"></i>
+                                    </a>
+                                    <a href="/car/addimage/<%=id%>" class="btn btn-primary btn-sm btn-icon-text">
+                                        Add Image
+                                        <i class="typcn typcn-plus btn-icon-append"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-success btn-sm btn-icon-text"
+                                        onclick="window.print()">
+                                        Print
+                                        <i class="typcn typcn-printer btn-icon-append"></i>
+                                    </button>
+
+                                    <a type="button" class="btn btn-danger btn-sm btn-icon-text"
+                                        onclick="return alert('Are you sure you want to delete THIS CAR BODY?')"
+                                        href="/car/delete/<%=id%>">
+                                        Delete
+                                        <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                    </a>
+                                </p>
+                                <hr>
+                                <h4 class="card-title">
+                                    <%=title%>
+                                </h4>
+                                <p>
+
+                                    <% if(messages.success){%>
+                                        <div class="alert alert-success" role="alert">
+                                            <%= messages.success %>
+                                        </div>
+                                        <%}%>
+                                            <% if(messages.error){%>
+                                                <div class="alert
+                                                            alert-danger" role="alert">
+                                                    <%= messages.error %>
+                                                </div>
+                                                <%}%>
+                                </p>
+                                <table class="table">
+
+                                    <tr>
+                                        <td>Owner </td>
+                                        <td>
+                                            <%= Name%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Model </td>
+                                        <td>
+                                            <%= Model%>
+                                        </td>
+                                    <tr>
+                                        <td>Transmission </td>
+                                        <td>
+                                            <%= Transmission%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fuel Type </td>
+                                        <td>
+                                            <%= FuelType%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Car Type </td>
+                                        <td>
+                                            <%= CarType%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Body </td>
+                                        <td>
+                                            <%= Body%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Condition </td>
+                                        <td>
+                                            <%= Condition%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Service History </td>
+                                        <td>
+                                            <%= ServiceHistory%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year of Make</td>
+                                        <td>
+                                            <%= Year%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year Bought</td>
+                                        <td>
+                                            <%= Year%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mileage</td>
+                                        <td>
+                                            <%= Mileage%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Engine</td>
+                                        <td>
+                                            <%= Engine%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Selling Price</td>
+                                        <td><strong>
+                                                <%= SellingPrice.toLocaleString('en-US', { minimumFractionDigits: 2,
+                                                    maximumFractionDigits: 2 })%>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TMZ Selling Price</td>
+                                        <td><strong>
+                                                <%= TmzSellingPrice !==null && TmzSellingPrice !=='' ?
+                                                    TmzSellingPrice.toLocaleString('en-US', { minimumFractionDigits: 2,
+                                                    maximumFractionDigits: 2 }) : '' %>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>External Color</td>
+                                        <td>
+                                            <%= ExteriorColor%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Internal Color </td>
+                                        <td>
+                                            <%= InteriorColor%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country of Manufacture</td>
+                                        <td>
+                                            <%= CountryOfManufacture%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other Details</td>
+                                        <td>
+                                            <%= OtherDetails%>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr>
+
+                                <div class="row">
+                                    <% for(var i=0; i< images.length; i++) { %>
+
+                                        <div class="col-md-4">
+                                            <img src="/uploads/<%= images[i].Photo%>" alt="Image" class="img-fluid"
+                                                style="border-radius:10px; height:300px; width:400px;">
+                                            <div class="d-flex align-items-center">
+                                                <a type="button" class="btn btn-danger btn-sm btn-icon-text"
+                                                    onclick="return alert('Are you sure you want to delete THIS IMAGE?')"
+                                                    href="/car/deleteimage/<%=images[i].PhotoId%>/<%=id%>">
+                                                    <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <%- include ("../footer.ejs") %>
