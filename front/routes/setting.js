@@ -10,17 +10,20 @@ settingRouter.get("/", checkAuth, async (req, res) => {
     .then((response) => {
       const data = response.data.data;
       console.log(data);
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/settings", {
-        id: data.Id,
-        phone: data.Phone,
-        email: data.Email,
-        address: data.Address,
-        app: data.App,
-        data: response.data.data,
-        title: "Settings",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/settings",
+        {
+          id: data.Id,
+          phone: data.Phone,
+          email: data.Email,
+          address: data.Address,
+          app: data.App,
+          data: response.data.data,
+          title: "Settings",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

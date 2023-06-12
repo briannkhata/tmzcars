@@ -12,7 +12,7 @@ faqRouter.get("/", checkAuth, async (req, res) => {
         data: response.data.data,
         title: "faqs",
         name: req.session.user.Name,
-        id: req.session.user.UserId,
+        userId: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -27,7 +27,7 @@ faqRouter.get("/add", checkAuth, async (req, res) => {
     answer: "",
     title: "Add Faq",
     name: req.session.user.Name,
-    id: req.session.user.UserId,
+    userId: req.session.user.UserId,
   });
 });
 
@@ -42,7 +42,7 @@ faqRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
         answer: response.data.data.Answer,
         title: "Update faq",
         name: req.session.user.Name,
-        id: req.session.user.UserId,
+        userId: req.session.user.UserId,
       });
     })
     .catch((error) => {

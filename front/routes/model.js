@@ -11,7 +11,7 @@ modelRouter.get("/", checkAuth, async (req, res) => {
         data: response.data.data,
         title: "Models",
         name: req.session.user.Name,
-        id: req.session.user.UserId,
+        userId: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -25,7 +25,7 @@ modelRouter.get("/add", checkAuth, async (req, res) => {
     model: "",
     title: "Add Model",
     name: req.session.user.Name,
-    id: req.session.user.UserId,
+    userId: req.session.user.UserId,
   });
 });
 
@@ -41,7 +41,7 @@ modelRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
           model: response.data.data.Model,
           title: "Update Model",
           name: req.session.user.Name,
-          id: req.session.user.UserId,
+          userId: req.session.user.UserId,
         }
       );
     })

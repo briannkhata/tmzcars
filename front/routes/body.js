@@ -12,7 +12,7 @@ bodyRouter.get("/", checkAuth, async (req, res) => {
         data: response.data.data,
         title: "Car Bodies",
         name: req.session.user.Name,
-        id: req.session.user.UserId,
+        userId: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -26,7 +26,7 @@ bodyRouter.get("/add", checkAuth, async (req, res) => {
     body: "",
     title: "Add car body",
     name: req.session.user.Name,
-    id: req.session.user.UserId,
+    userId: req.session.user.UserId,
   });
 });
 
@@ -35,13 +35,16 @@ bodyRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "body/getOne/" + id)
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addbody", {
-        id: id,
-        body: response.data.data.Body,
-        title: "Update body",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addbody",
+        {
+          id: id,
+          body: response.data.data.Body,
+          title: "Update body",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

@@ -12,9 +12,9 @@ transmissionRouter.get("/", checkAuth, async (req, res) => {
         "backend/" + req.session.user.Role.toLowerCase() + "/transmissions",
         {
           data: response.data.data,
-          title: "transmissions",
+          title: "Transmissions",
           name: req.session.user.Name,
-          id: req.session.user.UserId,
+          userId: req.session.user.UserId,
         }
       );
     })
@@ -31,7 +31,7 @@ transmissionRouter.get("/add", checkAuth, async (req, res) => {
       transmission: "",
       title: "Add transmission",
       name: req.session.user.Name,
-      id: req.session.user.UserId,
+      userId: req.session.user.UserId,
     }
   );
 });
@@ -48,7 +48,7 @@ transmissionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
           transmission: response.data.data.Transmission,
           title: "Update Transmission",
           name: req.session.user.Name,
-          id: req.session.user.UserId,
+          userId: req.session.user.UserId,
         }
       );
     })

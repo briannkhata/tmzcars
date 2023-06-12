@@ -5,6 +5,7 @@ const path = require("path");
 const multer = require("multer");
 const checkAuth = require("../middleware/CheckAuth.js");
 
+const API_URL = "http://127.0.0.1:7002/api/v1/";
 const uploadDir = path.join(__dirname, "../public/uploads/");
 const storage = multer.diskStorage({
   destination: uploadDir,
@@ -14,7 +15,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-const API_URL = "http://127.0.0.1:7002/api/v1/";
 carRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "car/")
@@ -51,37 +51,40 @@ carRouter.get("/view/(:id)", checkAuth, async (req, res) => {
     .then((response) => {
       const data = response.data.data;
       console.log(data);
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/cardetails", {
-        id: data.CarId,
-        Year: data.Year,
-        SellingPrice: data.SellingPrice,
-        TmzSellingPrice: data.TmzSellingPrice,
-        Mileage: data.Mileage,
-        Engine: data.Engine,
-        FuelConsumption: data.FuelConsumption,
-        Warrant: data.Warrant,
-        CountryOfManufacture: data.CountryOfManufacture,
-        ServiceHistory: data.ServiceHistory,
-        RegNo: data.RegNo,
-        Model: data.Model.Model,
-        Make: data.Make.Make,
-        Transmission: data.Transmission.Transmission,
-        Steering: data.Steering,
-        Condition: data.Condition.Condition,
-        InteriorColor: data.InteriorColor,
-        ExteriorColor: data.ExteriorColor,
-        FuelType: data.FuelType.FuelType,
-        CarType: data.CarType.CarType,
-        Body: data.Body.Body,
-        YearBought: data.YearBought,
-        YearsUsed: data.YearsUsed,
-        OtherDetails: data.OtherDetails,
-        Name: data.User.Name,
-        images: images,
-        title: "Car Details",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/cardetails",
+        {
+          id: data.CarId,
+          Year: data.Year,
+          SellingPrice: data.SellingPrice,
+          TmzSellingPrice: data.TmzSellingPrice,
+          Mileage: data.Mileage,
+          Engine: data.Engine,
+          FuelConsumption: data.FuelConsumption,
+          Warrant: data.Warrant,
+          CountryOfManufacture: data.CountryOfManufacture,
+          ServiceHistory: data.ServiceHistory,
+          RegNo: data.RegNo,
+          Model: data.Model.Model,
+          Make: data.Make.Make,
+          Transmission: data.Transmission.Transmission,
+          Steering: data.Steering,
+          Condition: data.Condition.Condition,
+          InteriorColor: data.InteriorColor,
+          ExteriorColor: data.ExteriorColor,
+          FuelType: data.FuelType.FuelType,
+          CarType: data.CarType.CarType,
+          Body: data.Body.Body,
+          YearBought: data.YearBought,
+          YearsUsed: data.YearsUsed,
+          OtherDetails: data.OtherDetails,
+          Name: data.User.Name,
+          images: images,
+          title: "Car Details",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -285,7 +288,10 @@ carRouter.get("/add", checkAuth, async (req, res) => {
     id: req.session.user.UserId,
   };
 
-  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcar", data);
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/addcar",
+    data
+  );
 });
 
 carRouter.post("/save", checkAuth, async (req, res) => {
@@ -382,7 +388,10 @@ carRouter.get("/addimage/(:id)", (req, res) => {
     name: req.session.user.Name,
     id: req.session.user.UserId,
   };
-  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addimage", data);
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/addimage",
+    data
+  );
 });
 
 carRouter.post(

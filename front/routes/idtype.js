@@ -8,12 +8,15 @@ idtypeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "idtype/")
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/idtypes", {
-        data: response.data.data,
-        title: "idtypes",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/idtypes",
+        {
+          data: response.data.data,
+          title: "idtypes",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -26,7 +29,7 @@ idtypeRouter.get("/add", checkAuth, async (req, res) => {
     idtype: "",
     title: "Add idtype",
     name: req.session.user.Name,
-    id: req.session.user.UserId,
+    userId: req.session.user.UserId,
   });
 });
 
@@ -35,13 +38,16 @@ idtypeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "idtype/getOne/" + id)
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addidtype", {
-        id: id,
-        idtype: response.data.data.IdType,
-        title: "Update idtype",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addidtype",
+        {
+          id: id,
+          idtype: response.data.data.IdType,
+          title: "Update idtype",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

@@ -8,12 +8,15 @@ conditionRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "condition/")
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/conditions", {
-        data: response.data.data,
-        title: "Conditions",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/conditions",
+        {
+          data: response.data.data,
+          title: "Conditions",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -21,13 +24,16 @@ conditionRouter.get("/", checkAuth, async (req, res) => {
 });
 
 conditionRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcondition", {
-    id: "",
-    condition: "",
-    title: "Add condition",
-    name: req.session.user.Name,
-    id: req.session.user.UserId,
-  });
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/addcondition",
+    {
+      id: "",
+      condition: "",
+      title: "Add condition",
+      name: req.session.user.Name,
+      userId: req.session.user.UserId,
+    }
+  );
 });
 
 conditionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
@@ -35,11 +41,14 @@ conditionRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "condition/getOne/" + id)
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcondition", {
-        id: id,
-        condition: response.data.data.Condition,
-        title: "Update condition",
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addcondition",
+        {
+          id: id,
+          condition: response.data.data.Condition,
+          title: "Update condition",
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

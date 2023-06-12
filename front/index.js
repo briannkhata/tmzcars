@@ -9,9 +9,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cookieParser());
+const expiryDate = new Date(Date.now() + 86400 * 1000);
 app.use(
   session({
-    cookie: { maxAge: 86400000 }, // 1 day (in milliseconds)
+    cookie: { maxAge: 86400000 }, 
     store: new session.MemoryStore(),
     saveUninitialized: true,
     resave: "true",

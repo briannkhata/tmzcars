@@ -1,5 +1,5 @@
 const checkAuth = async (req, res, next) => {
-  if (req.session.user) {
+  if (req.session || req.session.user) {
     next();
   } else {
     res.redirect("/login");

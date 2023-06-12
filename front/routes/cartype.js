@@ -8,12 +8,15 @@ cartypeRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "cartype/")
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/cartypes", {
-        data: response.data.data,
-        title: "Car Types",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/cartypes",
+        {
+          data: response.data.data,
+          title: "Car Types",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -26,7 +29,7 @@ cartypeRouter.get("/add", checkAuth, async (req, res) => {
     cartype: "",
     title: "Add car type",
     name: req.session.user.Name,
-    id: req.session.user.UserId,
+    userId: req.session.user.UserId,
   });
 });
 
@@ -35,13 +38,16 @@ cartypeRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "cartype/getOne/" + id)
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addcartype", {
-        id: id,
-        cartype: response.data.data.CarType,
-        title: "Update cartype",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addcartype",
+        {
+          id: id,
+          cartype: response.data.data.CarType,
+          title: "Update cartype",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

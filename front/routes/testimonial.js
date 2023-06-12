@@ -8,12 +8,15 @@ testimonialRouter.get("/", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "testimonial/")
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/testimonials", {
-        data: response.data.data,
-        title: "testimonials",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/testimonials",
+        {
+          data: response.data.data,
+          title: "testimonials",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -21,15 +24,18 @@ testimonialRouter.get("/", checkAuth, async (req, res) => {
 });
 
 testimonialRouter.get("/add", checkAuth, async (req, res) => {
-  res.render("backend/" + req.session.user.Role.toLowerCase() + "/addtestimonial", {
-    id: "",
-    testimonial: "",
-    role: "",
-    userId: "",
-    title: "Add testimonial",
-    name: req.session.user.Name,
-    id: req.session.user.UserId,
-  });
+  res.render(
+    "backend/" + req.session.user.Role.toLowerCase() + "/addtestimonial",
+    {
+      id: "",
+      testimonial: "",
+      role: "",
+      userId: "",
+      title: "Add testimonial",
+      name: req.session.user.Name,
+      userId: req.session.user.UserId,
+    }
+  );
 });
 
 testimonialRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
@@ -37,15 +43,18 @@ testimonialRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "testimonial/getOne/" + id)
     .then((response) => {
-      res.render("backend/" + req.session.user.Role.toLowerCase() + "/addtestimonial", {
-        id: id,
-        testimonial: response.data.data.Testimonial,
-        role: response.data.data.Role,
-        userId: response.data.data.UserId,
-        title: "Update Testimonial",
-        name: req.session.user.Name,
-        id: req.session.user.UserId,
-      });
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/addtestimonial",
+        {
+          id: id,
+          testimonial: response.data.data.Testimonial,
+          role: response.data.data.Role,
+          userId: response.data.data.UserId,
+          title: "Update Testimonial",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
     })
     .catch((error) => {
       console.log(error);

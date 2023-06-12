@@ -305,7 +305,7 @@ homeRouter.get("/dashboard", checkAuth, async (req, res) => {
     carstoday: carstoday,
     carsFeatured: carsFeatured,
     name: req.session.user.Name,
-    id: req.session.user.UserId,
+    userId: req.session.user.UserId,
     role: req.session.user.Role,
   };
   res.render(
