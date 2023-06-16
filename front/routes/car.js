@@ -33,6 +33,24 @@ carRouter.get("/", checkAuth, async (req, res) => {
     .finally(() => {});
 });
 
+carRouter.get("/rentals", checkAuth, async (req, res) => {
+  await axios
+    .get(API_URL + "car/rentals")
+    .then((response) => {
+      const data = response.data.data;
+      res.render("backend/" + req.session.user.Role.toLowerCase() + "/cars", {
+        data: data,
+        title: "Cars List",
+        name: req.session.user.Name,
+        id: req.session.user.UserId,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {});
+});
+
 function getCarImages(id) {
   return axios
     .get(API_URL + "photo/getCarImages/" + id)

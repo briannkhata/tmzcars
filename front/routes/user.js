@@ -297,6 +297,25 @@ userRouter.get("/admins", checkAuth, async (req, res) => {
     });
 });
 
+userRouter.get("/rentals", checkAuth, async (req, res) => {
+  await axios
+    .get(API_URL + "user/getRentals/")
+    .then((response) => {
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/rentals",
+        {
+          data: response.data.data,
+          title: "Rentals",
+          name: req.session.user.Name,
+          userId: req.session.user.UserId,
+        }
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 userRouter.get("/users", checkAuth, async (req, res) => {
   await axios
     .get(API_URL + "user/getSellers/")

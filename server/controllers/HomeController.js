@@ -6,7 +6,7 @@ require("dotenv").config();
 const auth = require("../middleware/auth.js");
 const register = async (req, res) => {
   try {
-    const { Name, Phone, Password } = req.body;
+    const { Role, Name, Phone, Password } = req.body;
 
     // if (!Name || !Phone || !Password) {
     //   return res.status(400).json({
@@ -26,10 +26,10 @@ const register = async (req, res) => {
     }
 
     await User.create({
+      Role,
       Name,
       Phone,
       Password: hashedPassword,
-      Role: "User",
     });
 
     res.status(201).json({
@@ -80,7 +80,7 @@ const login = async (req, res) => {
     console.error(error);
     res.status(500).json({
       success: 0,
-      message: "wrong credietions",
+      message: "wrong creditions",
     });
   }
 };

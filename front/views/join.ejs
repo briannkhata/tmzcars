@@ -34,6 +34,14 @@
                         <%}%>
 
                             <form action="/register" method="post">
+                                <div class="col-md-12 my-3">
+                                    <label class="site-label">Role <span class="red-text">*</span></label>
+                                    <select name="Role" class="site-input" required>
+                                        <option disabled selected>Select Option</option>
+                                        <option value="User">Car Seller</option>
+                                        <option value="Rental">Car Rental</option>
+                                    </select>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12 my-3">
                                         <label class="site-label">Name <span class="red-text">*</span></label>

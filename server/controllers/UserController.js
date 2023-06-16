@@ -138,6 +138,32 @@ const getSellers = async (req, res) => {
   }
 };
 
+const getRentals = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        Deleted: 0,
+        Role: "Rental",
+      },
+      include: [
+        {
+          model: IdType,
+        },
+      ],
+    });
+
+    res.status(200).json({
+      success: 1,
+      message: "users retrieved successfully",
+      data: users,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting users : ${err}` });
+  }
+};
+
 const getConfirmed = async (req, res) => {
   try {
     const users = await User.findAll({
@@ -341,6 +367,7 @@ module.exports = {
   getConfirmed,
   getAdmins,
   getSellers,
+  getRentals,
   addadmin,
   updateadmin,
 };

@@ -161,8 +161,6 @@ homeRouter.get("/contact", (req, res) => {
     email: "info@tmzcars.com",
     phone: "0888 015 904",
     address: "Next to MASM House, Blantyre",
-    message: "",
-    message2: "",
   };
   res.render("contact", data);
 });
@@ -176,8 +174,6 @@ homeRouter.get("/login", (req, res) => {
 homeRouter.get("/join", (req, res) => {
   const data = {
     title: "Create Account",
-    message: "",
-    message2: "",
   };
   res.render("join", data);
 });
@@ -185,6 +181,7 @@ homeRouter.get("/join", (req, res) => {
 homeRouter.post("/register", async (req, res) => {
   try {
     const response = await axios.post(API_URL + "home/register/", {
+      Role: req.body.Role,
       Name: req.body.Name,
       Phone: req.body.Phone,
       Password: req.body.Password,

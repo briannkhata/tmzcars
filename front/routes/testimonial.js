@@ -12,7 +12,7 @@ testimonialRouter.get("/", checkAuth, async (req, res) => {
         "backend/" + req.session.user.Role.toLowerCase() + "/testimonials",
         {
           data: response.data.data,
-          title: "testimonials",
+          title: "Testimonials",
           name: req.session.user.Name,
           userId: req.session.user.UserId,
         }

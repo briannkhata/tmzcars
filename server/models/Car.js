@@ -60,6 +60,12 @@ const Car = sequelize.define(
       type: DataTypes.STRING(200),
       allowNull: true,
     },
+
+    Purpose: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+
     FuelConsumption: {
       type: DataTypes.STRING(200),
       allowNull: true,

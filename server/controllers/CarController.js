@@ -44,6 +44,38 @@ const getAll = async (req, res) => {
   }
 };
 
+const getRentals = async (req, res) => {
+  try {
+    const cars = await Car.findAll({
+      where: {
+        Deleted: 0,
+      },
+      include: [
+        {
+          model: Model,
+        },
+        { model: Make },
+        { model: CarType },
+        { model: FuelType },
+        { model: Condition },
+        { model: Body },
+        { model: Transmission },
+        { model: User },
+        { model: Photo },
+      ],
+    });
+    res.status(200).json({
+      success: 1,
+      message: "Cars Retrieved successfully",
+      data: cars,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting cars : ${err}` });
+  }
+};
+
 const getCarsToday = async (req, res) => {
   try {
     const cars = await Car.findAll({
@@ -581,4 +613,5 @@ module.exports = {
   getCarsByMake,
   add,
   getCarsToday,
+  getRentals,
 };
