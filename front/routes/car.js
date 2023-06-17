@@ -38,6 +38,27 @@ carRouter.get("/rentals", checkAuth, async (req, res) => {
     .get(API_URL + "car/rentals")
     .then((response) => {
       const data = response.data.data;
+      res.render(
+        "backend/" + req.session.user.Role.toLowerCase() + "/rentals",
+        {
+          data: data,
+          title: "Cars List",
+          name: req.session.user.Name,
+          id: req.session.user.UserId,
+        }
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {});
+});
+
+carRouter.get("/front", async (req, res) => {
+  await axios
+    .get(API_URL + "car/front")
+    .then((response) => {
+      const data = response.data.data;
       res.render("backend/" + req.session.user.Role.toLowerCase() + "/cars", {
         data: data,
         title: "Cars List",

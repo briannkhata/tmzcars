@@ -14,9 +14,20 @@ const API_URL = "http://127.0.0.1:7002/api/v1/";
 //   res.redirect("/login");
 // });
 
+function getAllCarsRentals() {
+  return axios
+    .get(API_URL + "car/rentals/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function getAllCars() {
   return axios
-    .get(API_URL + "car/")
+    .get(API_URL + "car/front/")
     .then((response) => {
       return response.data.data;
     })
@@ -97,9 +108,8 @@ homeRouter.get("/", async (req, res) => {
   const makes = await getMakes();
   const conditions = await getConditions();
   const cartypes = await getCarTypes();
-  console.log(cars);
   const data = {
-    title: "Home",
+    title: "Car List",
     cars: cars,
     models: models,
     makes: makes,
@@ -107,6 +117,23 @@ homeRouter.get("/", async (req, res) => {
     cartypes: cartypes,
   };
   res.render("home", data);
+});
+
+homeRouter.get("/rentals", async (req, res) => {
+  const cars = await getAllCarsRentals();
+  const models = await getModels();
+  const makes = await getMakes();
+  const conditions = await getConditions();
+  const cartypes = await getCarTypes();
+  const data = {
+    title: "Cars for Rental",
+    cars: cars,
+    models: models,
+    makes: makes,
+    conditions: conditions,
+    cartypes: cartypes,
+  };
+  res.render("rentals", data);
 });
 
 homeRouter.get("/view/(:id)", async (req, res) => {
@@ -224,6 +251,17 @@ function getCars() {
     });
 }
 
+function getMyCars() {
+  return axios
+    .get(API_URL + "car/")
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function getConfirmed() {
   return axios
     .get(API_URL + "user/getConfirmed/")
@@ -298,7 +336,7 @@ homeRouter.get("/dashboard", checkAuth, async (req, res) => {
     title: "Dashboard",
     users: users,
     confirmed: confirmed,
-    cars: cars,
+    cars: cars > 0 ? cars : 0,
     carstoday: carstoday,
     carsFeatured: carsFeatured,
     name: req.session.user.Name,

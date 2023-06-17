@@ -14,14 +14,18 @@ const { Photo } = require("../models/Photo.js");
 
 const getAll = async (req, res) => {
   try {
+    let whereClause = {
+      Deleted: 0,
+      Purpose: "sale",
+    };
+
+    if (id) {
+      whereClause.UserId = userId;
+    }
     const cars = await Car.findAll({
-      where: {
-        Deleted: 0,
-      },
+      where: whereClause,
       include: [
-        {
-          model: Model,
-        },
+        { model: Model },
         { model: Make },
         { model: CarType },
         { model: FuelType },
@@ -49,11 +53,41 @@ const getRentals = async (req, res) => {
     const cars = await Car.findAll({
       where: {
         Deleted: 0,
+        Purpose: "rental",
       },
       include: [
-        {
-          model: Model,
-        },
+        { model: Model },
+        { model: Make },
+        { model: CarType },
+        { model: FuelType },
+        { model: Condition },
+        { model: Body },
+        { model: Transmission },
+        { model: User },
+        { model: Photo },
+      ],
+    });
+    res.status(200).json({
+      success: 1,
+      message: "Cars Retrieved successfully",
+      data: cars,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting cars : ${err}` });
+  }
+};
+
+const getCarsFront = async (req, res) => {
+  try {
+    const cars = await Car.findAll({
+      where: {
+        Deleted: 0,
+        Purpose: "sale",
+      },
+      include: [
+        { model: Model },
         { model: Make },
         { model: CarType },
         { model: FuelType },
@@ -614,4 +648,5 @@ module.exports = {
   add,
   getCarsToday,
   getRentals,
+  getCarsFront,
 };

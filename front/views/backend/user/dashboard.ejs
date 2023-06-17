@@ -8,29 +8,14 @@
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="row">
+
                     <div class="col-md-4 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
                                 <div
                                     class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                                     <div>
-                                        <p class="mb-2 text-md-center text-lg-left">Total Users</p>
-                                        <h1 class="mb-0">
-                                            <%=users.length%>
-                                        </h1>
-                                    </div>
-                                    <i class="typcn typcn-user icon-xl text-secondary"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div
-                                    class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
-                                    <div>
-                                        <p class="mb-2 text-md-center text-lg-left">Total Cars</p>
+                                        <p class="mb-2 text-md-center text-lg-left">My Cars</p>
                                         <h1 class="mb-0">
                                             <%=cars.length%>
                                         </h1>
@@ -41,74 +26,46 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-4 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
                                 <div
                                     class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                                     <div>
-                                        <p class="mb-2 text-md-center text-lg-left">Confirmed Users</p>
+                                        <p class="mb-2 text-md-center text-lg-left">Sold</p>
                                         <h1 class="mb-0">
-                                            <%=confirmed.length%>
+                                            <%=cars.length%>
                                         </h1>
                                     </div>
-                                    <i class="typcn typcn-user icon-xl text-secondary"></i>
+                                    <i class="typcn typcn-clipboard icon-xl text-secondary"></i>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-
-                <div class="row">
                     <div class="col-md-4 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
                                 <div
                                     class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                                     <div>
-                                        <p class="mb-2 text-md-center text-lg-left">Featured Cars</p>
+                                        <p class="mb-2 text-md-center text-lg-left">Featured</p>
                                         <h1 class="mb-0">
                                             <%=carsFeatured.length%>
                                         </h1>
                                     </div>
                                     <i class="typcn typcn-clipboard icon-xl text-secondary"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div
-                                    class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
-                                    <div>
-                                        <p class="mb-2 text-md-center text-lg-left">Today Cars</p>
-                                        <h1 class="mb-0">
-                                            <%=carstoday.length%>
-                                        </h1>
-                                    </div>
-                                    <i class="typcn typcn-clipboard icon-xl text-secondary"></i>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <div
-                                    class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
-                                    <div>
-                                        <p class="mb-2 text-md-center text-lg-left">Total Balance</p>
-                                        <h1 class="mb-0">$7,243</h1>
-                                    </div>
-                                    <i class="typcn typcn-clipboard icon-xl text-secondary"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
+
+
 
             </div>
             <%- include ("../footer.ejs") %>
