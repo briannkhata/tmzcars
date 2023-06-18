@@ -18,12 +18,46 @@ const getAll = async (req, res) => {
       Deleted: 0,
       Purpose: "sale",
     };
+    console.log(id);
 
     if (id) {
-      whereClause.UserId = userId;
+      whereClause.UserId = id;
     }
     const cars = await Car.findAll({
       where: whereClause,
+      include: [
+        { model: Model },
+        { model: Make },
+        { model: CarType },
+        { model: FuelType },
+        { model: Condition },
+        { model: Body },
+        { model: Transmission },
+        { model: User },
+        { model: Photo },
+      ],
+    });
+    res.status(200).json({
+      success: 1,
+      message: "Cars Retrieved successfully",
+      data: cars,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting cars : ${err}` });
+  }
+};
+
+const getMyCars = async (req, res) => {
+  console.log(req.session.user);
+  try {
+    const cars = await Car.findAll({
+      where: {
+        Deleted: 0,
+        Purpose: "sale",
+        UserId: req.session.user.UserId,
+      },
       include: [
         { model: Model },
         { model: Make },
@@ -649,4 +683,5 @@ module.exports = {
   getCarsToday,
   getRentals,
   getCarsFront,
+  getMyCars,
 };

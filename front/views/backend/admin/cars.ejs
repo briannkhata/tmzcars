@@ -36,64 +36,74 @@
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <% var counter=0 %>
-                                                    <% for(var i=0; i< data.length; i++) { %>
+                                            <% if(data.length>0) { %>
 
-                                                        <tr>
-                                                            <td>
-                                                                <%= ++counter %>
-                                                            </td>
-                                                            <td>
-                                                                <%= data[i].User.Name%>
-                                                            </td>
-                                                            <td>
-                                                                <%= data[i].CarType.CarType%>
-                                                            </td>
+                                                <tbody>
 
-                                                            <td>
-                                                                <%= data[i].Model.Model%>
-                                                            </td>
-                                                            <td>
-                                                                <%= data[i].Make.Make%>
-                                                            </td>
+                                                    <% var counter=0 %>
+                                                        <% for(var i=0; i< data.length; i++) { %>
 
-                                                            <td>
-                                                                <%= data[i].Condition.Condition%>
-                                                            </td>
+                                                            <tr>
+                                                                <td>
+                                                                    <%= ++counter %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= data[i].User.Name%>
+                                                                </td>
+                                                                <td>
+                                                                    <%= data[i].CarType.CarType%>
+                                                                </td>
 
+                                                                <td>
+                                                                    <%= data[i].Model.Model%>
+                                                                </td>
+                                                                <td>
+                                                                    <%= data[i].Make.Make%>
+                                                                </td>
 
-                                                            <td>
-                                                                <%= data[i].Body.Body%>
-                                                            </td>
+                                                                <td>
+                                                                    <%= data[i].Condition.Condition%>
+                                                                </td>
 
 
-                                                            <td>
-                                                                <%=new
-                                                                    Date(data[i].DateAdded).toLocaleDateString('en-US',
-                                                                    { day: 'numeric' , month: 'long' , year: 'numeric'
-                                                                    }) %>
-                                                            </td>
+                                                                <td>
+                                                                    <%= data[i].Body.Body%>
+                                                                </td>
 
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <a type="button" href="/car/edit/<%=data[i].CarId%>"
-                                                                        class=" btn btn-success btn-sm btn-icon-text mr-3">
-                                                                        Edit
-                                                                        <i class="typcn typcn-edit btn-icon-append"></i>
-                                                                    </a>
 
-                                                                    <a type="button" href="/car/view/<%=data[i].CarId%>"
-                                                                        class=" btn btn-primary btn-sm btn-icon-text mr-3">
-                                                                        Details
-                                                                        <i class="typcn typcn-eye btn-icon-append"></i>
-                                                                    </a>
+                                                                <td>
+                                                                    <%=new
+                                                                        Date(data[i].DateAdded).toLocaleDateString('en-US',
+                                                                        { day: 'numeric' , month: 'long' ,
+                                                                        year: 'numeric' }) %>
+                                                                </td>
 
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <%}%>
-                                            </tbody>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <a type="button"
+                                                                            href="/car/edit/<%=data[i].CarId%>"
+                                                                            class=" btn btn-success btn-sm btn-icon-text mr-3">
+                                                                            Edit
+                                                                            <i
+                                                                                class="typcn typcn-edit btn-icon-append"></i>
+                                                                        </a>
+
+                                                                        <a type="button"
+                                                                            href="/car/view/<%=data[i].CarId%>"
+                                                                            class=" btn btn-primary btn-sm btn-icon-text mr-3">
+                                                                            Details
+                                                                            <i
+                                                                                class="typcn typcn-eye btn-icon-append"></i>
+                                                                        </a>
+
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                                                </tbody>
+                                                <%}else{%>
+                                                    <h1>No data found</h1>
+                                                    <%}%>
                                         </table>
                                     </div>
                                 </div>

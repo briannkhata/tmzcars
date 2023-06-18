@@ -16,8 +16,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 carRouter.get("/", checkAuth, async (req, res) => {
+  const URL =
+    req.session.user.Role.toLowerCase() == "admin"
+      ? `${API_URL}car/`
+      : `${API_URL}car/getMyCars/`;
+
   await axios
-    .get(API_URL + "car/")
+    .get(URL)
     .then((response) => {
       const data = response.data.data;
       res.render("backend/" + req.session.user.Role.toLowerCase() + "/cars", {
@@ -269,7 +274,7 @@ carRouter.get("/edit/(:id)", checkAuth, async (req, res) => {
         users: users,
         title: "Update Car Details",
         name: req.session.user.Name,
-        id: req.session.user.UserId,
+        userId: req.session.user.UserId,
       });
     })
     .catch((error) => {
@@ -324,7 +329,7 @@ carRouter.get("/add", checkAuth, async (req, res) => {
     bodies: bodies,
     users: users,
     name: req.session.user.Name,
-    id: req.session.user.UserId,
+    userId: req.session.user.UserId,
   };
 
   res.render(

@@ -3,6 +3,7 @@ const carController = require("../controllers/CarController.js");
 const carRouter = express.Router();
 carRouter.get("/", carController.getAll);
 carRouter.get("/rentals", carController.getRentals);
+carRouter.get("/getMyCars", carController.getMyCars);
 carRouter.get("/front", carController.getCarsFront);
 carRouter.get("/getOne/:Id", carController.getOne);
 carRouter.post("/remove/", carController.remove);

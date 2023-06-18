@@ -250,7 +250,6 @@ function getCars() {
       console.error(error);
     });
 }
-
 function getMyCars() {
   return axios
     .get(API_URL + "car/")
@@ -261,7 +260,6 @@ function getMyCars() {
       console.error(error);
     });
 }
-
 function getConfirmed() {
   return axios
     .get(API_URL + "user/getConfirmed/")
