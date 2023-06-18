@@ -414,7 +414,6 @@ homeRouter.get("/searchCars", async (req, res) => {
     const makes = await getMakes();
     const conditions = await getConditions();
     const carTypes = await getCarTypes();
-
     const data = {
       title: "Search Results",
       cars: searchResults,
@@ -426,6 +425,7 @@ homeRouter.get("/searchCars", async (req, res) => {
     res.render("search", data);
   } catch (error) {
     req.flash("error", error.toString());
+    console.log(error.toString());
     return res.redirect("/");
   }
 });

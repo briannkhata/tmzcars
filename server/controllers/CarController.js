@@ -152,27 +152,20 @@ const searchCarFront = async (req, res) => {
         Purpose: "sale",
         ModelId:
           req.query.ModelId !== "" ? req.query.ModelId : { [Op.ne]: null },
-        MakelId: req.query.MakeId !== "" ? req.query.MakeId : { [Op.ne]: null },
+        MakeId: req.query.MakeId !== "" ? req.query.MakeId : { [Op.ne]: null },
         CarTypeId:
           req.query.CarTypeId !== "" ? req.query.CarTypeId : { [Op.ne]: null },
         ConditionId:
           req.query.ConditionId !== ""
             ? req.query.ConditionId
             : { [Op.ne]: null },
-        [Op.or]: [
-          {
-            SellingPrice: {
-              [Op.gt]:
-                req.query.MinPrice !== ""
-                  ? req.query.MinPrice
-                  : { [Op.ne]: null },
-              [Op.lt]:
-                req.query.MaxPrice !== ""
-                  ? req.query.MaxPrice
-                  : { [Op.ne]: null },
-            },
-          },
-        ],
+
+        SellingPrice: {
+          [Op.gt]:
+            req.query.MinPrice !== "" ? req.query.MinPrice : { [Op.ne]: null },
+          [Op.lt]:
+            req.query.MaxPrice !== "" ? req.query.MaxPrice : { [Op.ne]: null },
+        },
       },
       include: [
         { model: Model },
@@ -186,6 +179,8 @@ const searchCarFront = async (req, res) => {
         { model: Photo },
       ],
     });
+
+    console.log(cars);
     res.status(200).json({
       success: 1,
       message: "Cars Retrieved successfully",

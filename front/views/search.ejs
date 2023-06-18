@@ -89,17 +89,19 @@
     <!-- banner section ends here -->
 
     <!-- new car deals section starts here -->
-    <section class="new-car-deals">
-        <div class="container">
-            <!-- <div class="row">
+    <section class="new-car-deals" style="margin-top: -5%;">
+        <% if(cars.length> 0 ){%>
+
+            <div class="container">
+                <!-- <div class="row">
                 
             </div> -->
-            <style>
-                .car-deal-img {
-                    display: contents !important;
-                }
+                <style>
+                    .car-deal-img {
+                        display: contents !important;
+                    }
 
-                /*.car-deal-img img {
+                    /*.car-deal-img img {
                     max-width: 100%;
                     height: auto;
                 }
@@ -115,33 +117,33 @@
                     height: 100%;
                     object-fit: cover;
                 }*/
-                .deal-overlay {
-                    border-top-left-radius: 0px;
-                    border-top-right-radius: 0px;
-                }
+                    .deal-overlay {
+                        border-top-left-radius: 0px;
+                        border-top-right-radius: 0px;
+                    }
 
-                .car-deal-card {
-                    padding-top: 0% !important;
-                }
+                    .car-deal-card {
+                        padding-top: 0% !important;
+                    }
 
-                img {
-                    /*filter: grayscale(100%);*/
-                    background-color: white;
-                    /* or transparent */
-                }
-            </style>
-            <div class="row">
-                <% for (const car of cars) { %>
+                    img {
+                        /*filter: grayscale(100%);*/
+                        background-color: white;
+                        /* or transparent */
+                    }
+                </style>
+                <div class="row">
+                    <% for (const car of cars) { %>
 
-                    <div class="col-xl-3 col-lg-4 col-md-6 my-3">
-                        <div class="car-deal-card">
-                            <div class="car-deal-img">
-                                <% car.Photos.forEach((photo,index)=>{ if(index===0){%>
-                                    <img src="/uploads/<%=photo.Photo%>" alt="Car" class="img-fluid"
-                                        style="width: auto;height: auto;" />
-                                    <%} }); %>
-                            </div>
-                            <!-- <div class="car-deal-tags mt-2">
+                        <div class="col-xl-3 col-lg-4 col-md-6 my-3">
+                            <div class="car-deal-card">
+                                <div class="car-deal-img">
+                                    <% car.Photos.forEach((photo,index)=>{ if(index===0){%>
+                                        <img src="/uploads/<%=photo.Photo%>" alt="Car" class="img-fluid"
+                                            style="width: auto;height: auto;" />
+                                        <%} }); %>
+                                </div>
+                                <!-- <div class="car-deal-tags mt-2">
                                 <p class="my-0">TMZ Cars</p>
                                 <span class="green-text mx-2">|</span>
                                 <p class="my-0">TMZ Cars</p>
@@ -150,47 +152,50 @@
                                 <span class="green-text mx-2">|</span>
                                 <p class="my-0">TMZ Cars</p>
                             </div> -->
-                            <div class="car-deal-inner">
-                                <h6 class="mb-0">
-                                    <%= car.Model.Model%> | <%= car.Make.Make%>
-                                </h6>
-                                <div class="d-flex mt-2 align-items-center
+                                <div class="car-deal-inner">
+                                    <h6 class="mb-0">
+                                        <%= car.Model.Model%> | <%= car.Make.Make%>
+                                    </h6>
+                                    <div class="d-flex mt-2 align-items-center
                                         justify-content-center">
-                                    <i class="fas green-text fa-caret-left"></i>
-                                    <span class="green-line mx-1"></span>
-                                    <i class="fas green-text
+                                        <i class="fas green-text fa-caret-left"></i>
+                                        <span class="green-line mx-1"></span>
+                                        <i class="fas green-text
                                             fa-caret-right"></i>
+                                    </div>
+                                    <p class="mb-0 p-xs mt-2">Price</p>
+                                    <h4 class="green-text mb-0 regular">
+                                        <%=car.SellingPrice ? car.SellingPrice.toLocaleString('en-US', {
+                                            minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00' ; %>
+                                    </h4>
+                                    <!-- <p class="my-2 p-xs">TMZ Price</p> -->
+                                    <hr>
+                                    <h4 class=" regular">
+                                        <%=car.User.City %>
+                                    </h4>
                                 </div>
-                                <p class="mb-0 p-xs mt-2">Price</p>
-                                <h4 class="green-text mb-0 regular">
-                                    <%=car.SellingPrice ? car.SellingPrice.toLocaleString('en-US', {
-                                        minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00' ; %>
-                                </h4>
-                                <!-- <p class="my-2 p-xs">TMZ Price</p> -->
-                                <hr>
-                                <h4 class=" regular">
-                                    <%=car.User.City %>
-                                </h4>
-                            </div>
-                            <div class="deal-overlay">
-                                <a style="text-decoration: none;" class="site-btn white-border-btn"
-                                    href='/view/<%=car.CarId%>'>
-                                    View Details
-                                </a>
+                                <div class="deal-overlay">
+                                    <a style="text-decoration: none;" class="site-btn white-border-btn"
+                                        href='/view/<%=car.CarId%>'>
+                                        View Details
+                                    </a>
+                                </div>
                             </div>
                         </div>
+                        <% }%>
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <button class="site-btn">View More</button>
                     </div>
-                    <% }%>
-
-
-
-            </div>
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <button class="site-btn">View More</button>
                 </div>
             </div>
-        </div>
+            <%} else{%>
+                <h1>No Search Reults Found</h1>
+                <% } %>
     </section>
     <!-- new car deals section ends here -->
 
