@@ -144,6 +144,59 @@ const getCarsFront = async (req, res) => {
   }
 };
 
+const searchCarFront = async (req, res) => {
+  try {
+    const cars = await Car.findAll({
+      where: {
+        Deleted: 0,
+        Purpose: "sale",
+        ModelId: req.body.ModelId !== "" ? req.body.ModelId : { [Op.ne]: null },
+        MakelId: req.body.MakeId !== "" ? req.body.MakeId : { [Op.ne]: null },
+        CarTypeId:
+          req.body.CarTypeId !== "" ? req.body.CarTypeId : { [Op.ne]: null },
+        ConditionId:
+          req.body.ConditionId !== ""
+            ? req.body.ConditionId
+            : { [Op.ne]: null },
+        [Op.or]: [
+          {
+            SellingPrice: {
+              [Op.gt]:
+                req.body.MinPrice !== ""
+                  ? req.body.MinPrice
+                  : { [Op.ne]: null },
+              [Op.lt]:
+                req.body.MaxPrice !== ""
+                  ? req.body.MaxPrice
+                  : { [Op.ne]: null },
+            },
+          },
+        ],
+      },
+      include: [
+        { model: Model },
+        { model: Make },
+        { model: CarType },
+        { model: FuelType },
+        { model: Condition },
+        { model: Body },
+        { model: Transmission },
+        { model: User },
+        { model: Photo },
+      ],
+    });
+    res.status(200).json({
+      success: 1,
+      message: "Cars Retrieved successfully",
+      data: cars,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: 0, message: `Error getting cars : ${err}` });
+  }
+};
+
 const getCarsToday = async (req, res) => {
   try {
     const cars = await Car.findAll({
