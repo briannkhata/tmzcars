@@ -150,24 +150,25 @@ const searchCarFront = async (req, res) => {
       where: {
         Deleted: 0,
         Purpose: "sale",
-        ModelId: req.body.ModelId !== "" ? req.body.ModelId : { [Op.ne]: null },
-        MakelId: req.body.MakeId !== "" ? req.body.MakeId : { [Op.ne]: null },
+        ModelId:
+          req.query.ModelId !== "" ? req.query.ModelId : { [Op.ne]: null },
+        MakelId: req.query.MakeId !== "" ? req.query.MakeId : { [Op.ne]: null },
         CarTypeId:
-          req.body.CarTypeId !== "" ? req.body.CarTypeId : { [Op.ne]: null },
+          req.query.CarTypeId !== "" ? req.query.CarTypeId : { [Op.ne]: null },
         ConditionId:
-          req.body.ConditionId !== ""
-            ? req.body.ConditionId
+          req.query.ConditionId !== ""
+            ? req.query.ConditionId
             : { [Op.ne]: null },
         [Op.or]: [
           {
             SellingPrice: {
               [Op.gt]:
-                req.body.MinPrice !== ""
-                  ? req.body.MinPrice
+                req.query.MinPrice !== ""
+                  ? req.query.MinPrice
                   : { [Op.ne]: null },
               [Op.lt]:
-                req.body.MaxPrice !== ""
-                  ? req.body.MaxPrice
+                req.query.MaxPrice !== ""
+                  ? req.query.MaxPrice
                   : { [Op.ne]: null },
             },
           },
@@ -737,4 +738,5 @@ module.exports = {
   getRentals,
   getCarsFront,
   getMyCars,
+  searchCarFront,
 };

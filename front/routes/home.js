@@ -25,6 +25,31 @@ function getAllCarsRentals() {
     });
 }
 
+function searchCars(
+  CarTypeId,
+  ModelId,
+  MakeId,
+  ConditionId,
+  MaxPrice,
+  MinPrice
+) {
+  return axios
+    .get(API_URL + "car/searchCarFront/", {
+      CarTypeId,
+      ModelId,
+      MakeId,
+      ConditionId,
+      MaxPrice,
+      MinPrice,
+    })
+    .then((response) => {
+      return response.data.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function getAllCars() {
   return axios
     .get(API_URL + "car/front/")
@@ -107,14 +132,14 @@ homeRouter.get("/", async (req, res) => {
   const models = await getModels();
   const makes = await getMakes();
   const conditions = await getConditions();
-  const cartypes = await getCarTypes();
+  const carTypes = await getCarTypes();
   const data = {
     title: "Car List",
-    cars: cars,
-    models: models,
-    makes: makes,
-    conditions: conditions,
-    cartypes: cartypes,
+    cars,
+    models,
+    makes,
+    conditions,
+    carTypes,
   };
   res.render("home", data);
 });
@@ -372,6 +397,36 @@ homeRouter.post("/sendmessage", async (req, res) => {
   } catch (error) {
     req.flash("error", error.toString());
     return res.redirect("/contact");
+  }
+});
+
+homeRouter.get("/searchCars", async (req, res) => {
+  try {
+    const { CarTypeId, ModelId, MakeId, ConditionId, MaxPrice, MinPrice } =
+      req.query;
+
+    const apiResponse = await axios.get(API_URL + "car/searchCarFront/", {
+      params: { CarTypeId, ModelId, MakeId, ConditionId, MaxPrice, MinPrice },
+    });
+    const searchResults = apiResponse.data.data;
+
+    const models = await getModels();
+    const makes = await getMakes();
+    const conditions = await getConditions();
+    const carTypes = await getCarTypes();
+
+    const data = {
+      title: "Search Results",
+      cars: searchResults,
+      models,
+      makes,
+      conditions,
+      carTypes,
+    };
+    res.render("search", data);
+  } catch (error) {
+    req.flash("error", error.toString());
+    return res.redirect("/");
   }
 });
 
